@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yokai - Portfolio</title>
+    <title>Yokai</title>
     <meta name="description" content="yokai's personal portfolio - Discord developer and creator">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -590,7 +590,7 @@
 
         .project-image-container {
             width: 100%;
-            height: 150px;
+            height: 200px; /* Fixed height for uniform cropping */
             overflow: hidden;
             position: relative;
             background: var(--glass-bg);
@@ -600,9 +600,10 @@
         }
 
         .project-image-new {
-            width: auto;
+            width: 100%;
             height: 100%;
-            object-fit: contain;
+            object-fit: contain; /* Ensures full image is visible without cropping */
+            object-position: center;
             transition: transform 0.3s ease;
         }
 
