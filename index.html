@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yokai - Portfolio</title>
+    <meta name="description" content="yokai's personal portfolio - Discord developer and creator">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0f;
+            --secondary-bg: #1a1a2e;
+            --accent-color: #00d4ff;
+            --accent-secondary: #ff006e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-glow: 0 0 20px rgba(0, 212, 255, 0.3);
+            --neon-glow-pink: 0 0 20px rgba(255, 0, 110, 0.3);
+            --success-color: #43b581;
+            --warning-color: #faa61a;
+            --error-color: #f04747;
+            --offline-color: #747f8d;
+        }
+
+        html {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-behavior: smooth;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-20px) translateY(-10px); }
+            50% { transform: translateX(20px) translateY(10px); }
+            75% { transform: translateX(-10px) translateY(20px); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
+            }
+        }
+
+        .nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
+        }
+
+        .nav:hover {
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+        }
+
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 16px;
+        }
+
+        .nav-logo i {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 40px;
+            padding: 4px;
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 35px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        .nav-link i {
+            font-size: 0.85rem;
+        }
+
+        .nav-indicator {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            border-radius: 35px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0 8px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            position: relative;
+        }
+
+        .social-link:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--neon-glow);
+        }
+
+        .social-link.github:hover {
+            background: #333;
+            box-shadow: 0 5px 15px rgba(51, 51, 51, 0.4);
+        }
+
+        .social-link.instagram:hover {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
+        }
+
+        .social-link.discord:hover {
+            background: #5865f2;
+            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .social-link i {
+            transition: transform 0.3s ease;
+        }
+
+        .social-link:hover i {
+            transform: scale(1.2);
+        }
+
+        .main-content {
+            margin-top: 120px;
+            min-height: calc(100vh - 120px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            max-width: 1200px;
+            animation: pageSlideIn 0.6s ease-out;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .home-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--accent-color);
+            border-right: 3px solid var(--accent-secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            box-shadow: var(--neon-glow);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+        }
+
+        .profile-container {
+            display: none;
+            animation: profileFadeIn 0.8s ease-out;
+        }
+
+        @keyframes profileFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .profile-header {
+            margin-bottom: 3rem;
+        }
+
+        .avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            border: 3px solid var(--success-color);
+            transition: all 0.3s ease;
+            display: block;
+            box-shadow: 0 0 20px rgba(67, 181, 129, 0.3);
+            background: var(--glass-bg);
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+        }
+
+        .avatar.error {
+            border-color: var(--error-color);
+            box-shadow: 0 0 30px rgba(240, 71, 71, 0.4);
+        }
+
+        .username {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .discriminator {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.1);
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--success-color);
+            box-shadow: 0 0 15px rgba(67, 181, 129, 0.6);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(67, 181, 129, 0.8); }
+            100% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.6); }
+        }
+
+        .status-dot.offline {
+            background: var(--offline-color);
+            box-shadow: 0 0 15px rgba(116, 127, 141, 0.6);
+            animation: none;
+        }
+
+        .status-dot.idle {
+            background: var(--warning-color);
+            box-shadow: 0 0 15px rgba(250, 166, 26, 0.6);
+        }
+
+        .status-dot.dnd {
+            background: var(--error-color);
+            box-shadow: 0 0 15px rgba(240, 71, 71, 0.6);
+        }
+
+        .status-text {
+            font-size: 1rem;
+            color: var(--text-primary);
+            text-transform: capitalize;
+            font-weight: 500;
+        }
+
+        .custom-status {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            display: none;
+            font-style: italic;
+        }
+
+        .setup-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            color: #ffc107;
+        }
+
+        .setup-notice h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .setup-notice h4 i {
+            color: #ffc107;
+        }
+
+        .setup-notice ol {
+            margin-left: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .setup-notice a {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        .error-details {
+            background: rgba(240, 71, 71, 0.1);
+            border: 1px solid rgba(240, 71, 71, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--error-color);
+            display: none;
+        }
+
+        .retry-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .retry-button:hover {
+            background: var(--accent-secondary);
+            transform: translateY(-2px);
+        }
+
+        .projects-container {
+            text-align: center;
+        }
+
+        .projects-header {
+            margin-bottom: 4rem;
+        }
+
+        .projects-title-new {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .projects-subtitle-new {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 4rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .projects-grid-new {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card-new {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card-new:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .project-banner {
+            width: 100%;
+            height: 100px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: auto;
+            overflow: hidden;
+            position: relative;
+            background: var(--glass-bg);
+        }
+
+        .project-image-new {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-new:hover .project-image-new {
+            transform: scale(1.05);
+        }
+
+        .project-content-new {
+            padding: 1.5rem;
+        }
+
+        .project-header-new {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-icon-new {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+        }
+
+        .project-title-new {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .project-description-new {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tech-new {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag-new {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid;
+        }
+
+        .tech-tag-new.js {
+            background: rgba(247, 223, 30, 0.1);
+            color: #f7df1e;
+            border-color: rgba(247, 223, 30, 0.3);
+        }
+
+        .tech-tag-new.python {
+            background: rgba(55, 118, 171, 0.1);
+            color: #3776ab;
+            border-color: rgba(55, 118, 171, 0.3);
+        }
+
+        .tech-tag-new.db {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .tech-tag-new.api {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .tech-tag-new.os {
+            background: rgba(168, 85, 247, 0.1);
+            color: #a855f7;
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .tech-tag-new.extra {
+            background: rgba(139, 92, 246, 0.1);
+            color: #8b5cf6;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .project-actions-new {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .project-btn-new {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid;
+        }
+
+        .project-btn-new.github {
+            background: rgba(51, 51, 51, 0.1);
+            color: #ffffff;
+            border-color: rgba(51, 51, 51, 0.3);
+        }
+
+        .project-btn-new.github:hover {
+            background: rgba(51, 51, 51, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .project-btn-new.discord {
+            background: rgba(88, 101, 242, 0.1);
+            color: #5865f2;
+            border-color: rgba(88, 101, 242, 0.3);
+        }
+
+        .project-btn-new.discord:hover {
+            background: rgba(88, 101, 242, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .unified-status-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-section {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .unified-status-card.spotify-activity {
+            border: 1px solid rgba(29, 185, 84, 0.2);
+            background: rgba(29, 185, 84, 0.03);
+        }
+
+        .unified-status-card.game-activity {
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            background: rgba(0, 212, 255, 0.03);
+        }
+
+        .unified-status-card.custom-activity {
+            border: 1px solid rgba(255, 0, 110, 0.2);
+            background: rgba(255, 0, 110, 0.03);
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .activity-header i {
+            font-size: 1rem;
+            color: var(--accent-color);
+        }
+
+        .activity-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .activity-image {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 2px solid var(--glass-border);
+            transition: all 0.3s ease;
+            background: var(--glass-bg);
+            flex-shrink: 0;
+        }
+
+        .activity-image:hover {
+            transform: scale(1.05);
+            border-color: var(--accent-color);
+        }
+
+        .activity-details {
+            flex: 1;
+            text-align: left;
+            min-width: 0;
+        }
+
+        .activity-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .activity-file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-type-icon {
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .activity-details-text {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .activity-state {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-timestamp {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        #home {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        #projects {
+            overflow-y: auto;
+            min-height: 100vh;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                transform: none;
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                border-radius: 20px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .nav-indicator {
+                width: calc(50% - 4px);
+            }
+
+            .social-links {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .main-content {
+                margin-top: 180px;
+                padding: 1rem;
+            }
+
+            .home-container {
+                height: calc(100vh - 260px);
+            }
+
+            .username {
+                font-size: 2rem;
+            }
+
+            .avatar {
+                width: 140px;
+                height: 140px;
+            }
+
+            .activity-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .activity-details {
+                text-align: center;
+            }
+
+            .projects-title-new {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid-new {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-content-new {
+                padding: 1.25rem;
+            }
+
+            .project-actions-new {
+                flex-direction: column;
+            }
+
+            .project-btn-new {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                padding: 0.8rem;
+            }
+
+            .nav-link {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+
+            .social-link {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .main-content {
+                margin-top: 200px;
+            }
+
+            .home-container {
+                height: calc(100vh - 280px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <i class="fas fa-ghost"></i>
+            yokai
+        </div>
+        <ul class="nav-links">
+            <div class="nav-indicator" id="navIndicator"></div>
+            <li><a class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a class="nav-link" data-page="projects"><i class="fas fa-code"></i> Projects</a></li>
+        </ul>
+        <div class="social-links">
+            <a href="https://github.com/yokaimsi" target="_blank" class="social-link github" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://instagram.com/i.g_asan" target="_blank" class="social-link instagram" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://discord.com/users/1282292887878369358" target="_blank" class="social-link discord" title="Discord">
+                <i class="fab fa-discord"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Home Page -->
+        <div class="page active" id="home">
+            <div class="home-container">
+                <!-- Loading State -->
+                <div class="loading-container" id="loading">
+                    <div class="spinner"></div>
+                    <div class="loading-text">connecting to discord...</div>
+                </div>
+
+                <!-- Profile Content -->
+                <div class="profile-container" id="profile">
+                    <div class="profile-header">
+                        <img class="avatar" id="avatar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgdmlld0JveD0iMCAwIDE2MCAxNjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxNjAiIGhlaWdodD0iMTYwIiByeD0iODAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik04MCA1MEMzOS4yIDUwIDggODEuMiA4IDEyMlYxMTJDMTYgMTEyIDI0IDEwNCAzMiAxMDRINDhDNTYgMTA0IDY0IDExMiA2NCAxMTJWMTIyQzY0IDgxLjIgMTAwLjggNTAgMTQwIDUwSDEyOEMxMjAgNTAgMTEyIDU4IDExMiA2NlY4MCBDMTEyIDg4IDEwNCA5NiA5NiA5Nk02NCA1NiA5NiA0OCA4OCA0OCA4MFY2NkM0OCA1OCA0MCA1MCAzMiA1MEgxOVoiIGZpbGw9IiMwMGQ0ZmYiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjE2MCIgeTI9IjE2MCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMGEwYTBmIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFhMWEyZSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="Avatar">
+                        <div class="username" id="username">yokai</div>
+                        <div class="discriminator" id="discriminator">@yokai</div>
+                    </div>
+
+                    <!-- Setup Notice -->
+                    <div class="setup-notice" id="setupNotice" style="display: none;">
+                        <h4><i class="fas fa-exclamation-triangle"></i> Discord Status Setup Required</h4>
+                        <p>To enable real-time Discord status, please:</p>
+                        <ol>
+                            <li>Join the Lanyard Discord server: <a href="https://discord.gg/lanyard" target="_blank">discord.gg/lanyard</a></li>
+                            <li>Wait 5-10 minutes for your profile to be indexed</li>
+                            <li>Refresh this page</li>
+                        </ol>
+                        <button class="retry-button" onclick="retryDiscordConnection()">
+                            <i class="fas fa-sync-alt"></i> Retry Connection
+                        </button>
+                    </div>
+
+                    <div class="glass-card unified-status-card">
+                        <div class="status-indicator">
+                            <div class="status-dot offline" id="statusDot"></div>
+                            <div class="status-text" id="statusText">offline</div>
+                        </div>
+                        <div class="custom-status" id="customStatus"></div>
+                        <!-- Activity Section (inside the same card) -->
+                        <div class="activity-section" id="activitySection" style="display: none;">
+                            <div class="activity-header" id="activityHeader">
+                                <i class="fas fa-gamepad"></i>
+                                <span id="activityHeaderText">Playing</span>
+                            </div>
+                            <div class="activity-content">
+                                <img class="activity-image" id="activityImage" alt="Activity">
+                                <div class="activity-details">
+                                    <div class="activity-name" id="activityName"></div>
+                                    <div class="activity-file-info" id="activityFileInfo">
+                                        <i class="file-type-icon" id="fileTypeIcon"></i>
+                                        <span class="activity-details-text" id="activityDetails"></span>
+                                    </div>
+                                    <div class="activity-details-text" id="activityDetailsNoFile"></div>
+                                    <div class="activity-state" id="activityState"></div>
+                                    <div class="activity-timestamp" id="activityTimestamp"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error-details" id="errorDetails"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Page -->
+        <div class="page" id="projects">
+            <div class="projects-container">
+                <div class="projects-header">
+                    <h1 class="projects-title-new">My Projects</h1>
+                    <p class="projects-subtitle-new">Here are some of the projects I've built using various technologies.</p>
+                </div>
+
+                <div class="projects-grid-new">
+                    <div class="project-card-new">
+                        <div class="project-banner" style="background-image: url('./mikasa-banner.jpg');"></div>
+                        <div class="project-image-container">
+                            <img src="./mikasa.png" alt="Mikasa Music Bot" class="project-image-new">
+                        </div>
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="fas fa-music project-icon-new"></i>
+                                <h3 class="project-title-new">Mikasa Music Bot</h3>
+                            </div>
+                            <p class="project-description-new">
+                                A feature-rich Discord music bot with advanced filters, playlist management, and multiple platform support. Built with Discord.js V4 Component.
+                            </p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new js">JavaScript</span>
+                                <span class="tech-tag-new api">Discord.js</span>
+                                <span class="tech-tag-new extra">Music Filters</span>
+                                <span class="tech-tag-new db">Playlist Management</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi/Mikasa-Music-Bot" target="_blank" class="project-btn-new github">
+                                    <i class="fab fa-github"></i>
+                                    View Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card-new">
+                        <div class="project-banner" style="background-image: url('./bumblebee-banner.jpg');"></div>
+                        <div class="project-image-container">
+                            <img src="./bumblebee.png" alt="Bumblebee" class="project-image-new">
+                        </div>
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="fab fa-discord project-icon-new"></i>
+                                <h3 class="project-title-new">Bumblebee</h3>
+                            </div>
+                            <p class="project-description-new">
+                                A Multipurpose Discord Bot, focused on Antinuke, Automoderation, Autorole, Custom-Roles, Sticky Messages, Welcome...
+                            </p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new js">JavaScript</span>
+                                <span class="tech-tag-new db">SQLite</span>
+                                <span class="tech-tag-new api">API Integration</span>
+                                <span class="tech-tag-new extra">And More</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="#" class="project-btn-new discord">
+                                    <i class="fab fa-discord"></i>
+                                    View Discord
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card-new">
+                        <div class="project-banner" style="background-image: url('./ezfetch-banner.jpg');"></div>
+                        <div class="project-image-container">
+                            <img src="./ezfetch.png" alt="EZFetch" class="project-image-new">
+                        </div>
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="fas fa-terminal project-icon-new"></i>
+                                <h3 class="project-title-new">EZFetch</h3>
+                            </div>
+                            <p class="project-description-new">
+                                A fast and lightweight system information tool inspired by neofetch, written in Python with enhanced cross-platform support and customization options.
+                            </p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new python">Python</span>
+                                <span class="tech-tag-new os">System Info</span>
+                                <span class="tech-tag-new extra">Cross-Platform</span>
+                                <span class="tech-tag-new api">CLI Tool</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi/ezfetch" target="_blank" class="project-btn-new github">
+                                    <i class="fab fa-github"></i>
+                                    View Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="project-card-new">
+                        <div class="project-banner" style="background-image: url('./discord-banner.jpg');"></div>
+                        <div class="project-image-container">
+                            <img src="./discord.png" alt="Discord BOTS" class="project-image-new">
+                        </div>
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="fas fa-robot project-icon-new"></i>
+                                <h3 class="project-title-new">Discord BOTS</h3>
+                            </div>
+                            <p class="project-description-new">
+                                A collection of various Discord bots with different functionalities including moderation, utility, fun commands, and automation features.
+                            </p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new js">JavaScript</span>
+                                <span class="tech-tag-new api">Discord.js</span>
+                                <span class="tech-tag-new db">Database</span>
+                                <span class="tech-tag-new extra">Multi-Bot</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi/Discord-BOTS/" target="_blank" class="project-btn-new github">
+                                    <i class="fab fa-github"></i>
+                                    View Repository
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            DISCORD_USER_ID: '1282292887878369358',
+            LANYARD_API_URL: 'https://api.lanyard.rest/v1/users/',
+            RETRY_ATTEMPTS: 3,
+            RETRY_DELAY: 2000,
+            REFRESH_INTERVAL: 30000,
+            TIMEOUT: 10000
+        };
+
+        // State management
+        let retryCount = 0;
+        let refreshInterval = null;
+        let isConnected = false;
+
+        // File type icon mapping
+        const fileTypeIcons = {
+            // Web Technologies
+            'html': { icon: 'fab fa-html5', color: '#e34c26' },
+            'htm': { icon: 'fab fa-html5', color: '#e34c26' },
+            'css': { icon: 'fab fa-css3-alt', color: '#1572b6' },
+            'js': { icon: 'fab fa-js-square', color: '#f7df1e' },
+            'jsx': { icon: 'fab fa-react', color: '#61dafb' },
+            'ts': { icon: 'devicon-typescript-plain', color: '#3178c6' },
+            'tsx': { icon: 'fab fa-react', color: '#61dafb' },
+            'vue': { icon: 'fab fa-vuejs', color: '#4fc08d' },
+            'svelte': { icon: 'devicon-svelte-plain', color: '#ff3e00' },
+            
+            // Programming Languages
+            'py': { icon: 'fab fa-python', color: '#3776ab' },
+            'java': { icon: 'fab fa-java', color: '#ed8b00' },
+            'cpp': { icon: 'devicon-cplusplus-plain', color: '#00599c' },
+            'c': { icon: 'devicon-c-plain', color: '#a8b9cc' },
+            'cs': { icon: 'devicon-csharp-plain', color: '#239120' },
+            'php': { icon: 'fab fa-php', color: '#777bb4' },
+            'rb': { icon: 'devicon-ruby-plain', color: '#cc342d' },
+            'go': { icon: 'devicon-go-plain', color: '#00add8' },
+            'rs': { icon: 'devicon-rust-plain', color: '#000000' },
+            'swift': { icon: 'fab fa-swift', color: '#fa7343' },
+            'kt': { icon: 'devicon-kotlin-plain', color: '#7f52ff' },
+            
+            // Data & Config
+            'json': { icon: 'devicon-json-plain', color: '#000000' },
+            'xml': { icon: 'fas fa-code', color: '#ff6600' },
+            'yaml': { icon: 'fas fa-file-code', color: '#cb171e' },
+            'yml': { icon: 'fas fa-file-code', color: '#cb171e' },
+            'toml': { icon: 'fas fa-file-code', color: '#9c4221' },
+            'ini': { icon: 'fas fa-cog', color: '#6c757d' },
+            
+            // Database
+            'sql': { icon: 'fas fa-database', color: '#336791' },
+            'db': { icon: 'fas fa-database', color: '#336791' },
+            'sqlite': { icon: 'devicon-sqlite-plain', color: '#003b57' },
+            
+            // Documents
+            'md': { icon: 'fab fa-markdown', color: '#000000' },
+            'txt': { icon: 'fas fa-file-alt', color: '#6c757d' },
+            'pdf': { icon: 'fas fa-file-pdf', color: '#dc3545' },
+            'doc': { icon: 'fas fa-file-word', color: '#2b579a' },
+            'docx': { icon: 'fas fa-file-word', color: '#2b579a' },
+            
+            // Images
+            'png': { icon: 'fas fa-file-image', color: '#17a2b8' },
+            'jpg': { icon: 'fas fa-file-image', color: '#17a2b8' },
+            'jpeg': { icon: 'fas fa-file-image', color: '#17a2b8' },
+            'gif': { icon: 'fas fa-file-image', color: '#17a2b8' },
+            'svg': { icon: 'fas fa-file-image', color: '#ff9500' },
+            
+            // Default
+            'default': { icon: 'fas fa-file', color: '#6c757d' }
+        };
+
+        // Utility functions
+        function log(message, type = 'info') {
+            const emoji = {
+                info: '🔄',
+                success: '✅',
+                error: '❌',
+                warning: '⚠️'
+            };
+            console.log(`${emoji[type]} ${message}`);
+        }
+
+        function safeImageLoad(img, src, fallback) {
+            return new Promise((resolve) => {
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                    img.src = src;
+                    resolve(true);
+                };
+                tempImg.onerror = () => {
+                    if (fallback) {
+                        img.src = fallback;
+                    }
+                    resolve(false);
+                };
+                tempImg.src = src;
+            });
+        }
+
+        function formatTimestamp(timestamp) {
+            const now = Date.now();
+            const elapsed = now - timestamp;
+            const minutes = Math.floor(elapsed / 60000);
+            const hours = Math.floor(minutes / 60);
+            
+            if (hours > 0) {
+                return `${hours}h ${minutes % 60}m elapsed`;
+            } else if (minutes > 0) {
+                return `${minutes}m elapsed`;
+            } else {
+                return 'Just started';
+            }
+        }
+
+        function getFileTypeIcon(filename) {
+            if (!filename) return fileTypeIcons.default;
+            
+            const extension = filename.split('.').pop()?.toLowerCase();
+            return fileTypeIcons[extension] || fileTypeIcons.default;
+        }
+
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Navigation functionality
+        function initNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const indicator = document.getElementById('navIndicator');
+
+            updateIndicatorPosition();
+
+            navLinks.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = link.getAttribute('data-page');
+                    
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    
+                    link.classList.add('active');
+                    document.getElementById(targetPage).classList.add('active');
+                    
+                    updateIndicatorPosition();
+                    
+                    // Control body overflow based on active page
+                    document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
+                    
+                    // Smooth scroll to top
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            function updateIndicatorPosition() {
+                const activeLink = document.querySelector('.nav-link.active');
+                if (activeLink) {
+                    const left = activeLink.offsetLeft;
+                    const width = activeLink.offsetWidth;
+                    
+                    indicator.style.left = left + 'px';
+                    indicator.style.width = width + 'px';
+                }
+            }
+
+            window.addEventListener('resize', updateIndicatorPosition);
+            
+            // Set initial overflow state
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Disable developer tools
+        function disableDevTools() {
+            // Disable right-click context menu
+            document.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+            });
+
+            // Disable F12, Ctrl+Shift+I, Ctrl+Shift+J
+            document.addEventListener('keydown', (e) => {
+                if (
+                    e.key === 'F12' ||
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) ||
+                    (e.ctrlKey && e.key === 'u')
+                ) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Disable dev tools opening via browser menu
+            document.addEventListener('DOMContentLoaded', () => {
+                setInterval(() => {
+                    if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
+                        window.location.reload();
+                    }
+                }, 100);
+            });
+        }
+
+        // Discord API functions
+        async function fetchDiscordStatus() {
+            log('Attempting to fetch Discord status...');
+            
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
+                
+                const response = await fetch(
+                    `${CONFIG.LANYARD_API_URL}${CONFIG.DISCORD_USER_ID}`,
+                    { 
+                        signal: controller.signal,
+                        headers: {
+                            'Accept': 'application/json',
+                        }
+                    }
+                );
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.success || !data.data) {
+                    throw new Error('Invalid API response structure');
+                }
+                
+                log('Discord data received successfully', 'success');
+                updateDiscordProfile(data.data);
+                isConnected = true;
+                retryCount = 0;
+                
+                // Hide setup notice if shown
+                document.getElementById('setupNotice').style.display = 'none';
+                
+            } catch (error) {
+                log(`Error fetching Discord status: ${error.message}`, 'error');
+                handleDiscordError(error);
+            }
+        }
+
+        async function handleDiscordError(error) {
+            const errorDetails = document.getElementById('errorDetails');
+            const setupNotice = document.getElementById('setupNotice');
+            
+            let errorMessage = 'Unknown error occurred';
+            let showSetupNotice = false;
+            
+            if (error.message.includes('404')) {
+                errorMessage = 'Discord user not found in Lanyard database. You need to join the Lanyard Discord server first.';
+                showSetupNotice = true;
+            } else if (error.message.includes('timeout') || error.message.includes('Failed to fetch')) {
+                errorMessage = 'Network connection failed. Check your internet connection.';
+            } else if (error.message.includes('CORS')) {
+                errorMessage = 'CORS error. Try refreshing the page.';
+            } else {
+                errorMessage = error.message;
+            }
+            
+            errorDetails.textContent = `Error: ${errorMessage}`;
+            errorDetails.style.display = 'block';
+            
+            if (showSetupNotice) {
+                setupNotice.style.display = 'block';
+            }
+            
+            // Show offline state
+            showOfflineState();
+            
+            // Retry logic
+            if (retryCount < CONFIG.RETRY_ATTEMPTS && !showSetupNotice) {
+                retryCount++;
+                log(`Retrying in ${CONFIG.RETRY_DELAY/1000}s... (${retryCount}/${CONFIG.RETRY_ATTEMPTS})`, 'warning');
+                setTimeout(fetchDiscordStatus, CONFIG.RETRY_DELAY);
+            } else {
+                log('Max retry attempts reached or setup required', 'error');
+                showOfflineState();
+            }
+        }
+
+        function showOfflineState() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('profile').style.display = 'block';
+            
+            const avatar = document.getElementById('avatar');
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            const activitySection = document.getElementById('activitySection');
+            const unifiedCard = document.querySelector('.unified-status-card');
+            
+            avatar.classList.add('error');
+            statusDot.className = 'status-dot offline';
+            statusText.textContent = 'Offline';
+            activitySection.style.display = 'none';
+            unifiedCard.className = 'glass-card unified-status-card';
+        }
+
+        function updateDiscordProfile(userData) {
+            log('Updating profile with Discord data...');
+            
+            // Update avatar
+            const avatar = document.getElementById('avatar');
+            avatar.classList.remove('error');
+            
+            if (userData.discord_user.avatar) {
+                const avatarUrl = `https://cdn.discordapp.com/avatars/${userData.discord_user.id}/${userData.discord_user.avatar}.${userData.discord_user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`;
+                safeImageLoad(avatar, avatarUrl);
+            }
+            
+            // Update username
+            const username = document.getElementById('username');
+            const discriminator = document.getElementById('discriminator');
+            
+            if (userData.discord_user.discriminator === '0') {
+                username.textContent = userData.discord_user.display_name || userData.discord_user.username;
+                discriminator.textContent = `@${userData.discord_user.username}`;
+            } else {
+                username.textContent = userData.discord_user.username;
+                discriminator.textContent = `#${userData.discord_user.discriminator}`;
+            }
+            
+            // Update status
+            updateStatus(userData.discord_status);
+            
+            // Update custom status
+            updateCustomStatus(userData.activities);
+            
+            // Update activities
+            updateActivities(userData.activities);
+            
+            // Show profile and hide loading
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('profile').style.display = 'block';
+            document.getElementById('errorDetails').style.display = 'none';
+            
+            log('Profile updated successfully', 'success');
+        }
+
+        function updateStatus(status) {
+            const statusDot = document.getElementById('statusDot');
+            const statusText = document.getElementById('statusText');
+            
+            statusDot.className = 'status-dot';
+            
+            switch (status) {
+                case 'online':
+                    statusText.textContent = 'Online';
+                    break;
+                case 'idle':
+                    statusText.textContent = 'Away';
+                    statusDot.classList.add('idle');
+                    break;
+                case 'dnd':
+                    statusText.textContent = 'Do Not Disturb';
+                    statusDot.classList.add('dnd');
+                    break;
+                case 'offline':
+                default:
+                    statusText.textContent = 'Offline';
+                    statusDot.classList.add('offline');
+                    break;
+            }
+        }
+
+        function updateCustomStatus(activities) {
+            const customStatusElement = document.getElementById('customStatus');
+            const customActivity = activities.find(activity => activity.type === 4);
+            
+            if (customActivity && customActivity.state) {
+                customStatusElement.textContent = `"${customActivity.state}"`;
+                customStatusElement.style.display = 'block';
+            } else {
+                customStatusElement.style.display = 'none';
+            }
+        }
+
+        function updateActivities(activities) {
+            const activitySection = document.getElementById('activitySection');
+            const unifiedCard = document.querySelector('.unified-status-card');
+            const mainActivities = activities.filter(activity => activity.type !== 4);
+            
+            if (mainActivities.length === 0) {
+                activitySection.style.display = 'none';
+                unifiedCard.className = 'glass-card unified-status-card';
+                return;
+            }
+            
+            const activity = mainActivities[0];
+            unifiedCard.className = 'glass-card unified-status-card';
+            
+            switch (activity.type) {
+                case 0:
+                    updateGameActivity(activity);
+                    unifiedCard.classList.add('game-activity');
+                    break;
+                case 2:
+                    updateSpotifyActivity(activity);
+                    unifiedCard.classList.add('spotify-activity');
+                    break;
+                case 3:
+                    updateWatchingActivity(activity);
+                    unifiedCard.classList.add('custom-activity');
+                    break;
+                case 5:
+                    updateCompetingActivity(activity);
+                    unifiedCard.classList.add('custom-activity');
+                    break;
+                default:
+                    updateGenericActivity(activity);
+                    unifiedCard.classList.add('custom-activity');
+                    break;
+            }
+            
+            activitySection.style.display = 'block';
+        }
+
+        function updateGameActivity(activity) {
+            const activityHeaderText = document.getElementById('activityHeaderText');
+            const activityImage = document.getElementById('activityImage');
+            const activityName = document.getElementById('activityName');
+            const activityFileInfo = document.getElementById('activityFileInfo');
+            const activityDetails = document.getElementById('activityDetails');
+            const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+            const activityState = document.getElementById('activityState');
+            const activityTimestamp = document.getElementById('activityTimestamp');
+            const fileTypeIcon = document.getElementById('fileTypeIcon');
+            
+            activityHeaderText.textContent = 'Playing';
+            
+            // Update header icon
+            const headerIcon = document.querySelector('#activityHeader i');
+            headerIcon.className = 'fas fa-gamepad';
+            
+            activityName.textContent = activity.name;
+            
+            // Check if this is a coding activity (like VS Code)
+            const isCodeEditor = activity.name.toLowerCase().includes('visual studio code') || 
+                               activity.name.toLowerCase().includes('vscode') ||
+                               activity.name.toLowerCase().includes('code');
+            
+            if (isCodeEditor && activity.details && activity.details.includes('.')) {
+                // Extract filename from details
+                const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
+                const fileIcon = getFileTypeIcon(filename);
+                
+                activityFileInfo.style.display = 'flex';
+                activityDetailsNoFile.style.display = 'none';
+                
+                fileTypeIcon.className = fileIcon.icon;
+                fileTypeIcon.style.color = fileIcon.color;
+                activityDetails.textContent = activity.details;
+            } else {
+                activityFileInfo.style.display = 'none';
+                activityDetailsNoFile.style.display = 'block';
+                activityDetailsNoFile.textContent = activity.details || '';
+            }
+            
+            activityState.textContent = activity.state || '';
+            
+            if (activity.assets && activity.assets.large_image) {
+                const imageUrl = activity.assets.large_image.startsWith('mp:')
+                    ? `https://media.discordapp.net/${activity.assets.large_image.slice(3)}`
+                    : `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`;
+                safeImageLoad(activityImage, imageUrl);
+                activityImage.style.display = 'block';
+            } else {
+                activityImage.style.display = 'none';
+            }
+            
+            if (activity.timestamps && activity.timestamps.start) {
+                activityTimestamp.textContent = formatTimestamp(activity.timestamps.start);
+                activityTimestamp.style.display = 'block';
+            } else {
+                activityTimestamp.style.display = 'none';
+            }
+        }
+
+        function updateSpotifyActivity(activity) {
+            const activityHeaderText = document.getElementById('activityHeaderText');
+            const activityImage = document.getElementById('activityImage');
+            const activityName = document.getElementById('activityName');
+            const activityFileInfo = document.getElementById('activityFileInfo');
+            const activityDetails = document.getElementById('activityDetails');
+            const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+            const activityState = document.getElementById('activityState');
+            const activityTimestamp = document.getElementById('activityTimestamp');
+            
+            activityHeaderText.textContent = 'Listening to Spotify';
+            
+            // Update header icon
+            const headerIcon = document.querySelector('#activityHeader i');
+            headerIcon.className = 'fab fa-spotify';
+            
+            activityName.textContent = activity.details;
+            
+            // Hide file info for Spotify
+            activityFileInfo.style.display = 'none';
+            activityDetailsNoFile.style.display = 'block';
+            activityDetailsNoFile.textContent = `by ${activity.state}`;
+            activityState.textContent = `on ${activity.assets?.large_text || 'Spotify'}`;
+            
+            if (activity.assets && activity.assets.large_image) {
+                const spotifyImageUrl = `https://i.scdn.co/image/${activity.assets.large_image.slice(8)}`;
+                safeImageLoad(activityImage, spotifyImageUrl);
+                activityImage.style.display = 'block';
+            } else {
+                activityImage.style.display = 'none';
+            }
+            
+            if (activity.timestamps && activity.timestamps.start && activity.timestamps.end) {
+                const current = Date.now() - activity.timestamps.start;
+                const total = activity.timestamps.end - activity.timestamps.start;
+                const currentMin = Math.floor(current / 60000);
+                const currentSec = Math.floor((current % 60000) / 1000);
+                const totalMin = Math.floor(total / 60000);
+                const totalSec = Math.floor((total % 60000) / 1000);
+                
+                activityTimestamp.textContent = `${currentMin}:${String(currentSec).padStart(2, '0')} / ${totalMin}:${String(totalSec).padStart(2, '0')}`;
+                activityTimestamp.style.display = 'block';
+            } else {
+                activityTimestamp.style.display = 'none';
+            }
+        }
+
+        function updateWatchingActivity(activity) {
+            const activityHeaderText = document.getElementById('activityHeaderText');
+            
+            activityHeaderText.textContent = 'Watching';
+            
+            // Update header icon
+            const headerIcon = document.querySelector('#activityHeader i');
+            headerIcon.className = 'fas fa-eye';
+            
+            updateGenericActivityContent(activity);
+        }
+
+        function updateCompetingActivity(activity) {
+            const activityHeaderText = document.getElementById('activityHeaderText');
+            
+            activityHeaderText.textContent = 'Competing in';
+            
+            // Update header icon
+            const headerIcon = document.querySelector('#activityHeader i');
+            headerIcon.className = 'fas fa-trophy';
+            
+            updateGenericActivityContent(activity);
+        }
+
+        function updateGenericActivityContent(activity) {
+            const activityImage = document.getElementById('activityImage');
+            const activityName = document.getElementById('activityName');
+            const activityFileInfo = document.getElementById('activityFileInfo');
+            const activityDetails = document.getElementById('activityDetails');
+            const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+            const activityState = document.getElementById('activityState');
+            const activityTimestamp = document.getElementById('activityTimestamp');
+            const fileTypeIcon = document.getElementById('fileTypeIcon');
+            
+            activityName.textContent = activity.name;
+            
+            // Check for file-based activities
+            if (activity.details && activity.details.includes('.')) {
+                const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
+                const fileIcon = getFileTypeIcon(filename);
+                
+                activityFileInfo.style.display = 'flex';
+                activityDetailsNoFile.style.display = 'none';
+                
+                fileTypeIcon.className = fileIcon.icon;
+                fileTypeIcon.style.color = fileIcon.color;
+                activityDetails.textContent = activity.details;
+            } else {
+                activityFileInfo.style.display = 'none';
+                activityDetailsNoFile.style.display = 'block';
+                activityDetailsNoFile.textContent = activity.details || '';
+            }
+            
+            activityState.textContent = activity.state || '';
+            
+            if (activity.assets && activity.assets.large_image) {
+                const imageUrl = activity.assets.large_image.startsWith('mp:')
+                    ? `https://media.discordapp.net/${activity.assets.large_image.slice(3)}`
+                    : `https://cdn.discordapp.com/app-assets/${activity.application_id}/${activity.assets.large_image}.png`;
+                safeImageLoad(activityImage, imageUrl);
+                activityImage.style.display = 'block';
+            } else {
+                activityImage.style.display = 'none';
+            }
+            
+            if (activity.timestamps && activity.timestamps.start) {
+                activityTimestamp.textContent = formatTimestamp(activity.timestamps.start);
+                activityTimestamp.style.display = 'block';
+            } else {
+                activityTimestamp.style.display = 'none';
+            }
+        }
+
+        // Global retry function
+        function retryDiscordConnection() {
+            log('Manual retry initiated', 'info');
+            retryCount = 0;
+            document.getElementById('errorDetails').style.display = 'none';
+            document.getElementById('loading').style.display = 'flex';
+            document.getElementById('profile').style.display = 'none';
+            fetchDiscordStatus();
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            log('DOM loaded, initializing yokai app...', 'info');
+            
+            // Initialize components
+            createParticles();
+            initNavigation();
+            disableDevTools();
+            
+            // Start Discord status fetching
+            fetchDiscordStatus();
+            
+            // Set up refresh interval
+            refreshInterval = setInterval(() => {
+                if (isConnected) {
+                    fetchDiscordStatus();
+                }
+            }, CONFIG.REFRESH_INTERVAL);
+            
+            log('Yokai portfolio initialized successfully', 'success');
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        });
+    </script>
+</body>
+</html>
