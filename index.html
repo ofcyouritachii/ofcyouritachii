@@ -258,7 +258,7 @@
             min-height: calc(100vh - 100px);
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items:  flex-start;
             padding: 0;
             width: 100%;
         }
@@ -589,7 +589,7 @@
             height: 200px;
             overflow: hidden;
             position: relative;
-            background: var(--glass-bg);
+            background: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -598,30 +598,17 @@
         }
 
         .project-image-new {
-            width: 300px;
-            height: 200px;
+            width: 100px;
+            height: 100px;
             transition: transform 0.3s ease;
-            object-fit: cover;
+            object-fit: contain;
+            border-radius: 50%;
+            background: #ffffff;
+            padding: 10px;
         }
 
         .project-card-new:hover .project-image-new {
             transform: scale(1.05);
-        }
-
-        .project-image-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--text-primary);
-            font-size: 1.5rem;
-            font-weight: 600;
-            text-align: center;
-            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 5px;
-            white-space: nowrap;
         }
 
         .project-content-new {
@@ -965,11 +952,6 @@
             .home-container {
                 height: calc(100vh - 280px);
             }
-
-            .project-image-text {
-                font-size: 1.2rem;
-                padding: 8px 16px;
-            }
         }
     </style>
 </head>
@@ -1077,22 +1059,7 @@
                 <div class="projects-grid-new">
                     <div class="project-card-new">
                         <div class="project-image-container">
-                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
-                                <path d="M50 50L250 150" stroke="#00d4ff" stroke-width="5" stroke-linecap="round"/>
-                                <path d="M50 150L250 50" stroke="#ff006e" stroke-width="5" stroke-linecap="round"/>
-                                <circle cx="150" cy="100" r="40" stroke="#00d4ff" stroke-width="3" fill="none"/>
-                                <g transform="translate(140, 90) scale(0.8)">
-                                    <path d="M0 0L40 40L0 80L-40 40Z" fill="#ff006e"/>
-                                </g>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
-                                        <stop offset="0%" stop-color="#0a0a0f"/>
-                                        <stop offset="100%" stop-color="#1a1a2e"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div class="project-image-text">Mikasa Music Bot</div>
+                            <img class="project-image-new" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
@@ -1119,21 +1086,7 @@
 
                     <div class="project-card-new">
                         <div class="project-image-container">
-                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
-                                <path d="M50 100Q100 50 150 100T250 100" stroke="#ff9900" stroke-width="5" fill="none"/>
-                                <rect x="120" y="80" width="60" height="40" fill="#ffcc00"/>
-                                <g transform="translate(130, 90) scale(0.9)">
-                                    <path d="M0 0L50 50L0 100L-50 50Z" fill="#ff9900"/>
-                                </g>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
-                                        <stop offset="0%" stop-color="#0a0a0f"/>
-                                        <stop offset="100%" stop-color="#1a1a2e"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div class="project-image-text">Bumblebee</div>
+                            <img class="project-image-new" src="./bumblebee.png" alt="Discord Logo">
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
@@ -1160,19 +1113,7 @@
 
                     <div class="project-card-new">
                         <div class="project-image-container">
-                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
-                                <path d="M50 50L250 150" stroke="#3776ab" stroke-width="5" stroke-linecap="round"/>
-                                <path d="M50 150L250 50" stroke="#4a90e2" stroke-width="5" stroke-linecap="round"/>
-                                <rect x="110" y="80" width="80" height="40" fill="#3776ab"/>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
-                                        <stop offset="0%" stop-color="#0a0a0f"/>
-                                        <stop offset="100%" stop-color="#1a1a2e"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div class="project-image-text">EZFetch</div>
+                            <img class="project-image-new" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
@@ -1199,19 +1140,7 @@
 
                     <div class="project-card-new">
                         <div class="project-image-container">
-                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
-                                <path d="M60 60L240 140" stroke="#5865f2" stroke-width="5" stroke-linecap="round"/>
-                                <path d="M60 140L240 60" stroke="#7289da" stroke-width="5" stroke-linecap="round"/>
-                                <circle cx="150" cy="100" r="50" stroke="#5865f2" stroke-width="3" fill="none"/>
-                                <defs>
-                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
-                                        <stop offset="0%" stop-color="#0a0a0f"/>
-                                        <stop offset="100%" stop-color="#1a1a2e"/>
-                                    </linearGradient>
-                                </defs>
-                            </svg>
-                            <div class="project-image-text">Discord BOTS</div>
+                            <img class="project-image-new" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo">
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
