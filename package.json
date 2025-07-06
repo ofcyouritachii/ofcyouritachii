@@ -1,11 +1,11 @@
-cho{
+{
   "name": "yokai-portfolio",
   "version": "1.0.0",
   "description": "A futuristic personal portfolio website with real-time Discord status integration",
   "main": "index.html",
   "scripts": {
     "dev": "npx serve .",
-    "build": "echo build --output public" ,
+    "build": "echo 'Static site - no build needed'",
     "start": "npx serve ."
   },
   "keywords": [
