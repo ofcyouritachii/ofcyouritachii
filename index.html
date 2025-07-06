@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yokai</title>
+    <title>yokai - Portfolio</title>
     <meta name="description" content="yokai's personal portfolio - Discord developer and creator">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -254,18 +254,18 @@
         }
 
         .main-content {
-            margin-top: 120px;
-            min-height: calc(100vh - 120px);
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 2rem 1rem;
+            padding: 0;
+            width: 100%;
         }
 
         .page {
             display: none;
             width: 100%;
-            max-width: 1200px;
             animation: pageSlideIn 0.6s ease-out;
         }
 
@@ -286,6 +286,7 @@
 
         .home-container {
             text-align: center;
+            width: 100%;
             max-width: 600px;
             margin: 0 auto;
             height: calc(100vh - 200px);
@@ -524,10 +525,13 @@
 
         .projects-container {
             text-align: center;
+            padding-top: 0;
+            width: 100%;
         }
 
         .projects-header {
             margin-bottom: 2rem;
+            padding-top: 0;
         }
 
         .projects-title-new {
@@ -556,8 +560,9 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1rem;
-            max-width: 1400px;
-            margin: 0 auto;
+            width: 100%;
+            margin: 0;
+            padding: 0;
             justify-items: center;
         }
 
@@ -579,36 +584,44 @@
             border-color: rgba(139, 92, 246, 0.3);
         }
 
-        .project-banner {
-            width: 100%;
-            height: 80px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-            overflow: hidden;
-        }
-
         .project-image-container {
             width: 100%;
-            height: 200px; /* Fixed height for uniform cropping */
+            height: 200px;
             overflow: hidden;
             position: relative;
             background: var(--glass-bg);
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 0;
+            padding: 0;
         }
 
         .project-image-new {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Ensures full image is visible without cropping */
-            object-position: center;
+            width: 300px;
+            height: 200px;
             transition: transform 0.3s ease;
+            object-fit: cover;
         }
 
         .project-card-new:hover .project-image-new {
             transform: scale(1.05);
+        }
+
+        .project-image-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px 20px;
+            border-radius: 5px;
+            white-space: nowrap;
         }
 
         .project-content-new {
@@ -882,7 +895,7 @@
 
             .main-content {
                 margin-top: 180px;
-                padding: 1rem;
+                padding: 0;
             }
 
             .home-container {
@@ -952,6 +965,11 @@
             .home-container {
                 height: calc(100vh - 280px);
             }
+
+            .project-image-text {
+                font-size: 1.2rem;
+                padding: 8px 16px;
+            }
         }
     </style>
 </head>
@@ -997,7 +1015,7 @@
                 <!-- Profile Content -->
                 <div class="profile-container" id="profile">
                     <div class="profile-header">
-                        <img class="avatar" id="avatar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik02MCAzNzUuQzI5LjUgMzc1IDAgNDA0LjIgMCA0NDVWMzgwQzggMzgwIDE2IDM3MiAyNCAzNzJIMzZDMzYuMiAzNzIgNDQgMzgwIDQ0IDM4MEwzNiA0NDUuQzQ0IDQwNC4yIDY3LjUgMzc1IDEwMCAzNzVIMzZDMzYgMzcyIDQ0IDM2NCA0NCAzNjRWMzQwQzQ0IDMyOC41NiA0OC42NCAzMTcuMTIgNTQuODggMzA4Ljk2TDcyIDMwMFY0NDVDNzIgNDA0LjIgOTguNSAzNzUgMTQwIDM3NUgxMjhDMTIwIDM3NSAxMTIgMzgzIDExMiA0NDVWMzY0QzExMiAzNTIuNTYgMTE2LjY0IDM0MS4xMiAxMjIuODggMzMyLjk2TDQwIDM0MFoiIGZpbGw9IiMwMGQ0ZmYiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjEyMCIgeTI9IjEyMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMGEwYTBmIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFhMWEyZSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="Avatar">
+                        <img class="avatar" id="avatar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik02MCAzNzUuQzI5LjUgMzc1IDAgNDA0LjIgMCA0NDVWMzgwQzggMzgwIDE2IDM3MiAyNCAzNzJIMzZDMzYuMiAzNzIgNDQgMzgwIDQ0IDM4MEwzNiA0NDUuQzQ0IDQwNC4yIDY3LjUgMzc1IDEwMCAzNzVIMzZDMzYgMzcyIDQ0IDM2NCA0NCAzNjRWMzQwQzQ0IDMyOC41NiA0OC42NCAzMTcuMTIgNTQuODggMzA4Ljk2TDcyIDMwMFY4MDRDNzIgNDA0LjIgOTguNSAzNzUgMTQwIDM3NUgxMjhDMTIwIDM3NSAxMTIgMzgzIDExMiA0NDVWMzY0QzExMiAzNTIuNTYgMTE2LjY0IDM0MS4xMiAxMjIuODggMzMyLjk2TDQwIDM0MFoiIGZpbGw9IiMwMGQ0ZmYiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjEyMCIgeTI9IjEyMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMGEwYTBmIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFhMWEyZSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="Avatar">
                         <div class="username" id="username">yokai</div>
                         <div class="discriminator" id="discriminator">@yokai</div>
                     </div>
@@ -1058,9 +1076,23 @@
 
                 <div class="projects-grid-new">
                     <div class="project-card-new">
-                        <div class="project-banner" style="background-image: url('./mikasa-banner.jpg');"></div>
                         <div class="project-image-container">
-                            <img src="./mikasa.png" alt="Mikasa Music Bot" class="project-image-new">
+                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
+                                <path d="M50 50L250 150" stroke="#00d4ff" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M50 150L250 50" stroke="#ff006e" stroke-width="5" stroke-linecap="round"/>
+                                <circle cx="150" cy="100" r="40" stroke="#00d4ff" stroke-width="3" fill="none"/>
+                                <g transform="translate(140, 90) scale(0.8)">
+                                    <path d="M0 0L40 40L0 80L-40 40Z" fill="#ff006e"/>
+                                </g>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
+                                        <stop offset="0%" stop-color="#0a0a0f"/>
+                                        <stop offset="100%" stop-color="#1a1a2e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="project-image-text">Mikasa Music Bot</div>
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
@@ -1086,9 +1118,22 @@
                     </div>
 
                     <div class="project-card-new">
-                        <div class="project-banner" style="background-image: url('./bumblebee-banner.jpg');"></div>
                         <div class="project-image-container">
-                            <img src="./bumblebee.png" alt="Bumblebee" class="project-image-new">
+                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
+                                <path d="M50 100Q100 50 150 100T250 100" stroke="#ff9900" stroke-width="5" fill="none"/>
+                                <rect x="120" y="80" width="60" height="40" fill="#ffcc00"/>
+                                <g transform="translate(130, 90) scale(0.9)">
+                                    <path d="M0 0L50 50L0 100L-50 50Z" fill="#ff9900"/>
+                                </g>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
+                                        <stop offset="0%" stop-color="#0a0a0f"/>
+                                        <stop offset="100%" stop-color="#1a1a2e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="project-image-text">Bumblebee</div>
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
@@ -1114,9 +1159,20 @@
                     </div>
 
                     <div class="project-card-new">
-                        <div class="project-banner" style="background-image: url('./ezfetch-banner.jpg');"></div>
                         <div class="project-image-container">
-                            <img src="./ezfetch.png" alt="EZFetch" class="project-image-new">
+                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
+                                <path d="M50 50L250 150" stroke="#3776ab" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M50 150L250 50" stroke="#4a90e2" stroke-width="5" stroke-linecap="round"/>
+                                <rect x="110" y="80" width="80" height="40" fill="#3776ab"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
+                                        <stop offset="0%" stop-color="#0a0a0f"/>
+                                        <stop offset="100%" stop-color="#1a1a2e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="project-image-text">EZFetch</div>
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
@@ -1142,9 +1198,20 @@
                     </div>
 
                     <div class="project-card-new">
-                        <div class="project-banner" style="background-image: url('./discord-banner.jpg');"></div>
                         <div class="project-image-container">
-                            <img src="./discord.png" alt="Discord BOTS" class="project-image-new">
+                            <svg class="project-image-new" viewBox="0 0 300 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="300" height="200" rx="10" fill="url(#gradient)"/>
+                                <path d="M60 60L240 140" stroke="#5865f2" stroke-width="5" stroke-linecap="round"/>
+                                <path d="M60 140L240 60" stroke="#7289da" stroke-width="5" stroke-linecap="round"/>
+                                <circle cx="150" cy="100" r="50" stroke="#5865f2" stroke-width="3" fill="none"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0" y1="0" x2="300" y2="200">
+                                        <stop offset="0%" stop-color="#0a0a0f"/>
+                                        <stop offset="100%" stop-color="#1a1a2e"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                            <div class="project-image-text">Discord BOTS</div>
                         </div>
                         <div class="project-content-new">
                             <div class="project-header-new">
