@@ -263,7 +263,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            padding: 0;
+            padding: 0 20px;
             width: 100%;
         }
 
@@ -293,11 +293,11 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
-            height: calc(100vh - 200px);
+            min-height: calc(100vh - 200px);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            overflow: hidden;
+            padding: 20px;
         }
 
         .loading-container {
@@ -504,27 +504,6 @@
             font-size: 0.8rem;
             color: var(--error-color);
             display: none;
-        }
-
-        .retry-button {
-            background: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .retry-button:hover {
-            background: var(--accent-secondary);
-            transform: translateY(-1px);
         }
 
         .projects-container {
@@ -836,13 +815,20 @@
         }
 
         #home {
-            overflow: hidden;
-            height: 100vh;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         #projects {
-            overflow-y: auto;
             min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        #about {
+            min-height: 100vh;
+            padding: 2rem 0;
         }
 
         .skills-container {
@@ -933,6 +919,62 @@
             letter-spacing: 1px;
         }
 
+        .about-container {
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .about-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-align: center;
+        }
+
+        .about-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            text-align: center;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .about-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: left;
+        }
+
+        .about-content:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .nav {
                 top: 10px;
@@ -952,7 +994,7 @@
             }
 
             .nav-indicator {
-                width: calc(33.33% - 4px);
+                width: calc(25% - 4px);
             }
 
             .social-links {
@@ -962,11 +1004,11 @@
 
             .main-content {
                 margin-top: 180px;
-                padding: 0;
+                padding: 0 10px;
             }
 
             .home-container {
-                height: calc(100vh - 260px);
+                min-height: calc(100vh - 260px);
             }
 
             .username {
@@ -987,7 +1029,7 @@
                 text-align: center;
             }
 
-            .projects-title-new {
+            .projects-title-new, .skills-title, .about-title {
                 font-size: 2rem;
             }
 
@@ -1010,6 +1052,10 @@
 
             .skills-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                padding: 1.5rem;
             }
         }
 
@@ -1034,48 +1080,12 @@
             }
 
             .home-container {
-                height: calc(100vh - 280px);
+                min-height: calc(100vh - 280px);
             }
-        }
 
-        .about-me {
-            margin-top: 1.5rem;
-            padding: 1.5rem 2rem;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            text-align: left;
-            box-shadow: var(--neon-glow);
-            transition: all 0.3s ease;
-        }
-
-        .about-me:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
-        }
-
-        .about-me h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1rem;
-            color: var(--accent-color);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .about-me p {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.8;
-            text-align: justify;
-            padding: 0 1rem;
+            .about-content {
+                padding: 1rem;
+            }
         }
     </style>
 </head>
@@ -1092,6 +1102,7 @@
         <ul class="nav-links">
             <div class="nav-indicator" id="navIndicator"></div>
             <li><a class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a class="nav-link" data-page="about"><i class="fas fa-user"></i> About</a></li>
             <li><a class="nav-link" data-page="projects"><i class="fas fa-code"></i> Projects</a></li>
             <li><a class="nav-link" data-page="skills"><i class="fas fa-tools"></i> Skills</a></li>
         </ul>
@@ -1114,7 +1125,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Home Page -->
-        <div class="page" id="home">
+        <div class="page active" id="home">
             <div class="home-container">
                 <div class="loading-container" id="loading">
                     <div class="spinner"></div>
@@ -1122,7 +1133,7 @@
                 </div>
                 <div class="profile-container" id="profile">
                     <div class="profile-header">
-                        <img src="" alt="Avatar" id="avatar" class="avatar">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" id="avatar" class="avatar">
                         <div class="username" id="username">yokaimsi</div>
                         <div class="discriminator" id="discriminator"></div>
                     </div>
@@ -1160,9 +1171,20 @@
                         </ol>
                     </div>
                     <div class="error-details" id="errorDetails"></div>
-                    <button class="retry-button" onclick="retryDiscordConnection()">
-                        <i class="fas fa-redo"></i> Retry
-                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- About Page -->
+        <div class="page" id="about">
+            <div class="about-container">
+                <h1 class="about-title">About Me</h1>
+                <p class="about-subtitle">A glimpse into my journey as a developer and tech enthusiast</p>
+                <div class="about-content">
+                    <p>I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</p>
+                    <p>With a strong foundation in Python, JavaScript, HTML, and CSS, I enjoy building projects that combine functionality with aesthetic design. My work focuses on creating efficient tools, engaging bots, and user-friendly web applications. I'm also proficient in various Linux distributions and version control systems like Git.</p>
+                    <p>When I'm not coding, you can find me tinkering with new frameworks, contributing to open-source projects, or engaging with the developer community on Discord and GitHub. I believe in continuous learning and sharing knowledge to inspire others.</p>
+                    <p>My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone. Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
                 </div>
             </div>
         </div>
@@ -1335,7 +1357,8 @@
             RETRY_ATTEMPTS: 3,
             RETRY_DELAY: 2000,
             REFRESH_INTERVAL: 30000,
-            TIMEOUT: 10000
+            TIMEOUT: 10000,
+            FALLBACK_AVATAR: 'https://cdn.discordapp.com/embed/avatars/0.png'
         };
 
         let retryCount = 0;
@@ -1406,6 +1429,7 @@
         }
 
         function formatTimestamp(timestamp) {
+            if (!timestamp) return 'Just started';
             const now = Date.now();
             const elapsed = now - timestamp;
             const minutes = Math.floor(elapsed / 60000);
@@ -1422,7 +1446,8 @@
 
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
+            const particleCount = window.innerWidth < 768 ? 30 : 50;
+            particlesContainer.innerHTML = '';
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
@@ -1438,7 +1463,15 @@
             const pages = document.querySelectorAll('.page');
             const indicator = document.getElementById('navIndicator');
 
-            updateIndicatorPosition();
+            function updateIndicatorPosition() {
+                const activeLink = document.querySelector('.nav-link.active');
+                if (activeLink) {
+                    const left = activeLink.offsetLeft;
+                    const width = activeLink.offsetWidth;
+                    indicator.style.left = left + 'px';
+                    indicator.style.width = width + 'px';
+                }
+            }
 
             navLinks.forEach((link) => {
                 link.addEventListener('click', (e) => {
@@ -1454,17 +1487,12 @@
                 });
             });
 
-            function updateIndicatorPosition() {
-                const activeLink = document.querySelector('.nav-link.active');
-                if (activeLink) {
-                    const left = activeLink.offsetLeft;
-                    const width = activeLink.offsetWidth;
-                    indicator.style.left = left + 'px';
-                    indicator.style.width = width + 'px';
-                }
-            }
+            window.addEventListener('resize', () => {
+                updateIndicatorPosition();
+                createParticles();
+            });
 
-            window.addEventListener('resize', updateIndicatorPosition);
+            updateIndicatorPosition();
             document.body.style.overflow = 'hidden';
         }
 
@@ -1473,24 +1501,23 @@
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u')) {
                     e.preventDefault();
-                    return false;
                 }
-            });
-            document.addEventListener('DOMContentLoaded', () => {
-                setInterval(() => {
-                    if (window.outerWidth - window.innerWidth > 100 || window.outerHeight - window.innerHeight > 100) {
-                        window.location.reload();
-                    }
-                }, 100);
             });
         }
 
         async function fetchDiscordStatus() {
             log('Attempting to fetch Discord status...');
+            const loadingContainer = document.getElementById('loading');
+            const profileContainer = document.getElementById('profile');
             try {
+                loadingContainer.style.display = 'flex';
+                profileContainer.style.display = 'none';
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
-                const response = await fetch(`${CONFIG.LANYARD_API_URL}${CONFIG.DISCORD_USER_ID}`, { signal: controller.signal, headers: { 'Accept': 'application/json' } });
+                const response = await fetch(`${CONFIG.LANYARD_API_URL}${CONFIG.DISCORD_USER_ID}`, { 
+                    signal: controller.signal, 
+                    headers: { 'Accept': 'application/json' } 
+                });
                 clearTimeout(timeoutId);
                 if (!response.ok) throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 const data = await response.json();
@@ -1503,6 +1530,9 @@
             } catch (error) {
                 log(`Error fetching Discord status: ${error.message}`, 'error');
                 handleDiscordError(error);
+            } finally {
+                loadingContainer.style.display = 'none';
+                profileContainer.style.display = 'block';
             }
         }
 
@@ -1511,10 +1541,12 @@
             const setupNotice = document.getElementById('setupNotice');
             let errorMessage = 'Unknown error occurred';
             let showSetupNotice = false;
-            if (error.message.includes('404')) {
+            if (error.name === 'AbortError') {
+                errorMessage = 'Request timed out. Please check your connection.';
+            } else if (error.message.includes('404')) {
                 errorMessage = 'Discord user not found in Lanyard database. Join the Lanyard Discord server first.';
                 showSetupNotice = true;
-            } else if (error.message.includes('timeout') || error.message.includes('Failed to fetch')) {
+            } else if (error.message.includes('Failed to fetch')) {
                 errorMessage = 'Network connection failed. Check your internet.';
             } else if (error.message.includes('CORS')) {
                 errorMessage = 'CORS error. Try refreshing the page.';
@@ -1523,7 +1555,7 @@
             }
             errorDetails.textContent = `Error: ${errorMessage}`;
             errorDetails.style.display = 'block';
-            if (showSetupNotice) setupNotice.style.display = 'block';
+            setupNotice.style.display = showSetupNotice ? 'block' : 'none';
             showOfflineState();
             if (retryCount < CONFIG.RETRY_ATTEMPTS && !showSetupNotice) {
                 retryCount++;
@@ -1531,19 +1563,17 @@
                 setTimeout(fetchDiscordStatus, CONFIG.RETRY_DELAY);
             } else {
                 log('Max retry attempts reached or setup required', 'error');
-                showOfflineState();
             }
         }
 
         function showOfflineState() {
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('profile').style.display = 'block';
             const avatar = document.getElementById('avatar');
             const statusDot = document.getElementById('statusDot');
             const statusText = document.getElementById('statusText');
             const activitySection = document.getElementById('activitySection');
             const unifiedCard = document.querySelector('.unified-status-card');
             avatar.classList.add('error');
+            avatar.src = CONFIG.FALLBACK_AVATAR;
             statusDot.className = 'status-dot offline';
             statusText.textContent = 'Offline';
             activitySection.style.display = 'none';
@@ -1556,7 +1586,9 @@
             avatar.classList.remove('error');
             if (userData.discord_user.avatar) {
                 const avatarUrl = `https://cdn.discordapp.com/avatars/${userData.discord_user.id}/${userData.discord_user.avatar}.${userData.discord_user.avatar.startsWith('a_') ? 'gif' : 'png'}?size=256`;
-                safeImageLoad(avatar, avatarUrl);
+                safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR);
+            } else {
+                avatar.src = CONFIG.FALLBACK_AVATAR;
             }
             const username = document.getElementById('username');
             const discriminator = document.getElementById('discriminator');
@@ -1570,8 +1602,6 @@
             updateStatus(userData.discord_status);
             updateCustomStatus(userData.activities);
             updateActivities(userData.activities);
-            document.getElementById('loading').style.display = 'none';
-            document.getElementById('profile').style.display = 'block';
             document.getElementById('errorDetails').style.display = 'none';
             log('Profile updated successfully', 'success');
         }
@@ -1581,10 +1611,21 @@
             const statusText = document.getElementById('statusText');
             statusDot.className = 'status-dot';
             switch (status) {
-                case 'online': statusText.textContent = 'Online'; break;
-                case 'idle': statusText.textContent = 'Away'; statusDot.classList.add('idle'); break;
-                case 'dnd': statusText.textContent = 'Do Not Disturb'; statusDot.classList.add('dnd'); break;
-                case 'offline': default: statusText.textContent = 'Offline'; statusDot.classList.add('offline'); break;
+                case 'online':
+                    statusText.textContent = 'Online';
+                    break;
+                case 'idle':
+                    statusText.textContent = 'Away';
+                    statusDot.classList.add('idle');
+                    break;
+                case 'dnd':
+                    statusText.textContent = 'Do Not Disturb';
+                    statusDot.classList.add('dnd');
+                    break;
+                default:
+                    statusText.textContent = 'Offline';
+                    statusDot.classList.add('offline');
+                    break;
             }
         }
 
@@ -1603,7 +1644,7 @@
             const activitySection = document.getElementById('activitySection');
             const unifiedCard = document.querySelector('.unified-status-card');
             const mainActivities = activities.filter(activity => activity.type !== 4);
-            if (mainActivities.length === 0) {
+            if (!mainActivities.length) {
                 activitySection.style.display = 'none';
                 unifiedCard.className = 'glass-card unified-status-card';
                 return;
@@ -1611,11 +1652,26 @@
             const activity = mainActivities[0];
             unifiedCard.className = 'glass-card unified-status-card';
             switch (activity.type) {
-                case 0: updateGameActivity(activity); unifiedCard.classList.add('game-activity'); break;
-                case 2: updateSpotifyActivity(activity); unifiedCard.classList.add('spotify-activity'); break;
-                case 3: updateWatchingActivity(activity); unifiedCard.classList.add('custom-activity'); break;
-                case 5: updateCompetingActivity(activity); unifiedCard.classList.add('custom-activity'); break;
-                default: updateGenericActivity(activity); unifiedCard.classList.add('custom-activity'); break;
+                case 0:
+                    updateGameActivity(activity);
+                    unifiedCard.classList.add('game-activity');
+                    break;
+                case 2:
+                    updateSpotifyActivity(activity);
+                    unifiedCard.classList.add('spotify-activity');
+                    break;
+                case 3:
+                    updateWatchingActivity(activity);
+                    unifiedCard.classList.add('custom-activity');
+                    break;
+                case 5:
+                    updateCompetingActivity(activity);
+                    unifiedCard.classList.add('custom-activity');
+                    break;
+                default:
+                    updateGenericActivityContent(activity);
+                    unifiedCard.classList.add('custom-activity');
+                    break;
             }
             activitySection.style.display = 'block';
         }
@@ -1632,7 +1688,7 @@
             const headerIcon = document.querySelector('#activityHeader i');
             headerIcon.className = 'fas fa-gamepad';
             activityHeaderText.textContent = 'Playing';
-            activityName.textContent = activity.name;
+            activityName.textContent = activity.name || 'Unknown Game';
             const isCodeEditor = activity.name.toLowerCase().includes('visual studio code') || activity.name.toLowerCase().includes('vscode') || activity.name.toLowerCase().includes('code');
             if (isCodeEditor && activity.details && activity.details.includes('.')) {
                 const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
@@ -1648,12 +1704,8 @@
                 activityDetailsNoFile.textContent = activity.details || '';
             }
             activityState.textContent = activity.state || '';
-            if (activity.timestamps && activity.timestamps.start) {
-                activityTimestamp.textContent = formatTimestamp(activity.timestamps.start);
-                activityTimestamp.style.display = 'block';
-            } else {
-                activityTimestamp.style.display = 'none';
-            }
+            activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
+            activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
         }
 
         function updateSpotifyActivity(activity) {
@@ -1666,11 +1718,11 @@
             const headerIcon = document.querySelector('#activityHeader i');
             headerIcon.className = 'fab fa-spotify';
             activityHeaderText.textContent = 'Listening to Spotify';
-            activityName.textContent = activity.details;
+            activityName.textContent = activity.details || 'Unknown Track';
             activityFileInfo.style.display = 'none';
             activityDetailsNoFile.style.display = 'block';
-            activityDetailsNoFile.textContent = `by ${activity.state}`;
-            activityState.textContent = `on ${activity.assets?.large_text || 'Spotify'}`;
+            activityDetailsNoFile.textContent = activity.state ? `by ${activity.state}` : '';
+            activityState.textContent = activity.assets?.large_text ? `on ${activity.assets.large_text}` : 'on Spotify';
             if (activity.timestamps && activity.timestamps.start && activity.timestamps.end) {
                 const current = Date.now() - activity.timestamps.start;
                 const total = activity.timestamps.end - activity.timestamps.start;
@@ -1709,7 +1761,7 @@
             const activityState = document.getElementById('activityState');
             const activityTimestamp = document.getElementById('activityTimestamp');
             const fileTypeIcon = document.getElementById('fileTypeIcon');
-            activityName.textContent = activity.name;
+            activityName.textContent = activity.name || 'Unknown Activity';
             if (activity.details && activity.details.includes('.')) {
                 const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
                 const fileIcon = getFileTypeIcon(filename);
@@ -1724,21 +1776,8 @@
                 activityDetailsNoFile.textContent = activity.details || '';
             }
             activityState.textContent = activity.state || '';
-            if (activity.timestamps && activity.timestamps.start) {
-                activityTimestamp.textContent = formatTimestamp(activity.timestamps.start);
-                activityTimestamp.style.display = 'block';
-            } else {
-                activityTimestamp.style.display = 'none';
-            }
-        }
-
-        function retryDiscordConnection() {
-            log('Manual retry initiated', 'info');
-            retryCount = 0;
-            document.getElementById('errorDetails').style.display = 'none';
-            document.getElementById('loading').style.display = 'flex';
-            document.getElementById('profile').style.display = 'none';
-            fetchDiscordStatus();
+            activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
+            activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -1748,7 +1787,9 @@
             disableDevTools();
             fetchDiscordStatus();
             refreshInterval = setInterval(() => {
-                if (isConnected) fetchDiscordStatus();
+                if (isConnected && document.getElementById('home').classList.contains('active')) {
+                    fetchDiscordStatus();
+                }
             }, CONFIG.REFRESH_INTERVAL);
             log('Yokai portfolio initialized successfully', 'success');
         });
