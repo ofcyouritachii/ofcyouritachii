@@ -580,11 +580,17 @@
             position: relative;
             width: 100%;
             max-width: 300px;
+            animation: floatProject 4s ease-in-out infinite;
+        }
+
+        @keyframes floatProject {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .project-card-new:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
             border-color: rgba(139, 92, 246, 0.3);
         }
 
@@ -602,6 +608,12 @@
         .project-icon-new {
             font-size: 1rem;
             color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-new:hover .project-icon-new {
+            transform: rotate(15deg) scale(1.2);
+            color: var(--accent-secondary);
         }
 
         .project-title-new {
@@ -609,6 +621,11 @@
             font-weight: 600;
             color: var(--text-primary);
             margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .project-card-new:hover .project-title-new {
+            color: var(--accent-color);
         }
 
         .project-description-new {
@@ -616,6 +633,11 @@
             font-size: 0.9rem;
             line-height: 1.4;
             margin-bottom: 1rem;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card-new:hover .project-description-new {
+            opacity: 0.8;
         }
 
         .project-tech-new {
@@ -631,6 +653,7 @@
             font-size: 0.7rem;
             font-weight: 500;
             border: 1px solid;
+            transition: all 0.3s ease;
         }
 
         .tech-tag-new.js {
@@ -687,6 +710,12 @@
             font-weight: 500;
             transition: all 0.3s ease;
             border: 1px solid;
+            animation: pulseBtn 2s infinite;
+        }
+
+        @keyframes pulseBtn {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .project-btn-new.github {
@@ -697,7 +726,8 @@
 
         .project-btn-new.github:hover {
             background: rgba(51, 51, 51, 0.2);
-            transform: translateY(-1px);
+            transform: translateY(-1px) scale(1.05);
+            box-shadow: 0 0 10px rgba(51, 51, 51, 0.4);
         }
 
         .project-btn-new.discord {
@@ -708,7 +738,8 @@
 
         .project-btn-new.discord:hover {
             background: rgba(88, 101, 242, 0.2);
-            transform: translateY(-1px);
+            transform: translateY(-1px) scale(1.05);
+            box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
         }
 
         .unified-status-card {
@@ -1009,36 +1040,44 @@
 
         .about-me {
             margin-top: 1.5rem;
-            padding: 1rem;
+            padding: 1.5rem 2rem;
             background: var(--glass-bg);
-            border-radius: 10px;
-            max-width: 500px;
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            text-align: left;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
+        }
+
+        .about-me:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
         }
 
         .about-me h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
             color: var(--accent-color);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .about-me p {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
+            font-size: 1rem;
+            line-height: 1.8;
+            text-align: justify;
+            padding: 0 1rem;
         }
     </style>
-
-
-
-
-
-
-
-
-
-
 </head>
 <body>
     <!-- Floating Particles -->
@@ -1066,7 +1105,7 @@
             <a href="https://discord.com/users/1282292887878369358" target="_blank" class="social-link discord" title="Discord">
                 <i class="fab fa-discord"></i>
             </a>
-            <a href="https://linkedin.com/in/yokaimsi" target="_blank" class="social-link linkedin" title="LinkedIn">
+            <a href="https://www.linkedin.com/in/yokaimsi" target="_blank" class="social-link linkedin" title="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
         </div>
@@ -1075,58 +1114,43 @@
     <!-- Main Content -->
     <div class="main-content">
         <!-- Home Page -->
-        <div class="page active" id="home">
+        <div class="page" id="home">
             <div class="home-container">
-                <!-- Loading State -->
                 <div class="loading-container" id="loading">
                     <div class="spinner"></div>
-                    <div class="loading-text">connecting to discord...</div>
+                    <span class="loading-text">loading profile...</span>
                 </div>
-
-                <!-- Profile Content -->
                 <div class="profile-container" id="profile">
                     <div class="profile-header">
-                        <img class="avatar" id="avatar" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTIwIiBoZWlnaHQ9IjEyMCIgdmlld0JveD0iMCAwIDEyMCAxMjAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiByeD0iNjAiIGZpbGw9InVybCgjZ3JhZGllbnQwX2xpbmVhcl8xXzEpIi8+CjxwYXRoIGQ9Ik02MCAzNzUuQzI5LjUgMzc1IDAgNDA0LjIgMCA0NDVWMzgwQzggMzgwIDE2IDM3MiAyNCAzNzJIMzZDMzYuMiAzNzIgNDQgMzgwIDQ0IDM4MEwzNiA0NDUuQzQ0IDQwNC4yIDY3LjUgMzc1IDEwMCAzNzVIMzZDMzYgMzcyIDQ0IDM2NCA0NCAzNjRWMzQwQzQ0IDMyOC41NiA0OC42NCAzMTcuMTIgNTQuODggMzA4Ljk2TDcyIDMwMFY4MDRDNzIgNDA0LjIgOTguNSAzNzUgMTQwIDM3NUgxMjhDMTIwIDM3NSAxMTIgMzgzIDExMiA0NDVWMzY0QzExMiAzNTIuNTYgMTE2LjY0IDM0MS4xMiAxMjIuODggMzMyLjk2TDQwIDM0MFoiIGZpbGw9IiMwMGQ0ZmYiLz4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQwX2xpbmVhcl8xXzEiIHgxPSIwIiB5MT0iMCIgeDI9IjEyMCIgeTI9IjEyMCIgZ3JhZGllbnRVbml0cz0idXNlclNwYWNlT25Vc2UiPgo8c3RvcCBzdG9wLWNvbG9yPSIjMGEwYTBmIi8+CjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzFhMWEyZSIvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+Cjwvc3ZnPgo=" alt="Avatar">
-                        <div class="username" id="username">yokai</div>
-                        <div class="discriminator" id="discriminator">@yokai</div>
+                        <img src="" alt="Avatar" id="avatar" class="avatar">
+                        <div class="username" id="username"></div>
+                        <div class="discriminator" id="discriminator"></div>
                     </div>
-
-                    <!-- About Me Section -->
-                    <div class="about-me">
-                        <h3>About Me</h3>
-                        <p>I'm yokaimsi, a passionate developer with a love for creating innovative projects. I specialize in web development, Discord bots, and system scripting, with experience across various platforms and tools. Always exploring new technologies and open to collaboration!</p>
-                    </div>
-
-                    <!-- Setup Notice -->
-                    <div class="setup-notice" id="setupNotice" style="display: none;">
-                        <h4><i class="fas fa-exclamation-triangle"></i> Discord Status Setup Required</h4>
-                        <p>To enable real-time Discord status, please:</p>
-                        <ol>
-                            <li>Join the Lanyard Discord server: <a href="https://discord.gg/lanyard" target="_blank">discord.gg/lanyard</a></li>
-                            <li>Wait 5-10 minutes for your profile to be indexed</li>
-                            <li>Refresh this page</li>
-                        </ol>
-                        <button class="retry-button" onclick="retryDiscordConnection()">
-                            <i class="fas fa-sync-alt"></i> Retry Connection
-                        </button>
-                    </div>
-
                     <div class="glass-card unified-status-card">
                         <div class="status-indicator">
-                            <div class="status-dot offline" id="statusDot"></div>
-                            <div class="status-text" id="statusText">offline</div>
+                            <span class="status-dot" id="statusDot"></span>
+                            <span class="status-text" id="statusText"></span>
                         </div>
                         <div class="custom-status" id="customStatus"></div>
-                        <!-- Activity Section -->
+                        <div class="setup-notice" id="setupNotice" style="display: none;">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Setup Required</h4>
+                            <ol>
+                                <li>Join the <a href="https://discord.gg/lanyard" target="_blank">Lanyard Discord server</a>.</li>
+                                <li>Verify your Discord account to enable Lanyard tracking.</li>
+                                <li>Wait a few minutes for your data to propagate.</li>
+                            </ol>
+                        </div>
+                        <div class="error-details" id="errorDetails"></div>
+                        <button class="retry-button" onclick="retryDiscordConnection()"><i class="fas fa-redo"></i> Retry</button>
                         <div class="activity-section" id="activitySection" style="display: none;">
                             <div class="activity-header" id="activityHeader">
-                                <i class="fas fa-gamepad"></i>
-                                <span id="activityHeaderText">Playing</span>
+                                <i class="fas fa-spinner"></i>
+                                <span id="activityHeaderText">Loading...</span>
                             </div>
                             <div class="activity-content">
                                 <div class="activity-details">
                                     <div class="activity-name" id="activityName"></div>
-                                    <div class="activity-file-info" id="activityFileInfo">
+                                    <div class="activity-file-info" id="activityFileInfo" style="display: none;">
                                         <i class="file-type-icon" id="fileTypeIcon"></i>
                                         <span class="activity-details-text" id="activityDetails"></span>
                                     </div>
@@ -1136,7 +1160,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="error-details" id="errorDetails"></div>
+                    </div>
+                    <div class="about-me">
+                        <h3>About Me</h3>
+                        <p>I am a passionate developer with a focus on creating innovative and efficient solutions using Python, JavaScript, and various frameworks. With a keen interest in cybersecurity and system administration, I thrive on building tools and projects that solve real-world problems. My experience spans across web development, automation scripts, and open-source contributions, reflecting my dedication to continuous learning and collaboration.</p>
                     </div>
                 </div>
             </div>
@@ -1146,29 +1173,23 @@
         <div class="page" id="projects">
             <div class="projects-container">
                 <div class="projects-header">
-                    <h1 class="projects-title-new">My Projects</h1>
-                    <p class="projects-subtitle-new">Here are some of the projects I've built using various technologies.</p>
+                    <h1 class="projects-title-new">Projects</h1>
+                    <p class="projects-subtitle-new">Explore some of my recent work and contributions.</p>
                 </div>
-
                 <div class="projects-grid-new">
                     <div class="project-card-new">
                         <div class="project-content-new">
-                                                        <div class="project-header-new">
+                            <div class="project-header-new">
                                 <i class="project-icon-new fas fa-code"></i>
-                                <h3 class="project-title-new">Discord Bot</h3>
+                                <h3 class="project-title-new">Python Tools N Toys</h3>
                             </div>
-                            <p class="project-description-new">A multifunctional Discord bot with moderation, music, and custom commands.</p>
+                            <p class="project-description-new">A collection of Python scripts including a string finder tool for large text files with memory-efficient processing and multithreading.</p>
                             <div class="project-tech-new">
-                                <span class="tech-tag-new js">JS</span>
                                 <span class="tech-tag-new python">Python</span>
-                                <span class="tech-tag-new api">AIOHTTP</span>
                             </div>
                             <div class="project-actions-new">
-                                <a href="https://github.com/yokaimsi/discord-bot" target="_blank" class="project-btn-new github">
+                                <a href="https://github.com/yokaimsi/Python-Tools-N-Toys" target="_blank" class="project-btn-new github">
                                     <i class="fab fa-github"></i> GitHub
-                                </a>
-                                <a href="https://discord.com/invite/xyz" target="_blank" class="project-btn-new discord">
-                                    <i class="fab fa-discord"></i> Invite
                                 </a>
                             </div>
                         </div>
@@ -1176,18 +1197,15 @@
                     <div class="project-card-new">
                         <div class="project-content-new">
                             <div class="project-header-new">
-                                <i class="project-icon-new fas fa-server"></i>
-                                <h3 class="project-title-new">Web Dashboard</h3>
+                                <i class="project-icon-new fas fa-terminal"></i>
+                                <h3 class="project-title-new">ezfetch</h3>
                             </div>
-                            <p class="project-description-new">A responsive web dashboard built with Flask and SQLite for data management.</p>
+                            <p class="project-description-new">A simple and efficient system information fetcher script designed for quick diagnostics and monitoring.</p>
                             <div class="project-tech-new">
-                                <span class="tech-tag-new html">HTML</span>
-                                <span class="tech-tag-new css">CSS</span>
-                                <span class="tech-tag-new python">Flask</span>
-                                <span class="tech-tag-new db">SQLite</span>
+                                <span class="tech-tag-new python">Python</span>
                             </div>
                             <div class="project-actions-new">
-                                <a href="https://github.com/yokaimsi/web-dashboard" target="_blank" class="project-btn-new github">
+                                <a href="https://github.com/yokaimsi/ezfetch" target="_blank" class="project-btn-new github">
                                     <i class="fab fa-github"></i> GitHub
                                 </a>
                             </div>
@@ -1230,10 +1248,6 @@
                     <div class="skill-card">
                         <i class="devicon-vscode-plain"></i>
                         <span class="skill-label">VSCode</span>
-                    </div>
-                    <div class="skill-card">
-                        <i class="fas fa-code"></i>
-                        <span class="skill-label">AIOHTTP</span>
                     </div>
                     <div class="skill-card">
                         <i class="fas fa-flask"></i>
