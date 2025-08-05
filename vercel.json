@@ -3,14 +3,6 @@
     {
       "src": "index.html",
       "use": "@vercel/static"
-    },
-    {
-      "src": "styles.css",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "scripts.js",
-      "use": "@vercel/static"
     }
   ]
 }
