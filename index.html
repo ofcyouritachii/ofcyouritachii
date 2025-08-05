@@ -1105,7 +1105,7 @@
             <a href="https://discord.com/users/1282292887878369358" target="_blank" class="social-link discord" title="Discord">
                 <i class="fab fa-discord"></i>
             </a>
-            <a href="https://www.linkedin.com/in/yokaimsi" target="_blank" class="social-link linkedin" title="LinkedIn">
+            <a href="https://linkedin.com/in/yokaimsi" target="_blank" class="social-link linkedin" title="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
         </div>
@@ -1118,7 +1118,7 @@
             <div class="home-container">
                 <div class="loading-container" id="loading">
                     <div class="spinner"></div>
-                    <span class="loading-text">loading profile...</span>
+                    <span class="loading-text">connecting to yokai...</span>
                 </div>
                 <div class="profile-container" id="profile">
                     <div class="profile-header">
@@ -1128,42 +1128,45 @@
                     </div>
                     <div class="glass-card unified-status-card">
                         <div class="status-indicator">
-                            <span class="status-dot" id="statusDot"></span>
+                            <div class="status-dot" id="statusDot"></div>
                             <span class="status-text" id="statusText"></span>
                         </div>
                         <div class="custom-status" id="customStatus"></div>
                         <div class="setup-notice" id="setupNotice" style="display: none;">
                             <h4><i class="fas fa-exclamation-triangle"></i> Setup Required</h4>
                             <ol>
-                                <li>Join the <a href="https://discord.gg/lanyard" target="_blank">Lanyard Discord server</a>.</li>
-                                <li>Verify your Discord account to enable Lanyard tracking.</li>
-                                <li>Wait a few minutes for your data to propagate.</li>
+                                <li>Join the <a href="https://discord.gg/lanyard" target="_blank">Lanyard Discord</a> server.</li>
+                                <li>Enable your Discord presence sharing in the server.</li>
                             </ol>
                         </div>
                         <div class="error-details" id="errorDetails"></div>
-                        <button class="retry-button" onclick="retryDiscordConnection()"><i class="fas fa-redo"></i> Retry</button>
-                        <div class="activity-section" id="activitySection" style="display: none;">
-                            <div class="activity-header" id="activityHeader">
-                                <i class="fas fa-spinner"></i>
-                                <span id="activityHeaderText">Loading...</span>
-                            </div>
-                            <div class="activity-content">
-                                <div class="activity-details">
-                                    <div class="activity-name" id="activityName"></div>
-                                    <div class="activity-file-info" id="activityFileInfo" style="display: none;">
-                                        <i class="file-type-icon" id="fileTypeIcon"></i>
-                                        <span class="activity-details-text" id="activityDetails"></span>
-                                    </div>
-                                    <div class="activity-details-text" id="activityDetailsNoFile"></div>
-                                    <div class="activity-state" id="activityState"></div>
-                                    <div class="activity-timestamp" id="activityTimestamp"></div>
+                        <button class="retry-button" onclick="retryDiscordConnection()">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                    <div class="glass-card unified-status-card activity-section" id="activitySection" style="display: none;">
+                        <div class="activity-header" id="activityHeader">
+                            <i class="fas fa-spinner" id="activityHeaderIcon"></i>
+                            <span id="activityHeaderText"></span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-details">
+                                <div class="activity-name" id="activityName"></div>
+                                <div class="activity-file-info" id="activityFileInfo" style="display: none;">
+                                    <i class="file-type-icon" id="fileTypeIcon"></i>
+                                    <span class="activity-details-text" id="activityDetails"></span>
                                 </div>
+                                <div class="activity-details-text" id="activityDetailsNoFile"></div>
+                                <div class="activity-state" id="activityState"></div>
+                                <div class="activity-timestamp" id="activityTimestamp" style="display: none;"></div>
                             </div>
                         </div>
                     </div>
                     <div class="about-me">
                         <h3>About Me</h3>
-                        <p>I am a passionate developer with a focus on creating innovative and efficient solutions using Python, JavaScript, and various frameworks. With a keen interest in cybersecurity and system administration, I thrive on building tools and projects that solve real-world problems. My experience spans across web development, automation scripts, and open-source contributions, reflecting my dedication to continuous learning and collaboration.</p>
+                        <p>
+                            I am a passionate developer with a keen interest in crafting innovative software solutions. With expertise in Python, JavaScript, and various frameworks, I specialize in creating efficient tools and engaging projects. My journey in tech is driven by a commitment to problem-solving and continuous learning, ensuring every line of code reflects professionalism and creativity.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1174,7 +1177,7 @@
             <div class="projects-container">
                 <div class="projects-header">
                     <h1 class="projects-title-new">Projects</h1>
-                    <p class="projects-subtitle-new">Explore some of my recent work and contributions.</p>
+                    <p class="projects-subtitle-new">A showcase of my latest works and contributions.</p>
                 </div>
                 <div class="projects-grid-new">
                     <div class="project-card-new">
@@ -1183,7 +1186,7 @@
                                 <i class="project-icon-new fas fa-code"></i>
                                 <h3 class="project-title-new">Python Tools N Toys</h3>
                             </div>
-                            <p class="project-description-new">A collection of Python scripts including a string finder tool for large text files with memory-efficient processing and multithreading.</p>
+                            <p class="project-description-new">A collection of Python scripts for testing, including a string search tool with memory-efficient multithreading.</p>
                             <div class="project-tech-new">
                                 <span class="tech-tag-new python">Python</span>
                             </div>
@@ -1197,10 +1200,10 @@
                     <div class="project-card-new">
                         <div class="project-content-new">
                             <div class="project-header-new">
-                                <i class="project-icon-new fas fa-terminal"></i>
+                                <i class="project-icon-new fas fa-code"></i>
                                 <h3 class="project-title-new">ezfetch</h3>
                             </div>
-                            <p class="project-description-new">A simple and efficient system information fetcher script designed for quick diagnostics and monitoring.</p>
+                            <p class="project-description-new">A simple and efficient system information fetcher built for quick diagnostics.</p>
                             <div class="project-tech-new">
                                 <span class="tech-tag-new python">Python</span>
                             </div>
