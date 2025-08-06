@@ -30,7 +30,6 @@
             --warning-color: #faa61a;
             --error-color: #f04747;
             --offline-color: #747f8d;
-            --transition-ease: cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         html {
@@ -74,10 +73,10 @@
         }
 
         @keyframes backgroundShift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(-20px, -10px) scale(1.02); }
-            50% { transform: translate(20px, 10px) scale(1.01); }
-            75% { transform: translate(-10px, 20px) scale(1.02); }
+            0%, 100% { transform: translateX(0) translateY(0); }
+            25% { transform: translateX(-20px) translateY(-10px); }
+            50% { transform: translateX(20px) translateY(10px); }
+            75% { transform: translateX(-10px) translateY(20px); }
         }
 
         .particles {
@@ -96,8 +95,8 @@
             height: 2px;
             background: var(--accent-color);
             border-radius: 50%;
-            animation: float 15s ease-in-out infinite;
-            opacity: 0;
+            animation: float 15s infinite linear;
+            opacity: 0.3;
         }
 
         @keyframes float {
@@ -121,7 +120,7 @@
             position: fixed;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%) scale(1);
+            transform: translateX(-50%);
             background: var(--glass-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
@@ -132,24 +131,11 @@
             align-items: center;
             gap: 2rem;
             box-shadow: var(--neon-glow);
-            transition: all 0.5s var(--transition-ease);
-            animation: navSlideIn 0.8s var(--transition-ease);
-        }
-
-        @keyframes navSlideIn {
-            from {
-                transform: translateX(-50%) translateY(-50px) scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: translateX(-50%) translateY(0) scale(1);
-                opacity: 1;
-            }
+            transition: all 0.3s ease;
         }
 
         .nav:hover {
             box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
-            transform: translateX(-50%) scale(1.02);
         }
 
         .nav-logo {
@@ -161,11 +147,6 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0 16px;
-            transition: transform 0.3s var(--transition-ease);
-        }
-
-        .nav-logo:hover {
-            transform: scale(1.05);
         }
 
         .nav-logo i {
@@ -189,7 +170,7 @@
             font-weight: 500;
             padding: 10px 20px;
             border-radius: 35px;
-            transition: all 0.3s var(--transition-ease);
+            transition: all 0.3s ease;
             cursor: pointer;
             position: relative;
             z-index: 2;
@@ -199,18 +180,8 @@
             white-space: nowrap;
         }
 
-        .nav-link:hover {
-            color: var(--text-primary);
-            transform: scale(1.05);
-        }
-
         .nav-link i {
             font-size: 0.85rem;
-            transition: transform 0.3s var(--transition-ease);
-        }
-
-        .nav-link:hover i {
-            transform: rotate(10deg);
         }
 
         .nav-indicator {
@@ -220,7 +191,7 @@
             height: calc(100% - 8px);
             background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
             border-radius: 35px;
-            transition: all 0.5s var(--transition-ease);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
             box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
         }
@@ -247,14 +218,14 @@
             justify-content: center;
             text-decoration: none;
             color: var(--text-primary);
-            transition: all 0.4s var(--transition-ease);
+            transition: all 0.3s ease;
             font-size: 1.2rem;
             position: relative;
         }
 
         .social-link:hover {
             color: var(--text-primary);
-            transform: translateY(-3px) scale(1.1);
+            transform: translateY(-2px);
             box-shadow: var(--neon-glow);
         }
 
@@ -279,11 +250,11 @@
         }
 
         .social-link i {
-            transition: transform 0.4s var(--transition-ease);
+            transition: transform 0.3s ease;
         }
 
         .social-link:hover i {
-            transform: scale(1.2) rotate(5deg);
+            transform: scale(1.2);
         }
 
         .main-content {
@@ -299,15 +270,22 @@
         .page {
             display: none;
             width: 100%;
-            opacity: 0;
-            transform: translateY(30px) scale(0.95);
-            transition: all 0.6s var(--transition-ease);
+            animation: pageSlideIn 0.6s ease-out;
         }
 
         .page.active {
             display: block;
-            opacity: 1;
-            transform: translateY(0) scale(1);
+        }
+
+        @keyframes pageSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .home-container {
@@ -322,23 +300,11 @@
             padding: 20px;
         }
 
-        .home-container > * {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s var(--transition-ease) 0.2s;
-        }
-
-        .home-container.active > * {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .loading-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
-            transition: opacity 0.4s var(--transition-ease);
         }
 
         .spinner {
@@ -348,14 +314,13 @@
             border-top: 2px solid var(--accent-color);
             border-right: 2px solid var(--accent-secondary);
             border-radius: 50%;
-            animation: spin 1s var(--transition-ease) infinite;
+            animation: spin 1s linear infinite;
             box-shadow: var(--neon-glow);
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.05); }
-            100% { transform: rotate(360deg) scale(1); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-text {
@@ -364,44 +329,26 @@
             font-weight: 400;
             text-transform: lowercase;
             letter-spacing: 2px;
-            animation: pulseText 2s var(--transition-ease) infinite;
-        }
-
-        @keyframes pulseText {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
         }
 
         .profile-container {
             display: none;
-            animation: profileFadeIn 0.8s var(--transition-ease);
-        }
-
-        .profile-container.active {
-            display: block;
+            animation: profileFadeIn 0.8s ease-out;
         }
 
         @keyframes profileFadeIn {
             from {
                 opacity: 0;
-                transform: scale(0.9) translateY(20px);
+                transform: scale(0.9);
             }
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: scale(1);
             }
         }
 
         .profile-header {
             margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s var(--transition-ease) 0.3s;
-        }
-
-        .profile-container.active .profile-header {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .avatar {
@@ -410,7 +357,7 @@
             border-radius: 50%;
             margin: 0 auto 1.5rem;
             border: 2px solid var(--success-color);
-            transition: all 0.4s var(--transition-ease);
+            transition: all 0.3s ease;
             display: block;
             box-shadow: 0 0 15px rgba(67, 181, 129, 0.3);
             background: var(--glass-bg);
@@ -419,8 +366,7 @@
         }
 
         .avatar:hover {
-            transform: scale(1.08) rotate(3deg);
-            box-shadow: 0 0 25px rgba(67, 181, 129, 0.5);
+            transform: scale(1.05);
         }
 
         .avatar.error {
@@ -436,22 +382,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .username:hover {
-            transform: scale(1.05);
         }
 
         .discriminator {
             color: var(--text-secondary);
             font-size: 1rem;
             font-weight: 400;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .discriminator:hover {
-            opacity: 0.8;
         }
 
         .glass-card {
@@ -461,22 +397,15 @@
             border-radius: 15px;
             padding: 1rem;
             margin-bottom: 1.5rem;
-            transition: all 0.5s var(--transition-ease);
+            transition: all 0.3s ease;
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .page.active .glass-card {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .glass-card:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 5px 25px rgba(0, 212, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
         }
 
         .status-indicator {
@@ -484,7 +413,6 @@
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 1rem;
-            transition: all 0.4s var(--transition-ease);
         }
 
         .status-dot {
@@ -493,13 +421,13 @@
             border-radius: 50%;
             background: var(--success-color);
             box-shadow: 0 0 10px rgba(67, 181, 129, 0.6);
-            animation: pulse 2s var(--transition-ease) infinite;
+            animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
-            0% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); transform: scale(1); }
-            50% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.8); transform: scale(1.1); }
-            100% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); transform: scale(1); }
+            0% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); }
+            50% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.8); }
+            100% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); }
         }
 
         .status-dot.offline {
@@ -523,11 +451,6 @@
             color: var(--text-primary);
             text-transform: capitalize;
             font-weight: 500;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .status-text:hover {
-            transform: scale(1.05);
         }
 
         .custom-status {
@@ -537,12 +460,6 @@
             margin-bottom: 0.5rem;
             display: none;
             font-style: italic;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .custom-status.active {
-            display: block;
-            opacity: 1;
         }
 
         .setup-notice {
@@ -555,14 +472,6 @@
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s var(--transition-ease) 0.4s;
-        }
-
-        .page.active .setup-notice {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .setup-notice h4 {
@@ -574,11 +483,6 @@
 
         .setup-notice h4 i {
             color: #ffc107;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .setup-notice h4:hover i {
-            transform: rotate(10deg);
         }
 
         .setup-notice ol {
@@ -589,11 +493,6 @@
         .setup-notice a {
             color: #ffc107;
             text-decoration: underline;
-            transition: color 0.3s var(--transition-ease);
-        }
-
-        .setup-notice a:hover {
-            color: var(--accent-color);
         }
 
         .error-details {
@@ -605,15 +504,6 @@
             font-size: 0.8rem;
             color: var(--error-color);
             display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s var(--transition-ease) 0.5s;
-        }
-
-        .error-details.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .projects-container {
@@ -625,14 +515,6 @@
         .projects-header {
             margin-bottom: 2rem;
             padding-top: 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s var(--transition-ease) 0.2s;
-        }
-
-        .page.active .projects-header {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .projects-title-new {
@@ -644,11 +526,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-align: center;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .projects-title-new:hover {
-            transform: scale(1.05);
         }
 
         .projects-subtitle-new {
@@ -660,11 +537,6 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .projects-subtitle-new:hover {
-            opacity: 0.8;
         }
 
         .projects-grid-new {
@@ -683,24 +555,12 @@
             border: 1px solid var(--glass-border);
             border-radius: 12px;
             overflow: hidden;
-            transition: all 0.5s var(--transition-ease);
+            transition: all 0.3s ease;
             position: relative;
             width: 100%;
             max-width: 300px;
-            opacity: 0;
-            transform: translateY(20px);
+            animation: floatProject 4s ease-in-out infinite;
         }
-
-        .page.active .project-card-new {
-            opacity: 1;
-            transform: translateY(0);
-            animation: floatProject 4s var(--transition-ease) infinite;
-        }
-
-        .project-card-new:nth-child(1) { transition-delay: 0.3s; }
-        .project-card-new:nth-child(2) { transition-delay: 0.4s; }
-        .project-card-new:nth-child(3) { transition-delay: 0.5s; }
-        .project-card-new:nth-child(4) { transition-delay: 0.6s; }
 
         @keyframes floatProject {
             0%, 100% { transform: translateY(0); }
@@ -708,9 +568,9 @@
         }
 
         .project-card-new:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
-            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
+            border-color: rgba(139, 92, 246, 0.3);
         }
 
         .project-content-new {
@@ -727,7 +587,7 @@
         .project-icon-new {
             font-size: 1rem;
             color: var(--accent-color);
-            transition: all 0.4s var(--transition-ease);
+            transition: transform 0.3s ease;
         }
 
         .project-card-new:hover .project-icon-new {
@@ -740,12 +600,11 @@
             font-weight: 600;
             color: var(--text-primary);
             margin: 0;
-            transition: all 0.4s var(--transition-ease);
+            transition: color 0.3s ease;
         }
 
         .project-card-new:hover .project-title-new {
             color: var(--accent-color);
-            transform: scale(1.05);
         }
 
         .project-description-new {
@@ -753,7 +612,7 @@
             font-size: 0.9rem;
             line-height: 1.4;
             margin-bottom: 1rem;
-            transition: all 0.4s var(--transition-ease);
+            transition: opacity 0.3s ease;
         }
 
         .project-card-new:hover .project-description-new {
@@ -773,11 +632,7 @@
             font-size: 0.7rem;
             font-weight: 500;
             border: 1px solid;
-            transition: all 0.4s var(--transition-ease);
-        }
-
-        .tech-tag-new:hover {
-            transform: scale(1.1);
+            transition: all 0.3s ease;
         }
 
         .tech-tag-new.js {
@@ -832,14 +687,14 @@
             text-decoration: none;
             font-size: 0.75rem;
             font-weight: 500;
-            transition: all 0.4s var(--transition-ease);
+            transition: all 0.3s ease;
             border: 1px solid;
-            animation: pulseBtn 2s var(--transition-ease) infinite;
+            animation: pulseBtn 2s infinite;
         }
 
         @keyframes pulseBtn {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.03); }
+            50% { transform: scale(1.02); }
         }
 
         .project-btn-new.github {
@@ -850,8 +705,8 @@
 
         .project-btn-new.github:hover {
             background: rgba(51, 51, 51, 0.2);
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 0 15px rgba(51, 51, 51, 0.5);
+            transform: translateY(-1px) scale(1.05);
+            box-shadow: 0 0 10px rgba(51, 51, 51, 0.4);
         }
 
         .project-btn-new.discord {
@@ -862,8 +717,8 @@
 
         .project-btn-new.discord:hover {
             background: rgba(88, 101, 242, 0.2);
-            transform: translateY(-3px) scale(1.1);
-            box-shadow: 0 0 15px rgba(88, 101, 242, 0.5);
+            transform: translateY(-1px) scale(1.05);
+            box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
         }
 
         .unified-status-card {
@@ -874,14 +729,6 @@
         .activity-section {
             margin-top: 0;
             padding-top: 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.5s var(--transition-ease) 0.4s;
-        }
-
-        .page.active .activity-section {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .unified-status-card.spotify-activity {
@@ -909,21 +756,11 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.3px;
-            transition: all 0.4s var(--transition-ease);
-        }
-
-        .activity-header:hover {
-            transform: scale(1.05);
         }
 
         .activity-header i {
             font-size: 0.9rem;
             color: var(--accent-color);
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .activity-header:hover i {
-            transform: rotate(10deg);
         }
 
         .activity-content {
@@ -944,11 +781,6 @@
             color: var(--text-primary);
             margin-bottom: 0.2rem;
             line-height: 1.2;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .activity-name:hover {
-            transform: scale(1.05);
         }
 
         .activity-file-info {
@@ -956,17 +788,11 @@
             align-items: center;
             gap: 0.3rem;
             margin-bottom: 0.2rem;
-            transition: all 0.4s var(--transition-ease);
         }
 
         .file-type-icon {
             font-size: 0.9rem;
             flex-shrink: 0;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .activity-file-info:hover .file-type-icon {
-            transform: scale(1.1);
         }
 
         .activity-details-text {
@@ -974,33 +800,18 @@
             color: var(--text-secondary);
             margin-bottom: 0.2rem;
             line-height: 1.2;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .activity-details-text:hover {
-            opacity: 0.8;
         }
 
         .activity-state {
             font-size: 0.7rem;
             color: var(--text-secondary);
             margin-bottom: 0.2rem;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .activity-state:hover {
-            opacity: 0.8;
         }
 
         .activity-timestamp {
             font-size: 0.65rem;
             color: var(--accent-color);
             font-weight: 500;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .activity-timestamp:hover {
-            transform: scale(1.05);
         }
 
         #home {
@@ -1037,11 +848,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-align: center;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .skills-title:hover {
-            transform: scale(1.05);
         }
 
         .skills-subtitle {
@@ -1053,11 +859,6 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .skills-subtitle:hover {
-            opacity: 0.8;
         }
 
         .skills-grid {
@@ -1079,7 +880,7 @@
             font-size: 1rem;
             font-weight: 500;
             color: var(--text-primary);
-            transition: all 0.5s var(--transition-ease);
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
             display: flex;
@@ -1087,32 +888,8 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
+            animation: floatSkill 4s ease-in-out infinite;
         }
-
-        .page.active .skill-card {
-            opacity: 1;
-            transform: translateY(0);
-            animation: floatSkill 4s var(--transition-ease) infinite;
-        }
-
-        .skill-card:nth-child(1) { transition-delay: 0.3s; }
-        .skill-card:nth-child(2) { transition-delay: 0.35s; }
-        .skill-card:nth-child(3) { transition-delay: 0.4s; }
-        .skill-card:nth-child(4) { transition-delay: 0.45s; }
-        .skill-card:nth-child(5) { transition-delay: 0.5s; }
-        .skill-card:nth-child(6) { transition-delay: 0.55s; }
-        .skill-card:nth-child(7) { transition-delay: 0.6s; }
-        .skill-card:nth-child(8) { transition-delay: 0.65s; }
-        .skill-card:nth-child(9) { transition-delay: 0.7s; }
-        .skill-card:nth-child(10) { transition-delay: 0.75s; }
-        .skill-card:nth-child(11) { transition-delay: 0.8s; }
-        .skill-card:nth-child(12) { transition-delay: 0.85s; }
-        .skill-card:nth-child(13) { transition-delay: 0.9s; }
-        .skill-card:nth-child(14) { transition-delay: 0.95s; }
-        .skill-card:nth-child(15) { transition-delay: 1s; }
-        .skill-card:nth-child(16) { transition-delay: 1.05s; }
 
         @keyframes floatSkill {
             0%, 100% { transform: translateY(0); }
@@ -1120,15 +897,15 @@
         }
 
         .skill-card:hover {
-            transform: translateY(-8px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
             background: rgba(255, 255, 255, 0.1);
         }
 
         .skill-card i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            transition: all 0.4s var(--transition-ease);
+            transition: transform 0.3s ease, color 0.3s ease;
         }
 
         .skill-card:hover i {
@@ -1140,11 +917,6 @@
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .skill-card:hover .skill-label {
-            transform: scale(1.05);
         }
 
         .about-container {
@@ -1164,11 +936,6 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-align: center;
-            transition: transform 0.4s var(--transition-ease);
-        }
-
-        .about-title:hover {
-            transform: scale(1.05);
         }
 
         .about-subtitle {
@@ -1180,11 +947,6 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .about-subtitle:hover {
-            opacity: 0.8;
         }
 
         .about-content {
@@ -1194,23 +956,16 @@
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            transition: all 0.5s var(--transition-ease);
+            transition: all 0.3s ease;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             text-align: left;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .page.active .about-content {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .about-content:hover {
-            transform: translateY(-5px) scale(1.03);
-            box-shadow: 0 5px 25px rgba(0, 212, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
         }
 
         .about-content p {
@@ -1218,11 +973,6 @@
             font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 1rem;
-            transition: opacity 0.4s var(--transition-ease);
-        }
-
-        .about-content p:hover {
-            opacity: 0.8;
         }
 
         @media (max-width: 768px) {
@@ -1726,21 +1476,14 @@
             navLinks.forEach((link) => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (link.classList.contains('active')) return;
                     const targetPage = link.getAttribute('data-page');
-                    const currentPage = document.querySelector('.page.active');
-                    if (currentPage) {
-                        currentPage.classList.remove('active');
-                        setTimeout(() => {
-                            navLinks.forEach(nl => nl.classList.remove('active'));
-                            pages.forEach(page => page.classList.remove('active'));
-                            link.classList.add('active');
-                            document.getElementById(targetPage).classList.add('active');
-                            updateIndicatorPosition();
-                            document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }, 300);
-                    }
+                    navLinks.forEach(nl => nl.classList.remove('active'));
+                    pages.forEach(page => page.classList.remove('active'));
+                    link.classList.add('active');
+                    document.getElementById(targetPage).classList.add('active');
+                    updateIndicatorPosition();
+                    document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 });
             });
 
@@ -1790,7 +1533,6 @@
             } finally {
                 loadingContainer.style.display = 'none';
                 profileContainer.style.display = 'block';
-                profileContainer.classList.add('active');
             }
         }
 
@@ -1812,7 +1554,7 @@
                 errorMessage = error.message;
             }
             errorDetails.textContent = `Error: ${errorMessage}`;
-            errorDetails.classList.add('active');
+            errorDetails.style.display = 'block';
             setupNotice.style.display = showSetupNotice ? 'block' : 'none';
             showOfflineState();
             if (retryCount < CONFIG.RETRY_ATTEMPTS && !showSetupNotice) {
@@ -1860,7 +1602,7 @@
             updateStatus(userData.discord_status);
             updateCustomStatus(userData.activities);
             updateActivities(userData.activities);
-            document.getElementById('errorDetails').classList.remove('active');
+            document.getElementById('errorDetails').style.display = 'none';
             log('Profile updated successfully', 'success');
         }
 
@@ -1892,9 +1634,9 @@
             const customActivity = activities.find(activity => activity.type === 4);
             if (customActivity && customActivity.state) {
                 customStatusElement.textContent = `"${customActivity.state}"`;
-                customStatusElement.classList.add('active');
+                customStatusElement.style.display = 'block';
             } else {
-                customStatusElement.classList.remove('active');
+                customStatusElement.style.display = 'none';
             }
         }
 
@@ -1979,90 +1721,82 @@
             activityName.textContent = activity.details || 'Unknown Track';
             activityFileInfo.style.display = 'none';
             activityDetailsNoFile.style.display = 'block';
-            activityDetailsNoFile.textContent = `by ${activity.state || 'Unknown Artist'}`;
-            activityState.textContent = `on ${activity.assets?.large_text || 'Unknown Album'}`;
-            activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-            activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
+            activityDetailsNoFile.textContent = activity.state ? `by ${activity.state}` : '';
+            activityState.textContent = activity.assets?.large_text ? `on ${activity.assets.large_text}` : 'on Spotify';
+            if (activity.timestamps && activity.timestamps.start && activity.timestamps.end) {
+                const current = Date.now() - activity.timestamps.start;
+                const total = activity.timestamps.end - activity.timestamps.start;
+                const currentMin = Math.floor(current / 60000);
+                const currentSec = Math.floor((current % 60000) / 1000);
+                const totalMin = Math.floor(total / 60000);
+                const totalSec = Math.floor((total % 60000) / 1000);
+                activityTimestamp.textContent = `${currentMin}:${String(currentSec).padStart(2, '0')} / ${totalMin}:${String(totalSec).padStart(2, '0')}`;
+                activityTimestamp.style.display = 'block';
+            } else {
+                activityTimestamp.style.display = 'none';
+            }
         }
 
         function updateWatchingActivity(activity) {
             const activityHeaderText = document.getElementById('activityHeaderText');
-            const activityName = document.getElementById('activityName');
-            const activityFileInfo = document.getElementById('activityFileInfo');
-            const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-            const activityState = document.getElementById('activityState');
-            const activityTimestamp = document.getElementById('activityTimestamp');
             const headerIcon = document.querySelector('#activityHeader i');
-            headerIcon.className = 'fas fa-tv';
+            headerIcon.className = 'fas fa-eye';
             activityHeaderText.textContent = 'Watching';
-            activityName.textContent = activity.name || 'Unknown';
-            activityFileInfo.style.display = 'none';
-            activityDetailsNoFile.style.display = 'block';
-            activityDetailsNoFile.textContent = activity.details || '';
-            activityState.textContent = activity.state || '';
-            activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-            activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
+            updateGenericActivityContent(activity);
         }
 
         function updateCompetingActivity(activity) {
             const activityHeaderText = document.getElementById('activityHeaderText');
-            const activityName = document.getElementById('activityName');
-            const activityFileInfo = document.getElementById('activityFileInfo');
-            const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-            const activityState = document.getElementById('activityState');
-            const activityTimestamp = document.getElementById('activityTimestamp');
             const headerIcon = document.querySelector('#activityHeader i');
             headerIcon.className = 'fas fa-trophy';
-            activityHeaderText.textContent = 'Competing';
-            activityName.textContent = activity.name || 'Unknown';
-            activityFileInfo.style.display = 'none';
-            activityDetailsNoFile.style.display = 'block';
-            activityDetailsNoFile.textContent = activity.details || '';
-            activityState.textContent = activity.state || '';
-            activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-            activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
+            activityHeaderText.textContent = 'Competing in';
+            updateGenericActivityContent(activity);
         }
 
         function updateGenericActivityContent(activity) {
-            const activityHeaderText = document.getElementById('activityHeaderText');
             const activityName = document.getElementById('activityName');
             const activityFileInfo = document.getElementById('activityFileInfo');
+            const activityDetails = document.getElementById('activityDetails');
             const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
             const activityState = document.getElementById('activityState');
             const activityTimestamp = document.getElementById('activityTimestamp');
-            const headerIcon = document.querySelector('#activityHeader i');
-            headerIcon.className = 'fas fa-info-circle';
-            activityHeaderText.textContent = 'Activity';
-            activityName.textContent = activity.name || 'Unknown';
-            activityFileInfo.style.display = 'none';
-            activityDetailsNoFile.style.display = 'block';
-            activityDetailsNoFile.textContent = activity.details || '';
+            const fileTypeIcon = document.getElementById('fileTypeIcon');
+            activityName.textContent = activity.name || 'Unknown Activity';
+            if (activity.details && activity.details.includes('.')) {
+                const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
+                const fileIcon = getFileTypeIcon(filename);
+                activityFileInfo.style.display = 'flex';
+                activityDetailsNoFile.style.display = 'none';
+                fileTypeIcon.className = fileIcon.icon;
+                fileTypeIcon.style.color = fileIcon.color;
+                activityDetails.textContent = activity.details;
+            } else {
+                activityFileInfo.style.display = 'none';
+                activityDetailsNoFile.style.display = 'block';
+                activityDetailsNoFile.textContent = activity.details || '';
+            }
             activityState.textContent = activity.state || '';
             activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
             activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
         }
 
-        function startStatusRefresh() {
-            if (refreshInterval) clearInterval(refreshInterval);
-            refreshInterval = setInterval(async () => {
-                if (isConnected) {
-                    log('Refreshing Discord status...');
-                    await fetchDiscordStatus();
-                }
-            }, CONFIG.REFRESH_INTERVAL);
-        }
-
-        async function initialize() {
-            log('Initializing application...');
+        document.addEventListener('DOMContentLoaded', function() {
+            log('DOM loaded, initializing yokai app...', 'info');
             createParticles();
             initNavigation();
             disableDevTools();
-            await fetchDiscordStatus();
-            startStatusRefresh();
-            log('Application initialized', 'success');
-        }
+            fetchDiscordStatus();
+            refreshInterval = setInterval(() => {
+                if (isConnected && document.getElementById('home').classList.contains('active')) {
+                    fetchDiscordStatus();
+                }
+            }, CONFIG.REFRESH_INTERVAL);
+            log('Yokai portfolio initialized successfully', 'success');
+        });
 
-        window.addEventListener('load', initialize);
+        window.addEventListener('beforeunload', () => {
+            if (refreshInterval) clearInterval(refreshInterval);
+        });
     </script>
 </body>
 </html>
