@@ -73,10 +73,10 @@
     }
 
     @keyframes backgroundShift {
-        0%, 100% { transform: translateX(0) translateY(0); }
-        25% { transform: translateX(-20px) translateY(-10px); }
-        50% { transform: translateX(20px) translateY(10px); }
-        75% { transform: translateX(-10px) translateY(20px); }
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(-20px, -10px) scale(1.02); }
+        50% { transform: translate(20px, 10px) scale(1.03); }
+        75% { transform: translate(-10px, 20px) scale(1.02); }
     }
 
     .particles {
@@ -95,23 +95,27 @@
         height: 2px;
         background: var(--accent-color);
         border-radius: 50%;
-        animation: float 15s infinite linear;
+        animation: float 15s infinite ease-in-out;
         opacity: 0.3;
     }
 
     @keyframes float {
         0% {
-            transform: translateY(100vh) translateX(0);
+            transform: translateY(100vh) translateX(0) scale(1);
             opacity: 0;
         }
         10% {
             opacity: 0.3;
         }
+        50% {
+            transform: translateY(50vh) translateX(50px) scale(1.2);
+            opacity: 0.5;
+        }
         90% {
             opacity: 0.3;
         }
         100% {
-            transform: translateY(-100px) translateX(100px);
+            transform: translateY(-100px) translateX(100px) scale(1);
             opacity: 0;
         }
     }
@@ -131,11 +135,17 @@
         align-items: center;
         gap: 2rem;
         box-shadow: var(--neon-glow);
-        transition: all 0.3s ease;
+        animation: navPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes navPulse {
+        0%, 100% { transform: translateX(-50%) scale(1); }
+        50% { transform: translateX(-50%) scale(1.02); }
     }
 
     .nav:hover {
         box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+        animation-play-state: paused;
     }
 
     .nav-logo {
@@ -147,11 +157,23 @@
         align-items: center;
         gap: 0.5rem;
         padding: 0 16px;
+        animation: logoGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes logoGlow {
+        0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
+        50% { text-shadow: 0 0 15px rgba(0, 212, 255, 0.7); }
     }
 
     .nav-logo i {
         font-size: 1.5rem;
         color: var(--accent-secondary);
+        animation: logoIconSpin 5s infinite linear;
+    }
+
+    @keyframes logoIconSpin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
     }
 
     .nav-links {
@@ -182,6 +204,11 @@
 
     .nav-link i {
         font-size: 0.85rem;
+        transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover i {
+        transform: rotate(15deg);
     }
 
     .nav-indicator {
@@ -194,6 +221,12 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1;
         box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
+        animation: indicatorGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes indicatorGlow {
+        0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+        50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.6); }
     }
 
     .nav-link.active {
@@ -221,12 +254,19 @@
         transition: all 0.3s ease;
         font-size: 1.2rem;
         position: relative;
+        animation: socialPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes socialPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
     }
 
     .social-link:hover {
         color: var(--text-primary);
-        transform: translateY(-2px);
+        transform: translateY(-2px) scale(1.2);
         box-shadow: var(--neon-glow);
+        animation-play-state: paused;
     }
 
     .social-link.github:hover {
@@ -254,7 +294,7 @@
     }
 
     .social-link:hover i {
-        transform: scale(1.2);
+        transform: scale(1.2) rotate(15deg);
     }
 
     .main-content {
@@ -270,7 +310,7 @@
     .page {
         display: none;
         width: 100%;
-        animation: pageSlideIn 0.6s ease-out;
+        animation: pageSlideIn 0.6s ease-out forwards;
     }
 
     .page.active {
@@ -280,11 +320,11 @@
     @keyframes pageSlideIn {
         from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(30px) scale(0.95);
         }
         to {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
     }
 
@@ -298,6 +338,29 @@
         flex-direction: column;
         justify-content: center;
         padding: 20px;
+        position: relative;
+    }
+
+    .home-container::before {
+        content: 'Welcome to My Portfolio';
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 3rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        opacity: 0;
+        animation: welcomeFade 2s ease-in-out 1s forwards;
+    }
+
+    @keyframes welcomeFade {
+        0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+        50% { opacity: 0.7; }
+        100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
     }
 
     .loading-container {
@@ -305,6 +368,12 @@
         flex-direction: column;
         align-items: center;
         gap: 1rem;
+        animation: fadeIn 1s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
     .spinner {
@@ -319,8 +388,9 @@
     }
 
     @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% { transform: rotate(0deg) scale(1); }
+        50% { transform: rotate(180deg) scale(1.1); }
+        100% { transform: rotate(360deg) scale(1); }
     }
 
     .loading-text {
@@ -329,21 +399,27 @@
         font-weight: 400;
         text-transform: lowercase;
         letter-spacing: 2px;
+        animation: textGlow 1.5s ease-in-out infinite;
+    }
+
+    @keyframes textGlow {
+        0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
+        50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
     }
 
     .profile-container {
         display: none;
-        animation: profileFadeIn 0.8s ease-out;
+        animation: profileFadeIn 0.8s ease-out forwards;
     }
 
     @keyframes profileFadeIn {
         from {
             opacity: 0;
-            transform: scale(0.9);
+            transform: scale(0.9) translateY(20px);
         }
         to {
             opacity: 1;
-            transform: scale(1);
+            transform: scale(1) translateY(0);
         }
     }
 
@@ -363,15 +439,23 @@
         background: var(--glass-bg);
         object-fit: cover;
         object-position: center;
+        animation: avatarPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes avatarPulse {
+        0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(67, 181, 129, 0.3); }
+        50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(67, 181, 129, 0.5); }
     }
 
     .avatar:hover {
-        transform: scale(1.05);
+        transform: scale(1.1);
+        animation-play-state: paused;
     }
 
     .avatar.error {
         border-color: var(--error-color);
         box-shadow: 0 0 20px rgba(240, 71, 71, 0.4);
+        animation: none;
     }
 
     .username {
@@ -382,12 +466,19 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        animation: textGradient 3s linear infinite;
+    }
+
+    @keyframes textGradient {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 200% 50%; }
     }
 
     .discriminator {
         color: var(--text-secondary);
         font-size: 1rem;
         font-weight: 400;
+        animation: fadeIn 1s ease-in;
     }
 
     .glass-card {
@@ -401,11 +492,18 @@
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
+        animation: cardFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
     }
 
     .glass-card:hover {
-        transform: translateY(-3px);
+        transform: translateY(-3px) scale(1.02);
         box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+        animation-play-state: paused;
     }
 
     .status-indicator {
@@ -425,9 +523,9 @@
     }
 
     @keyframes pulse {
-        0% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); }
-        50% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.8); }
-        100% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); }
+        0% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); transform: scale(1); }
+        50% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.8); transform: scale(1.2); }
+        100% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); transform: scale(1); }
     }
 
     .status-dot.offline {
@@ -451,6 +549,7 @@
         color: var(--text-primary);
         text-transform: capitalize;
         font-weight: 500;
+        animation: fadeIn 1s ease-in;
     }
 
     .custom-status {
@@ -460,6 +559,12 @@
         margin-bottom: 0.5rem;
         display: none;
         font-style: italic;
+        animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+        from { transform: translateY(10px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
     }
 
     .setup-notice {
@@ -472,6 +577,7 @@
         max-width: 400px;
         margin-left: auto;
         margin-right: auto;
+        animation: fadeIn 1s ease-in;
     }
 
     .setup-notice h4 {
@@ -483,6 +589,13 @@
 
     .setup-notice h4 i {
         color: #ffc107;
+        animation: iconShake 1.5s ease-in-out infinite;
+    }
+
+    @keyframes iconShake {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-5deg); }
+        75% { transform: rotate(5deg); }
     }
 
     .setup-notice ol {
@@ -504,6 +617,13 @@
         font-size: 0.8rem;
         color: var(--error-color);
         display: none;
+        animation: shakeError 0.5s ease-in-out;
+    }
+
+    @keyframes shakeError {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
     }
 
     .projects-container {
@@ -526,6 +646,7 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-align: center;
+        animation: textGradient 3s linear infinite;
     }
 
     .projects-subtitle-new {
@@ -537,6 +658,7 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+        animation: fadeIn 1s ease-in;
     }
 
     .projects-grid-new {
@@ -563,14 +685,15 @@
     }
 
     @keyframes floatProject {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-10px) scale(1.02); }
     }
 
     .project-card-new:hover {
         transform: translateY(-5px) scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
         border-color: rgba(139, 92, 246, 0.3);
+        animation-play-state: paused;
     }
 
     .project-content-new {
@@ -588,11 +711,18 @@
         font-size: 1rem;
         color: var(--accent-color);
         transition: transform 0.3s ease;
+        animation: iconBob 2s ease-in-out infinite;
+    }
+
+    @keyframes iconBob {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-3px); }
     }
 
     .project-card-new:hover .project-icon-new {
         transform: rotate(15deg) scale(1.2);
         color: var(--accent-secondary);
+        animation-play-state: paused;
     }
 
     .project-title-new {
@@ -633,6 +763,12 @@
         font-weight: 500;
         border: 1px solid;
         transition: all 0.3s ease;
+        animation: tagPop 1.5s ease-in-out infinite;
+    }
+
+    @keyframes tagPop {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
     }
 
     .tech-tag-new.js {
@@ -689,12 +825,12 @@
         font-weight: 500;
         transition: all 0.3s ease;
         border: 1px solid;
-        animation: pulseBtn 2s infinite;
+        animation: pulseBtn 2s ease-in-out infinite;
     }
 
     @keyframes pulseBtn {
         0%, 100% { transform: scale(1); }
-        50% { transform: scale(1.02); }
+        50% { transform: scale(1.05); }
     }
 
     .project-btn-new.github {
@@ -705,8 +841,9 @@
 
     .project-btn-new.github:hover {
         background: rgba(51, 51, 51, 0.2);
-        transform: translateY(-1px) scale(1.05);
+        transform: translateY(-1px) scale(1.1);
         box-shadow: 0 0 10px rgba(51, 51, 51, 0.4);
+        animation-play-state: paused;
     }
 
     .project-btn-new.discord {
@@ -717,18 +854,15 @@
 
     .project-btn-new.discord:hover {
         background: rgba(88, 101, 242, 0.2);
-        transform: translateY(-1px) scale(1.05);
+        transform: translateY(-1px) scale(1.1);
         box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
+        animation-play-state: paused;
     }
 
     .unified-status-card {
         position: relative;
         overflow: hidden;
-    }
-
-    .activity-section {
-        margin-top: 0;
-        padding-top: 0;
+        animation: cardFloat 4s ease-in-out infinite;
     }
 
     .unified-status-card.spotify-activity {
@@ -746,6 +880,11 @@
         background: rgba(255, 0, 110, 0.03);
     }
 
+    .activity-section {
+        margin-top: 0;
+        padding-top: 0;
+    }
+
     .activity-header {
         display: flex;
         align-items: center;
@@ -761,12 +900,14 @@
     .activity-header i {
         font-size: 0.9rem;
         color: var(--accent-color);
+        animation: iconBob 2s ease-in-out infinite;
     }
 
     .activity-content {
         display: flex;
         align-items: flex-start;
         gap: 0.75rem;
+        animation: slideUp 0.5s ease-out;
     }
 
     .activity-details {
@@ -781,6 +922,7 @@
         color: var(--text-primary);
         margin-bottom: 0.2rem;
         line-height: 1.2;
+        animation: fadeIn 0.5s ease-in;
     }
 
     .activity-file-info {
@@ -793,6 +935,7 @@
     .file-type-icon {
         font-size: 0.9rem;
         flex-shrink: 0;
+        animation: iconBob 2s ease-in-out infinite;
     }
 
     .activity-details-text {
@@ -812,6 +955,7 @@
         font-size: 0.65rem;
         color: var(--accent-color);
         font-weight: 500;
+        animation: fadeIn 0.5s ease-in;
     }
 
     #home {
@@ -848,6 +992,7 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-align: center;
+        animation: textGradient 3s linear infinite;
     }
 
     .skills-subtitle {
@@ -859,6 +1004,7 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+        animation: fadeIn 1s ease-in;
     }
 
     .skills-grid {
@@ -888,35 +1034,45 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        animation: floatSkill 4s ease-in-out infinite;
+        animation: skillFloat 4s ease-in-out infinite;
+        animation-delay: calc(var(--skill-index) * 0.2s);
     }
 
-    @keyframes floatSkill {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-10px); }
+    @keyframes skillFloat {
+        0%, 100% { transform: translateY(0) scale(1); }
+        50% { transform: translateY(-10px) scale(1.02); }
     }
 
     .skill-card:hover {
         transform: translateY(-5px) scale(1.05);
         box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
         background: rgba(255, 255, 255, 0.1);
+        animation-play-state: paused;
     }
 
     .skill-card i {
         font-size: 2rem;
         margin-bottom: 0.5rem;
         transition: transform 0.3s ease, color 0.3s ease;
+        animation: skillIconRotate 3s ease-in-out infinite;
+    }
+
+    @keyframes skillIconRotate {
+        0%, 100% { transform: rotate(0deg); }
+        50% { transform: rotate(10deg); }
     }
 
     .skill-card:hover i {
         transform: rotate(15deg) scale(1.2);
         color: var(--accent-color);
+        animation-play-state: paused;
     }
 
     .skill-label {
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 1px;
+        animation: fadeIn 0.5s ease-in;
     }
 
     .about-container {
@@ -936,6 +1092,7 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
         text-align: center;
+        animation: textGradient 3s linear infinite;
     }
 
     .about-subtitle {
@@ -947,6 +1104,7 @@
         max-width: 600px;
         margin-left: auto;
         margin-right: auto;
+        animation: fadeIn 1s ease-in;
     }
 
     .about-content {
@@ -961,11 +1119,13 @@
         margin-left: auto;
         margin-right: auto;
         text-align: left;
+        animation: cardFloat 4s ease-in-out infinite;
     }
 
     .about-content:hover {
-        transform: translateY(-3px);
+        transform: translateY(-3px) scale(1.02);
         box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
+        animation-play-state: paused;
     }
 
     .about-content p {
@@ -973,6 +1133,7 @@
         font-size: 1rem;
         line-height: 1.8;
         margin-bottom: 1rem;
+        animation: fadeIn 0.5s ease-in;
     }
 
     @media (max-width: 768px) {
@@ -1009,6 +1170,10 @@
 
         .home-container {
             min-height: calc(100vh - 260px);
+        }
+
+        .home-container::before {
+            font-size: 2rem;
         }
 
         .username {
@@ -1081,6 +1246,10 @@
 
         .home-container {
             min-height: calc(100vh - 280px);
+        }
+
+        .home-container::before {
+            font-size: 1.5rem;
         }
 
         .about-content {
@@ -1280,67 +1449,67 @@
             <h1 class="skills-title">My Skills</h1>
             <p class="skills-subtitle">A collection of technologies and tools I am proficient in.</p>
             <div class="skills-grid">
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 0;">
                     <i class="devicon-python-plain"></i>
                     <span class="skill-label">Python</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 1;">
                     <i class="fab fa-html5"></i>
                     <span class="skill-label">HTML</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 2;">
                     <i class="fab fa-css3-alt"></i>
                     <span class="skill-label">CSS</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 3;">
                     <i class="fab fa-js-square"></i>
                     <span class="skill-label">JavaScript</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 4;">
                     <i class="fab fa-git-alt"></i>
                     <span class="skill-label">Git</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 5;">
                     <i class="fab fa-github"></i>
                     <span class="skill-label">GitHub</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 6;">
                     <i class="devicon-vscode-plain"></i>
                     <span class="skill-label">VSCode</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 7;">
                     <i class="fas fa-flask"></i>
                     <span class="skill-label">Flask</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 8;">
                     <i class="devicon-sqlite-plain"></i>
                     <span class="skill-label">SQLite</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 9;">
                     <i class="fas fa-cloud"></i>
                     <span class="skill-label">Vercel</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 10;">
                     <i class="fab fa-windows"></i>
                     <span class="skill-label">Windows</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 11;">
                     <i class="fab fa-linux"></i>
                     <span class="skill-label">Kali Linux</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 12;">
                     <i class="fab fa-linux"></i>
                     <span class="skill-label">Linux Mint</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 13;">
                     <i class="fab fa-linux"></i>
                     <span class="skill-label">Parrot</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 14;">
                     <i class="fab fa-linux"></i>
                     <span class="skill-label">Ubuntu</span>
                 </div>
-                <div class="skill-card">
+                <div class="skill-card" style="--skill-index: 15;">
                     <i class="fab fa-linux"></i>
                     <span class="skill-label">Zorin</span>
                 </div>
@@ -1760,42 +1929,42 @@
         const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
         const activityState = document.getElementById('activityState');
         const activityTimestamp = document.getElementById('activityTimestamp');
-        const fileTypeIcon = document.getElementById('fileTypeIcon');
         activityName.textContent = activity.name || 'Unknown Activity';
-        if (activity.details && activity.details.includes('.')) {
-            const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
-            const fileIcon = getFileTypeIcon(filename);
-            activityFileInfo.style.display = 'flex';
-            activityDetailsNoFile.style.display = 'none';
-            fileTypeIcon.className = fileIcon.icon;
-            fileTypeIcon.style.color = fileIcon.color;
-            activityDetails.textContent = activity.details;
-        } else {
-            activityFileInfo.style.display = 'none';
-            activityDetailsNoFile.style.display = 'block';
-            activityDetailsNoFile.textContent = activity.details || '';
-        }
+        activityFileInfo.style.display = 'none';
+        activityDetailsNoFile.style.display = 'block';
+        activityDetailsNoFile.textContent = activity.details || '';
         activityState.textContent = activity.state || '';
         activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
         activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-        log('DOM loaded, initializing yokai app...', 'info');
+    function startStatusRefresh() {
+        if (refreshInterval) clearInterval(refreshInterval);
+        refreshInterval = setInterval(fetchDiscordStatus, CONFIG.REFRESH_INTERVAL);
+        log('Started Discord status refresh interval', 'success');
+    }
+
+    window.addEventListener('load', () => {
         createParticles();
         initNavigation();
         disableDevTools();
-        fetchDiscordStatus();
-        refreshInterval = setInterval(() => {
-            if (isConnected && document.getElementById('home').classList.contains('active')) {
-                fetchDiscordStatus();
-            }
-        }, CONFIG.REFRESH_INTERVAL);
-        log('Yokai portfolio initialized successfully', 'success');
+        fetchDiscordStatus().then(() => {
+            if (isConnected) startStatusRefresh();
+        });
     });
 
-    window.addEventListener('beforeunload', () => {
-        if (refreshInterval) clearInterval(refreshInterval);
+    window.addEventListener('online', () => {
+        log('Network online, attempting to reconnect...', 'info');
+        retryCount = 0;
+        fetchDiscordStatus().then(() => {
+            if (isConnected) startStatusRefresh();
+        });
+    });
+
+    window.addEventListener('offline', () => {
+        log('Network offline, stopping refresh...', 'warning');
+        clearInterval(refreshInterval);
+        showOfflineState();
     });
 </script>
 </body>
