@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>yokaimsi</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -133,7 +134,7 @@
         z-index: 1000;
         display: flex;
         align-items: center;
-        gap: 1.5rem;
+        gap: 2rem;
         box-shadow: var(--neon-glow);
         animation: navPulse 3s ease-in-out infinite;
     }
@@ -275,7 +276,7 @@
     }
 
     .social-link.instagram:hover {
-        background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        background:a linear-gradaient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
         box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
     }
 
@@ -1139,66 +1140,45 @@
     @media (max-width: 768px) {
         .nav {
             top: 10px;
-            left: 5px;
-            right: 5px;
+            left: 10px;
+            right: 10px;
             transform: none;
             flex-direction: column;
-            gap: 0.8rem;
-            padding: 0.8rem;
-            border-radius: 15px;
-            width: calc(100% - 10px);
-            align-items: center;
-            animation: none;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 20px;
         }
 
         .nav-links {
             width: 100%;
             justify-content: center;
             flex-wrap: wrap;
-            padding: 2px;
-        }
-
-        .nav-link {
-            padding: 8px 15px;
-            font-size: 0.85rem;
         }
 
         .nav-indicator {
             width: calc(25% - 4px);
-            height: calc(100% - 4px);
-            top: 2px;
-            left: 2px;
         }
 
         .social-links {
             justify-content: center;
             flex-wrap: wrap;
-            gap: 0.3rem;
-        }
-
-        .social-link {
-            width: 36px;
-            height: 36px;
-            font-size: 1rem;
         }
 
         .main-content {
-            margin-top: 120px;
+            margin-top: 180px;
             padding: 0 10px;
         }
 
         .home-container {
-            min-height: calc(100vh - 180px);
-            padding: 15px;
+            min-height: calc(100vh - 260px);
         }
 
         .home-container::before {
-            font-size: 1.8rem;
-            top: 15%;
+            font-size: 2rem;
         }
 
         .username {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
         }
 
         .avatar {
@@ -1208,7 +1188,6 @@
 
         .activity-content {
             flex-direction: column;
-            align-items: center;
             text-align: center;
         }
 
@@ -1222,58 +1201,38 @@
 
         .projects-grid-new {
             grid-template-columns: 1fr;
-            gap: 0.8rem;
-            padding: 0 5px;
-        }
-
-        .project-card-new {
-            max-width: 100%;
+            gap: 1rem;
         }
 
         .project-content-new {
-            padding: 0.8rem;
+            padding: 0.75rem;
         }
 
         .project-actions-new {
             flex-direction: column;
-            align-items: center;
         }
 
         .project-btn-new {
             justify-content: center;
-            width: 100%;
-            max-width: 200px;
         }
 
         .skills-grid {
             grid-template-columns: 1fr;
-            gap: 0.8rem;
-            padding: 0 5px;
-        }
-
-        .skill-card {
-            padding: 1rem;
         }
 
         .about-content {
-            padding: 1.2rem;
-            max-width: 100%;
-        }
-
-        .particle {
-            display: none; /* Disable particles on mobile to improve performance */
+            padding: 1.5rem;
         }
     }
 
     @media (max-width: 480px) {
         .nav {
-            padding: 0.6rem;
-            gap: 0.5rem;
+            padding: 0.8rem;
         }
 
         .nav-link {
-            padding: 6px 10px;
-            font-size: 0.7rem;
+            padding: 8px 12px;
+            font-size: 0.75rem;
         }
 
         .social-link {
@@ -1283,44 +1242,19 @@
         }
 
         .main-content {
-            margin-top: 140px;
-            padding: 0 5px;
+            margin-top: 200px;
         }
 
         .home-container {
-            min-height: calc(100vh - 200px);
-            padding: 10px;
+            min-height: calc(100vh - 280px);
         }
 
         .home-container::before {
-            font-size: 1.2rem;
-            top: 10%;
-        }
-
-        .username {
-            font-size: 1.4rem;
-        }
-
-        .avatar {
-            width: 80px;
-            height: 80px;
-        }
-
-        .projects-title-new, .skills-title, .about-title {
-            font-size: 1.8rem;
-        }
-
-        .projects-subtitle-new, .skills-subtitle, .about-subtitle {
-            font-size: 0.9rem;
+            font-size: 1.5rem;
         }
 
         .about-content {
             padding: 1rem;
-        }
-
-        .about-content p {
-            font-size: 0.9rem;
-            line-height: 1.6;
         }
     }
 </style>
@@ -1682,7 +1616,7 @@
 
     function createParticles() {
         const particlesContainer = document.getElementById('particles');
-        const particleCount = window.innerWidth < 768 ? 10 : 50; // Reduced particles on mobile
+        const particleCount = window.innerWidth < 768 ? 30 : 50;
         particlesContainer.innerHTML = '';
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -1922,141 +1856,117 @@
         const activityTimestamp = document.getElementById('activityTimestamp');
         const fileTypeIcon = document.getElementById('fileTypeIcon');
         const headerIcon = document.querySelector('#activityHeader i');
-    function updateGameActivity(activity) {
+        headerIcon.className = 'fas fa-gamepad';
+        activityHeaderText.textContent = 'Playing';
+        activityName.textContent = activity.name || 'Unknown Game';
+        const isCodeEditor = activity.name.toLowerCase().includes('visual studio code') || activity.name.toLowerCase().includes('vscode') || activity.name.toLowerCase().includes('code');
+        if (isCodeEditor && activity.details && activity.details.includes('.')) {
+            const filename = activity.details.replace('Editing ', '').replace('Working on ', '');
+            const fileIcon = getFileTypeIcon(filename);
+            activityFileInfo.style.display = 'flex';
+            activityDetailsNoFile.style.display = 'none';
+            fileTypeIcon.className = fileIcon.icon;
+            fileTypeIcon.style.color = fileIcon.color;
+            activityDetails.textContent = activity.details;
+        } else {
+            activityFileInfo.style.display = 'none';
+            activityDetailsNoFile.style.display = 'block';
+            activityDetailsNoFile.textContent = activity.details || '';
+        }
+        activityState.textContent = activity.state || '';
+        activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
+        activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
+    }
+
+    function updateSpotifyActivity(activity) {
         const activityHeaderText = document.getElementById('activityHeaderText');
+        const activityName = document.getElementById('activityName');
+        const activityFileInfo = document.getElementById('activityFileInfo');
+        const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+        const activityState = document.getElementById('activityState');
+        const activityTimestamp = document.getElementById('activityTimestamp');
+        const headerIcon = document.querySelector('#activityHeader i');
+        headerIcon.className = 'fab fa-spotify';
+        activityHeaderText.textContent = 'Listening to Spotify';
+        activityName.textContent = activity.details || 'Unknown Track';
+        activityFileInfo.style.display = 'none';
+        activityDetailsNoFile.style.display = 'block';
+        activityDetailsNoFile.textContent = activity.state ? `by ${activity.state}` : '';
+        activityState.textContent = activity.assets?.large_text ? `on ${activity.assets.large_text}` : 'on Spotify';
+        if (activity.timestamps && activity.timestamps.start && activity.timestamps.end) {
+            const current = Date.now() - activity.timestamps.start;
+            const total = activity.timestamps.end - activity.timestamps.start;
+            const currentMin = Math.floor(current / 60000);
+            const currentSec = Math.floor((current % 60000) / 1000);
+            const totalMin = Math.floor(total / 60000);
+            const totalSec = Math.floor((total % 60000) / 1000);
+            activityTimestamp.textContent = `${currentMin}:${String(currentSec).padStart(2, '0')} / ${totalMin}:${String(totalSec).padStart(2, '0')}`;
+            activityTimestamp.style.display = 'block';
+        } else {
+            activityTimestamp.style.display = 'none';
+        }
+    }
+
+    function updateWatchingActivity(activity) {
+        const activityHeaderText = document.getElementById('activityHeaderText');
+        const headerIcon = document.querySelector('#activityHeader i');
+        headerIcon.className = 'fas fa-eye';
+        activityHeaderText.textContent = 'Watching';
+        updateGenericActivityContent(activity);
+    }
+
+    function updateCompetingActivity(activity) {
+        const activityHeaderText = document.getElementById('activityHeaderText');
+        const headerIcon = document.querySelector('#activityHeader i');
+        headerIcon.className = 'fas fa-trophy';
+        activityHeaderText.textContent = 'Competing in';
+        updateGenericActivityContent(activity);
+    }
+
+    function updateGenericActivityContent(activity) {
         const activityName = document.getElementById('activityName');
         const activityFileInfo = document.getElementById('activityFileInfo');
         const activityDetails = document.getElementById('activityDetails');
         const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
         const activityState = document.getElementById('activityState');
         const activityTimestamp = document.getElementById('activityTimestamp');
-        const fileTypeIcon = document.getElementById('fileTypeIcon');
-        const headerIcon = document.querySelector('#activityHeader i');
-
-    activityHeaderText.textContent = 'Playing';
-    headerIcon.className = 'fas fa-gamepad';
-    activityName.textContent = activity.name || 'Unknown Game';
-    
-    if (activity.assets && activity.assets.large_text) {
-        const fileInfo = activity.assets.large_text.split(' - ');
-        const fileName = fileInfo[0];
-        const fileDetails = fileInfo[1] || '';
-        activityFileInfo.style.display = 'flex';
-        activityDetailsNoFile.style.display = 'none';
-        const iconInfo = getFileTypeIcon(fileName);
-        fileTypeIcon.className = `file-type-icon ${iconInfo.icon}`;
-        fileTypeIcon.style.color = iconInfo.color;
-        activityDetails.textContent = fileName;
-        activityState.textContent = fileDetails || activity.state || '';
-    } else {
+        activityName.textContent = activity.name || 'Unknown Activity';
         activityFileInfo.style.display = 'none';
         activityDetailsNoFile.style.display = 'block';
         activityDetailsNoFile.textContent = activity.details || '';
         activityState.textContent = activity.state || '';
+        activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
+        activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
     }
 
-    activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-}
+    function startStatusRefresh() {
+        if (refreshInterval) clearInterval(refreshInterval);
+        refreshInterval = setInterval(fetchDiscordStatus, CONFIG.REFRESH_INTERVAL);
+        log('Started Discord status refresh interval', 'success');
+    }
 
-function updateSpotifyActivity(activity) {
-    const activityHeaderText = document.getElementById('activityHeaderText');
-    const activityName = document.getElementById('activityName');
-    const activityFileInfo = document.getElementById('activityFileInfo');
-    const activityDetails = document.getElementById('activityDetails');
-    const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-    const activityState = document.getElementById('activityState');
-    const activityTimestamp = document.getElementById('activityTimestamp');
-    const headerIcon = document.querySelector('#activityHeader i');
+    window.addEventListener('load', () => {
+        createParticles();
+        initNavigation();
+        disableDevTools();
+        fetchDiscordStatus().then(() => {
+            if (isConnected) startStatusRefresh();
+        });
+    });
 
-    activityHeaderText.textContent = 'Listening to Spotify';
-    headerIcon.className = 'fab fa-spotify';
-    activityName.textContent = activity.details || 'Unknown Track';
-    activityFileInfo.style.display = 'none';
-    activityDetailsNoFile.style.display = 'block';
-    activityDetailsNoFile.textContent = `by ${activity.state || 'Unknown Artist'}`;
-    activityState.textContent = activity.assets?.large_text || '';
-    activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-}
+    window.addEventListener('online', () => {
+        log('Network online, attempting to reconnect...', 'info');
+        retryCount = 0;
+        fetchDiscordStatus().then(() => {
+            if (isConnected) startStatusRefresh();
+        });
+    });
 
-function updateWatchingActivity(activity) {
-    const activityHeaderText = document.getElementById('activityHeaderText');
-    const activityName = document.getElementById('activityName');
-    const activityFileInfo = document.getElementById('activityFileInfo');
-    const activityDetails = document.getElementById('activityDetails');
-    const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-    const activityState = document.getElementById('activityState');
-    const activityTimestamp = document.getElementById('activityTimestamp');
-    const headerIcon = document.querySelector('#activityHeader i');
-
-    activityHeaderText.textContent = 'Watching';
-    headerIcon.className = 'fas fa-tv';
-    activityName.textContent = activity.name || 'Unknown';
-    activityFileInfo.style.display = 'none';
-    activityDetailsNoFile.style.display = 'block';
-    activityDetailsNoFile.textContent = activity.details || '';
-    activityState.textContent = activity.state || '';
-    activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-}
-
-function updateCompetingActivity(activity) {
-    const activityHeaderText = document.getElementById('activityHeaderText');
-    const activityName = document.getElementById('activityName');
-    const activityFileInfo = document.getElementById('activityFileInfo');
-    const activityDetails = document.getElementById('activityDetails');
-    const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-    const activityState = document.getElementById('activityState');
-    const activityTimestamp = document.getElementById('activityTimestamp');
-    const headerIcon = document.querySelector('#activityHeader i');
-
-    activityHeaderText.textContent = 'Competing';
-    headerIcon.className = 'fas fa-trophy';
-    activityName.textContent = activity.name || 'Unknown';
-    activityFileInfo.style.display = 'none';
-    activityDetailsNoFile.style.display = 'block';
-    activityDetailsNoFile.textContent = activity.details || '';
-    activityState.textContent = activity.state || '';
-    activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-}
-
-function updateGenericActivityContent(activity) {
-    const activityHeaderText = document.getElementById('activityHeaderText');
-    const activityName = document.getElementById('activityName');
-    const activityFileInfo = document.getElementById('activityFileInfo');
-    const activityDetails = document.getElementById('activityDetails');
-    const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-    const activityState = document.getElementById('activityState');
-    const activityTimestamp = document.getElementById('activityTimestamp');
-    const headerIcon = document.querySelector('#activityHeader i');
-
-    activityHeaderText.textContent = 'Activity';
-    headerIcon.className = 'fas fa-spinner';
-    activityName.textContent = activity.name || 'Unknown Activity';
-    activityFileInfo.style.display = 'none';
-    activityDetailsNoFile.style.display = 'block';
-    activityDetailsNoFile.textContent = activity.details || '';
-    activityState.textContent = activity.state || '';
-    activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
-}
-
-function startStatusRefresh() {
-    if (refreshInterval) clearInterval(refreshInterval);
-    refreshInterval = setInterval(() => {
-        if (isConnected) {
-            log('Refreshing Discord status...');
-            fetchDiscordStatus();
-        }
-    }, CONFIG.REFRESH_INTERVAL);
-}
-
-function initialize() {
-    createParticles();
-    initNavigation();
-    disableDevTools();
-    fetchDiscordStatus();
-    startStatusRefresh();
-}
-
-document.addEventListener('DOMContentLoaded', initialize);
+    window.addEventListener('offline', () => {
+        log('Network offline, stopping refresh...', 'warning');
+        clearInterval(refreshInterval);
+        showOfflineState();
+    });
 </script>
 </body>
 </html>
