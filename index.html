@@ -122,25 +122,27 @@
 
     .nav {
         position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+        top: 10px;
+        left: 10px;
+        right: 10px;
+        transform: none;
         background: var(--glass-bg);
         backdrop-filter: blur(20px);
         border: 1px solid var(--glass-border);
-        border-radius: 50px;
-        padding: 8px;
+        border-radius: 20px;
+        padding: 1rem;
         z-index: 1000;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 2rem;
+        gap: 1rem;
         box-shadow: var(--neon-glow);
         animation: navPulse 3s ease-in-out infinite;
     }
 
     @keyframes navPulse {
-        0%, 100% { transform: translateX(-50%) scale(1); }
-        50% { transform: translateX(-50%) scale(1.02); }
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.02); }
     }
 
     .nav:hover {
@@ -149,7 +151,7 @@
     }
 
     .nav-logo {
-        font-size: 1.3rem;
+        font-size: 1.5rem;
         font-weight: 700;
         color: var(--accent-color);
         text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
@@ -166,7 +168,7 @@
     }
 
     .nav-logo i {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
         color: var(--accent-secondary);
         animation: logoIconSpin 5s infinite linear;
     }
@@ -181,16 +183,19 @@
         list-style: none;
         background: rgba(255, 255, 255, 0.03);
         border-radius: 40px;
-        padding: 4px;
+        padding: 8px;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
         position: relative;
     }
 
     .nav-link {
         color: var(--text-secondary);
         text-decoration: none;
-        font-size: 0.9rem;
+        font-size: 1rem;
         font-weight: 500;
-        padding: 10px 20px;
+        padding: 12px 24px;
         border-radius: 35px;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -200,10 +205,12 @@
         align-items: center;
         gap: 0.5rem;
         white-space: nowrap;
+        min-width: 100px;
+        text-align: center;
     }
 
     .nav-link i {
-        font-size: 0.85rem;
+        font-size: 1rem;
         transition: transform 0.3s ease;
     }
 
@@ -213,9 +220,9 @@
 
     .nav-indicator {
         position: absolute;
-        top: 4px;
-        left: 4px;
-        height: calc(100% - 8px);
+        top: 8px;
+        left: 8px;
+        height: calc(100% - 16px);
         background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
         border-radius: 35px;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -236,13 +243,15 @@
 
     .social-links {
         display: flex;
-        gap: 0.5rem;
+        gap: 1rem;
         padding: 0 8px;
+        flex-wrap: wrap;
+        justify-content: center;
     }
 
     .social-link {
-        width: 40px;
-        height: 40px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         background: var(--glass-bg);
         border: 1px solid var(--glass-border);
@@ -252,7 +261,7 @@
         text-decoration: none;
         color: var(--text-primary);
         transition: all 0.3s ease;
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         position: relative;
         animation: socialPulse 2s ease-in-out infinite;
     }
@@ -298,12 +307,12 @@
     }
 
     .main-content {
-        margin-top: 100px;
-        min-height: calc(100vh - 100px);
+        margin-top: 120px;
+        min-height: calc(100vh - 120px);
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        padding: 0 20px;
+        padding: 0 15px;
         width: 100%;
     }
 
@@ -333,11 +342,11 @@
         width: 100%;
         max-width: 600px;
         margin: 0 auto;
-        min-height: calc(100vh - 200px);
+        min-height: calc(100vh - 220px);
         display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 20px;
+        padding: 20px 10px;
         position: relative;
     }
 
@@ -347,7 +356,7 @@
         top: 20%;
         left: 50%;
         transform: translateX(-50%);
-        font-size: 3rem;
+        font-size: 2rem;
         font-weight: 700;
         background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
         -webkit-background-clip: text;
@@ -424,14 +433,14 @@
     }
 
     .profile-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
     }
 
     .avatar {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         border-radius: 50%;
-        margin: 0 auto 1.5rem;
+        margin: 0 auto 1rem;
         border: 2px solid var(--success-color);
         transition: all 0.3s ease;
         display: block;
@@ -459,7 +468,7 @@
     }
 
     .username {
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 700;
         margin-bottom: 0.3rem;
         background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
@@ -476,7 +485,7 @@
 
     .discriminator {
         color: var(--text-secondary);
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 400;
         animation: fadeIn 1s ease-in;
     }
@@ -489,7 +498,7 @@
         padding: 1rem;
         margin-bottom: 1.5rem;
         transition: all 0.3s ease;
-        max-width: 400px;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         animation: cardFloat 4s ease-in-out infinite;
@@ -574,7 +583,7 @@
         padding: 1rem;
         margin-bottom: 1rem;
         color: #ffc107;
-        max-width: 400px;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         animation: fadeIn 1s ease-in;
@@ -633,12 +642,12 @@
     }
 
     .projects-header {
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
         padding-top: 0;
     }
 
     .projects-title-new {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
         background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
@@ -651,11 +660,11 @@
 
     .projects-subtitle-new {
         color: var(--text-secondary);
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 400;
         text-align: center;
-        margin-bottom: 2rem;
-        max-width: 600px;
+        margin-bottom: 1.5rem;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         animation: fadeIn 1s ease-in;
@@ -663,7 +672,7 @@
 
     .projects-grid-new {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: 1fr;
         gap: 1rem;
         width: 100%;
         margin: 0;
@@ -697,7 +706,7 @@
     }
 
     .project-content-new {
-        padding: 1rem;
+        padding: 0.75rem;
     }
 
     .project-header-new {
@@ -739,7 +748,7 @@
 
     .project-description-new {
         color: var(--text-secondary);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         line-height: 1.4;
         margin-bottom: 1rem;
         transition: opacity 0.3s ease;
@@ -967,12 +976,12 @@
 
     #projects {
         min-height: 100vh;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
 
     #about {
         min-height: 100vh;
-        padding: 2rem 0;
+        padding: 1.5rem 0;
     }
 
     .skills-container {
@@ -980,11 +989,11 @@
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .skills-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
         background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
@@ -997,11 +1006,11 @@
 
     .skills-subtitle {
         color: var(--text-secondary);
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 400;
         text-align: center;
-        margin-bottom: 2rem;
-        max-width: 600px;
+        margin-bottom: 1.5rem;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         animation: fadeIn 1s ease-in;
@@ -1009,7 +1018,7 @@
 
     .skills-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: 1fr;
         gap: 1rem;
         width: 100%;
         margin: 0 auto;
@@ -1080,11 +1089,11 @@
         width: 100%;
         max-width: 800px;
         margin: 0 auto;
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
 
     .about-title {
-        font-size: 3rem;
+        font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
         background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
@@ -1097,11 +1106,11 @@
 
     .about-subtitle {
         color: var(--text-secondary);
-        font-size: 1rem;
+        font-size: 0.9rem;
         font-weight: 400;
         text-align: center;
-        margin-bottom: 2rem;
-        max-width: 600px;
+        margin-bottom: 1.5rem;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         animation: fadeIn 1s ease-in;
@@ -1112,10 +1121,10 @@
         backdrop-filter: blur(15px);
         border: 1px solid var(--glass-border);
         border-radius: 15px;
-        padding: 2rem;
+        padding: 1.5rem;
         margin-bottom: 1.5rem;
         transition: all 0.3s ease;
-        max-width: 600px;
+        max-width: 100%;
         margin-left: auto;
         margin-right: auto;
         text-align: left;
@@ -1130,8 +1139,8 @@
 
     .about-content p {
         color: var(--text-secondary);
-        font-size: 1rem;
-        line-height: 1.8;
+        font-size: 0.9rem;
+        line-height: 1.6;
         margin-bottom: 1rem;
         animation: fadeIn 0.5s ease-in;
     }
@@ -1155,7 +1164,7 @@
         }
 
         .nav-indicator {
-            width: calc(25% - 4px);
+            width: calc(25% - 8px);
         }
 
         .social-links {
@@ -1173,16 +1182,16 @@
         }
 
         .home-container::before {
-            font-size: 2rem;
-        }
-
-        .username {
             font-size: 1.5rem;
         }
 
+        .username {
+            font-size: 1.2rem;
+        }
+
         .avatar {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
         }
 
         .activity-content {
@@ -1195,7 +1204,7 @@
         }
 
         .projects-title-new, .skills-title, .about-title {
-            font-size: 2rem;
+            font-size: 1.8rem;
         }
 
         .projects-grid-new {
@@ -1220,7 +1229,7 @@
         }
 
         .about-content {
-            padding: 1.5rem;
+            padding: 1rem;
         }
     }
 
@@ -1230,14 +1239,15 @@
         }
 
         .nav-link {
-            padding: 8px 12px;
-            font-size: 0.75rem;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            min-width: 80px;
         }
 
         .social-link {
-            width: 32px;
-            height: 32px;
-            font-size: 0.9rem;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
         }
 
         .main-content {
@@ -1249,11 +1259,20 @@
         }
 
         .home-container::before {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
         }
 
         .about-content {
             padding: 1rem;
+        }
+
+        .avatar {
+            width: 70px;
+            height: 70px;
+        }
+
+        .username {
+            font-size: 1rem;
         }
     }
 </style>
@@ -1615,7 +1634,7 @@
 
     function createParticles() {
         const particlesContainer = document.getElementById('particles');
-        const particleCount = window.innerWidth < 768 ? 30 : 50;
+        const particleCount = window.innerWidth < 768 ? 20 : 50;
         particlesContainer.innerHTML = '';
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
@@ -1902,33 +1921,58 @@
             activityTimestamp.textContent = `${currentMin}:${String(currentSec).padStart(2, '0')} / ${totalMin}:${String(totalSec).padStart(2, '0')}`;
             activityTimestamp.style.display = 'block';
         } else {
-            activityTimestamp.style.display = 'none';
+            activityTimestamp.style.display ='none';
         }
     }
 
     function updateWatchingActivity(activity) {
         const activityHeaderText = document.getElementById('activityHeaderText');
+        const activityName = document.getElementById('activityName');
+        const activityFileInfo = document.getElementById('activityFileInfo');
+        const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+        const activityState = document.getElementById('activityState');
+        const activityTimestamp = document.getElementById('activityTimestamp');
         const headerIcon = document.querySelector('#activityHeader i');
         headerIcon.className = 'fas fa-eye';
         activityHeaderText.textContent = 'Watching';
-        updateGenericActivityContent(activity);
+        activityName.textContent = activity.name || 'Unknown Content';
+        activityFileInfo.style.display = 'none';
+        activityDetailsNoFile.style.display = 'block';
+        activityDetailsNoFile.textContent = activity.details || '';
+        activityState.textContent = activity.state || '';
+        activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
+        activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
     }
 
     function updateCompetingActivity(activity) {
         const activityHeaderText = document.getElementById('activityHeaderText');
-        const headerIcon = document.querySelector('#activityHeader i');
-        headerIcon.className = 'fas fa-trophy';
-        activityHeaderText.textContent = 'Competing in';
-        updateGenericActivityContent(activity);
-    }
-
-    function updateGenericActivityContent(activity) {
         const activityName = document.getElementById('activityName');
         const activityFileInfo = document.getElementById('activityFileInfo');
-        const activityDetails = document.getElementById('activityDetails');
         const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
         const activityState = document.getElementById('activityState');
         const activityTimestamp = document.getElementById('activityTimestamp');
+        const headerIcon = document.querySelector('#activityHeader i');
+        headerIcon.className = 'fas fa-trophy';
+        activityHeaderText.textContent = 'Competing in';
+        activityName.textContent = activity.name || 'Unknown Competition';
+        activityFileInfo.style.display = 'none';
+        activityDetailsNoFile.style.display = 'block';
+        activityDetailsNoFile.textContent = activity.details || '';
+        activityState.textContent = activity.state || '';
+        activityTimestamp.textContent = formatTimestamp(activity.timestamps?.start);
+        activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
+    }
+
+    function updateGenericActivityContent(activity) {
+        const activityHeaderText = document.getElementById('activityHeaderText');
+        const activityName = document.getElementById('activityName');
+        const activityFileInfo = document.getElementById('activityFileInfo');
+        const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+        const activityState = document.getElementById('activityState');
+        const activityTimestamp = document.getElementById('activityTimestamp');
+        const headerIcon = document.querySelector('#activityHeader i');
+        headerIcon.className = 'fas fa-spinner';
+        activityHeaderText.textContent = 'Activity';
         activityName.textContent = activity.name || 'Unknown Activity';
         activityFileInfo.style.display = 'none';
         activityDetailsNoFile.style.display = 'block';
@@ -1938,34 +1982,27 @@
         activityTimestamp.style.display = activity.timestamps?.start ? 'block' : 'none';
     }
 
-    function startStatusRefresh() {
+    function startRefreshInterval() {
         if (refreshInterval) clearInterval(refreshInterval);
         refreshInterval = setInterval(fetchDiscordStatus, CONFIG.REFRESH_INTERVAL);
-        log('Started Discord status refresh interval', 'success');
     }
 
-    window.addEventListener('load', () => {
+    function stopRefreshInterval() {
+        if (refreshInterval) clearInterval(refreshInterval);
+        refreshInterval = null;
+    }
+
+    function initialize() {
         createParticles();
         initNavigation();
         disableDevTools();
-        fetchDiscordStatus().then(() => {
-            if (isConnected) startStatusRefresh();
-        });
-    });
+        fetchDiscordStatus();
+        startRefreshInterval();
+    }
 
-    window.addEventListener('online', () => {
-        log('Network online, attempting to reconnect...', 'info');
-        retryCount = 0;
-        fetchDiscordStatus().then(() => {
-            if (isConnected) startStatusRefresh();
-        });
-    });
+    document.addEventListener('DOMContentLoaded', initialize);
 
-    window.addEventListener('offline', () => {
-        log('Network offline, stopping refresh...', 'warning');
-        clearInterval(refreshInterval);
-        showOfflineState();
-    });
+    window.addEventListener('unload', stopRefreshInterval);
 </script>
 </body>
 </html>
