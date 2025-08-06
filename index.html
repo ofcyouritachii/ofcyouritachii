@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest; frame-src 'none'; object-src 'none';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
     <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
     <title>yokaimsi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
@@ -27,7 +27,6 @@
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-border: rgba(255, 255, 255, 0.1);
             --neon-glow: 0 0 20px rgba(0, 212, 255, 0.3);
-            --neon-glow-pink: 0 0 20px rgba(255, 0, 110, 0.3);
             --success-color: #43b581;
             --warning-color: #faa61a;
             --error-color: #f04747;
@@ -62,17 +61,14 @@
             height: 100%;
             background: 
                 radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(0, 212, 255, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
             z-index: -1;
             animation: backgroundShift 20s ease-in-out infinite;
         }
 
         @keyframes backgroundShift {
             0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(-20px, -10px) scale(1.02); }
-            50% { transform: translate(20px, 10px) scale(1.03); }
-            75% { transform: translate(-10px, 20px) scale(1.02); }
+            50% { transform: translate(10px, 10px) scale(1.02); }
         }
 
         .particles {
@@ -83,6 +79,7 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
+            display: var(--particles-display, block);
         }
 
         .particle {
@@ -96,24 +93,10 @@
         }
 
         @keyframes float {
-            0% {
-                transform: translateY(100vh) translateX(0) scale(1);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            50% {
-                transform: translateY(50vh) translateX(50px) scale(1.2);
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) translateX(100px) scale(1);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) scale(1); opacity: 0; }
+            10% { opacity: 0.3; }
+            50% { transform: translateY(50vh) translateX(50px) scale(1.2); opacity: 0.5; }
+            100% { transform: translateY(-100px) translateX(100px) scale(1); opacity: 0; }
         }
 
         .nav {
@@ -131,19 +114,8 @@
             align-items: center;
             gap: 2rem;
             box-shadow: var(--neon-glow);
-            animation: navPulse 3s ease-in-out infinite;
             visibility: visible;
             opacity: 1;
-        }
-
-        @keyframes navPulse {
-            0%, 100% { transform: translateX(-50%) scale(1); }
-            50% { transform: translateX(-50%) scale(1.02); }
-        }
-
-        .nav:hover {
-            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
-            animation-play-state: paused;
         }
 
         .nav-logo {
@@ -155,12 +127,6 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0 16px;
-            animation: logoGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes logoGlow {
-            0%, 100% { text-shadow: 0 0 10px rgba(0, 212, 255, 0.5); }
-            50% { text-shadow: 0 0 15px rgba(0, 212, 255, 0.7); }
         }
 
         .nav-logo i {
@@ -190,23 +156,22 @@
             font-weight: 500;
             padding: 10px 20px;
             border-radius: 35px;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             cursor: pointer;
             position: relative;
             z-index: 2;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            white-space: nowrap;
         }
 
         .nav-link i {
             font-size: 0.85rem;
-            transition: transform 0.3s ease;
         }
 
-        .nav-link:hover i {
-            transform: rotate(15deg);
+        .nav-link:hover, .nav-link:focus {
+            color: var(--text-primary);
+            outline: none;
         }
 
         .nav-link:focus {
@@ -223,18 +188,10 @@
             border-radius: 35px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-            animation: indicatorGlow 2s ease-in-out infinite;
-        }
-
-        @keyframes indicatorGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
-            50% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.6); }
         }
 
         .nav-link.active {
             color: var(--text-primary);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .social-links {
@@ -254,10 +211,8 @@
             justify-content: center;
             text-decoration: none;
             color: var(--text-primary);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
             font-size: 1.2rem;
-            position: relative;
-            animation: socialPulse 2s ease-in-out infinite;
         }
 
         .social-link::after {
@@ -267,23 +222,14 @@
             bottom: -1.5rem;
             font-size: 0.7rem;
             color: var(--text-secondary);
-            white-space: nowrap;
         }
 
         .social-link:hover::after {
             display: block;
         }
 
-        @keyframes socialPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
         .social-link:hover {
-            color: var(--text-primary);
-            transform: translateY(-2px) scale(1.2);
-            box-shadow: var(--neon-glow);
-            animation-play-state: paused;
+            transform: translateY(-2px) scale(1.1);
         }
 
         .social-link:focus {
@@ -291,42 +237,15 @@
             outline-offset: 2px;
         }
 
-        .social-link.github:hover {
-            background: #333;
-            box-shadow: 0 5px 15px rgba(51, 51, 51, 0.4);
-        }
-
-        .social-link.instagram:hover {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            box-shadow: 0 5px 15px rgba(225, 48, 108, 0.4);
-        }
-
-        .social-link.discord:hover {
-            background: #5865f2;
-            box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
-        }
-
-        .social-link.linkedin:hover {
-            background: #0077b5;
-            box-shadow: 0 5px 15px rgba(0, 119, 181, 0.4);
-        }
-
-        .social-link i {
-            transition: transform 0.3s ease;
-        }
-
-        .social-link:hover i {
-            transform: scale(1.2) rotate(15deg);
-        }
+        .social-link.github:hover { background: #333; }
+        .social-link.instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .social-link.discord:hover { background: #5865f2; }
+        .social-link.linkedin:hover { background: #0077b5; }
 
         .main-content {
             margin-top: 100px;
             min-height: calc(100vh - 100px);
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
             padding: 0 20px;
-            width: 100%;
         }
 
         .page {
@@ -340,19 +259,12 @@
         }
 
         @keyframes pageSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px) scale(0.95);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .home-container {
             text-align: center;
-            width: 100%;
             max-width: 600px;
             margin: 0 auto;
             min-height: calc(100vh - 200px);
@@ -360,29 +272,6 @@
             flex-direction: column;
             justify-content: center;
             padding: 20px;
-            position: relative;
-        }
-
-        .home-container::before {
-            content: 'Welcome to My Portfolio';
-            position: absolute;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 3rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            opacity: 0;
-            animation: welcomeFade 2s ease-in-out 1s forwards;
-        }
-
-        @keyframes welcomeFade {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            50% { opacity: 0.7; }
-            100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
         }
 
         .loading-container {
@@ -390,12 +279,6 @@
             flex-direction: column;
             align-items: center;
             gap: 1rem;
-            animation: fadeIn 1s ease-in;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
         }
 
         .spinner {
@@ -406,13 +289,11 @@
             border-right: 2px solid var(--accent-secondary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
-            box-shadow: var(--neon-glow);
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.1); }
-            100% { transform: rotate(360deg) scale(1); }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .loading-text {
@@ -421,32 +302,10 @@
             font-weight: 400;
             text-transform: lowercase;
             letter-spacing: 2px;
-            animation: textGlow 1.5s ease-in-out infinite;
-        }
-
-        @keyframes textGlow {
-            0%, 100% { text-shadow: 0 0 5px rgba(255, 255, 255, 0.3); }
-            50% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
         }
 
         .profile-container {
             display: none;
-            animation: profileFadeIn 0.8s ease-out forwards;
-        }
-
-        @keyframes profileFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
-
-        .profile-header {
-            margin-bottom: 2rem;
         }
 
         .avatar {
@@ -455,30 +314,14 @@
             border-radius: 50%;
             margin: 0 auto 1.5rem;
             border: 2px solid var(--success-color);
-            transition: all 0.3s ease;
-            display: block;
+            transition: transform 0.3s ease;
             box-shadow: 0 0 15px rgba(67, 181, 129, 0.3);
-            background: var(--glass-bg);
             object-fit: cover;
-            object-position: center;
-            animation: avatarPulse 2s ease-in-out infinite;
             loading: lazy;
-        }
-
-        @keyframes avatarPulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 15px rgba(67, 181, 129, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(67, 181, 129, 0.5); }
-        }
-
-        .avatar:hover {
-            transform: scale(1.1);
-            animation-play-state: paused;
         }
 
         .avatar.error {
             border-color: var(--error-color);
-            box-shadow: 0 0 20px rgba(240, 71, 71, 0.4);
-            animation: none;
         }
 
         .username {
@@ -489,19 +332,12 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: textGradient 3s linear infinite;
-        }
-
-        @keyframes textGradient {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 200% 50%; }
         }
 
         .discriminator {
             color: var(--text-secondary);
             font-size: 1rem;
             font-weight: 400;
-            animation: fadeIn 1s ease-in;
         }
 
         .glass-card {
@@ -511,26 +347,13 @@
             border-radius: 15px;
             padding: 1rem;
             margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
-            animation: cardFloat 4s ease-in-out infinite;
-        }
-
-        @keyframes cardFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .glass-card:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
-            animation-play-state: paused;
         }
 
         .status-indicator {
-            display: inline-flex;
+            display: flex;
             align-items: center;
             gap: 0.75rem;
             margin-bottom: 1rem;
@@ -541,38 +364,16 @@
             height: 12px;
             border-radius: 50%;
             background: var(--success-color);
-            box-shadow: 0 0 10px rgba(67, 181, 129, 0.6);
-            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); transform: scale(1); }
-            50% { box-shadow: 0 0 15px rgba(67, 181, 129, 0.8); transform: scale(1.2); }
-            100% { box-shadow: 0 0 10px rgba(67, 181, 129, 0.6); transform: scale(1); }
-        }
-
-        .status-dot.offline {
-            background: var(--offline-color);
-            box-shadow: 0 0 10px rgba(116, 127, 141, 0.6);
-            animation: none;
-        }
-
-        .status-dot.idle {
-            background: var(--warning-color);
-            box-shadow: 0 0 10px rgba(250, 166, 26, 0.6);
-        }
-
-        .status-dot.dnd {
-            background: var(--error-color);
-            box-shadow: 0 0 10px rgba(240, 71, 71, 0.6);
-        }
+        .status-dot.offline { background: var(--offline-color); }
+        .status-dot.idle { background: var(--warning-color); }
+        .status-dot.dnd { background: var(--error-color); }
 
         .status-text {
             font-size: 0.9rem;
             color: var(--text-primary);
             text-transform: capitalize;
-            font-weight: 500;
-            animation: fadeIn 1s ease-in;
         }
 
         .custom-status {
@@ -582,12 +383,6 @@
             margin-bottom: 0.5rem;
             display: none;
             font-style: italic;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(10px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .setup-notice {
@@ -600,7 +395,6 @@
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeIn 1s ease-in;
         }
 
         .setup-notice h4 {
@@ -608,17 +402,6 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
-        }
-
-        .setup-notice h4 i {
-            color: #ffc107;
-            animation: iconShake 1.5s ease-in-out infinite;
-        }
-
-        @keyframes iconShake {
-            0%, 100% { transform: rotate(0deg); }
-            25% { transform: rotate(-5deg); }
-            75% { transform: rotate(5deg); }
         }
 
         .setup-notice ol {
@@ -640,27 +423,16 @@
             font-size: 0.8rem;
             color: var(--error-color);
             display: none;
-            animation: shakeError 0.5s ease-in-out;
         }
 
-        @keyframes shakeError {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        .projects-container {
+        .projects-container, .skills-container, .about-container {
             text-align: center;
-            padding-top: 0;
-            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
         }
 
-        .projects-header {
-            margin-bottom: 2rem;
-            padding-top: 0;
-        }
-
-        .projects-title-new {
+        .projects-title-new, .skills-title, .about-title {
             font-size: 3rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
@@ -668,30 +440,24 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-align: center;
-            animation: textGradient 3s linear infinite;
         }
 
-        .projects-subtitle-new {
+        .projects-subtitle-new, .skills-subtitle, .about-subtitle {
             color: var(--text-secondary);
             font-size: 1rem;
             font-weight: 400;
-            text-align: center;
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            animation: fadeIn 1s ease-in;
         }
 
         .projects-grid-new {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1rem;
-            width: 100%;
-            margin: 0;
-            padding: 0;
             justify-items: center;
+            overflow: visible;
         }
 
         .project-card-new {
@@ -699,24 +465,22 @@
             backdrop-filter: blur(15px);
             border: 1px solid var(--glass-border);
             border-radius: 12px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            position: relative;
             width: 100%;
             max-width: 300px;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card-new[data-visible="true"] {
             animation: floatProject 4s ease-in-out infinite;
         }
 
         @keyframes floatProject {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.02); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .project-card-new:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
-            border-color: rgba(139, 92, 246, 0.3);
-            animation-play-state: paused;
+            transform: translateY(-5px);
         }
 
         .project-content-new {
@@ -733,31 +497,12 @@
         .project-icon-new {
             font-size: 1rem;
             color: var(--accent-color);
-            transition: transform 0.3s ease;
-            animation: iconBob 2s ease-in-out infinite;
-        }
-
-        @keyframes iconBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-3px); }
-        }
-
-        .project-card-new:hover .project-icon-new {
-            transform: rotate(15deg) scale(1.2);
-            color: var(--accent-secondary);
-            animation-play-state: paused;
         }
 
         .project-title-new {
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-primary);
-            margin: 0;
-            transition: color 0.3s ease;
-        }
-
-        .project-card-new:hover .project-title-new {
-            color: var(--accent-color);
         }
 
         .project-description-new {
@@ -765,11 +510,6 @@
             font-size: 0.9rem;
             line-height: 1.4;
             margin-bottom: 1rem;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card-new:hover .project-description-new {
-            opacity: 0.8;
         }
 
         .project-tech-new {
@@ -785,50 +525,10 @@
             font-size: 0.7rem;
             font-weight: 500;
             border: 1px solid;
-            transition: all 0.3s ease;
-            animation: tagPop 1.5s ease-in-out infinite;
         }
 
-        @keyframes tagPop {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .tech-tag-new.js {
-            background: rgba(247, 223, 30, 0.1);
-            color: #f7df1e;
-            border-color: rgba(247, 223, 30, 0.3);
-        }
-
-        .tech-tag-new.python {
-            background: rgba(55, 118, 171, 0.1);
-            color: #3776ab;
-            border-color: rgba(55, 118, 171, 0.3);
-        }
-
-        .tech-tag-new.db {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .tech-tag-new.api {
-            background: rgba(16, 185, 129, 0.1);
-            color: #10b981;
-            border-color: rgba(16, 185, 129, 0.3);
-        }
-
-        .tech-tag-new.os {
-            background: rgba(168, 85, 247, 0.1);
-            color: #a855f7;
-            border-color: rgba(168, 85, 247, 0.3);
-        }
-
-        .tech-tag-new.extra {
-            background: rgba(139, 92, 246, 0.1);
-            color: #8b5cf6;
-            border-color: rgba(139, 92, 246, 0.3);
-        }
+        .tech-tag-new.js { background: rgba(247, 223, 30, 0.1); color: #f7df1e; border-color: rgba(247, 223, 30, 0.3); }
+        .tech-tag-new.python { background: rgba(55, 118, 171, 0.1); color: #3776ab; border-color: rgba(55, 118, 171, 0.3); }
 
         .project-actions-new {
             display: flex;
@@ -838,70 +538,29 @@
         }
 
         .project-btn-new {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
             padding: 0.4rem 0.8rem;
             border-radius: 6px;
             text-decoration: none;
             font-size: 0.75rem;
             font-weight: 500;
-            transition: all 0.3s ease;
             border: 1px solid;
-            animation: pulseBtn 2s ease-in-out infinite;
+            transition: transform 0.3s ease;
         }
 
-        @keyframes pulseBtn {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+        .project-btn-new.github { background: rgba(51, 51, 51, 0.1); color: #ffffff; border-color: rgba(51, 51, 51, 0.3); }
+        .project-btn-new.discord { background: rgba(88, 101, 242, 0.1); color: #5865f2; border-color: rgba(88, 101, 242, 0.3); }
 
-        .project-btn-new.github {
-            background: rgba(51, 51, 51, 0.1);
-            color: #ffffff;
-            border-color: rgba(51, 51, 51, 0.3);
-        }
-
-        .project-btn-new.github:hover {
-            background: rgba(51, 51, 51, 0.2);
-            transform: translateY(-1px) scale(1.1);
-            box-shadow: 0 0 10px rgba(51, 51, 51, 0.4);
-            animation-play-state: paused;
-        }
-
-        .project-btn-new.discord {
-            background: rgba(88, 101, 242, 0.1);
-            color: #5865f2;
-            border-color: rgba(88, 101, 242, 0.3);
-        }
-
-        .project-btn-new.discord:hover {
-            background: rgba(88, 101, 242, 0.2);
-            transform: translateY(-1px) scale(1.1);
-            box-shadow: 0 0 10px rgba(88, 101, 242, 0.4);
-            animation-play-state: paused;
+        .project-btn-new:hover {
+            transform: translateY(-1px);
         }
 
         .unified-status-card {
-            position: relative;
-            overflow: hidden;
-            animation: cardFloat 4s ease-in-out infinite;
+            border: 1px solid var(--glass-border);
         }
 
-        .unified-status-card.spotify-activity {
-            border: 1px solid rgba(29, 185, 84, 0.2);
-            background: rgba(29, 185, 84, 0.03);
-        }
-
-        .unified-status-card.game-activity {
-            border: 1px solid rgba(0, 212, 255, 0.2);
-            background: rgba(0, 212, 255, 0.03);
-        }
-
-        .unified-status-card.custom-activity {
-            border: 1px solid rgba(255, 0, 110, 0.2);
-            background: rgba(255, 0, 110, 0.03);
-        }
+        .unified-status-card.spotify-activity { border-color: rgba(29, 185, 84, 0.2); }
+        .unified-status-card.game-activity { border-color: rgba(0, 212, 255, 0.2); }
+        .unified-status-card.custom-activity { border-color: rgba(255, 0, 110, 0.2); }
 
         .activity-section {
             margin-top: 0;
@@ -916,27 +575,22 @@
             font-size: 0.8rem;
             font-weight: 500;
             color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.3px;
         }
 
         .activity-header i {
             font-size: 0.9rem;
             color: var(--accent-color);
-            animation: iconBob 2s ease-in-out infinite;
         }
 
         .activity-content {
             display: flex;
             align-items: flex-start;
             gap: 0.75rem;
-            animation: slideUp 0.5s ease-out;
         }
 
         .activity-details {
             flex: 1;
             text-align: left;
-            min-width: 0;
         }
 
         .activity-name {
@@ -944,8 +598,6 @@
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: 0.2rem;
-            line-height: 1.2;
-            animation: fadeIn 0.5s ease-in;
         }
 
         .activity-file-info {
@@ -957,15 +609,12 @@
 
         .file-type-icon {
             font-size: 0.9rem;
-            flex-shrink: 0;
-            animation: iconBob 2s ease-in-out infinite;
         }
 
         .activity-details-text {
             font-size: 0.75rem;
             color: var(--text-secondary);
             margin-bottom: 0.2rem;
-            line-height: 1.2;
         }
 
         .activity-state {
@@ -978,66 +627,14 @@
             font-size: 0.65rem;
             color: var(--accent-color);
             font-weight: 500;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        #home {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        #projects {
-            min-height: 100vh;
-            padding: 2rem 0;
-        }
-
-        #about {
-            min-height: 100vh;
-            padding: 2rem 0;
-        }
-
-        .skills-container {
-            text-align: center;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .skills-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-align: center;
-            animation: textGradient 3s linear infinite;
-        }
-
-        .skills-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 1s ease-in;
         }
 
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 1rem;
-            width: 100%;
-            margin: 0 auto;
             max-width: 800px;
-            padding: 1rem;
+            margin: 0 auto;
         }
 
         .skill-card {
@@ -1049,85 +646,35 @@
             font-size: 1rem;
             font-weight: 500;
             color: var(--text-primary);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             text-align: center;
+        }
+
+        .skill-card[data-visible="true"] {
             animation: skillFloat 4s ease-in-out infinite;
-            animation-delay: calc(var(--skill-index) * 0.2s);
         }
 
         @keyframes skillFloat {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-10px) scale(1.02); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         .skill-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            animation-play-state: paused;
+            transform: translateY(-5px);
         }
 
         .skill-card i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            transition: transform 0.3s ease, color 0.3s ease;
-            animation: skillIconRotate 3s ease-in-out infinite;
-        }
-
-        @keyframes skillIconRotate {
-            0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(10deg); }
-        }
-
-        .skill-card:hover i {
-            transform: rotate(15deg) scale(1.2);
-            color: var(--accent-color);
-            animation-play-state: paused;
         }
 
         .skill-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            animation: fadeIn 0.5s ease-in;
-        }
-
-        .about-container {
-            text-align: center;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        .about-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-align: center;
-            animation: textGradient 3s linear infinite;
-        }
-
-        .about-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
-            text-align: center;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeIn 1s ease-in;
         }
 
         .about-content {
@@ -1137,18 +684,10 @@
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            transition: all 0.3s ease;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             text-align: left;
-            animation: cardFloat 4s ease-in-out infinite;
-        }
-
-        .about-content:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.1);
-            animation-play-state: paused;
         }
 
         .about-content p {
@@ -1156,7 +695,6 @@
             font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 1rem;
-            animation: fadeIn 0.5s ease-in;
         }
 
         .hamburger {
@@ -1173,6 +711,10 @@
         }
 
         @media (max-width: 768px) {
+            :root {
+                --particles-display: none;
+            }
+
             .nav {
                 top: 10px;
                 left: 10px;
@@ -1231,11 +773,6 @@
                 min-height: calc(100vh - 200px);
             }
 
-            .home-container::before {
-                font-size: 2rem;
-                top: 15%;
-            }
-
             .username {
                 font-size: 1.8rem;
             }
@@ -1263,8 +800,8 @@
                 gap: 1.5rem;
             }
 
-            .project-content-new {
-                padding: 1rem;
+            .project-card-new, .skill-card {
+                animation: none;
             }
 
             .project-actions-new {
@@ -1273,7 +810,6 @@
             }
 
             .project-btn-new {
-                justify-content: center;
                 width: 100%;
                 max-width: 200px;
             }
@@ -1281,10 +817,6 @@
             .skills-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
-            }
-
-            .about-content {
-                padding: 1.5rem;
             }
         }
 
@@ -1307,14 +839,6 @@
                 margin-top: 140px;
             }
 
-            .home-container {
-                min-height: calc(100vh - 220px);
-            }
-
-            .home-container::before {
-                font-size: 1.8rem;
-            }
-
             .username {
                 font-size: 1.5rem;
             }
@@ -1327,18 +851,11 @@
             .projects-title-new, .skills-title, .about-title {
                 font-size: 2rem;
             }
-
-            .about-content {
-                padding: 1rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Particles -->
     <div class="particles" id="particles"></div>
-
-    <!-- Navigation -->
     <nav class="nav" role="navigation" aria-label="Main navigation">
         <div class="nav-logo">
             <i class="fas fa-ghost" aria-hidden="true"></i>
@@ -1369,10 +886,7 @@
             </a>
         </div>
     </nav>
-
-    <!-- Main Content -->
     <div class="main-content" role="main">
-        <!-- Home Page -->
         <div class="page active" id="home" role="region" aria-label="Home">
             <div class="home-container">
                 <div class="loading-container" id="loading" role="status" aria-live="polite">
@@ -1422,8 +936,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- About Page -->
         <div class="page" id="about" role="region" aria-label="About">
             <div class="about-container">
                 <h1 class="about-title">About Me</h1>
@@ -1434,10 +946,33 @@
                     <p>When I'm not coding, you can find me tinkering with new frameworks, contributing to open-source projects, or engaging with the developer community on Discord and GitHub. I believe in continuous learning and sharing knowledge to inspire others.</p>
                     <p>My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone. Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
                 </div>
+                <div class="glass-card unified-status-card" id="aboutStatus" role="region" aria-label="User status" style="display: none;">
+                    <div class="status-indicator">
+                        <span class="status-dot offline" id="aboutStatusDot" aria-hidden="true"></span>
+                        <span class="status-text" id="aboutStatusText">Offline</span>
+                    </div>
+                    <div class="custom-status" id="aboutCustomStatus"></div>
+                    <div class="activity-section" id="aboutActivitySection" role="region" aria-label="Current activity" style="display: none;">
+                        <div class="activity-header" id="aboutActivityHeader">
+                            <i class="fas fa-spinner" aria-hidden="true"></i>
+                            <span id="aboutActivityHeaderText">Loading...</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-details">
+                                <div class="activity-name" id="aboutActivityName"></div>
+                                <div class="activity-file-info" id="aboutActivityFileInfo" style="display: none;">
+                                    <i class="file-type-icon" id="aboutFileTypeIcon" aria-hidden="true"></i>
+                                    <span class="activity-details-text" id="aboutActivityDetails"></span>
+                                </div>
+                                <div class="activity-details-text" id="aboutActivityDetailsNoFile"></div>
+                                <div class="activity-state" id="aboutActivityState"></div>
+                                <div class="activity-timestamp" id="aboutActivityTimestamp"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Projects Page -->
         <div class="page" id="projects" role="region" aria-label="Projects">
             <div class="projects-container">
                 <div class="projects-header">
@@ -1445,7 +980,7 @@
                     <p class="projects-subtitle-new">Explore my open-source contributions and personal projects.</p>
                 </div>
                 <div class="projects-grid-new">
-                    <div class="project-card-new">
+                    <div class="project-card-new" data-visible="false">
                         <div class="project-content-new">
                             <div class="project-header-new">
                                 <i class="project-icon-new fas fa-code" aria-hidden="true"></i>
@@ -1462,7 +997,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card-new">
+                    <div class="project-card-new" data-visible="false">
                         <div class="project-content-new">
                             <div class="project-header-new">
                                 <i class="project-icon-new fas fa-code" aria-hidden="true"></i>
@@ -1479,7 +1014,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card-new">
+                    <div class="project-card-new" data-visible="false">
                         <div class="project-content-new">
                             <div class="project-header-new">
                                 <i class="project-icon-new fab fa-discord" aria-hidden="true"></i>
@@ -1500,7 +1035,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="project-card-new">
+                    <div class="project-card-new" data-visible="false">
                         <div class="project-content-new">
                             <div class="project-header-new">
                                 <i class="project-icon-new fab fa-discord" aria-hidden="true"></i>
@@ -1519,142 +1054,178 @@
                         </div>
                     </div>
                 </div>
+                <div class="glass-card unified-status-card" id="projectsStatus" role="region" aria-label="User status" style="display: none;">
+                    <div class="status-indicator">
+                        <span class="status-dot offline" id="projectsStatusDot" aria-hidden="true"></span>
+                        <span class="status-text" id="projectsStatusText">Offline</span>
+                    </div>
+                    <div class="custom-status" id="projectsCustomStatus"></div>
+                    <div class="activity-section" id="projectsActivitySection" role="region" aria-label="Current activity" style="display: none;">
+                        <div class="activity-header" id="projectsActivityHeader">
+                            <i class="fas fa-spinner" aria-hidden="true"></i>
+                            <span id="projectsActivityHeaderText">Loading...</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-details">
+                                <div class="activity-name" id="projectsActivityName"></div>
+                                <div class="activity-file-info" id="projectsActivityFileInfo" style="display: none;">
+                                    <i class="file-type-icon" id="projectsFileTypeIcon" aria-hidden="true"></i>
+                                    <span class="activity-details-text" id="projectsActivityDetails"></span>
+                                </div>
+                                <div class="activity-details-text" id="projectsActivityDetailsNoFile"></div>
+                                <div class="activity-state" id="projectsActivityState"></div>
+                                <div class="activity-timestamp" id="projectsActivityTimestamp"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Skills Page -->
         <div class="page" id="skills" role="region" aria-label="Skills">
             <div class="skills-container">
                 <h1 class="skills-title">My Skills</h1>
                 <p class="skills-subtitle">A collection of technologies and tools I am proficient in.</p>
                 <div class="skills-grid">
-                    <div class="skill-card" style="--skill-index: 0;">
-                        <i class="devicon-python-plain" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 0;" data-visible="false">
+                        <i class="devicon-python-plain" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Python</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 1;">
-                        <i class="fab fa-html5" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 1;" data-visible="false">
+                        <i class="fab fa-html5" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">HTML</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 2;">
-                        <i class="fab fa-css3-alt" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 2;" data-visible="false">
+                        <i class="fab fa-css3-alt" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">CSS</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 3;">
-                        <i class="fab fa-js-square" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 3;" data-visible="false">
+                        <i class="fab fa-js-square" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">JavaScript</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 4;">
-                        <i class="fab fa-git-alt" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 4;" data-visible="false">
+                        <i class="fab fa-git-alt" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Git</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 5;">
-                        <i class="fab fa-github" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 5;" data-visible="false">
+                        <i class="fab fa-github" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">GitHub</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 6;">
-                        <i class="devicon-vscode-plain" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 6;" data-visible="false">
+                        <i class="devicon-vscode-plain" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">VSCode</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 7;">
-                        <i class="fas fa-flask" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 7;" data-visible="false">
+                        <i class="fas fa-flask" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Flask</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 8;">
-                        <i class="devicon-sqlite-plain" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 8;" data-visible="false">
+                        <i class="devicon-sqlite-plain" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">SQLite</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 9;">
-                        <i class="fas fa-cloud" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 9;" data-visible="false">
+                        <i class="fas fa-cloud" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Vercel</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 10;">
-                        <i class="fab fa-windows" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 10;" data-visible="false">
+                        <i class="fab fa-windows" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Windows</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 11;">
-                        <i class="fab fa-linux" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 11;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Kali Linux</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 12;">
-                        <i class="fab fa-linux" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 12;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Linux Mint</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 13;">
-                        <i class="fab fa-linux" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 13;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Parrot</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 14;">
-                        <i class="fab fa-linux" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 14;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Ubuntu</span>
                     </div>
-                    <div class="skill-card" style="--skill-index: 15;">
-                        <i class="fab fa-linux" aria-hidden="true"></i>
+                    <div class="skill-card" style="--skill-index: 15;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Zorin</span>
+                    </div>
+                </div>
+                <div class="glass-card unified-status-card" id="skillsStatus" role="region" aria-label="User status" style="display: none;">
+                    <div class="status-indicator">
+                        <span class="status-dot offline" id="skillsStatusDot" aria-hidden="true"></span>
+                        <span class="status-text" id="skillsStatusText">Offline</span>
+                    </div>
+                    <div class="custom-status" id="skillsCustomStatus"></div>
+                    <div class="activity-section" id="skillsActivitySection" role="region" aria-label="Current activity" style="display: none;">
+                        <div class="activity-header" id="skillsActivityHeader">
+                            <i class="fas fa-spinner" aria-hidden="true"></i>
+                            <span id="skillsActivityHeaderText">Loading...</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-details">
+                                <div class="activity-name" id="skillsActivityName"></div>
+                                <div class="activity-file-info" id="skillsActivityFileInfo" style="display: none;">
+                                    <i class="file-type-icon" id="skillsFileTypeIcon" aria-hidden="true"></i>
+                                    <span class="activity-details-text" id="skillsActivityDetails"></span>
+                                </div>
+                                <div class="activity-details-text" id="skillsActivityDetailsNoFile"></div>
+                                <div class="activity-state" id="skillsActivityState"></div>
+                                <div class="activity-timestamp" id="skillsActivityTimestamp"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
     <script>
-        // Configuration
         const CONFIG = {
             DISCORD_USER_ID: '1282292887878369358',
-            LANYARD_API_URL: 'https://api.lanyard.rest/v1/users/',
+            LANYARD_WS_URL: 'wss://api.lanyard.rest/socket',
+            LANYARD_HTTP_URL: 'https://api.lanyard.rest/v1/users/',
             RETRY_ATTEMPTS: 3,
             RETRY_DELAY: 3000,
             REFRESH_INTERVAL: 30000,
             TIMEOUT: 15000,
-            FALLBACK_AVATAR: 'https://cdn.discordapp.com/embed/avatars/0.png'
+            FALLBACK_AVATAR: 'https://cdn.discordapp.com/embed/avatars/0.png',
+            CACHE_KEY: 'discord_status_cache',
+            CACHE_EXPIRY: 30000
         };
 
         let retryCount = 0;
         let refreshInterval = null;
         let isConnected = false;
+        let lastFetchTime = 0;
+        let websocket = null;
+        let wsRetryCount = 0;
 
         const fileTypeIcons = {
             'html': { icon: 'fab fa-html5', color: '#e34c26' },
-            'htm': { icon: 'fab fa-html5', color: '#e34c26' },
             'css': { icon: 'fab fa-css3-alt', color: '#1572b6' },
             'js': { icon: 'fab fa-js-square', color: '#f7df1e' },
-            'jsx': { icon: 'fab fa-react', color: '#61dafb' },
-            'ts': { icon: 'devicon-typescript-plain', color: '#3178c6' },
-            'tsx': { icon: 'fab fa-react', color: '#61dafb' },
-            'vue': { icon: 'fab fa-vuejs', color: '#4fc08d' },
-            'svelte': { icon: 'devicon-svelte-plain', color: '#ff3e00' },
             'py': { icon: 'fab fa-python', color: '#3776ab' },
-            'java': { icon: 'fab fa-java', color: '#ed8b00' },
-            'cpp': { icon: 'devicon-cplusplus-plain', color: '#00599c' },
-            'c': { icon: 'devicon-c-plain', color: '#a8b9cc' },
-            'cs': { icon: 'devicon-csharp-plain', color: '#239120' },
-            'php': { icon: 'fab fa-php', color: '#777bb4' },
-            'rb': { icon: 'devicon-ruby-plain', color: '#cc342d' },
-            'go': { icon: 'devicon-go-plain', color: '#00add8' },
-            'rs': { icon: 'devicon-rust-plain', color: '#000000' },
-            'swift': { icon: 'fab fa-swift', color: '#fa7343' },
-            'kt': { icon: 'devicon-kotlin-plain', color: '#7f52ff' },
-            'json': { icon: 'devicon-json-plain', color: '#000000' },
-            'xml': { icon: 'fas fa-code', color: '#ff6600' },
-            'yaml': { icon: 'fas fa-file-code', color: '#cb171e' },
-            'yml': { icon: 'fas fa-file-code', color: '#cb171e' },
-            'toml': { icon: 'fas fa-file-code', color: '#9c4221' },
-            'ini': { icon: 'fas fa-cog', color: '#6c757d' },
-            'sql': { icon: 'fas fa-database', color: '#336791' },
-            'db': { icon: 'fas fa-database', color: '#336791' },
-            'sqlite': { icon: 'devicon-sqlite-plain', color: '#003b57' },
-            'md': { icon: 'fab fa-markdown', color: '#000000' },
-            'txt': { icon: 'fas fa-file-alt', color: '#6c757d' },
-            'pdf': { icon: 'fas fa-file-pdf', color: '#dc3545' },
-            'doc': { icon: 'fas fa-file-word', color: '#2b579a' },
-            'docx': { icon: 'fas fa-file-word', color: '#2b579a' },
-            'png': { icon: 'fas fa-file-image', color: '#17a2b8' },
-            'jpg': { icon: 'fas fa-file-image', color: '#17a2b8' },
-            'jpeg': { icon: 'fas fa-file-image', color: '#17a2b8' },
-            'gif': { icon: 'fas fa-file-image', color: '#17a2b8' },
-            'svg': { icon: 'fas fa-file-image', color: '#ff9500' },
             'default': { icon: 'fas fa-file', color: '#6c757d' }
         };
+
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
+        }
+
+        function throttle(func, limit) {
+            let inThrottle;
+            return function (...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
+        }
 
         function safeImageLoad(img, src, fallback) {
             return new Promise((resolve) => {
@@ -1664,7 +1235,7 @@
                     resolve(true);
                 };
                 tempImg.onerror = () => {
-                    if (fallback) img.src = fallback;
+                    img.src = fallback;
                     resolve(false);
                 };
                 tempImg.src = src;
@@ -1677,9 +1248,7 @@
             const elapsed = now - timestamp;
             const minutes = Math.floor(elapsed / 60000);
             const hours = Math.floor(minutes / 60);
-            if (hours > 0) return `${hours}h ${minutes % 60}m elapsed`;
-            else if (minutes > 0) return `${minutes}m elapsed`;
-            return 'Just started';
+            return hours > 0 ? `${hours}h ${minutes % 60}m elapsed` : `${minutes}m elapsed`;
         }
 
         function getFileTypeIcon(filename) {
@@ -1688,10 +1257,10 @@
         }
 
         function createParticles() {
+            if (window.innerWidth <= 768) return;
             const particlesContainer = document.getElementById('particles');
-            const particleCount = window.innerWidth < 768 ? 20 : 50;
             particlesContainer.innerHTML = '';
-            for (let i = 0; i < particleCount; i++) {
+            for (let i = 0; i < 50; i++) {
                 const particle = document.createElement('div');
                 particle.className = 'particle';
                 particle.style.left = Math.random() * 100 + '%';
@@ -1701,6 +1270,10 @@
             }
         }
 
+        function shouldShowActivity(pageId) {
+            return window.innerWidth > 768 || pageId === 'home';
+        }
+
         function initNavigation() {
             const nav = document.querySelector('.nav');
             const hamburger = document.getElementById('hamburger');
@@ -1708,7 +1281,6 @@
             const pages = document.querySelectorAll('.page');
             const indicator = document.getElementById('navIndicator');
 
-            // Ensure navbar is visible
             nav.style.visibility = 'visible';
             nav.style.opacity = '1';
 
@@ -1727,8 +1299,7 @@
             hamburger.addEventListener('click', () => {
                 nav.classList.toggle('nav-open');
                 hamburger.setAttribute('aria-expanded', nav.classList.contains('nav-open'));
-                const icon = hamburger.querySelector('i');
-                icon.className = nav.classList.contains('nav-open') ? 'fas fa-times' : 'fas fa-bars';
+                hamburger.querySelector('i').className = nav.classList.contains('nav-open') ? 'fas fa-times' : 'fas fa-bars';
             });
 
             navLinks.forEach((link) => {
@@ -1744,6 +1315,7 @@
                     link.setAttribute('aria-current', 'page');
                     document.getElementById(targetPage).classList.add('active');
                     updateIndicatorPosition();
+                    updateActivityVisibility(targetPage);
                     document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
                     if (window.innerWidth <= 768) {
                         nav.classList.remove('nav-open');
@@ -1753,18 +1325,28 @@
                 });
             });
 
-            window.addEventListener('resize', () => {
+            window.addEventListener('resize', debounce(() => {
                 updateIndicatorPosition();
                 createParticles();
+                updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
                 if (window.innerWidth > 768) {
                     nav.classList.remove('nav-open');
                     hamburger.setAttribute('aria-expanded', 'false');
                     hamburger.querySelector('i').className = 'fas fa-bars';
                 }
-            });
+            }, 100));
 
             updateIndicatorPosition();
-            document.body.style.overflow = 'hidden';
+        }
+
+        function lazyLoadCards() {
+            const cards = document.querySelectorAll('.project-card-new, .skill-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    entry.target.setAttribute('data-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.1 });
+            cards.forEach(card => observer.observe(card));
         }
 
         function disableDevTools() {
@@ -1776,19 +1358,48 @@
             });
         }
 
-        async function fetchDiscordStatus() {
+        function getCachedData() {
+            const cached = localStorage.getItem(CONFIG.CACHE_KEY);
+            if (!cached) return null;
+            const { data, timestamp } = JSON.parse(cached);
+            if (Date.now() - timestamp < CONFIG.CACHE_EXPIRY) {
+                return data;
+            }
+            localStorage.removeItem(CONFIG.CACHE_KEY);
+            return null;
+        }
+
+        function setCachedData(data) {
+            localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({
+                data,
+                timestamp: Date.now()
+            }));
+        }
+
+        async function fetchDiscordStatusFallback() {
             const loadingContainer = document.getElementById('loading');
             const profileContainer = document.getElementById('profile');
             const errorDetails = document.getElementById('errorDetails');
             const setupNotice = document.getElementById('setupNotice');
 
             try {
+                const cachedData = getCachedData();
+                if (cachedData && Date.now() - lastFetchTime < CONFIG.REFRESH_INTERVAL) {
+                    isConnected = true;
+                    loadingContainer.style.display = 'none';
+                    profileContainer.style.display = 'block';
+                    setupNotice.style.display = 'none';
+                    errorDetails.style.display = 'none';
+                    updateDiscordProfile(cachedData);
+                    updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
+                    return;
+                }
+
                 loadingContainer.style.display = 'flex';
                 profileContainer.style.display = 'none';
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
-                const response = await fetch(`${CONFIG.LANYARD_API_URL}${CONFIG.DISCORD_USER_ID
-                }`, {
+                const response = await fetch(`${CONFIG.LANYARD_HTTP_URL}${CONFIG.DISCORD_USER_ID}`, {
                     signal: controller.signal,
                     headers: { 'Accept': 'application/json' }
                 });
@@ -1808,11 +1419,14 @@
 
                 isConnected = true;
                 retryCount = 0;
+                lastFetchTime = Date.now();
+                setCachedData(data.data);
                 loadingContainer.style.display = 'none';
                 profileContainer.style.display = 'block';
                 setupNotice.style.display = 'none';
                 errorDetails.style.display = 'none';
                 updateDiscordProfile(data.data);
+                updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
             } catch (error) {
                 retryCount++;
                 let errorMessage = error.message || 'An unknown error occurred';
@@ -1823,7 +1437,19 @@
                 }
 
                 if (retryCount < CONFIG.RETRY_ATTEMPTS) {
-                    setTimeout(fetchDiscordStatus, CONFIG.RETRY_DELAY);
+                    setTimeout(fetchDiscordStatusFallback, CONFIG.RETRY_DELAY);
+                    return;
+                }
+
+                const cachedData = getCachedData();
+                if (cachedData) {
+                    isConnected = true;
+                    loadingContainer.style.display = 'none';
+                    profileContainer.style.display = 'block';
+                    setupNotice.style.display = 'none';
+                    errorDetails.style.display = 'none';
+                    updateDiscordProfile(cachedData);
+                    updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
                     return;
                 }
 
@@ -1835,163 +1461,303 @@
                     setupNotice.style.display = 'block';
                 }
                 showOfflineState();
+                updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
+            }
+        }
+
+        function initWebSocket() {
+            try {
+                websocket = new WebSocket(CONFIG.LANYARD_WS_URL);
+                const loadingContainer = document.getElementById('loading');
+                const profileContainer = document.getElementById('profile');
+                const errorDetails = document.getElementById('errorDetails');
+                const setupNotice = document.getElementById('setupNotice');
+
+                websocket.onopen = () => {
+                    wsRetryCount = 0;
+                    isConnected = true;
+                    loadingContainer.style.display = 'none';
+                    profileContainer.style.display = 'block';
+                    errorDetails.style.display = 'none';
+                    setupNotice.style.display = 'none';
+                    websocket.send(JSON.stringify({ op: 2, d: { subscribe_to_id: CONFIG.DISCORD_USER_ID } }));
+                    setInterval(() => {
+                        if (websocket.readyState === WebSocket.OPEN) {
+                            websocket.send(JSON.stringify({ op: 3 }));
+                        }
+                    }, 30000);
+                };
+
+                websocket.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        if (data.op === 0 && data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
+                            lastFetchTime = Date.now();
+                            setCachedData(data.d);
+                            updateDiscordProfile(data.d);
+                            updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
+                        }
+                    } catch (e) {
+                        errorDetails.style.display = 'block';
+                        errorDetails.textContent = 'Error: Failed to parse WebSocket data';
+                    }
+                };
+
+                websocket.onerror = () => {
+                    wsRetryCount++;
+                    if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
+                        setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
+                    } else {
+                        errorDetails.style.display = 'block';
+                        errorDetails.textContent = 'Error: WebSocket connection failed, falling back to HTTP';
+                        fetchDiscordStatusFallback();
+                    }
+                };
+
+                websocket.onclose = () => {
+                    wsRetryCount++;
+                    if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
+                        setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
+                    } else {
+                        errorDetails.style.display = 'block';
+                        errorDetails.textContent = 'Error: WebSocket closed, falling back to HTTP';
+                        fetchDiscordStatusFallback();
+                    }
+                };
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: WebSocket initialization failed';
+                fetchDiscordStatusFallback();
             }
         }
 
         function showOfflineState() {
-            const avatar = document.getElementById('avatar');
-            const username = document.getElementById('username');
-            const discriminator = document.getElementById('discriminator');
+            try {
+                const avatar = document.getElementById('avatar');
+                const username = document.getElementById('username');
+                const discriminator = document.getElementById('discriminator');
 
-            safeImageLoad(avatar, CONFIG.FALLBACK_AVATAR, CONFIG.FALLBACK_AVATAR).then((success) => {
-                avatar.classList.toggle('error', !success);
-            });
+                safeImageLoad(avatar, CONFIG.FALLBACK_AVATAR, CONFIG.FALLBACK_AVATAR).then((success) => {
+                    avatar.classList.toggle('error', !success);
+                });
 
-            username.textContent = 'yokaimsi';
-            discriminator.textContent = '@yokaimsi';
-            avatar.alt = 'yokaimsi\'s avatar';
-            updateStatus('offline');
-            updateCustomStatus([]);
-            updateActivities([]);
+                username.textContent = 'yokaimsi';
+                discriminator.textContent = '@yokaimsi';
+                avatar.alt = 'yokaimsi\'s avatar';
+                updateStatus('offline');
+                updateCustomStatus([]);
+                updateActivities([]);
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to display offline state';
+            }
         }
 
         function updateDiscordProfile(userData) {
-            const avatar = document.getElementById('avatar');
-            const username = document.getElementById('username');
-            const discriminator = document.getElementById('discriminator');
-            const avatarUrl = userData.discord_user?.avatar 
-                ? `https://cdn.discordapp.com/avatars/${CONFIG.DISCORD_USER_ID}/${userData.discord_user.avatar}.png?size=128`
-                : CONFIG.FALLBACK_AVATAR;
+            try {
+                const avatar = document.getElementById('avatar');
+                const username = document.getElementById('username');
+                const discriminator = document.getElementById('discriminator');
+                const avatarUrl = userData.discord_user?.avatar 
+                    ? `https://cdn.discordapp.com/avatars/${CONFIG.DISCORD_USER_ID}/${userData.discord_user.avatar}.png?size=128`
+                    : CONFIG.FALLBACK_AVATAR;
 
-            safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR).then((success) => {
-                avatar.classList.toggle('error', !success);
-            });
+                safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR).then((success) => {
+                    avatar.classList.toggle('error', !success);
+                });
 
-            username.textContent = userData.discord_user?.username || 'yokaimsi';
-            discriminator.textContent = `@${userData.discord_user?.username || 'yokaimsi'}`;
-            avatar.alt = `${userData.discord_user?.username || 'yokaimsi'}'s avatar`;
+                username.textContent = userData.discord_user?.username || 'yokaimsi';
+                discriminator.textContent = `@${userData.discord_user?.username || 'yokaimsi'}`;
+                avatar.alt = `${userData.discord_user?.username || 'yokaimsi'}'s avatar`;
 
-            updateStatus(userData.discord_status || 'offline');
-            updateCustomStatus(userData.activities || []);
-            updateActivities(userData.activities || []);
+                updateStatus(userData.discord_status || 'offline');
+                updateCustomStatus(userData.activities || []);
+                updateActivities(userData.activities || []);
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update profile';
+                showOfflineState();
+            }
         }
 
         function updateStatus(status) {
-            const statusDot = document.getElementById('statusDot');
-            const statusText = document.getElementById('statusText');
-            statusDot.className = 'status-dot';
-            switch (status) {
-                case 'online':
-                    statusText.textContent = 'Online';
-                    statusDot.classList.add('online');
-                    break;
-                case 'idle':
-                    statusText.textContent = 'Away';
-                    statusDot.classList.add('idle');
-                    break;
-                case 'dnd':
-                    statusText.textContent = 'Do Not Disturb';
-                    statusDot.classList.add('dnd');
-                    break;
-                default:
-                    statusText.textContent = 'Offline';
-                    statusDot.classList.add('offline');
-                    break;
+            try {
+                const pages = ['home', 'about', 'projects', 'skills'];
+                pages.forEach(page => {
+                    const statusDot = document.getElementById(page === 'home' ? 'statusDot' : `${page}StatusDot`);
+                    const statusText = document.getElementById(page === 'home' ? 'statusText' : `${page}StatusText`);
+                    if (statusDot && statusText) {
+                        statusDot.className = 'status-dot';
+                        switch (status) {
+                            case 'online':
+                                statusText.textContent = 'Online';
+                                statusDot.classList.add('online');
+                                break;
+                            case 'idle':
+                                statusText.textContent = 'Away';
+                                statusDot.classList.add('idle');
+                                break;
+                            case 'dnd':
+                                statusText.textContent = 'Do Not Disturb';
+                                statusDot.classList.add('dnd');
+                                break;
+                            default:
+                                statusText.textContent = 'Offline';
+                                statusDot.classList.add('offline');
+                                break;
+                        }
+                    }
+                });
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update status';
             }
         }
 
         function updateCustomStatus(activities) {
-            const customStatus = document.getElementById('customStatus');
-            const customActivity = activities.find(activity => activity.type === 4 && activity.state);
-            const unifiedCard = document.querySelector('.unified-status-card');
-            if (customActivity && customActivity.state) {
-                customStatus.textContent = customActivity.state;
-                customStatus.style.display = 'block';
-                unifiedCard.classList.add('custom-activity');
-            } else {
-                customStatus.style.display = 'none';
-                unifiedCard.classList.remove('custom-activity');
+            try {
+                const pages = ['home', 'about', 'projects', 'skills'];
+                const customActivity = activities.find(activity => activity.type === 4 && activity.state);
+                pages.forEach(page => {
+                    const customStatus = document.getElementById(page === 'home' ? 'customStatus' : `${page}CustomStatus`);
+                    const unifiedCard = document.querySelector(page === 'home' ? '.unified-status-card' : `#${page} .unified-status-card`);
+                    if (customStatus && unifiedCard) {
+                        if (customActivity && customActivity.state) {
+                            customStatus.textContent = customActivity.state;
+                            customStatus.style.display = 'block';
+                            unifiedCard.classList.add('custom-activity');
+                        } else {
+                            customStatus.style.display = 'none';
+                            unifiedCard.classList.remove('custom-activity');
+                        }
+                    }
+                });
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update custom status';
             }
         }
 
         function updateActivities(activities) {
-            const activitySection = document.getElementById('activitySection');
-            const activityHeader = document.getElementById('activityHeader');
-            const activityHeaderText = document.getElementById('activityHeaderText');
-            const activityName = document.getElementById('activityName');
-            const activityFileInfo = document.getElementById('activityFileInfo');
-            const fileTypeIcon = document.getElementById('fileTypeIcon');
-            const activityDetails = document.getElementById('activityDetails');
-            const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-            const activityState = document.getElementById('activityState');
-            const activityTimestamp = document.getElementById('activityTimestamp');
-            const unifiedCard = document.querySelector('.unified-status-card');
+            try {
+                const pages = ['home', 'about', 'projects', 'skills'];
+                const priorityActivity = activities.find(activity => activity.type === 0 || activity.type === 2);
 
-            const priorityActivity = activities.find(activity => 
-                activity.type === 0 || activity.type === 2
-            );
+                pages.forEach(page => {
+                    const activitySection = document.getElementById(page === 'home' ? 'activitySection' : `${page}ActivitySection`);
+                    const activityHeader = document.getElementById(page === 'home' ? 'activityHeader' : `${page}ActivityHeader`);
+                    const activityHeaderText = document.getElementById(page === 'home' ? 'activityHeaderText' : `${page}ActivityHeaderText`);
+                    const activityName = document.getElementById(page === 'home' ? 'activityName' : `${page}ActivityName`);
+                    const activityFileInfo = document.getElementById(page === 'home' ? 'activityFileInfo' : `${page}ActivityFileInfo`);
+                    const fileTypeIcon = document.getElementById(page === 'home' ? 'fileTypeIcon' : `${page}FileTypeIcon`);
+                    const activityDetails = document.getElementById(page === 'home' ? 'activityDetails' : `${page}ActivityDetails`);
+                    const activityDetailsNoFile = document.getElementById(page === 'home' ? 'activityDetailsNoFile' : `${page}ActivityDetailsNoFile`);
+                    const activityState = document.getElementById(page === 'home' ? 'activityState' : `${page}ActivityState`);
+                    const activityTimestamp = document.getElementById(page === 'home' ? 'activityTimestamp' : `${page}ActivityTimestamp`);
+                    const unifiedCard = document.querySelector(page === 'home' ? '.unified-status-card' : `#${page} .unified-status-card`);
 
-            if (!priorityActivity) {
-                activitySection.style.display = 'none';
-                unifiedCard.classList.remove('spotify-activity', 'game-activity');
-                return;
+                    if (!activitySection || !unifiedCard) return;
+
+                    if (!priorityActivity || !shouldShowActivity(page)) {
+                        activitySection.style.display = 'none';
+                        unifiedCard.classList.remove('spotify-activity', 'game-activity');
+                        return;
+                    }
+
+                    activitySection.style.display = 'block';
+                    unifiedCard.classList.remove('spotify-activity', 'game-activity');
+
+                    if (priorityActivity.type === 2) {
+                        unifiedCard.classList.add('spotify-activity');
+                        activityHeaderText.textContent = 'Listening to Spotify';
+                        activityHeader.querySelector('i').className = 'fab fa-spotify';
+                        activityName.textContent = priorityActivity.details || 'Unknown Track';
+                        activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
+                        activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
+                        activityFileInfo.style.display = 'none';
+                        activityTimestamp.textContent = priorityActivity.timestamps?.start 
+                            ? formatTimestamp(priorityActivity.timestamps.start) 
+                            : 'Just started';
+                    } else if (priorityActivity.type === 0) {
+                        unifiedCard.classList.add('game-activity');
+                        activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
+                        activityHeader.querySelector('i').className = 'fas fa-gamepad';
+                        activityName.textContent = priorityActivity.name || 'Unknown Activity';
+
+                        const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
+                        if (fileExtension && fileTypeIcons[fileExtension]) {
+                            const fileIcon = getFileTypeIcon(priorityActivity.details);
+                            fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
+                            fileTypeIcon.style.color = fileIcon.color;
+                            activityDetails.textContent = priorityActivity.details || '';
+                            activityFileInfo.style.display = 'flex';
+                            activityDetailsNoFile.textContent = '';
+                        } else {
+                            activityFileInfo.style.display = 'none';
+                            activityDetailsNoFile.textContent = priorityActivity.details || '';
+                        }
+
+                        activityState.textContent = priorityActivity.state || '';
+                        activityTimestamp.textContent = priorityActivity.timestamps?.start 
+                            ? formatTimestamp(priorityActivity.timestamps.start) 
+                            : 'Just started';
+                    }
+                });
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update activities';
             }
+        }
 
-            activitySection.style.display = 'block';
-            unifiedCard.classList.remove('spotify-activity', 'game-activity');
-
-            if (priorityActivity.type === 2) { // Spotify
-                unifiedCard.classList.add('spotify-activity');
-                activityHeaderText.textContent = 'Listening to Spotify';
-                activityHeader.querySelector('i').className = 'fab fa-spotify';
-                activityName.textContent = priorityActivity.details || 'Unknown Track';
-                activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
-                activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
-                activityFileInfo.style.display = 'none';
-                activityTimestamp.textContent = priorityActivity.timestamps?.start 
-                    ? formatTimestamp(priorityActivity.timestamps.start) 
-                    : 'Just started';
-            } else if (priorityActivity.type === 0) { // Game or other activity
-                unifiedCard.classList.add('game-activity');
-                activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
-                activityHeader.querySelector('i').className = 'fas fa-gamepad';
-                activityName.textContent = priorityActivity.name || 'Unknown Activity';
-
-                const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
-                if (fileExtension && fileTypeIcons[fileExtension]) {
-                    const fileIcon = getFileTypeIcon(priorityActivity.details);
-                    fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
-                    fileTypeIcon.style.color = fileIcon.color;
-                    activityDetails.textContent = priorityActivity.details || '';
-                    activityFileInfo.style.display = 'flex';
-                    activityDetailsNoFile.textContent = '';
-                } else {
-                    activityFileInfo.style.display = 'none';
-                    activityDetailsNoFile.textContent = priorityActivity.details || '';
-                }
-
-                activityState.textContent = priorityActivity.state || '';
-                activityTimestamp.textContent = priorityActivity.timestamps?.start 
-                    ? formatTimestamp(priorityActivity.timestamps.start) 
-                    : 'Just started';
+        function updateActivityVisibility(pageId) {
+            try {
+                const pages = ['home', 'about', 'projects', 'skills'];
+                pages.forEach(page => {
+                    const statusContainer = document.getElementById(page === 'home' ? 'profile' : `${page}Status`);
+                    if (statusContainer) {
+                        statusContainer.style.display = shouldShowActivity(page) ? 'block' : 'none';
+                    }
+                });
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update activity visibility';
             }
         }
 
         function startStatusRefresh() {
-            if (refreshInterval) clearInterval(refreshInterval);
-            refreshInterval = setInterval(fetchDiscordStatus, CONFIG.REFRESH_INTERVAL);
+            if 
+            (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+            refreshInterval = setInterval(() => {
+                if (!isConnected || websocket?.readyState !== WebSocket.OPEN) {
+                    fetchDiscordStatusFallback();
+                }
+            }, CONFIG.REFRESH_INTERVAL);
         }
 
-        function initialize() {
-            createParticles();
-            initNavigation();
-            disableDevTools();
-            fetchDiscordStatus().then(() => {
-                if (isConnected) startStatusRefresh();
-            });
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                createParticles();
+                initNavigation();
+                lazyLoadCards();
+                disableDevTools();
+                initWebSocket();
+                startStatusRefresh();
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to initialize page';
+            }
+        });
 
-        window.addEventListener('load', initialize);
+        window.addEventListener('beforeunload', () => {
+            if (websocket) {
+                websocket.close();
+            }
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        });
     </script>
 </body>
 </html>
