@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
     <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
-    <title>yokaimsi</title>
+    <title>Bug Hunter - yokaimsi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
@@ -31,6 +31,10 @@
             --warning-color: #faa61a;
             --error-color: #f04747;
             --offline-color: #747f8d;
+            --soft-pink: #e5989b;
+            --soft-green: #9bc4bc;
+            --soft-blue: #a3bffa;
+            --soft-black: #333333;
         }
 
         html {
@@ -114,6 +118,7 @@
             align-items: center;
             gap: 2rem;
             box-shadow: var(--neon-glow);
+            outline: none; /* Remove blue outline */
             visibility: visible;
             opacity: 1;
         }
@@ -156,7 +161,7 @@
             font-weight: 500;
             padding: 10px 20px;
             border-radius: 35px;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, transform 0.3s ease; /* Subtle hover effect */
             cursor: pointer;
             position: relative;
             z-index: 2;
@@ -171,6 +176,7 @@
 
         .nav-link:hover, .nav-link:focus {
             color: var(--text-primary);
+            transform: translateY(-2px); /* Subtle hover lift */
             outline: none;
         }
 
@@ -237,15 +243,16 @@
             outline-offset: 2px;
         }
 
-        .social-link.github:hover { background: #333; }
-        .social-link.instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .social-link.discord:hover { background: #5865f2; }
-        .social-link.linkedin:hover { background: #0077b5; }
+        .social-link.github:hover { background: var(--soft-black); }
+        .social-link.instagram:hover { background: var(--soft-pink); }
+        .social-link.discord:hover { background: var(--soft-blue); }
+        .social-link.linkedin:hover { background: var(--soft-green); }
 
         .main-content {
             margin-top: 100px;
             min-height: calc(100vh - 100px);
             padding: 0 20px;
+            transition: opacity 0.3s ease; /* Smooth page transitions */
         }
 
         .page {
@@ -272,6 +279,7 @@
             flex-direction: column;
             justify-content: center;
             padding: 20px;
+            position: relative; /* For positioning social icons */
         }
 
         .loading-container {
@@ -302,6 +310,7 @@
             font-weight: 400;
             text-transform: lowercase;
             letter-spacing: 2px;
+            display: none; /* Remove "Connecting to Discord" */
         }
 
         .profile-container {
@@ -651,6 +660,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
+            position: relative; /* For glowing animation */
         }
 
         .skill-card[data-visible="true"] {
@@ -669,12 +679,26 @@
         .skill-card i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
+            animation: glow 2s ease-in-out infinite; /* Glowing animation */
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px var(--accent-color); }
+            50% { box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-secondary); }
+            100% { box-shadow: 0 0 5px var(--accent-color); }
         }
 
         .skill-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            animation: glowText 2s ease-in-out infinite; /* Glowing text animation */
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 5px var(--accent-color); }
+            50% { text-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-secondary); }
+            100% { text-shadow: 0 0 5px var(--accent-color); }
         }
 
         .about-content {
@@ -709,6 +733,48 @@
         .nav-open .nav-links, .nav-open .social-links {
             display: flex !important;
         }
+
+        /* Social media icons in bottom corners */
+        .bottom-left-social, .bottom-right-social {
+            position: fixed;
+            bottom: 20px;
+            display: flex;
+            gap: 10px;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .bottom-left-social {
+            left: 20px;
+        }
+
+        .bottom-right-social {
+            right: 20px;
+        }
+
+        .bottom-social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: transform 0.3s ease, background 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .bottom-social-link:hover {
+            transform: translateY(-2px) scale(1.1);
+        }
+
+        .bottom-social-link.instagram { background: var(--soft-pink); }
+        .bottom-social-link.spotify { background: var(--soft-green); }
+        .bottom-social-link.discord { background: var(--soft-blue); }
+        .bottom-social-link.grok { background: var(--soft-black); }
 
         @media (max-width: 768px) {
             :root {
@@ -818,6 +884,20 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
+
+            .bottom-left-social, .bottom-right-social {
+                bottom: 10px;
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .bottom-left-social {
+                left: 10px;
+            }
+
+            .bottom-right-social {
+                right: 10px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -850,6 +930,12 @@
 
             .projects-title-new, .skills-title, .about-title {
                 font-size: 2rem;
+            }
+
+            .bottom-social-link {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
             }
         }
     </style>
@@ -891,7 +977,7 @@
             <div class="home-container">
                 <div class="loading-container" id="loading" role="status" aria-live="polite">
                     <div class="spinner" aria-hidden="true"></div>
-                    <div class="loading-text">connecting to discord...</div>
+                    <div class="loading-text"></div>
                 </div>
                 <div class="profile-container" id="profile" role="region" aria-label="Profile">
                     <div class="profile-header">
@@ -933,6 +1019,24 @@
                         </ol>
                     </div>
                     <div class="error-details" id="errorDetails" role="alert" aria-label="Error message"></div>
+                </div>
+                <!-- Bottom left social icons -->
+                <div class="bottom-left-social">
+                    <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="bottom-social-link instagram" title="Instagram" aria-label="Instagram">
+                        <i class="fab fa-instagram" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://open.spotify.com/user/yokaimsi" target="_blank" rel="noopener noreferrer" class="bottom-social-link spotify" title="Spotify" aria-label="Spotify">
+                        <i class="fab fa-spotify" aria-hidden="true"></i>
+                    </a>
+                </div>
+                <!-- Bottom right social icons -->
+                <div class="bottom-right-social">
+                    <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="bottom-social-link discord" title="Discord" aria-label="Discord">
+                        <i class="fab fa-discord" aria-hidden="true"></i>
+                    </a>
+                    <a href="https://x.ai/grok" target="_blank" rel="noopener noreferrer" class="bottom-social-link grok" title="Grok" aria-label="Grok">
+                        <i class="fab fa-x" aria-hidden="true"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -1725,8 +1829,7 @@
         }
 
         function startStatusRefresh() {
-            if 
-            (refreshInterval) {
+            if (refreshInterval) {
                 clearInterval(refreshInterval);
             }
             refreshInterval = setInterval(() => {
@@ -1736,28 +1839,25 @@
             }, CONFIG.REFRESH_INTERVAL);
         }
 
+        // Initialize the application
         document.addEventListener('DOMContentLoaded', () => {
-            try {
-                createParticles();
-                initNavigation();
-                lazyLoadCards();
-                disableDevTools();
-                initWebSocket();
-                startStatusRefresh();
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to initialize page';
-            }
-        });
+            createParticles();
+            initNavigation();
+            lazyLoadCards();
+            disableDevTools();
+            initWebSocket();
+            startStatusRefresh();
 
-        window.addEventListener('beforeunload', () => {
-            if (websocket) {
-                websocket.close();
-            }
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
+            // Handle page load and initial state
+            const initialPage = window.location.hash.replace('#', '') || 'home';
+            const initialLink = document.querySelector(`.nav-link[data-page="${initialPage}"]`);
+            if (initialLink) {
+                initialLink.click();
+            } else {
+                document.querySelector('.nav-link[data-page="home"]').click();
             }
         });
     </script>
 </body>
 </html>
+</xaiArtifact>
