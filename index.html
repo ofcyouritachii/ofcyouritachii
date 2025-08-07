@@ -31,10 +31,10 @@
             --warning-color: #faa61a;
             --error-color: #f04747;
             --offline-color: #747f8d;
-            --soft-pink: #e5989b;
-            --soft-green: #9bc4bc;
-            --soft-blue: #a3bffa;
-            --soft-black: #333333;
+            --soft-pink: #e91e63;
+            --soft-green: #4caf50;
+            --soft-blue: #2196f3;
+            --soft-gray: #9e9e9e;
         }
 
         html {
@@ -50,6 +50,7 @@
             position: relative;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            transition: all 0.3s ease;
         }
 
         body::-webkit-scrollbar {
@@ -118,9 +119,9 @@
             align-items: center;
             gap: 2rem;
             box-shadow: var(--neon-glow);
-            outline: none; /* Remove blue outline */
             visibility: visible;
             opacity: 1;
+            outline: none; /* Remove blue outline */
         }
 
         .nav-logo {
@@ -176,7 +177,7 @@
 
         .nav-link:hover, .nav-link:focus {
             color: var(--text-primary);
-            transform: translateY(-2px); /* Subtle hover lift */
+            transform: translateY(-2px); /* Subtle lift on hover */
             outline: none;
         }
 
@@ -204,6 +205,16 @@
             display: flex;
             gap: 0.5rem;
             padding: 0 8px;
+            position: fixed;
+            bottom: 20px;
+        }
+
+        .social-links.left {
+            left: 20px;
+        }
+
+        .social-links.right {
+            right: 20px;
         }
 
         .social-link {
@@ -219,6 +230,12 @@
             color: var(--text-primary);
             transition: transform 0.3s ease, background 0.3s ease;
             font-size: 1.2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .social-link::after {
@@ -243,16 +260,16 @@
             outline-offset: 2px;
         }
 
-        .social-link.github:hover { background: var(--soft-black); }
-        .social-link.instagram:hover { background: var(--soft-pink); }
-        .social-link.discord:hover { background: var(--soft-blue); }
-        .social-link.linkedin:hover { background: var(--soft-green); }
+        .social-link.instagram { background: var(--soft-pink); color: #fff; }
+        .social-link.spotify { background: var(--soft-green); color: #fff; }
+        .social-link.discord { background: var(--soft-blue); color: #fff; }
+        .social-link.grok { background: var(--soft-gray); color: #fff; }
 
         .main-content {
             margin-top: 100px;
             min-height: calc(100vh - 100px);
             padding: 0 20px;
-            transition: opacity 0.3s ease; /* Smooth page transitions */
+            transition: opacity 0.3s ease;
         }
 
         .page {
@@ -279,7 +296,6 @@
             flex-direction: column;
             justify-content: center;
             padding: 20px;
-            position: relative; /* For positioning social icons */
         }
 
         .loading-container {
@@ -310,7 +326,7 @@
             font-weight: 400;
             text-transform: lowercase;
             letter-spacing: 2px;
-            display: none; /* Remove "Connecting to Discord" */
+            display: none; /* Remove "Connecting to Discord" message */
         }
 
         .profile-container {
@@ -660,7 +676,8 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            position: relative; /* For glowing animation */
+            position: relative;
+            overflow: hidden;
         }
 
         .skill-card[data-visible="true"] {
@@ -679,26 +696,39 @@
         .skill-card i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            animation: glow 2s ease-in-out infinite; /* Glowing animation */
-        }
-
-        @keyframes glow {
-            0% { box-shadow: 0 0 5px var(--accent-color); }
-            50% { box-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-secondary); }
-            100% { box-shadow: 0 0 5px var(--accent-color); }
+            position: relative;
+            z-index: 1;
         }
 
         .skill-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            animation: glowText 2s ease-in-out infinite; /* Glowing text animation */
+            position: relative;
+            z-index: 1;
         }
 
-        @keyframes glowText {
-            0% { text-shadow: 0 0 5px var(--accent-color); }
-            50% { text-shadow: 0 0 15px var(--accent-color), 0 0 30px var(--accent-secondary); }
-            100% { text-shadow: 0 0 5px var(--accent-color); }
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
+            animation: glow 3s infinite alternate;
+            z-index: 0;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        .skill-card[data-visible="true"]::before {
+            opacity: 1;
+        }
+
+        @keyframes glow {
+            0% { transform: translate(-50%, -50%) scale(0); }
+            100% { transform: translate(-50%, -50%) scale(1.5); }
         }
 
         .about-content {
@@ -733,48 +763,6 @@
         .nav-open .nav-links, .nav-open .social-links {
             display: flex !important;
         }
-
-        /* Social media icons in bottom corners */
-        .bottom-left-social, .bottom-right-social {
-            position: fixed;
-            bottom: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 1000;
-            transition: transform 0.3s ease;
-        }
-
-        .bottom-left-social {
-            left: 20px;
-        }
-
-        .bottom-right-social {
-            right: 20px;
-        }
-
-        .bottom-social-link {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: var(--glass-bg);
-            border: 1px solid var(--glass-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: transform 0.3s ease, background 0.3s ease;
-            font-size: 1.2rem;
-        }
-
-        .bottom-social-link:hover {
-            transform: translateY(-2px) scale(1.1);
-        }
-
-        .bottom-social-link.instagram { background: var(--soft-pink); }
-        .bottom-social-link.spotify { background: var(--soft-green); }
-        .bottom-social-link.discord { background: var(--soft-blue); }
-        .bottom-social-link.grok { background: var(--soft-black); }
 
         @media (max-width: 768px) {
             :root {
@@ -828,6 +816,7 @@
                 margin-top: 1rem;
                 justify-content: center;
                 flex-wrap: wrap;
+                position: static;
             }
 
             .main-content {
@@ -884,20 +873,6 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
-            .bottom-left-social, .bottom-right-social {
-                bottom: 10px;
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .bottom-left-social {
-                left: 10px;
-            }
-
-            .bottom-right-social {
-                right: 10px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -931,12 +906,6 @@
             .projects-title-new, .skills-title, .about-title {
                 font-size: 2rem;
             }
-
-            .bottom-social-link {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
-            }
         }
     </style>
 </head>
@@ -957,27 +926,14 @@
             <li><a class="nav-link" data-page="projects" href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projects</a></li>
             <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
         </ul>
-        <div class="social-links" role="list">
-            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
-                <i class="fab fa-github" aria-hidden="true"></i>
-            </a>
-            <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
-                <i class="fab fa-instagram" aria-hidden="true"></i>
-            </a>
-            <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
-                <i class="fab fa-discord" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
-                <i class="fab fa-linkedin" aria-hidden="true"></i>
-            </a>
-        </div>
+        <div class="social-links" role="list" style="display: none;"></div> <!-- Moved to bottom corners in script -->
     </nav>
     <div class="main-content" role="main">
         <div class="page active" id="home" role="region" aria-label="Home">
             <div class="home-container">
                 <div class="loading-container" id="loading" role="status" aria-live="polite">
                     <div class="spinner" aria-hidden="true"></div>
-                    <div class="loading-text"></div>
+                    <div class="loading-text"></div> <!-- Removed "Connecting to Discord" message -->
                 </div>
                 <div class="profile-container" id="profile" role="region" aria-label="Profile">
                     <div class="profile-header">
@@ -1019,24 +975,6 @@
                         </ol>
                     </div>
                     <div class="error-details" id="errorDetails" role="alert" aria-label="Error message"></div>
-                </div>
-                <!-- Bottom left social icons -->
-                <div class="bottom-left-social">
-                    <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="bottom-social-link instagram" title="Instagram" aria-label="Instagram">
-                        <i class="fab fa-instagram" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://open.spotify.com/user/yokaimsi" target="_blank" rel="noopener noreferrer" class="bottom-social-link spotify" title="Spotify" aria-label="Spotify">
-                        <i class="fab fa-spotify" aria-hidden="true"></i>
-                    </a>
-                </div>
-                <!-- Bottom right social icons -->
-                <div class="bottom-right-social">
-                    <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="bottom-social-link discord" title="Discord" aria-label="Discord">
-                        <i class="fab fa-discord" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://x.ai/grok" target="_blank" rel="noopener noreferrer" class="bottom-social-link grok" title="Grok" aria-label="Grok">
-                        <i class="fab fa-x" aria-hidden="true"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -1839,25 +1777,72 @@
             }, CONFIG.REFRESH_INTERVAL);
         }
 
-        // Initialize the application
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            initNavigation();
-            lazyLoadCards();
-            disableDevTools();
-            initWebSocket();
-            startStatusRefresh();
+        // Add social media icons to bottom corners
+        function initSocialLinks() {
+            const socialLinks = document.querySelector('.social-links');
+            const leftLinks = ['instagram', 'spotify'];
+            const rightLinks = ['discord', 'grok'];
 
-            // Handle page load and initial state
-            const initialPage = window.location.hash.replace('#', '') || 'home';
-            const initialLink = document.querySelector(`.nav-link[data-page="${initialPage}"]`);
-            if (initialLink) {
-                initialLink.click();
-            } else {
-                document.querySelector('.nav-link[data-page="home"]').click();
+            const leftSocial = document.createElement('div');
+            leftSocial.className = 'social-links left';
+            leftLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link === 'instagram' ? 'https://instagram.com/i.g_asan' : 
+                        link === 'spotify' ? '#' : // Replace with actual Spotify link
+                        '#';
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.className = `social-link ${link}`;
+                a.title = link.charAt(0).toUpperCase() + link.slice(1);
+                a.setAttribute('aria-label', link.charAt(0).toUpperCase() + link.slice(1));
+                a.innerHTML = `<i class="fab fa-${link === 'grok' ? 'x' : link}" aria-hidden="true"></i>`;
+                leftSocial.appendChild(a);
+            });
+
+            const rightSocial = document.createElement('div');
+            rightSocial.className = 'social-links right';
+            rightLinks.forEach(link => {
+                const a = document.createElement('a');
+                a.href = link === 'discord' ? 'https://discord.com/users/1282292887878369358' : 
+                        link === 'grok' ? 'https://x.ai/grok' : 
+                        '#';
+                a.target = '_blank';
+                a.rel = 'noopener noreferrer';
+                a.className = `social-link ${link}`;
+                a.title = link.charAt(0).toUpperCase() + link.slice(1);
+                a.setAttribute('aria-label', link.charAt(0).toUpperCase() + link.slice(1));
+                a.innerHTML = `<i class="fab fa-${link === 'grok' ? 'x' : link}" aria-hidden="true"></i>`;
+                rightSocial.appendChild(a);
+            });
+
+            document.body.appendChild(leftSocial);
+            document.body.appendChild(rightSocial);
+            socialLinks.style.display = 'none'; // Hide original social links
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                createParticles();
+                initNavigation();
+                lazyLoadCards();
+                disableDevTools();
+                initWebSocket();
+                startStatusRefresh();
+                initSocialLinks(); // Initialize social links
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to initialize page';
+            }
+        });
+
+        window.addEventListener('beforeunload', () => {
+            if (websocket) {
+                websocket.close();
+            }
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
             }
         });
     </script>
 </body>
 </html>
-</xaiArtifact>
