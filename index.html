@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
     <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
-    <title>Bug Hunter - yokaimsi</title>
+    <title>yokaimsi</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
@@ -31,10 +31,6 @@
             --warning-color: #faa61a;
             --error-color: #f04747;
             --offline-color: #747f8d;
-            --soft-pink: #e91e63;
-            --soft-green: #4caf50;
-            --soft-blue: #2196f3;
-            --soft-gray: #9e9e9e;
         }
 
         html {
@@ -50,7 +46,6 @@
             position: relative;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            transition: all 0.3s ease;
         }
 
         body::-webkit-scrollbar {
@@ -121,7 +116,6 @@
             box-shadow: var(--neon-glow);
             visibility: visible;
             opacity: 1;
-            outline: none; /* Remove blue outline */
         }
 
         .nav-logo {
@@ -162,7 +156,7 @@
             font-weight: 500;
             padding: 10px 20px;
             border-radius: 35px;
-            transition: color 0.3s ease, transform 0.3s ease; /* Subtle hover effect */
+            transition: color 0.3s ease;
             cursor: pointer;
             position: relative;
             z-index: 2;
@@ -177,7 +171,6 @@
 
         .nav-link:hover, .nav-link:focus {
             color: var(--text-primary);
-            transform: translateY(-2px); /* Subtle lift on hover */
             outline: none;
         }
 
@@ -205,16 +198,6 @@
             display: flex;
             gap: 0.5rem;
             padding: 0 8px;
-            position: fixed;
-            bottom: 20px;
-        }
-
-        .social-links.left {
-            left: 20px;
-        }
-
-        .social-links.right {
-            right: 20px;
         }
 
         .social-link {
@@ -230,12 +213,6 @@
             color: var(--text-primary);
             transition: transform 0.3s ease, background 0.3s ease;
             font-size: 1.2rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
         }
 
         .social-link::after {
@@ -260,16 +237,15 @@
             outline-offset: 2px;
         }
 
-        .social-link.instagram { background: var(--soft-pink); color: #fff; }
-        .social-link.spotify { background: var(--soft-green); color: #fff; }
-        .social-link.discord { background: var(--soft-blue); color: #fff; }
-        .social-link.grok { background: var(--soft-gray); color: #fff; }
+        .social-link.github:hover { background: #333; }
+        .social-link.instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .social-link.discord:hover { background: #5865f2; }
+        .social-link.linkedin:hover { background: #0077b5; }
 
         .main-content {
             margin-top: 100px;
             min-height: calc(100vh - 100px);
             padding: 0 20px;
-            transition: opacity 0.3s ease;
         }
 
         .page {
@@ -326,7 +302,6 @@
             font-weight: 400;
             text-transform: lowercase;
             letter-spacing: 2px;
-            display: none; /* Remove "Connecting to Discord" message */
         }
 
         .profile-container {
@@ -676,8 +651,6 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            position: relative;
-            overflow: hidden;
         }
 
         .skill-card[data-visible="true"] {
@@ -696,39 +669,12 @@
         .skill-card i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
-            position: relative;
-            z-index: 1;
         }
 
         .skill-label {
             font-size: 0.9rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .skill-card::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%);
-            animation: glow 3s infinite alternate;
-            z-index: 0;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-        }
-
-        .skill-card[data-visible="true"]::before {
-            opacity: 1;
-        }
-
-        @keyframes glow {
-            0% { transform: translate(-50%, -50%) scale(0); }
-            100% { transform: translate(-50%, -50%) scale(1.5); }
         }
 
         .about-content {
@@ -816,7 +762,6 @@
                 margin-top: 1rem;
                 justify-content: center;
                 flex-wrap: wrap;
-                position: static;
             }
 
             .main-content {
@@ -926,14 +871,27 @@
             <li><a class="nav-link" data-page="projects" href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projects</a></li>
             <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
         </ul>
-        <div class="social-links" role="list" style="display: none;"></div> <!-- Moved to bottom corners in script -->
+        <div class="social-links" role="list">
+            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
+                <i class="fab fa-github" aria-hidden="true"></i>
+            </a>
+            <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
+                <i class="fab fa-instagram" aria-hidden="true"></i>
+            </a>
+            <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
+                <i class="fab fa-discord" aria-hidden="true"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
+                <i class="fab fa-linkedin" aria-hidden="true"></i>
+            </a>
+        </div>
     </nav>
     <div class="main-content" role="main">
         <div class="page active" id="home" role="region" aria-label="Home">
             <div class="home-container">
                 <div class="loading-container" id="loading" role="status" aria-live="polite">
                     <div class="spinner" aria-hidden="true"></div>
-                    <div class="loading-text"></div> <!-- Removed "Connecting to Discord" message -->
+                    <div class="loading-text">connecting to discord...</div>
                 </div>
                 <div class="profile-container" id="profile" role="region" aria-label="Profile">
                     <div class="profile-header">
@@ -1767,7 +1725,8 @@
         }
 
         function startStatusRefresh() {
-            if (refreshInterval) {
+            if 
+            (refreshInterval) {
                 clearInterval(refreshInterval);
             }
             refreshInterval = setInterval(() => {
@@ -1775,49 +1734,6 @@
                     fetchDiscordStatusFallback();
                 }
             }, CONFIG.REFRESH_INTERVAL);
-        }
-
-        // Add social media icons to bottom corners
-        function initSocialLinks() {
-            const socialLinks = document.querySelector('.social-links');
-            const leftLinks = ['instagram', 'spotify'];
-            const rightLinks = ['discord', 'grok'];
-
-            const leftSocial = document.createElement('div');
-            leftSocial.className = 'social-links left';
-            leftLinks.forEach(link => {
-                const a = document.createElement('a');
-                a.href = link === 'instagram' ? 'https://instagram.com/i.g_asan' : 
-                        link === 'spotify' ? '#' : // Replace with actual Spotify link
-                        '#';
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                a.className = `social-link ${link}`;
-                a.title = link.charAt(0).toUpperCase() + link.slice(1);
-                a.setAttribute('aria-label', link.charAt(0).toUpperCase() + link.slice(1));
-                a.innerHTML = `<i class="fab fa-${link === 'grok' ? 'x' : link}" aria-hidden="true"></i>`;
-                leftSocial.appendChild(a);
-            });
-
-            const rightSocial = document.createElement('div');
-            rightSocial.className = 'social-links right';
-            rightLinks.forEach(link => {
-                const a = document.createElement('a');
-                a.href = link === 'discord' ? 'https://discord.com/users/1282292887878369358' : 
-                        link === 'grok' ? 'https://x.ai/grok' : 
-                        '#';
-                a.target = '_blank';
-                a.rel = 'noopener noreferrer';
-                a.className = `social-link ${link}`;
-                a.title = link.charAt(0).toUpperCase() + link.slice(1);
-                a.setAttribute('aria-label', link.charAt(0).toUpperCase() + link.slice(1));
-                a.innerHTML = `<i class="fab fa-${link === 'grok' ? 'x' : link}" aria-hidden="true"></i>`;
-                rightSocial.appendChild(a);
-            });
-
-            document.body.appendChild(leftSocial);
-            document.body.appendChild(rightSocial);
-            socialLinks.style.display = 'none'; // Hide original social links
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -1828,7 +1744,6 @@
                 disableDevTools();
                 initWebSocket();
                 startStatusRefresh();
-                initSocialLinks(); // Initialize social links
             } catch (e) {
                 document.getElementById('errorDetails').style.display = 'block';
                 document.getElementById('errorDetails').textContent = 'Error: Failed to initialize page';
