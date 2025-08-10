@@ -6,6 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
     <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
     <title>yokaimsi</title>
+    <link rel="icon" href="https://cdn.imgbin.com/13/1/18/python-logo-python-programming-logo-in-black-and-white-zbhv4amq.jpg" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
     <style>
@@ -31,6 +32,8 @@
             --warning-color: #faa61a;
             --error-color: #f04747;
             --offline-color: #747f8d;
+            --nav-bg: #12121a;
+            --nav-active-bg: #1e1e2d;
         }
 
         html {
@@ -104,7 +107,7 @@
             top: 10px;
             left: 50%;
             transform: translateX(-50%);
-            background: var(--glass-bg);
+            background: var(--nav-bg);
             backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 50px;
@@ -113,9 +116,12 @@
             display: flex;
             align-items: center;
             gap: 2rem;
-            box-shadow: var(--neon-glow);
-            visibility: visible;
-            opacity: 1;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav:hover {
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
         }
 
         .nav-logo {
@@ -143,10 +149,11 @@
         .nav-links {
             display: flex;
             list-style: none;
-            background: rgba(255, 255, 255, 0.03);
+            background: var(--nav-bg);
             border-radius: 40px;
             padding: 4px;
             position: relative;
+            transition: all 0.3s ease-in-out;
         }
 
         .nav-link {
@@ -156,7 +163,7 @@
             font-weight: 500;
             padding: 10px 20px;
             border-radius: 35px;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease-in-out;
             cursor: pointer;
             position: relative;
             z-index: 2;
@@ -167,16 +174,21 @@
 
         .nav-link i {
             font-size: 0.85rem;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2);
         }
 
         .nav-link:hover, .nav-link:focus {
             color: var(--text-primary);
-            outline: none;
+            background: var(--nav-active-bg);
+            transform: translateY(-2px);
         }
 
         .nav-link:focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
+            outline: none;
         }
 
         .nav-indicator {
@@ -184,25 +196,38 @@
             top: 4px;
             left: 4px;
             height: calc(100% - 8px);
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            background: var(--nav-active-bg);
             border-radius: 35px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
         }
 
         .nav-link.active {
             color: var(--text-primary);
+            background: var(--nav-active-bg);
         }
 
         .social-links {
             display: flex;
-            gap: 0.5rem;
-            padding: 0 8px;
+            gap: 0.75rem;
+            padding: 0;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
@@ -211,30 +236,32 @@
             justify-content: center;
             text-decoration: none;
             color: var(--text-primary);
-            transition: transform 0.3s ease, background 0.3s ease;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px) scale(1.15);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .social-link::after {
             content: attr(aria-label);
             display: none;
             position: absolute;
-            bottom: -1.5rem;
-            font-size: 0.7rem;
-            color: var(--text-secondary);
+            top: -2rem;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            background: var(--nav-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: all 0.3s ease-in-out;
         }
 
         .social-link:hover::after {
             display: block;
-        }
-
-        .social-link:hover {
-            transform: translateY(-2px) scale(1.1);
-        }
-
-        .social-link:focus {
-            outline: 2px solid var(--accent-color);
-            outline-offset: 2px;
         }
 
         .social-link.github:hover { background: #333; }
@@ -706,7 +733,7 @@
             z-index: 1001;
         }
 
-        .nav-open .nav-links, .nav-open .social-links {
+        .nav-open .nav-links {
             display: flex !important;
         }
 
@@ -733,7 +760,7 @@
                 right: 10px;
             }
 
-            .nav-links, .social-links {
+            .nav-links {
                 display: none;
                 flex-direction: column;
                 width: 100%;
@@ -759,9 +786,10 @@
             }
 
             .social-links {
-                margin-top: 1rem;
-                justify-content: center;
+                position: fixed;
+                bottom: 10px;
                 flex-wrap: wrap;
+                justify-content: center;
             }
 
             .main-content {
@@ -871,21 +899,21 @@
             <li><a class="nav-link" data-page="projects" href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projects</a></li>
             <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
         </ul>
-        <div class="social-links" role="list">
-            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
-                <i class="fab fa-github" aria-hidden="true"></i>
-            </a>
-            <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
-                <i class="fab fa-instagram" aria-hidden="true"></i>
-            </a>
-            <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
-                <i class="fab fa-discord" aria-hidden="true"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
-                <i class="fab fa-linkedin" aria-hidden="true"></i>
-            </a>
-        </div>
     </nav>
+    <div class="social-links" role="list">
+        <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
+            <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
+            <i class="fab fa-discord" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+    </div>
     <div class="main-content" role="main">
         <div class="page active" id="home" role="region" aria-label="Home">
             <div class="home-container">
@@ -1725,8 +1753,7 @@
         }
 
         function startStatusRefresh() {
-            if 
-            (refreshInterval) {
+            if (refreshInterval) {
                 clearInterval(refreshInterval);
             }
             refreshInterval = setInterval(() => {
