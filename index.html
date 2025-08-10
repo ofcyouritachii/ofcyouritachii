@@ -138,12 +138,6 @@
         .nav-logo i {
             font-size: 1.5rem;
             color: var(--accent-secondary);
-            animation: logoIconSpin 5s infinite linear;
-        }
-
-        @keyframes logoIconSpin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
         }
 
         .nav-links {
@@ -329,6 +323,12 @@
 
         .profile-container {
             display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .avatar {
@@ -373,6 +373,11 @@
             max-width: 400px;
             margin-left: auto;
             margin-right: auto;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .status-indicator {
@@ -387,6 +392,7 @@
             height: 12px;
             border-radius: 50%;
             background: var(--success-color);
+            transition: background 0.3s ease;
         }
 
         .status-dot.offline { background: var(--offline-color); }
@@ -490,7 +496,7 @@
             border-radius: 12px;
             width: 100%;
             max-width: 300px;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .project-card-new[data-visible="true"] {
@@ -504,6 +510,7 @@
 
         .project-card-new:hover {
             transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .project-content-new {
@@ -520,6 +527,11 @@
         .project-icon-new {
             font-size: 1rem;
             color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        .project-card-new:hover .project-icon-new {
+            color: var(--accent-secondary);
         }
 
         .project-title-new {
@@ -548,10 +560,15 @@
             font-size: 0.7rem;
             font-weight: 500;
             border: 1px solid;
+            transition: background 0.3s ease;
         }
 
         .tech-tag-new.js { background: rgba(247, 223, 30, 0.1); color: #f7df1e; border-color: rgba(247, 223, 30, 0.3); }
         .tech-tag-new.python { background: rgba(55, 118, 171, 0.1); color: #3776ab; border-color: rgba(55, 118, 171, 0.3); }
+
+        .project-card-new:hover .tech-tag-new {
+            background: rgba(255, 255, 255, 0.1);
+        }
 
         .project-actions-new {
             display: flex;
@@ -567,7 +584,7 @@
             font-size: 0.75rem;
             font-weight: 500;
             border: 1px solid;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, background 0.3s ease;
         }
 
         .project-btn-new.github { background: rgba(51, 51, 51, 0.1); color: #ffffff; border-color: rgba(51, 51, 51, 0.3); }
@@ -575,10 +592,12 @@
 
         .project-btn-new:hover {
             transform: translateY(-1px);
+            background: var(--nav-active-bg);
         }
 
         .unified-status-card {
             border: 1px solid var(--glass-border);
+            transition: border-color 0.3s ease;
         }
 
         .unified-status-card.spotify-activity { border-color: rgba(29, 185, 84, 0.2); }
@@ -598,11 +617,21 @@
             font-size: 0.8rem;
             font-weight: 500;
             color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .activity-header:hover {
+            color: var(--accent-color);
         }
 
         .activity-header i {
             font-size: 0.9rem;
             color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-header:hover i {
+            transform: rotate(360deg);
         }
 
         .activity-content {
@@ -669,7 +698,7 @@
             font-size: 1rem;
             font-weight: 500;
             color: var(--text-primary);
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -687,11 +716,17 @@
 
         .skill-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .skill-card i {
             font-size: 2rem;
             margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .skill-card:hover i {
+            color: var(--accent-secondary);
         }
 
         .skill-label {
@@ -727,6 +762,11 @@
             padding: 2rem;
             margin-bottom: 1.5rem;
             text-align: left;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .about-content:hover {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
         }
 
         .about-content p {
@@ -734,6 +774,11 @@
             font-size: 1rem;
             line-height: 1.8;
             margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .about-content p:hover {
+            color: var(--text-primary);
         }
 
         .hamburger {
@@ -743,6 +788,11 @@
             color: var(--text-primary);
             padding: 0.5rem;
             z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: scale(1.1);
         }
 
         .nav-open .nav-links {
@@ -1286,6 +1336,7 @@
                     link.setAttribute('aria-current', 'page');
                     document.getElementById(targetPage).classList.add('active');
                     updateIndicatorPosition();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                     document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
                     if (window.innerWidth <= 768) {
                         nav.classList.remove('nav-open');
