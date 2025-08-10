@@ -210,19 +210,15 @@
 
         .social-links {
             display: flex;
-            gap: 0.75rem;
+            flex-direction: column;
+            gap: 1rem;
             padding: 0;
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1000;
             animation: slideUp 0.5s ease-out forwards;
         }
 
         @keyframes slideUp {
-            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
-            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .social-link {
@@ -704,6 +700,25 @@
             letter-spacing: 1px;
         }
 
+        .about-layout {
+            display: flex;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .about-left {
+            flex: 1;
+        }
+
+        .about-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
         .about-content {
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
@@ -711,9 +726,6 @@
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 1.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
             text-align: left;
         }
 
@@ -785,13 +797,6 @@
                 display: none;
             }
 
-            .social-links {
-                position: fixed;
-                bottom: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-
             .main-content {
                 margin-top: 120px;
                 padding: 0 15px;
@@ -845,6 +850,15 @@
             .skills-grid {
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
+            }
+
+            .about-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-links {
+                flex-direction: row;
             }
         }
 
@@ -900,20 +914,6 @@
             <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
         </ul>
     </nav>
-    <div class="social-links" role="list">
-        <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
-            <i class="fab fa-github" aria-hidden="true"></i>
-        </a>
-        <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
-            <i class="fab fa-instagram" aria-hidden="true"></i>
-        </a>
-        <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
-            <i class="fab fa-discord" aria-hidden="true"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
-            <i class="fab fa-linkedin" aria-hidden="true"></i>
-        </a>
-    </div>
     <div class="main-content" role="main">
         <div class="page active" id="home" role="region" aria-label="Home">
             <div class="home-container">
@@ -968,34 +968,29 @@
             <div class="about-container">
                 <h1 class="about-title">About Me</h1>
                 <p class="about-subtitle">A glimpse into my journey as a developer and tech enthusiast</p>
-                <div class="about-content">
-                    <p>I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</p>
-                    <p>With a strong foundation in Python, JavaScript, HTML, and CSS, I enjoy building projects that combine functionality with aesthetic design. My work focuses on creating efficient tools, engaging bots, and user-friendly web applications. I'm also proficient in various Linux distributions and version control systems like Git.</p>
-                    <p>When I'm not coding, you can find me tinkering with new frameworks, contributing to open-source projects, or engaging with the developer community on Discord and GitHub. I believe in continuous learning and sharing knowledge to inspire others.</p>
-                    <p>My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone. Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
-                </div>
-                <div class="glass-card unified-status-card" id="aboutStatus" role="region" aria-label="User status" style="display: none;">
-                    <div class="status-indicator">
-                        <span class="status-dot offline" id="aboutStatusDot" aria-hidden="true"></span>
-                        <span class="status-text" id="aboutStatusText">Offline</span>
-                    </div>
-                    <div class="custom-status" id="aboutCustomStatus"></div>
-                    <div class="activity-section" id="aboutActivitySection" role="region" aria-label="Current activity" style="display: none;">
-                        <div class="activity-header" id="aboutActivityHeader">
-                            <i class="fas fa-spinner" aria-hidden="true"></i>
-                            <span id="aboutActivityHeaderText">Loading...</span>
+                <div class="about-layout">
+                    <div class="about-left">
+                        <div class="about-content">
+                            <p>I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</p>
+                            <p>With a strong foundation in Python, JavaScript, HTML, and CSS, I enjoy building projects that combine functionality with aesthetic design. My work focuses on creating efficient tools, engaging bots, and user-friendly web applications. I'm also proficient in various Linux distributions and version control systems like Git.</p>
+                            <p>When I'm not coding, you can find me tinkering with new frameworks, contributing to open-source projects, or engaging with the developer community on Discord and GitHub. I believe in continuous learning and sharing knowledge to inspire others.</p>
+                            <p>My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone. Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
                         </div>
-                        <div class="activity-content">
-                            <div class="activity-details">
-                                <div class="activity-name" id="aboutActivityName"></div>
-                                <div class="activity-file-info" id="aboutActivityFileInfo" style="display: none;">
-                                    <i class="file-type-icon" id="aboutFileTypeIcon" aria-hidden="true"></i>
-                                    <span class="activity-details-text" id="aboutActivityDetails"></span>
-                                </div>
-                                <div class="activity-details-text" id="aboutActivityDetailsNoFile"></div>
-                                <div class="activity-state" id="aboutActivityState"></div>
-                                <div class="activity-timestamp" id="aboutActivityTimestamp"></div>
-                            </div>
+                    </div>
+                    <div class="about-right">
+                        <div class="social-links" role="list">
+                            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
+                                <i class="fab fa-discord" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1082,31 +1077,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="glass-card unified-status-card" id="projectsStatus" role="region" aria-label="User status" style="display: none;">
-                    <div class="status-indicator">
-                        <span class="status-dot offline" id="projectsStatusDot" aria-hidden="true"></span>
-                        <span class="status-text" id="projectsStatusText">Offline</span>
-                    </div>
-                    <div class="custom-status" id="projectsCustomStatus"></div>
-                    <div class="activity-section" id="projectsActivitySection" role="region" aria-label="Current activity" style="display: none;">
-                        <div class="activity-header" id="projectsActivityHeader">
-                            <i class="fas fa-spinner" aria-hidden="true"></i>
-                            <span id="projectsActivityHeaderText">Loading...</span>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-details">
-                                <div class="activity-name" id="projectsActivityName"></div>
-                                <div class="activity-file-info" id="projectsActivityFileInfo" style="display: none;">
-                                    <i class="file-type-icon" id="projectsFileTypeIcon" aria-hidden="true"></i>
-                                    <span class="activity-details-text" id="projectsActivityDetails"></span>
-                                </div>
-                                <div class="activity-details-text" id="projectsActivityDetailsNoFile"></div>
-                                <div class="activity-state" id="projectsActivityState"></div>
-                                <div class="activity-timestamp" id="projectsActivityTimestamp"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
         <div class="page" id="skills" role="region" aria-label="Skills">
@@ -1177,31 +1147,6 @@
                     <div class="skill-card" style="--skill-index: 15;" data-visible="false">
                         <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
                         <span class="skill-label">Zorin</span>
-                    </div>
-                </div>
-                <div class="glass-card unified-status-card" id="skillsStatus" role="region" aria-label="User status" style="display: none;">
-                    <div class="status-indicator">
-                        <span class="status-dot offline" id="skillsStatusDot" aria-hidden="true"></span>
-                        <span class="status-text" id="skillsStatusText">Offline</span>
-                    </div>
-                    <div class="custom-status" id="skillsCustomStatus"></div>
-                    <div class="activity-section" id="skillsActivitySection" role="region" aria-label="Current activity" style="display: none;">
-                        <div class="activity-header" id="skillsActivityHeader">
-                            <i class="fas fa-spinner" aria-hidden="true"></i>
-                            <span id="skillsActivityHeaderText">Loading...</span>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-details">
-                                <div class="activity-name" id="skillsActivityName"></div>
-                                <div class="activity-file-info" id="skillsActivityFileInfo" style="display: none;">
-                                    <i class="file-type-icon" id="skillsFileTypeIcon" aria-hidden="true"></i>
-                                    <span class="activity-details-text" id="skillsActivityDetails"></span>
-                                </div>
-                                <div class="activity-details-text" id="skillsActivityDetailsNoFile"></div>
-                                <div class="activity-state" id="skillsActivityState"></div>
-                                <div class="activity-timestamp" id="skillsActivityTimestamp"></div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1343,7 +1288,6 @@
                     link.setAttribute('aria-current', 'page');
                     document.getElementById(targetPage).classList.add('active');
                     updateIndicatorPosition();
-                    updateActivityVisibility(targetPage);
                     document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
                     if (window.innerWidth <= 768) {
                         nav.classList.remove('nav-open');
@@ -1356,7 +1300,6 @@
             window.addEventListener('resize', debounce(() => {
                 updateIndicatorPosition();
                 createParticles();
-                updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
                 if (window.innerWidth > 768) {
                     nav.classList.remove('nav-open');
                     hamburger.setAttribute('aria-expanded', 'false');
@@ -1419,7 +1362,6 @@
                     setupNotice.style.display = 'none';
                     errorDetails.style.display = 'none';
                     updateDiscordProfile(cachedData);
-                    updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
                     return;
                 }
 
@@ -1454,7 +1396,6 @@
                 setupNotice.style.display = 'none';
                 errorDetails.style.display = 'none';
                 updateDiscordProfile(data.data);
-                updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
             } catch (error) {
                 retryCount++;
                 let errorMessage = error.message || 'An unknown error occurred';
@@ -1477,7 +1418,6 @@
                     setupNotice.style.display = 'none';
                     errorDetails.style.display = 'none';
                     updateDiscordProfile(cachedData);
-                    updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
                     return;
                 }
 
@@ -1489,7 +1429,6 @@
                     setupNotice.style.display = 'block';
                 }
                 showOfflineState();
-                updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
             }
         }
 
@@ -1523,7 +1462,6 @@
                             lastFetchTime = Date.now();
                             setCachedData(data.d);
                             updateDiscordProfile(data.d);
-                            updateActivityVisibility(document.querySelector('.nav-link.active')?.getAttribute('data-page') || 'home');
                         }
                     } catch (e) {
                         errorDetails.style.display = 'block';
@@ -1610,32 +1548,29 @@
 
         function updateStatus(status) {
             try {
-                const pages = ['home', 'about', 'projects', 'skills'];
-                pages.forEach(page => {
-                    const statusDot = document.getElementById(page === 'home' ? 'statusDot' : `${page}StatusDot`);
-                    const statusText = document.getElementById(page === 'home' ? 'statusText' : `${page}StatusText`);
-                    if (statusDot && statusText) {
-                        statusDot.className = 'status-dot';
-                        switch (status) {
-                            case 'online':
-                                statusText.textContent = 'Online';
-                                statusDot.classList.add('online');
-                                break;
-                            case 'idle':
-                                statusText.textContent = 'Away';
-                                statusDot.classList.add('idle');
-                                break;
-                            case 'dnd':
-                                statusText.textContent = 'Do Not Disturb';
-                                statusDot.classList.add('dnd');
-                                break;
-                            default:
-                                statusText.textContent = 'Offline';
-                                statusDot.classList.add('offline');
-                                break;
-                        }
+                const statusDot = document.getElementById('statusDot');
+                const statusText = document.getElementById('statusText');
+                if (statusDot && statusText) {
+                    statusDot.className = 'status-dot';
+                    switch (status) {
+                        case 'online':
+                            statusText.textContent = 'Online';
+                            statusDot.classList.add('online');
+                            break;
+                        case 'idle':
+                            statusText.textContent = 'Away';
+                            statusDot.classList.add('idle');
+                            break;
+                        case 'dnd':
+                            statusText.textContent = 'Do Not Disturb';
+                            statusDot.classList.add('dnd');
+                            break;
+                        default:
+                            statusText.textContent = 'Offline';
+                            statusDot.classList.add('offline');
+                            break;
                     }
-                });
+                }
             } catch (e) {
                 document.getElementById('errorDetails').style.display = 'block';
                 document.getElementById('errorDetails').textContent = 'Error: Failed to update status';
@@ -1644,22 +1579,19 @@
 
         function updateCustomStatus(activities) {
             try {
-                const pages = ['home', 'about', 'projects', 'skills'];
-                const customActivity = activities.find(activity => activity.type === 4 && activity.state);
-                pages.forEach(page => {
-                    const customStatus = document.getElementById(page === 'home' ? 'customStatus' : `${page}CustomStatus`);
-                    const unifiedCard = document.querySelector(page === 'home' ? '.unified-status-card' : `#${page} .unified-status-card`);
-                    if (customStatus && unifiedCard) {
-                        if (customActivity && customActivity.state) {
-                            customStatus.textContent = customActivity.state;
-                            customStatus.style.display = 'block';
-                            unifiedCard.classList.add('custom-activity');
-                        } else {
-                            customStatus.style.display = 'none';
-                            unifiedCard.classList.remove('custom-activity');
-                        }
+                const customStatus = document.getElementById('customStatus');
+                const unifiedCard = document.querySelector('.unified-status-card');
+                if (customStatus && unifiedCard) {
+                    const customActivity = activities.find(activity => activity.type === 4 && activity.state);
+                    if (customActivity && customActivity.state) {
+                        customStatus.textContent = customActivity.state;
+                        customStatus.style.display = 'block';
+                        unifiedCard.classList.add('custom-activity');
+                    } else {
+                        customStatus.style.display = 'none';
+                        unifiedCard.classList.remove('custom-activity');
                     }
-                });
+                }
             } catch (e) {
                 document.getElementById('errorDetails').style.display = 'block';
                 document.getElementById('errorDetails').textContent = 'Error: Failed to update custom status';
@@ -1668,87 +1600,69 @@
 
         function updateActivities(activities) {
             try {
-                const pages = ['home', 'about', 'projects', 'skills'];
+                const activitySection = document.getElementById('activitySection');
+                const activityHeader = document.getElementById('activityHeader');
+                const activityHeaderText = document.getElementById('activityHeaderText');
+                const activityName = document.getElementById('activityName');
+                const activityFileInfo = document.getElementById('activityFileInfo');
+                const fileTypeIcon = document.getElementById('fileTypeIcon');
+                const activityDetails = document.getElementById('activityDetails');
+                const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+                const activityState = document.getElementById('activityState');
+                const activityTimestamp = document.getElementById('activityTimestamp');
+                const unifiedCard = document.querySelector('.unified-status-card');
+
+                if (!activitySection || !unifiedCard) return;
+
                 const priorityActivity = activities.find(activity => activity.type === 0 || activity.type === 2);
 
-                pages.forEach(page => {
-                    const activitySection = document.getElementById(page === 'home' ? 'activitySection' : `${page}ActivitySection`);
-                    const activityHeader = document.getElementById(page === 'home' ? 'activityHeader' : `${page}ActivityHeader`);
-                    const activityHeaderText = document.getElementById(page === 'home' ? 'activityHeaderText' : `${page}ActivityHeaderText`);
-                    const activityName = document.getElementById(page === 'home' ? 'activityName' : `${page}ActivityName`);
-                    const activityFileInfo = document.getElementById(page === 'home' ? 'activityFileInfo' : `${page}ActivityFileInfo`);
-                    const fileTypeIcon = document.getElementById(page === 'home' ? 'fileTypeIcon' : `${page}FileTypeIcon`);
-                    const activityDetails = document.getElementById(page === 'home' ? 'activityDetails' : `${page}ActivityDetails`);
-                    const activityDetailsNoFile = document.getElementById(page === 'home' ? 'activityDetailsNoFile' : `${page}ActivityDetailsNoFile`);
-                    const activityState = document.getElementById(page === 'home' ? 'activityState' : `${page}ActivityState`);
-                    const activityTimestamp = document.getElementById(page === 'home' ? 'activityTimestamp' : `${page}ActivityTimestamp`);
-                    const unifiedCard = document.querySelector(page === 'home' ? '.unified-status-card' : `#${page} .unified-status-card`);
-
-                    if (!activitySection || !unifiedCard) return;
-
-                    if (!priorityActivity || !shouldShowActivity(page)) {
-                        activitySection.style.display = 'none';
-                        unifiedCard.classList.remove('spotify-activity', 'game-activity');
-                        return;
-                    }
-
-                    activitySection.style.display = 'block';
+                if (!priorityActivity || !shouldShowActivity('home')) {
+                    activitySection.style.display = 'none';
                     unifiedCard.classList.remove('spotify-activity', 'game-activity');
+                    return;
+                }
 
-                    if (priorityActivity.type === 2) {
-                        unifiedCard.classList.add('spotify-activity');
-                        activityHeaderText.textContent = 'Listening to Spotify';
-                        activityHeader.querySelector('i').className = 'fab fa-spotify';
-                        activityName.textContent = priorityActivity.details || 'Unknown Track';
-                        activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
-                        activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
+                activitySection.style.display = 'block';
+                unifiedCard.classList.remove('spotify-activity', 'game-activity');
+
+                if (priorityActivity.type === 2) {
+                    unifiedCard.classList.add('spotify-activity');
+                    activityHeaderText.textContent = 'Listening to Spotify';
+                    activityHeader.querySelector('i').className = 'fab fa-spotify';
+                    activityName.textContent = priorityActivity.details || 'Unknown Track';
+                    activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
+                    activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
+                    activityFileInfo.style.display = 'none';
+                    activityTimestamp.textContent = priorityActivity.timestamps?.start 
+                        ? formatTimestamp(priorityActivity.timestamps.start) 
+                        : 'Just started';
+                } else if (priorityActivity.type === 0) {
+                    unifiedCard.classList.add('game-activity');
+                    activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
+                    activityHeader.querySelector('i').className = 'fas fa-gamepad';
+                    activityName.textContent = priorityActivity.name || 'Unknown Activity';
+
+                    const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
+                    if (fileExtension && fileTypeIcons[fileExtension]) {
+                        const fileIcon = getFileTypeIcon(priorityActivity.details);
+                        fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
+                        fileTypeIcon.style.color = fileIcon.color;
+                        activityDetails.textContent = priorityActivity.details || '';
+                        activityFileInfo.style.display = 'flex';
+                        activityDetailsNoFile.textContent = '';
+                    } else {
                         activityFileInfo.style.display = 'none';
-                        activityTimestamp.textContent = priorityActivity.timestamps?.start 
-                            ? formatTimestamp(priorityActivity.timestamps.start) 
-                            : 'Just started';
-                    } else if (priorityActivity.type === 0) {
-                        unifiedCard.classList.add('game-activity');
-                        activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
-                        activityHeader.querySelector('i').className = 'fas fa-gamepad';
-                        activityName.textContent = priorityActivity.name || 'Unknown Activity';
-
-                        const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
-                        if (fileExtension && fileTypeIcons[fileExtension]) {
-                            const fileIcon = getFileTypeIcon(priorityActivity.details);
-                            fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
-                            fileTypeIcon.style.color = fileIcon.color;
-                            activityDetails.textContent = priorityActivity.details || '';
-                            activityFileInfo.style.display = 'flex';
-                            activityDetailsNoFile.textContent = '';
-                        } else {
-                            activityFileInfo.style.display = 'none';
-                            activityDetailsNoFile.textContent = priorityActivity.details || '';
-                        }
-
-                        activityState.textContent = priorityActivity.state || '';
-                        activityTimestamp.textContent = priorityActivity.timestamps?.start 
-                            ? formatTimestamp(priorityActivity.timestamps.start) 
-                            : 'Just started';
+                        activityDetailsNoFile.textContent = priorityActivity.details || '';
                     }
-                });
+
+                    activityState.textContent = priorityActivity.state || '';
+                    activityTimestamp.textContent = priorityActivity.timestamps?.start 
+                        ? formatTimestamp(priorityActivity.timestamps.start) 
+                        : 'Just started';
+                }
             } catch (e) {
                 document.getElementById('errorDetails').style.display = 'block';
                 document.getElementById('errorDetails').textContent = 'Error: Failed to update activities';
-            }
-        }
-
-        function updateActivityVisibility(pageId) {
-            try {
-                const pages = ['home', 'about', 'projects', 'skills'];
-                pages.forEach(page => {
-                    const statusContainer = document.getElementById(page === 'home' ? 'profile' : `${page}Status`);
-                    if (statusContainer) {
-                        statusContainer.style.display = shouldShowActivity(page) ? 'block' : 'none';
-                    }
-                });
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to update activity visibility';
             }
         }
 
