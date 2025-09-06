@@ -1,1457 +1,1753 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
-  <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
-  <title>yokaimsi</title>
-  <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/d3/Python_icon_%28black_and_white%29.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary-bg: #0a0a0f;
-      --secondary-bg: #1a1a2e;
-      --accent-color: #00d4ff;
-      --accent-secondary: #ff006e;
-      --text-primary: #ffffff;
-      --text-secondary: #a0a0a0;
-      --glass-bg: rgba(255, 255, 255, 0.1);
-      --glass-border: rgba(255, 255, 255, 0.15);
-      --shadow-light: 0 10px 20px rgba(0, 0, 0, 0.2);
-      --shadow-dark: 0 15px 30px rgba(0, 0, 0, 0.3);
-      --success-color: #43b581;
-      --warning-color: #faa61a;
-      --error-color: #f04747;
-      --offline-color: #747f8d;
-      --nav-bg: #12121a;
-      --progress-bg: #2a2a3e;
-      --progress-fill: #00d4ff;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--primary-bg);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
-    }
-
-    body::-webkit-scrollbar {
-      display: none;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, #0a0a0f, #1a1a2e, #0a0a0f);
-      background-size: 200% 200%;
-      animation: morphGradient 15s ease-in-out infinite;
-      z-index: -2;
-      will-change: background-position;
-    }
-
-    @keyframes morphGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    .custom-cursor {
-      position: fixed;
-      width: 20px;
-      height: 20px;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.5) 0%, transparent 70%);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 10000;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease-out, opacity 0.3s ease;
-      will-change: transform;
-    }
-
-    .custom-cursor.hovered {
-      transform: translate(-50%, -50%) scale(1.5);
-      background: radial-gradient(circle, rgba(255, 0, 110, 0.5) 0%, transparent 70%);
-    }
-
-    .canvas-particles {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .nav {
-      position: fixed;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--glass-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--glass-border);
-      border-radius: 50px;
-      padding: 10px;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-      box-shadow: var(--shadow-light);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .nav:hover {
-      transform: translateX(-50%) translateY(-2px);
-      box-shadow: var(--shadow-dark);
-    }
-
-    .nav-logo {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--accent-color);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0 20px;
-    }
-
-    .nav-logo i {
-      font-size: 1.6rem;
-      color: var(--accent-secondary);
-      transition: transform 0.3s ease;
-    }
-
-    .nav-logo:hover i {
-      transform: rotate(360deg);
-    }
-
-    .nav-links {
-      display: flex;
-      list-style: none;
-      background: var(--glass-bg);
-      border-radius: 40px;
-      padding: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .nav-link {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.95rem;
-      font-weight: 500;
-      padding: 10px 20px;
-      border-radius: 35px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-link:hover, .nav-link:focus {
-      color: var(--text-primary);
-      background: var(--glass-bg);
-      transform: translateY(-2px);
-    }
-
-    .nav-link.active {
-      color: var(--text-primary);
-      background: var(--glass-bg);
-      box-shadow: var(--shadow-light);
-    }
-
-    .nav-link:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px var(--accent-color);
-    }
-
-    .hamburger {
-      display: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-primary);
-      padding: 0.5rem;
-      z-index: 1001;
-    }
-
-    .main-content {
-      margin-top: 120px;
-      padding: 0 20px;
-      min-height: calc(100vh - 120px);
-    }
-
-    .page {
-      display: none;
-      width: 100%;
-      animation: pageFadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .page.active {
-      display: block;
-    }
-
-    @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .home-container {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-      min-height: calc(100vh - 200px);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .loading-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid transparent;
-      border-top: 3px solid var(--accent-color);
-      border-right: 3px solid var(--accent-secondary);
-      border-radius: 50%;
-      animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-
-    .loading-text {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      animation: pulseText 2s ease-in-out infinite;
-    }
-
-    @keyframes pulseText {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
-
-    .profile-container {
-      display: none;
-      animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-    }
-
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin: 0 auto 1.5rem;
-      border: 2px solid var(--glass-border);
-      object-fit: cover;
-      loading: lazy;
-      transition: transform 0.3s ease;
-    }
-
-    .avatar:hover {
-      transform: scale(1.1);
-    }
-
-    .avatar.error {
-      border-color: var(--error-color);
-    }
-
-    .username {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.3rem;
-      background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .discriminator {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-      font-weight: 400;
-    }
-
-    .glass-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-      box-shadow: var(--shadow-light);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    .glass-card:hover {
-      box-shadow: var(--shadow-dark);
-      transform: translateY(-5px);
-    }
-
-    .status-indicator {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-
-    .status-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--success-color);
-      transition: background 0.3s ease;
-    }
-
-    .status-dot.offline { background: var(--offline-color); }
-    .status-dot.idle { background: var(--warning-color); }
-    .status-dot.dnd { background: var(--error-color); }
-
-    .status-text {
-      font-size: 0.95rem;
-      color: var(--text-primary);
-      text-transform: capitalize;
-    }
-
-    .custom-status {
-      font-size: 0.9rem;
-      color: var(--text-secondary);
-      margin-top: 0.5rem;
-      display: none;
-      font-style: italic;
-    }
-
-    .typewriter {
-      overflow: hidden;
-      white-space: nowrap;
-      animation: typing 3s steps(40, end) forwards;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-
-    .social-section {
-      text-align: center;
-      max-width: 700px;
-      margin: 2rem auto;
-    }
-
-    .social-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #8b5cf6, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .social-subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .social-links {
-      display: flex;
-      justify-content: center;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-    }
-
-    .social-link {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      color: var(--text-primary);
-      font-size: 1.8rem;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      transform-style: preserve-3d;
-    }
-
-    .social-link:hover {
-      transform: translateY(-5px) rotateX(10deg);
-      box-shadow: var(--shadow-dark);
-    }
-
-    .social-link::after {
-      content: attr(aria-label);
-      position: absolute;
-      top: -2.5rem;
-      font-size: 0.9rem;
-      color: var(--text-primary);
-      background: var(--glass-bg);
-      padding: 5px 10px;
-      border-radius: 5px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .social-link:hover::after {
-      opacity: 1;
-    }
-
-    .social-link.github:hover { background: #333; }
-    .social-link.instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-    .social-link.discord:hover { background: #5865f2; }
-    .social-link.linkedin:hover { background: #0077b5; }
-
-    .projects-container {
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .projects-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #8b5cf6, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .projects-subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      justify-items: center;
-    }
-
-    .project-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      width: 100%;
-      max-width: 350px;
-      padding: 1.5rem;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    .project-card[data-visible="true"] {
-      animation: floatCard 5s ease-in-out infinite;
-    }
-
-    @keyframes floatCard {
-      0%, 100% { transform: translateY(0) rotateX(0deg); }
-      50% { transform: translateY(-10px) rotateX(5deg); }
-    }
-
-    .project-card:hover {
-      transform: translateY(-10px) rotateX(10deg);
-      box-shadow: var(--shadow-dark);
-    }
-
-    .project-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-    }
-
-    .project-description {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      line-height: 1.5;
-    }
-
-    .project-actions {
-      display: flex;
-      gap: 0.75rem;
-      justify-content: center;
-      margin-top: 1rem;
-    }
-
-    .project-btn {
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid var(--glass-border);
-      color: var(--text-primary);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .project-btn:hover {
-      transform: translateY(-2px);
-      background: var(--glass-bg);
-    }
-
-    .skills-container {
-      text-align: center;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .skills-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #8b5cf6, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .skills-subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-card {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.4s ease;
-    }
-
-    .skill-card[data-visible="true"] {
-      animation: floatSkill 5s ease-in-out infinite;
-    }
-
-    @keyframes floatSkill {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    .skill-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-dark);
-    }
-
-    .skill-progress {
-      width: 80px;
-      height: 80px;
-      position: relative;
-      margin-bottom: 0.5rem;
-    }
-
-    .skill-progress svg {
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .skill-progress circle {
-      fill: none;
-      stroke-width: 8;
-      stroke-linecap: round;
-      cx: 40;
-      cy: 40;
-      r: 36;
-    }
-
-    .skill-progress .bg {
-      stroke: var(--progress-bg);
-    }
-
-    .skill-progress .fg {
-      stroke: var(--progress-fill);
-      stroke-dasharray: 226.2;
-      stroke-dashoffset: 226.2;
-      transition: stroke-dashoffset 1s ease-out;
-    }
-
-    .skill-label {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--text-primary);
-    }
-
-    .about-container {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .about-title {
-      font-size: 3rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      background: linear-gradient(135deg, #8b5cf6, #a855f7);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .about-subtitle {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .about-content {
-      background: var(--glass-bg);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--glass-border);
-      border-radius: 15px;
-      padding: 2rem;
-      box-shadow: var(--shadow-light);
-      transition: box-shadow 0.3s ease, transform 0.3s ease;
-    }
-
-    .about-content:hover {
-      box-shadow: var(--shadow-dark);
-      transform: translateY(-5px);
-    }
-
-    .about-content p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-      line-height: 1.8;
-      margin-bottom: 1rem;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .page, .project-card, .skill-card, .social-link, .nav, .nav-logo i, .custom-cursor {
-        animation: none !important;
-        transition: none !important;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav {
-        top: 10px;
-        left: 10px;
-        right: 10px;
-        transform: none;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 1rem;
-        border-radius: 20px;
-      }
-
-      .hamburger {
-        display: block;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-      }
-
-      .nav-links {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-      }
-
-      .nav-open .nav-links {
-        display: flex;
-      }
-
-      .nav-link {
-        padding: 0.8rem 1rem;
-        font-size: 1rem;
-        width: 100%;
-        text-align: center;
-        justify-content: center;
-      }
-
-      .main-content {
-        margin-top: 140px;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .social-links {
-        flex-direction: row;
-        gap: 1rem;
-      }
-
-      .social-link {
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
-      }
-
-      .username {
-        font-size: 2rem;
-      }
-
-      .avatar {
-        width: 80px;
-        height: 80px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .projects-title, .skills-title, .about-title, .social-title {
-        font-size: 2.5rem;
-      }
-
-      .social-link {
-        width: 40px;
-        height: 40px;
-        font-size: 1.2rem;
-      }
-
-      .main-content {
-        margin-top: 160px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
+    <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
+    <title>yokaimsi</title>
+    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/d3/Python_icon_%28black_and_white%29.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #0a0a0f;
+            --secondary-bg: #1a1a2e;
+            --accent-color: #00d4ff;
+            --accent-secondary: #ff006e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --neon-glow: 0 0 20px rgba(0, 212, 255, 0.3);
+            --success-color: #43b581;
+            --warning-color: #faa61a;
+            --error-color: #f04747;
+            --offline-color: #747f8d;
+            --nav-bg: #12121a;
+            --nav-active-bg: #1e1e2d;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        body::-webkit-scrollbar {
+            display: none;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 20s ease-in-out infinite;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10px, 10px) scale(1.02); }
+        }
+
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            display: var(--particles-display, block);
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) scale(1); opacity: 0; }
+            10% { opacity: 0.3; }
+            50% { transform: translateY(50vh) translateX(50px) scale(1.2); opacity: 0.5; }
+            100% { transform: translateY(-100px) translateX(100px) scale(1); opacity: 0; }
+        }
+
+        .nav {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--nav-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 8px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav:hover {
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0 16px;
+        }
+
+        .nav-logo i {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            background: var(--nav-bg);
+            border-radius: 40px;
+            padding: 4px;
+            position: relative;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 35px;
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link i {
+            font-size: 0.85rem;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .nav-link:hover i {
+            transform: scale(1.2);
+        }
+
+        .nav-link:hover, .nav-link:focus {
+            color: var(--text-primary);
+            background: var(--nav-active-bg);
+            transform: translateY(-2px);
+        }
+
+        .nav-link:focus {
+            outline: none;
+        }
+
+        .nav-indicator {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            height: calc(100% - 8px);
+            background: var(--nav-active-bg);
+            border-radius: 35px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1;
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+            background: var(--nav-active-bg);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            padding: 0;
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            transition: all 0.3s ease-in-out;
+            position: relative;
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px) scale(1.15);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .social-link::after {
+            content: attr(aria-label);
+            display: none;
+            position: absolute;
+            top: -2rem;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+            background: var(--nav-bg);
+            padding: 4px 8px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .social-link:hover::after {
+            display: block;
+        }
+
+        .social-link.github:hover { background: #333; }
+        .social-link.instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
+        .social-link.discord:hover { background: #5865f2; }
+        .social-link.linkedin:hover { background: #0077b5; }
+
+        .main-content {
+            margin-top: 100px;
+            min-height: calc(100vh - 100px);
+            padding: 0 20px;
+        }
+
+        .page {
+            display: none;
+            width: 100%;
+            animation: pageSlideIn 0.6s ease-out forwards;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes pageSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .home-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+            min-height: calc(100vh - 200px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--accent-color);
+            border-right: 2px solid var(--accent-secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-transform: lowercase;
+            letter-spacing: 2px;
+        }
+
+        .profile-container {
+            display: none;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            border: 2px solid var(--success-color);
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 15px rgba(67, 181, 129, 0.3);
+            object-fit: cover;
+            loading: lazy;
+        }
+
+        .avatar.error {
+            border-color: var(--error-color);
+        }
+
+        .username {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .discriminator {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .glass-card:hover {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--success-color);
+            transition: background 0.3s ease;
+        }
+
+        .status-dot.offline { background: var(--offline-color); }
+        .status-dot.idle { background: var(--warning-color); }
+        .status-dot.dnd { background: var(--error-color); }
+
+        .status-text {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            text-transform: capitalize;
+        }
+
+        .custom-status {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.3rem;
+            margin-bottom: 0.5rem;
+            display: none;
+            font-style: italic;
+        }
+
+        .setup-notice {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            color: #ffc107;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .setup-notice h4 {
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .setup-notice ol {
+            margin-left: 1rem;
+            line-height: 1.4;
+        }
+
+        .setup-notice a {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        .error-details {
+            background: rgba(240, 71, 71, 0.1);
+            border: 1px solid rgba(240, 71, 71, 0.3);
+            border-radius: 10px;
+            padding: 0.75rem;
+            margin-top: 0.75rem;
+            font-size: 0.8rem;
+            color: var(--error-color);
+            display: none;
+        }
+
+        .projects-container, .skills-container, .about-container {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .projects-title-new, .skills-title, .about-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .projects-subtitle-new, .skills-subtitle, .about-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .projects-grid-new {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            justify-items: center;
+            overflow: visible;
+        }
+
+        .project-card-new {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .project-card-new[data-visible="true"] {
+            animation: floatProject 4s ease-in-out infinite;
+        }
+
+        @keyframes floatProject {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .project-card-new:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .project-content-new {
+            padding: 1rem;
+        }
+
+        .project-header-new {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-icon-new {
+            font-size: 1rem;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        .project-card-new:hover .project-icon-new {
+            color: var(--accent-secondary);
+        }
+
+        .project-title-new {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .project-description-new {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+        }
+
+        .project-tech-new {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag-new {
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            border: 1px solid;
+            transition: background 0.3s ease;
+        }
+
+        .tech-tag-new.js { background: rgba(247, 223, 30, 0.1); color: #f7df1e; border-color: rgba(247, 223, 30, 0.3); }
+        .tech-tag-new.python { background: rgba(55, 118, 171, 0.1); color: #3776ab; border-color: rgba(55, 118, 171, 0.3); }
+
+        .project-card-new:hover .tech-tag-new {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .project-actions-new {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .project-btn-new {
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .project-btn-new.github { background: rgba(51, 51, 51, 0.1); color: #ffffff; border-color: rgba(51, 51, 51, 0.3); }
+        .project-btn-new.discord { background: rgba(88, 101, 242, 0.1); color: #5865f2; border-color: rgba(88, 101, 242, 0.3); }
+
+        .project-btn-new:hover {
+            transform: translateY(-1px);
+            background: var(--nav-active-bg);
+        }
+
+        .unified-status-card {
+            border: 1px solid var(--glass-border);
+            transition: border-color 0.3s ease;
+        }
+
+        .unified-status-card.spotify-activity { border-color: rgba(29, 185, 84, 0.2); }
+        .unified-status-card.game-activity { border-color: rgba(0, 212, 255, 0.2); }
+        .unified-status-card.custom-activity { border-color: rgba(255, 0, 110, 0.2); }
+
+        .activity-section {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        .activity-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .activity-header:hover {
+            color: var(--accent-color);
+        }
+
+        .activity-header i {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .activity-header:hover i {
+            transform: rotate(360deg);
+        }
+
+        .activity-content {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .activity-details {
+            flex: 1;
+            text-align: left;
+        }
+
+        .activity-name {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-file-info {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .file-type-icon {
+            font-size: 0.9rem;
+        }
+
+        .activity-details-text {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-state {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-timestamp {
+            font-size: 0.65rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .skill-card[data-visible="true"] {
+            animation: skillFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes skillFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .skill-card i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .skill-card:hover i {
+            color: var(--accent-secondary);
+        }
+
+        .skill-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .about-layout {
+            display: flex;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            align-items: flex-start;
+        }
+
+        .about-left {
+            flex: 1;
+        }
+
+        .about-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .about-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .about-content:hover {
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .about-content p:hover {
+            color: var(--text-primary);
+        }
+
+        .hamburger {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+            padding: 0.5rem;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+
+        .hamburger:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-open .nav-links {
+            display: flex !important;
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --particles-display: none;
+            }
+
+            .nav {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                transform: none;
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+                border-radius: 20px;
+            }
+
+            .hamburger {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                align-items: center;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+                background: none;
+                padding: 0;
+            }
+
+            .nav-link {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+                width: 100%;
+                text-align: center;
+                justify-content: center;
+            }
+
+            .nav-indicator {
+                display: none;
+            }
+
+            .main-content {
+                margin-top: 120px;
+                padding: 0 15px;
+            }
+
+            .home-container {
+                min-height: calc(100vh - 200px);
+            }
+
+            .username {
+                font-size: 1.8rem;
+            }
+
+            .avatar {
+                width: 100px;
+                height: 100px;
+            }
+
+            .activity-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .activity-details {
+                text-align: center;
+            }
+
+            .projects-title-new, .skills-title, .about-title {
+                font-size: 2.5rem;
+            }
+
+            .projects-grid-new {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .project-card-new, .skill-card {
+                animation: none;
+            }
+
+            .project-actions-new {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .project-btn-new {
+                width: 100%;
+                max-width: 200px;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .social-links {
+                flex-direction: row;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav {
+                padding: 0.8rem;
+            }
+
+            .nav-link {
+                font-size: 0.9rem;
+            }
+
+            .social-link {
+                width: 36px;
+                height: 36px;
+                font-size: 1rem;
+            }
+
+            .main-content {
+                margin-top: 140px;
+            }
+
+            .username {
+                font-size: 1.5rem;
+            }
+
+            .avatar {
+                width: 80px;
+                height: 80px;
+            }
+
+            .projects-title-new, .skills-title, .about-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="custom-cursor" id="customCursor"></div>
-  <canvas class="canvas-particles" id="particlesCanvas"></canvas>
-  <nav class="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav-logo">
-      <i class="fas fa-ghost" aria-hidden="true"></i>
-      yokai
-    </div>
-    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button">
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </div>
-    <ul class="nav-links" role="list">
-      <li><a class="nav-link active" data-page="home" href="#home" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
-      <li><a class="nav-link" data-page="about" href="#about"><i class="fas fa-user" aria-hidden="true"></i> About</a></li>
-      <li><a class="nav-link" data-page="projects" href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projects</a></li>
-      <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
-      <li><a class="nav-link" data-page="social" href="#social"><i class="fas fa-share-alt" aria-hidden="true"></i> Social</a></li>
-    </ul>
-  </nav>
-  <div class="main-content" role="main">
-    <div class="page active" id="home" role="region" aria-label="Home">
-      <div class="home-container">
-        <div class="loading-container" id="loading" role="status" aria-live="polite">
-          <div class="spinner" aria-hidden="true"></div>
-          <div class="loading-text">Connecting to Discord...</div>
+    <div class="particles" id="particles"></div>
+    <nav class="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-logo">
+            <i class="fas fa-ghost" aria-hidden="true"></i>
+            yokai
         </div>
-        <div class="profile-container" id="profile" role="region" aria-label="Profile">
-          <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User avatar" id="avatar" class="avatar" loading="lazy">
-          <div class="username typewriter" id="username">yokaimsi</div>
-          <div class="discriminator" id="discriminator">@yokaimsi</div>
-          <div class="glass-card unified-status-card" role="region" aria-label="User status">
-            <div class="status-indicator">
-              <span class="status-dot offline" id="statusDot" aria-hidden="true"></span>
-              <span class="status-text" id="statusText">Offline</span>
-            </div>
-            <div class="custom-status" id="customStatus"></div>
-            <div class="activity-section" id="activitySection" role="region" aria-label="Current activity" style="display: none;">
-              <div class="activity-header" id="activityHeader">
-                <i class="fas fa-spinner" aria-hidden="true"></i>
-                <span id="activityHeaderText">Loading...</span>
-              </div>
-              <div class="activity-content">
-                <div class="activity-details">
-                  <div class="activity-name" id="activityName"></div>
-                  <div class="activity-file-info" id="activityFileInfo" style="display: none;">
-                    <i class="file-type-icon" id="fileTypeIcon" aria-hidden="true"></i>
-                    <span class="activity-details-text" id="activityDetails"></span>
-                  </div>
-                  <div class="activity-details-text" id="activityDetailsNoFile"></div>
-                  <div class="activity-state" id="activityState"></div>
-                  <div class="activity-timestamp" id="activityTimestamp"></div>
+        <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button">
+            <i class="fas fa-bars" aria-hidden="true"></i>
+        </div>
+        <ul class="nav-links" role="list">
+            <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
+            <li><a class="nav-link active" data-page="home" href="#home" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
+            <li><a class="nav-link" data-page="about" href="#about"><i class="fas fa-user" aria-hidden="true"></i> About</a></li>
+            <li><a class="nav-link" data-page="projects" href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projects</a></li>
+            <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
+        </ul>
+    </nav>
+    <div class="main-content" role="main">
+        <div class="page active" id="home" role="region" aria-label="Home">
+            <div class="home-container">
+                <div class="loading-container" id="loading" role="status" aria-live="polite">
+                    <div class="spinner" aria-hidden="true"></div>
+                    <div class="loading-text">connecting to discord...</div>
                 </div>
-              </div>
+                <div class="profile-container" id="profile" role="region" aria-label="Profile">
+                    <div class="profile-header">
+                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User avatar" id="avatar" class="avatar" loading="lazy">
+                        <div class="username" id="username">yokaimsi</div>
+                        <div class="discriminator" id="discriminator">@yokaimsi</div>
+                    </div>
+                    <div class="glass-card unified-status-card" role="region" aria-label="User status">
+                        <div class="status-indicator">
+                            <span class="status-dot offline" id="statusDot" aria-hidden="true"></span>
+                            <span class="status-text" id="statusText">Offline</span>
+                        </div>
+                        <div class="custom-status" id="customStatus"></div>
+                        <div class="activity-section" id="activitySection" role="region" aria-label="Current activity" style="display: none;">
+                            <div class="activity-header" id="activityHeader">
+                                <i class="fas fa-spinner" aria-hidden="true"></i>
+                                <span id="activityHeaderText">Loading...</span>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-details">
+                                    <div class="activity-name" id="activityName"></div>
+                                    <div class="activity-file-info" id="activityFileInfo" style="display: none;">
+                                        <i class="file-type-icon" id="fileTypeIcon" aria-hidden="true"></i>
+                                        <span class="activity-details-text" id="activityDetails"></span>
+                                    </div>
+                                    <div class="activity-details-text" id="activityDetailsNoFile"></div>
+                                    <div class="activity-state" id="activityState"></div>
+                                    <div class="activity-timestamp" id="activityTimestamp"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setup-notice" id="setupNotice" style="display: none;" role="alert" aria-label="Setup instructions">
+                        <h4><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Setup Required</h4>
+                        <ol>
+                            <li>Join the <a href="https://discord.gg/lanyard" target="_blank" rel="noopener noreferrer">Lanyard Discord Server</a>.</li>
+                            <li>Enable your Discord presence in the Lanyard bot settings.</li>
+                            <li>Refresh this page after setup.</li>
+                        </ol>
+                    </div>
+                    <div class="error-details" id="errorDetails" role="alert" aria-label="Error message"></div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="page" id="about" role="region" aria-label="About">
-      <div class="about-container">
-        <h1 class="about-title">About Me</h1>
-        <p class="about-subtitle">A passionate developer creating innovative solutions</p>
-        <div class="about-content">
-          <p class="typewriter">I'm yokaimsi, a tech enthusiast with a passion for building impactful projects. My journey began with Python, and I've since expanded into web development, creating seamless and visually stunning experiences.</p>
-          <p>My focus is on combining functionality with aesthetic design, leveraging modern technologies to make the web more accessible and engaging. Let's connect to explore exciting ideas and collaborations!</p>
+        <div class="page" id="about" role="region" aria-label="About">
+            <div class="about-container">
+                <h1 class="about-title">About Me</h1>
+                <p class="about-subtitle">A glimpse into my journey as a developer and tech enthusiast</p>
+                <div class="about-layout">
+                    <div class="about-left">
+                        <div class="about-content">
+                            <p>I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</p>
+                            <p>With a strong foundation in Python, JavaScript, HTML, and CSS, I enjoy building projects that combine functionality with aesthetic design.My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone. Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
+                        </div>
+                    </div>
+                    <div class="about-right">
+                        <div class="social-links" role="list">
+                            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
+                                <i class="fab fa-instagram" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
+                                <i class="fab fa-discord" aria-hidden="true"></i>
+                            </a>
+                            <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="page" id="projects" role="region" aria-label="Projects">
-      <div class="projects-container">
-        <h1 class="projects-title">Projects</h1>
-        <p class="projects-subtitle">Explore my open-source contributions and personal projects</p>
-        <div class="projects-grid">
-          <div class="project-card" data-visible="false">
-            <div class="project-title">Python Tools N Toys</div>
-            <p class="project-description">A collection of Python scripts for various utilities and testing.</p>
-            <div class="project-actions">
-              <a href="https://github.com/yokaimsi/Python-Tools-N-Toys" target="_blank" rel="noopener noreferrer" class="project-btn">GitHub</a>
+        <div class="page" id="projects" role="region" aria-label="Projects">
+            <div class="projects-container">
+                <div class="projects-header">
+                    <h1 class="projects-title-new">Projects</h1>
+                    <p class="projects-subtitle-new">Explore my open-source contributions and personal projects.</p>
+                </div>
+                <div class="projects-grid-new">
+                    <div class="project-card-new" data-visible="false">
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="project-icon-new fas fa-code" aria-hidden="true"></i>
+                                <h3 class="project-title-new">Python Tools N Toys</h3>
+                            </div>
+                            <p class="project-description-new">A collection of Python scripts for testing, including a string search tool with memory management.</p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new python">Python</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi/Python-Tools-N-Toys" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
+                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-new" data-visible="false">
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="project-icon-new fas fa-code" aria-hidden="true"></i>
+                                <h3 class="project-title-new">ezfetch</h3>
+                            </div>
+                            <p class="project-description-new">A simple and efficient system information fetch tool.</p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new python">Python</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi/ezfetch" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
+                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-new" data-visible="false">
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="project-icon-new fab fa-discord" aria-hidden="true"></i>
+                                <h3 class="project-title-new">Bumblebee Discord Bot</h3>
+                            </div>
+                            <p class="project-description-new">A multifunctional Discord bot with moderation and custom commands.</p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new js">JS</span>
+                                <span class="tech-tag-new python">Python</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
+                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                                </a>
+                                <a href="https://discord.gg/GDxC4aYQxQ" target="_blank" rel="noopener noreferrer" class="project-btn-new discord">
+                                    <i class="fab fa-discord" aria-hidden="true"></i> Discord Server
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-new" data-visible="false">
+                        <div class="project-content-new">
+                            <div class="project-header-new">
+                                <i class="project-icon-new fab fa-discord" aria-hidden="true"></i>
+                                <h3 class="project-title-new">Discord Bots</h3>
+                            </div>
+                            <p class="project-description-new">A repository containing various Discord bot implementations.</p>
+                            <div class="project-tech-new">
+                                <span class="tech-tag-new js">JS</span>
+                                <span class="tech-tag-new python">Python</span>
+                            </div>
+                            <div class="project-actions-new">
+                                <a href="https://github.com/yokaimsi/Discord-BOTS" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
+                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="project-card" data-visible="false">
-            <div class="project-title">ezfetch</div>
-            <p class="project-description">A simple and efficient system information fetch tool.</p>
-            <div class="project-actions">
-              <a href="https://github.com/yokaimsi/ezfetch" target="_blank" rel="noopener noreferrer" class="project-btn">GitHub</a>
-            </div>
-          </div>
-          <div class="project-card" data-visible="false">
-            <div class="project-title">Bumblebee Discord Bot</div>
-            <p class="project-description">A multifunctional Discord bot with moderation and custom commands.</p>
-            <div class="project-actions">
-              <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="project-btn">GitHub</a>
-              <a href="https://discord.gg/GDxC4aYQxQ" target="_blank" rel="noopener noreferrer" class="project-btn">Discord Server</a>
-            </div>
-          </div>
         </div>
-      </div>
-    </div>
-    <div class="page" id="skills" role="region" aria-label="Skills">
-      <div class="skills-container">
-        <h1 class="skills-title">My Skills</h1>
-        <p class="skills-subtitle">Technologies and tools I'm proficient in</p>
-        <div class="skills-grid">
-          <div class="skill-card" data-visible="false">
-            <div class="skill-progress">
-              <svg>
-                <circle class="bg" cx="40" cy="40" r="36"></circle>
-                <circle class="fg" cx="40" cy="40" r="36" style="stroke-dashoffset: 45.24;"></circle>
-              </svg>
+        <div class="page" id="skills" role="region" aria-label="Skills">
+            <div class="skills-container">
+                <h1 class="skills-title">My Skills</h1>
+                <p class="skills-subtitle">A collection of technologies and tools I am proficient in.</p>
+                <div class="skills-grid">
+                    <div class="skill-card" style="--skill-index: 0;" data-visible="false">
+                        <i class="devicon-python-plain" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Python</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 1;" data-visible="false">
+                        <i class="fab fa-html5" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">HTML</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 2;" data-visible="false">
+                        <i class="fab fa-css3-alt" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">CSS</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 3;" data-visible="false">
+                        <i class="fab fa-js-square" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">JavaScript</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 4;" data-visible="false">
+                        <i class="fab fa-git-alt" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Git</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 5;" data-visible="false">
+                        <i class="fab fa-github" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">GitHub</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 6;" data-visible="false">
+                        <i class="devicon-vscode-plain" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">VSCode</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 7;" data-visible="false">
+                        <i class="fas fa-flask" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Flask</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 8;" data-visible="false">
+                        <i class="devicon-sqlite-plain" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">SQLite</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 9;" data-visible="false">
+                        <i class="fas fa-cloud" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Vercel</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 10;" data-visible="false">
+                        <i class="fab fa-windows" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Windows</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 11;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Kali Linux</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 12;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Linux Mint</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 13;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Parrot</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 14;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Ubuntu</span>
+                    </div>
+                    <div class="skill-card" style="--skill-index: 15;" data-visible="false">
+                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
+                        <span class="skill-label">Zorin</span>
+                    </div>
+                </div>
             </div>
-            <span class="skill-label">Python</span>
-          </div>
-          <div class="skill-card" data-visible="false">
-            <div class="skill-progress">
-              <svg>
-                <circle class="bg" cx="40" cy="40" r="36"></circle>
-                <circle class="fg" cx="40" cy="40" r="36" style="stroke-dashoffset: 67.86;"></circle>
-              </svg>
-            </div>
-            <span class="skill-label">HTML</span>
-          </div>
-          <div class="skill-card" data-visible="false">
-            <div class="skill-progress">
-              <svg>
-                <circle class="bg" cx="40" cy="40" r="36"></circle>
-                <circle class="fg" cx="40" cy="40" r="36" style="stroke-dashoffset: 90.48;"></circle>
-              </svg>
-            </div>
-            <span class="skill-label">CSS</span>
-          </div>
-          <div class="skill-card" data-visible="false">
-            <div class="skill-progress">
-              <svg>
-                <circle class="bg" cx="40" cy="40" r="36"></circle>
-                <circle class="fg" cx="40" cy="40" r="36" style="stroke-dashoffset: 56.55;"></circle>
-              </svg>
-            </div>
-            <span class="skill-label">JavaScript</span>
-          </div>
         </div>
-      </div>
     </div>
-    <div class="page" id="social" role="region" aria-label="Social">
-      <div class="social-section">
-        <h1 class="social-title">Connect With Me</h1>
-        <p class="social-subtitle">Find me on social platforms</p>
-        <div class="social-links" role="list">
-          <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
-            <i class="fab fa-github" aria-hidden="true"></i>
-          </a>
-          <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
-            <i class="fab fa-instagram" aria-hidden="true"></i>
-          </a>
-          <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
-            <i class="fab fa-discord" aria-hidden="true"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
-            <i class="fab fa-linkedin" aria-hidden="true"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <script>
-    const CONFIG = {
-      DISCORD_USER_ID: '1282292887878369358',
-      LANYARD_WS_URL: 'wss://api.lanyard.rest/socket',
-      LANYARD_HTTP_URL: 'https://api.lanyard.rest/v1/users/',
-      RETRY_ATTEMPTS: 3,
-      RETRY_DELAY: 3000,
-      REFRESH_INTERVAL: 30000,
-      TIMEOUT: 15000,
-      FALLBACK_AVATAR: 'https://cdn.discordapp.com/embed/avatars/0.png',
-      CACHE_KEY: 'discord_status_cache',
-      CACHE_EXPIRY: 30000
-    };
-
-    let retryCount = 0;
-    let refreshInterval = null;
-    let isConnected = false;
-    let lastFetchTime = 0;
-    let websocket = null;
-    let wsRetryCount = 0;
-
-    const fileTypeIcons = {
-      'html': { icon: 'fab fa-html5', color: '#e34c26' },
-      'css': { icon: 'fab fa-css3-alt', color: '#1572b6' },
-      'js': { icon: 'fab fa-js-square', color: '#f7df1e' },
-      'py': { icon: 'fab fa-python', color: '#3776ab' },
-      'default': { icon: 'fas fa-file', color: '#6c757d' }
-    };
-
-    function debounce(func, wait) {
-      let timeout;
-      return function (...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-      };
-    }
-
-    function throttle(func, limit) {
-      let inThrottle;
-      return function (...args) {
-        if (!inThrottle) {
-          func.apply(this, args);
-          inThrottle = true;
-          setTimeout(() => inThrottle = false, limit);
-        }
-      };
-    }
-
-    function safeImageLoad(img, src, fallback) {
-      return new Promise((resolve) => {
-        const tempImg = new Image();
-        tempImg.onload = () => {
-          img.src = src;
-          resolve(true);
+    <script>
+        const CONFIG = {
+            DISCORD_USER_ID: '1282292887878369358',
+            LANYARD_WS_URL: 'wss://api.lanyard.rest/socket',
+            LANYARD_HTTP_URL: 'https://api.lanyard.rest/v1/users/',
+            RETRY_ATTEMPTS: 3,
+            RETRY_DELAY: 3000,
+            REFRESH_INTERVAL: 30000,
+            TIMEOUT: 15000,
+            FALLBACK_AVATAR: 'https://cdn.discordapp.com/embed/avatars/0.png',
+            CACHE_KEY: 'discord_status_cache',
+            CACHE_EXPIRY: 30000
         };
-        tempImg.onerror = () => {
-          img.src = fallback;
-          resolve(false);
+
+        let retryCount = 0;
+        let refreshInterval = null;
+        let isConnected = false;
+        let lastFetchTime = 0;
+        let websocket = null;
+        let wsRetryCount = 0;
+
+        const fileTypeIcons = {
+            'html': { icon: 'fab fa-html5', color: '#e34c26' },
+            'css': { icon: 'fab fa-css3-alt', color: '#1572b6' },
+            'js': { icon: 'fab fa-js-square', color: '#f7df1e' },
+            'py': { icon: 'fab fa-python', color: '#3776ab' },
+            'default': { icon: 'fas fa-file', color: '#6c757d' }
         };
-        tempImg.src = src;
-      });
-    }
 
-    function formatTimestamp(timestamp) {
-      if (!timestamp) return 'Just started';
-      const now = Date.now();
-      const elapsed = now - timestamp;
-      const minutes = Math.floor(elapsed / 60000);
-      const hours = Math.floor(minutes / 60);
-      return hours > 0 ? `${hours}h ${minutes % 60}m` : `${minutes}m`;
-    }
-
-    function getFileTypeIcon(filename) {
-      const extension = filename?.split('.').pop()?.toLowerCase() || 'default';
-      return fileTypeIcons[extension] || fileTypeIcons.default;
-    }
-
-    function initParticles() {
-      const canvas = document.getElementById('particlesCanvas');
-      const ctx = canvas.getContext('2d');
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-
-      const particles = [];
-      const particleCount = window.innerWidth > 768 ? 50 : 20;
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 2,
-          vy: (Math.random() - 0.5) * 2,
-          radius: Math.random() * 2 + 1,
-          opacity: Math.random() * 0.3 + 0.1
-        });
-      }
-
-      let mouseX = 0, mouseY = 0;
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(particle => {
-          particle.x += particle.vx;
-          particle.y += particle.vy;
-
-          if (particle.x < 0 || particle.x > canvas.width) particle.vx *= -1;
-          if (particle.y < 0 || particle.y > canvas.height) particle.vy *= -1;
-
-          const dx = particle.x - mouseX;
-          const dy = particle.y - mouseY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 100) {
-            particle.vx += dx * 0.01;
-            particle.vy += dy * 0.01;
-          }
-
-          ctx.beginPath();
-          ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(0, 212, 255, ${particle.opacity})`;
-          ctx.fill();
-        });
-        requestAnimationFrame(animateParticles);
-      }
-
-      window.addEventListener('resize', () => {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-      });
-
-      animateParticles();
-    }
-
-    function initCustomCursor() {
-      const cursor = document.getElementById('customCursor');
-      let mouseX = 0, mouseY = 0;
-      let cursorX = 0, cursorY = 0;
-      const speed = 0.2;
-
-      document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-      });
-
-      function updateCursor() {
-        cursorX += (mouseX - cursorX) * speed;
-        cursorY += (mouseY - cursorY) * speed;
-        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px)`;
-        requestAnimationFrame(updateCursor);
-      }
-
-      document.querySelectorAll('.social-link, .project-btn, .nav-link').forEach(el => {
-        el.addEventListener('mouseenter', () => cursor.classList.add('hovered'));
-        el.addEventListener('mouseleave', () => cursor.classList.remove('hovered'));
-      });
-
-      updateCursor();
-    }
-
-    function initNavigation() {
-      const nav = document.querySelector('.nav');
-      const hamburger = document.getElementById('hamburger');
-      const navLinks = document.querySelectorAll('.nav-link');
-      const pages = document.querySelectorAll('.page');
-
-      nav.style.visibility = 'visible';
-      nav.style.opacity = '1';
-
-      hamburger.addEventListener('click', () => {
-        nav.classList.toggle('nav-open');
-        hamburger.setAttribute('aria-expanded', nav.classList.contains('nav-open'));
-        hamburger.querySelector('i').className = nav.classList.contains('nav-open') ? 'fas fa-times' : 'fas fa-bars';
-      });
-
-      navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const targetPage = link.getAttribute('data-page');
-          navLinks.forEach(nl => {
-            nl.classList.remove('active');
-            nl.removeAttribute('aria-current');
-          });
-          pages.forEach(page => page.classList.remove('active'));
-          link.classList.add('active');
-          link.setAttribute('aria-current', 'page');
-          document.getElementById(targetPage).classList.add('active');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          if (window.innerWidth <= 768) {
-            nav.classList.remove('nav-open');
-            hamburger.setAttribute('aria-expanded', 'false');
-            hamburger.querySelector('i').className = 'fas fa-bars';
-          }
-        });
-      });
-
-      window.addEventListener('resize', debounce(() => {
-        if (window.innerWidth > 768) {
-          nav.classList.remove('nav-open');
-          hamburger.setAttribute('aria-expanded', 'false');
-          hamburger.querySelector('i').className = 'fas fa-bars';
-        }
-      }, 100));
-    }
-
-    function initScrollAnimations() {
-      const cards = document.querySelectorAll('.project-card, .skill-card');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          entry.target.setAttribute('data-visible', entry.isIntersecting);
-        });
-      }, { threshold: 0.2 });
-      cards.forEach(card => observer.observe(card));
-    }
-
-    function getCachedData() {
-      const cached = localStorage.getItem(CONFIG.CACHE_KEY);
-      if (!cached) return null;
-      const { data, timestamp } = JSON.parse(cached);
-      if (Date.now() - timestamp < CONFIG.CACHE_EXPIRY) {
-        return data;
-      }
-      localStorage.removeItem(CONFIG.CACHE_KEY);
-      return null;
-    }
-
-    function setCachedData(data) {
-      localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({
-        data,
-        timestamp: Date.now()
-      }));
-    }
-
-    async function fetchDiscordStatusFallback() {
-      const loadingContainer = document.getElementById('loading');
-      const profileContainer = document.getElementById('profile');
-      const errorDetails = document.getElementById('errorDetails');
-
-      try {
-        const cachedData = getCachedData();
-        if (cachedData && Date.now() - lastFetchTime < CONFIG.REFRESH_INTERVAL) {
-          isConnected = true;
-          loadingContainer.style.display = 'none';
-          profileContainer.style.display = 'block';
-          updateDiscordProfile(cachedData);
-          return;
+        function debounce(func, wait) {
+            let timeout;
+            return function (...args) {
+                clearTimeout(timeout);
+                timeout = setTimeout(() => func.apply(this, args), wait);
+            };
         }
 
-        loadingContainer.style.display = 'flex';
-        profileContainer.style.display = 'none';
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
-        const response = await fetch(`${CONFIG.LANYARD_HTTP_URL}${CONFIG.DISCORD_USER_ID}`, {
-          signal: controller.signal,
-          headers: { 'Accept': 'application/json' }
-        });
-        clearTimeout(timeoutId);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
+        function throttle(func, limit) {
+            let inThrottle;
+            return function (...args) {
+                if (!inThrottle) {
+                    func.apply(this, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            };
         }
 
-        const data = await response.json();
-        if (!data.success) {
-          throw new Error(data.error?.message || 'Unknown Lanyard API error');
+        function safeImageLoad(img, src, fallback) {
+            return new Promise((resolve) => {
+                const tempImg = new Image();
+                tempImg.onload = () => {
+                    img.src = src;
+                    resolve(true);
+                };
+                tempImg.onerror = () => {
+                    img.src = fallback;
+                    resolve(false);
+                };
+                tempImg.src = src;
+            });
         }
 
-        isConnected = true;
-        retryCount = 0;
-        lastFetchTime = Date.now();
-        setCachedData(data.data);
-        loadingContainer.style.display = 'none';
-        profileContainer.style.display = 'block';
-        updateDiscordProfile(data.data);
-      } catch (error) {
-        retryCount++;
-        if (retryCount < CONFIG.RETRY_ATTEMPTS) {
-          setTimeout(fetchDiscordStatusFallback, CONFIG.RETRY_DELAY);
-          return;
+        function formatTimestamp(timestamp) {
+            if (!timestamp) return 'Just started';
+            const now = Date.now();
+            const elapsed = now - timestamp;
+            const minutes = Math.floor(elapsed / 60000);
+            const hours = Math.floor(minutes / 60);
+            return hours > 0 ? `${hours}h ${minutes % 60}m elapsed` : `${minutes}m elapsed`;
         }
 
-        const cachedData = getCachedData();
-        if (cachedData) {
-          isConnected = true;
-          loadingContainer.style.display = 'none';
-          profileContainer.style.display = 'block';
-          updateDiscordProfile(cachedData);
-          return;
+        function getFileTypeIcon(filename) {
+            const extension = filename?.split('.').pop()?.toLowerCase() || 'default';
+            return fileTypeIcons[extension] || fileTypeIcons.default;
         }
 
-        loadingContainer.style.display = 'none';
-        profileContainer.style.display = 'block';
-        showOfflineState();
-      }
-    }
-
-    function initWebSocket() {
-      try {
-        websocket = new WebSocket(CONFIG.LANYARD_WS_URL);
-        const loadingContainer = document.getElementById('loading');
-        const profileContainer = document.getElementById('profile');
-
-        websocket.onopen = () => {
-          wsRetryCount = 0;
-          isConnected = true;
-          loadingContainer.style.display = 'none';
-          profileContainer.style.display = 'block';
-          websocket.send(JSON.stringify({ op: 2, d: { subscribe_to_id: CONFIG.DISCORD_USER_ID } }));
-          setInterval(() => {
-            if (websocket.readyState === WebSocket.OPEN) {
-              websocket.send(JSON.stringify({ op: 3 }));
+        function createParticles() {
+            if (window.innerWidth <= 768) return;
+            const particlesContainer = document.getElementById('particles');
+            particlesContainer.innerHTML = '';
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
             }
-          }, 30000);
-        };
+        }
 
-        websocket.onmessage = (event) => {
-          try {
-            const data = JSON.parse(event.data);
-            if (data.op === 0 && data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
-              lastFetchTime = Date.now();
-              setCachedData(data.d);
-              updateDiscordProfile(data.d);
+        function shouldShowActivity(pageId) {
+            return window.innerWidth > 768 || pageId === 'home';
+        }
+
+        function initNavigation() {
+            const nav = document.querySelector('.nav');
+            const hamburger = document.getElementById('hamburger');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const pages = document.querySelectorAll('.page');
+            const indicator = document.getElementById('navIndicator');
+
+            nav.style.visibility = 'visible';
+            nav.style.opacity = '1';
+
+            function updateIndicatorPosition() {
+                if (window.innerWidth > 768) {
+                    const activeLink = document.querySelector('.nav-link.active');
+                    if (activeLink) {
+                        const left = activeLink.offsetLeft;
+                        const width = activeLink.offsetWidth;
+                        indicator.style.left = left + 'px';
+                        indicator.style.width = width + 'px';
+                    }
+                }
             }
-          } catch (e) {
-            console.error('WebSocket parse error:', e);
-          }
-        };
 
-        websocket.onerror = () => {
-          wsRetryCount++;
-          if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
-            setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
-          } else {
-            fetchDiscordStatusFallback();
-          }
-        };
+            hamburger.addEventListener('click', () => {
+                nav.classList.toggle('nav-open');
+                hamburger.setAttribute('aria-expanded', nav.classList.contains('nav-open'));
+                hamburger.querySelector('i').className = nav.classList.contains('nav-open') ? 'fas fa-times' : 'fas fa-bars';
+            });
 
-        websocket.onclose = () => {
-          wsRetryCount++;
-          if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
-            setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
-          } else {
-            fetchDiscordStatusFallback();
-          }
-        };
-      } catch (e) {
-        fetchDiscordStatusFallback();
-      }
-    }
+            navLinks.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetPage = link.getAttribute('data-page');
+                    navLinks.forEach(nl => {
+                        nl.classList.remove('active');
+                        nl.removeAttribute('aria-current');
+                    });
+                    pages.forEach(page => page.classList.remove('active'));
+                    link.classList.add('active');
+                    link.setAttribute('aria-current', 'page');
+                    document.getElementById(targetPage).classList.add('active');
+                    updateIndicatorPosition();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
+                    if (window.innerWidth <= 768) {
+                        nav.classList.remove('nav-open');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        hamburger.querySelector('i').className = 'fas fa-bars';
+                    }
+                });
+            });
 
-    function showOfflineState() {
-      const avatar = document.getElementById('avatar');
-      const username = document.getElementById('username');
-      const discriminator = document.getElementById('discriminator');
+            window.addEventListener('resize', debounce(() => {
+                updateIndicatorPosition();
+                createParticles();
+                if (window.innerWidth > 768) {
+                    nav.classList.remove('nav-open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    hamburger.querySelector('i').className = 'fas fa-bars';
+                }
+            }, 100));
 
-      safeImageLoad(avatar, CONFIG.FALLBACK_AVATAR, CONFIG.FALLBACK_AVATAR).then((success) => {
-        avatar.classList.toggle('error', !success);
-      });
-
-      username.textContent = 'yokaimsi';
-      discriminator.textContent = '@yokaimsi';
-      avatar.alt = 'yokaimsi\'s avatar';
-      updateStatus('offline');
-      updateCustomStatus([]);
-      updateActivities([]);
-    }
-
-    function updateDiscordProfile(userData) {
-      const avatar = document.getElementById('avatar');
-      const username = document.getElementById('username');
-      const discriminator = document.getElementById('discriminator');
-      const avatarUrl = userData.discord_user?.avatar
-        ? `https://cdn.discordapp.com/avatars/${CONFIG.DISCORD_USER_ID}/${userData.discord_user.avatar}.png?size=128`
-        : CONFIG.FALLBACK_AVATAR;
-
-      safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR).then((success) => {
-        avatar.classList.toggle('error', !success);
-      });
-
-      username.textContent = userData.discord_user?.username || 'yokaimsi';
-      discriminator.textContent = `@${userData.discord_user?.username || 'yokaimsi'}`;
-      avatar.alt = `${userData.discord_user?.username || 'yokaimsi'}'s avatar`;
-
-      updateStatus(userData.discord_status || 'offline');
-      updateCustomStatus(userData.activities || []);
-      updateActivities(userData.activities || []);
-    }
-
-    function updateStatus(status) {
-      const statusDot = document.getElementById('statusDot');
-      const statusText = document.getElementById('statusText');
-      if (statusDot && statusText) {
-        statusDot.className = 'status-dot';
-        switch (status) {
-          case 'online':
-            statusText.textContent = 'Online';
-            statusDot.classList.add('online');
-            break;
-          case 'idle':
-            statusText.textContent = 'Away';
-            statusDot.classList.add('idle');
-            break;
-          case 'dnd':
-            statusText.textContent = 'Do Not Disturb';
-            statusDot.classList.add('dnd');
-            break;
-          default:
-            statusText.textContent = 'Offline';
-            statusDot.classList.add('offline');
-            break;
-        }
-      }
-    }
-
-    function updateCustomStatus(activities) {
-      const customStatus = document.getElementById('customStatus');
-      const unifiedCard = document.querySelector('.unified-status-card');
-      if (customStatus && unifiedCard) {
-        const customActivity = activities.find(activity => activity.type === 4 && activity.state);
-        if (customActivity && customActivity.state) {
-          customStatus.textContent = customActivity.state;
-          customStatus.style.display = 'block';
-          unifiedCard.classList.add('custom-activity');
-        } else {
-          customStatus.style.display = 'none';
-          unifiedCard.classList.remove('custom-activity');
-        }
-      }
-    }
-
-    function updateActivities(activities) {
-      const activitySection = document.getElementById('activitySection');
-      const activityHeader = document.getElementById('activityHeader');
-      const activityHeaderText = document.getElementById('activityHeaderText');
-      const activityName = document.getElementById('activityName');
-      const activityFileInfo = document.getElementById('activityFileInfo');
-      const fileTypeIcon = document.getElementById('fileTypeIcon');
-      const activityDetails = document.getElementById('activityDetails');
-      const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-      const activityState = document.getElementById('activityState');
-      const activityTimestamp = document.getElementById('activityTimestamp');
-      const unifiedCard = document.querySelector('.unified-status-card');
-
-      if (!activitySection || !unifiedCard) return;
-
-      const priorityActivity = activities.find(activity => activity.type === 0 || activity.type === 2);
-
-      if (!priorityActivity) {
-        activitySection.style.display = 'none';
-        unifiedCard.classList.remove('spotify-activity', 'game-activity');
-        return;
-      }
-
-      activitySection.style.display = 'block';
-      unifiedCard.classList.remove('spotify-activity', 'game-activity');
-
-      if (priorityActivity.type === 2) {
-        unifiedCard.classList.add('spotify-activity');
-        activityHeaderText.textContent = 'Listening to Spotify';
-        activityHeader.querySelector('i').className = 'fab fa-spotify';
-        activityName.textContent = priorityActivity.details || 'Unknown Track';
-        activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
-        activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
-        activityFileInfo.style.display = 'none';
-        activityTimestamp.textContent = priorityActivity.timestamps?.start
-          ? formatTimestamp(priorityActivity.timestamps.start)
-          : 'Just started';
-      } else if (priorityActivity.type === 0) {
-        unifiedCard.classList.add('game-activity');
-        activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
-        activityHeader.querySelector('i').className = 'fas fa-gamepad';
-        activityName.textContent = priorityActivity.name || 'Unknown Activity';
-
-        const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
-        if (fileExtension && fileTypeIcons[fileExtension]) {
-          const fileIcon = getFileTypeIcon(priorityActivity.details);
-          fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
-          fileTypeIcon.style.color = fileIcon.color;
-          activityDetails.textContent = priorityActivity.details || '';
-          activityFileInfo.style.display = 'flex';
-          activityDetailsNoFile.textContent = '';
-        } else {
-          activityFileInfo.style.display = 'none';
-          activityDetailsNoFile.textContent = priorityActivity.details || '';
+            updateIndicatorPosition();
         }
 
-        activityState.textContent = priorityActivity.state || '';
-        activityTimestamp.textContent = priorityActivity.timestamps?.start
-          ? formatTimestamp(priorityActivity.timestamps.start)
-          : 'Just started';
-      }
-    }
-
-    function startStatusRefresh() {
-      if (refreshInterval) {
-        clearInterval(refreshInterval);
-      }
-      refreshInterval = setInterval(() => {
-        if (!isConnected || websocket?.readyState !== WebSocket.OPEN) {
-          fetchDiscordStatusFallback();
+        function lazyLoadCards() {
+            const cards = document.querySelectorAll('.project-card-new, .skill-card');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    entry.target.setAttribute('data-visible', entry.isIntersecting);
+                });
+            }, { threshold: 0.1 });
+            cards.forEach(card => observer.observe(card));
         }
-      }, CONFIG.REFRESH_INTERVAL);
-    }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      initParticles();
-      initCustomCursor();
-      initNavigation();
-      initScrollAnimations();
-      initWebSocket();
-      startStatusRefresh();
-    });
+        function disableDevTools() {
+            document.addEventListener('contextmenu', (e) => e.preventDefault());
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u')) {
+                    e.preventDefault();
+                }
+            });
+        }
 
-    window.addEventListener('beforeunload', () => {
-      if (websocket) websocket.close();
-      if (refreshInterval) clearInterval(refreshInterval);
-    });
-  </script>
+        function getCachedData() {
+            const cached = localStorage.getItem(CONFIG.CACHE_KEY);
+            if (!cached) return null;
+            const { data, timestamp } = JSON.parse(cached);
+            if (Date.now() - timestamp < CONFIG.CACHE_EXPIRY) {
+                return data;
+            }
+            localStorage.removeItem(CONFIG.CACHE_KEY);
+            return null;
+        }
+
+        function setCachedData(data) {
+            localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({
+                data,
+                timestamp: Date.now()
+            }));
+        }
+
+        async function fetchDiscordStatusFallback() {
+            const loadingContainer = document.getElementById('loading');
+            const profileContainer = document.getElementById('profile');
+            const errorDetails = document.getElementById('errorDetails');
+            const setupNotice = document.getElementById('setupNotice');
+
+            try {
+                const cachedData = getCachedData();
+                if (cachedData && Date.now() - lastFetchTime < CONFIG.REFRESH_INTERVAL) {
+                    isConnected = true;
+                    loadingContainer.style.display = 'none';
+                    profileContainer.style.display = 'block';
+                    setupNotice.style.display = 'none';
+                    errorDetails.style.display = 'none';
+                    updateDiscordProfile(cachedData);
+                    return;
+                }
+
+                loadingContainer.style.display = 'flex';
+                profileContainer.style.display = 'none';
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
+                const response = await fetch(`${CONFIG.LANYARD_HTTP_URL}${CONFIG.DISCORD_USER_ID}`, {
+                    signal: controller.signal,
+                    headers: { 'Accept': 'application/json' }
+                });
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        throw new Error('User not found. Ensure the Discord user ID is registered with Lanyard.');
+                    }
+                    throw new Error(`HTTP error: ${response.status} ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                if (!data.success) {
+                    throw new Error(data.error?.message || 'Unknown Lanyard API error');
+                }
+
+                isConnected = true;
+                retryCount = 0;
+                lastFetchTime = Date.now();
+                setCachedData(data.data);
+                loadingContainer.style.display = 'none';
+                profileContainer.style.display = 'block';
+                setupNotice.style.display = 'none';
+                errorDetails.style.display = 'none';
+                updateDiscordProfile(data.data);
+            } catch (error) {
+                retryCount++;
+                let errorMessage = error.message || 'An unknown error occurred';
+                if (error.name === 'AbortError') {
+                    errorMessage = 'Request timed out';
+                } else if (error.message.includes('Failed to fetch')) {
+                    errorMessage = 'Network error: Failed to connect to Lanyard API';
+                }
+
+                if (retryCount < CONFIG.RETRY_ATTEMPTS) {
+                    setTimeout(fetchDiscordStatusFallback, CONFIG.RETRY_DELAY);
+                    return;
+                }
+
+                const cachedData = getCachedData();
+                if (cachedData) {
+                    isConnected = true;
+                    loadingContainer.style.display = 'none';
+                    profileContainer.style.display = 'block';
+                    setupNotice.style.display = 'none';
+                    errorDetails.style.display = 'none';
+                    updateDiscordProfile(cachedData);
+                    return;
+                }
+
+                loadingContainer.style.display = 'none';
+                profileContainer.style.display = 'block';
+                errorDetails.style.display = 'block';
+                errorDetails.textContent = `Error: ${errorMessage}`;
+                if (errorMessage.includes('User not found')) {
+                    setupNotice.style.display = 'block';
+                }
+                showOfflineState();
+            }
+        }
+
+        function initWebSocket() {
+            try {
+                websocket = new WebSocket(CONFIG.LANYARD_WS_URL);
+                const loadingContainer = document.getElementById('loading');
+                const profileContainer = document.getElementById('profile');
+                const errorDetails = document.getElementById('errorDetails');
+                const setupNotice = document.getElementById('setupNotice');
+
+                websocket.onopen = () => {
+                    wsRetryCount = 0;
+                    isConnected = true;
+                    loadingContainer.style.display = 'none';
+                    profileContainer.style.display = 'block';
+                    errorDetails.style.display = 'none';
+                    setupNotice.style.display = 'none';
+                    websocket.send(JSON.stringify({ op: 2, d: { subscribe_to_id: CONFIG.DISCORD_USER_ID } }));
+                    setInterval(() => {
+                        if (websocket.readyState === WebSocket.OPEN) {
+                            websocket.send(JSON.stringify({ op: 3 }));
+                        }
+                    }, 30000);
+                };
+
+                websocket.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        if (data.op === 0 && data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
+                            lastFetchTime = Date.now();
+                            setCachedData(data.d);
+                            updateDiscordProfile(data.d);
+                        }
+                    } catch (e) {
+                        errorDetails.style.display = 'block';
+                        errorDetails.textContent = 'Error: Failed to parse WebSocket data';
+                    }
+                };
+
+                websocket.onerror = () => {
+                    wsRetryCount++;
+                    if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
+                        setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
+                    } else {
+                        errorDetails.style.display = 'block';
+                        errorDetails.textContent = 'Error: WebSocket connection failed, falling back to HTTP';
+                        fetchDiscordStatusFallback();
+                    }
+                };
+
+                websocket.onclose = () => {
+                    wsRetryCount++;
+                    if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
+                        setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
+                    } else {
+                        errorDetails.style.display = 'block';
+                        errorDetails.textContent = 'Error: WebSocket closed, falling back to HTTP';
+                        fetchDiscordStatusFallback();
+                    }
+                };
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: WebSocket initialization failed';
+                fetchDiscordStatusFallback();
+            }
+        }
+
+        function showOfflineState() {
+            try {
+                const avatar = document.getElementById('avatar');
+                const username = document.getElementById('username');
+                const discriminator = document.getElementById('discriminator');
+
+                safeImageLoad(avatar, CONFIG.FALLBACK_AVATAR, CONFIG.FALLBACK_AVATAR).then((success) => {
+                    avatar.classList.toggle('error', !success);
+                });
+
+                username.textContent = 'yokaimsi';
+                discriminator.textContent = '@yokaimsi';
+                avatar.alt = 'yokaimsi\'s avatar';
+                updateStatus('offline');
+                updateCustomStatus([]);
+                updateActivities([]);
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to display offline state';
+            }
+        }
+
+        function updateDiscordProfile(userData) {
+            try {
+                const avatar = document.getElementById('avatar');
+                const username = document.getElementById('username');
+                const discriminator = document.getElementById('discriminator');
+                const avatarUrl = userData.discord_user?.avatar 
+                    ? `https://cdn.discordapp.com/avatars/${CONFIG.DISCORD_USER_ID}/${userData.discord_user.avatar}.png?size=128`
+                    : CONFIG.FALLBACK_AVATAR;
+
+                safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR).then((success) => {
+                    avatar.classList.toggle('error', !success);
+                });
+
+                username.textContent = userData.discord_user?.username || 'yokaimsi';
+                discriminator.textContent = `@${userData.discord_user?.username || 'yokaimsi'}`;
+                avatar.alt = `${userData.discord_user?.username || 'yokaimsi'}'s avatar`;
+
+                updateStatus(userData.discord_status || 'offline');
+                updateCustomStatus(userData.activities || []);
+                updateActivities(userData.activities || []);
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update profile';
+                showOfflineState();
+            }
+        }
+
+        function updateStatus(status) {
+            try {
+                const statusDot = document.getElementById('statusDot');
+                const statusText = document.getElementById('statusText');
+                if (statusDot && statusText) {
+                    statusDot.className = 'status-dot';
+                    switch (status) {
+                        case 'online':
+                            statusText.textContent = 'Online';
+                            statusDot.classList.add('online');
+                            break;
+                        case 'idle':
+                            statusText.textContent = 'Away';
+                            statusDot.classList.add('idle');
+                            break;
+                        case 'dnd':
+                            statusText.textContent = 'Do Not Disturb';
+                            statusDot.classList.add('dnd');
+                            break;
+                        default:
+                            statusText.textContent = 'Offline';
+                            statusDot.classList.add('offline');
+                            break;
+                    }
+                }
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update status';
+            }
+        }
+
+        function updateCustomStatus(activities) {
+            try {
+                const customStatus = document.getElementById('customStatus');
+                const unifiedCard = document.querySelector('.unified-status-card');
+                if (customStatus && unifiedCard) {
+                    const customActivity = activities.find(activity => activity.type === 4 && activity.state);
+                    if (customActivity && customActivity.state) {
+                        customStatus.textContent = customActivity.state;
+                        customStatus.style.display = 'block';
+                        unifiedCard.classList.add('custom-activity');
+                    } else {
+                        customStatus.style.display = 'none';
+                        unifiedCard.classList.remove('custom-activity');
+                    }
+                }
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update custom status';
+            }
+        }
+
+        function updateActivities(activities) {
+            try {
+                const activitySection = document.getElementById('activitySection');
+                const activityHeader = document.getElementById('activityHeader');
+                const activityHeaderText = document.getElementById('activityHeaderText');
+                const activityName = document.getElementById('activityName');
+                const activityFileInfo = document.getElementById('activityFileInfo');
+                const fileTypeIcon = document.getElementById('fileTypeIcon');
+                const activityDetails = document.getElementById('activityDetails');
+                const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
+                const activityState = document.getElementById('activityState');
+                const activityTimestamp = document.getElementById('activityTimestamp');
+                const unifiedCard = document.querySelector('.unified-status-card');
+
+                if (!activitySection || !unifiedCard) return;
+
+                const priorityActivity = activities.find(activity => activity.type === 0 || activity.type === 2);
+
+                if (!priorityActivity || !shouldShowActivity('home')) {
+                    activitySection.style.display = 'none';
+                    unifiedCard.classList.remove('spotify-activity', 'game-activity');
+                    return;
+                }
+
+                activitySection.style.display = 'block';
+                unifiedCard.classList.remove('spotify-activity', 'game-activity');
+
+                if (priorityActivity.type === 2) {
+                    unifiedCard.classList.add('spotify-activity');
+                    activityHeaderText.textContent = 'Listening to Spotify';
+                    activityHeader.querySelector('i').className = 'fab fa-spotify';
+                    activityName.textContent = priorityActivity.details || 'Unknown Track';
+                    activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
+                    activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
+                    activityFileInfo.style.display = 'none';
+                    activityTimestamp.textContent = priorityActivity.timestamps?.start 
+                        ? formatTimestamp(priorityActivity.timestamps.start) 
+                        : 'Just started';
+                } else if (priorityActivity.type === 0) {
+                    unifiedCard.classList.add('game-activity');
+                    activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
+                    activityHeader.querySelector('i').className = 'fas fa-gamepad';
+                    activityName.textContent = priorityActivity.name || 'Unknown Activity';
+
+                    const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
+                    if (fileExtension && fileTypeIcons[fileExtension]) {
+                        const fileIcon = getFileTypeIcon(priorityActivity.details);
+                        fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
+                        fileTypeIcon.style.color = fileIcon.color;
+                        activityDetails.textContent = priorityActivity.details || '';
+                        activityFileInfo.style.display = 'flex';
+                        activityDetailsNoFile.textContent = '';
+                    } else {
+                        activityFileInfo.style.display = 'none';
+                        activityDetailsNoFile.textContent = priorityActivity.details || '';
+                    }
+
+                    activityState.textContent = priorityActivity.state || '';
+                    activityTimestamp.textContent = priorityActivity.timestamps?.start 
+                        ? formatTimestamp(priorityActivity.timestamps.start) 
+                        : 'Just started';
+                }
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to update activities';
+            }
+        }
+
+        function startStatusRefresh() {
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+            refreshInterval = setInterval(() => {
+                if (!isConnected || websocket?.readyState !== WebSocket.OPEN) {
+                    fetchDiscordStatusFallback();
+                }
+            }, CONFIG.REFRESH_INTERVAL);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                createParticles();
+                initNavigation();
+                lazyLoadCards();
+                disableDevTools();
+                initWebSocket();
+                startStatusRefresh();
+            } catch (e) {
+                document.getElementById('errorDetails').style.display = 'block';
+                document.getElementById('errorDetails').textContent = 'Error: Failed to initialize page';
+            }
+        });
+
+        window.addEventListener('beforeunload', () => {
+            if (websocket) {
+                websocket.close();
+            }
+            if (refreshInterval) {
+                clearInterval(refreshInterval);
+            }
+        });
+    </script>
 </body>
 </html>
