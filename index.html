@@ -4,860 +4,1366 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; script-src 'self' https://cdn.jsdelivr.net 'unsafe-inline'; img-src 'self' https://cdn.discordapp.com data:; connect-src 'self' https://api.lanyard.rest ws://api.lanyard.rest wss://api.lanyard.rest; frame-src 'none'; object-src 'none';">
-    <meta name="description" content="Portfolio of yokaimsi, showcasing projects, skills, and Discord presence.">
-    <title>yokaimsi</title>
+    <meta name="description" content="Portfolio of yokaimsi - A cutting-edge showcase of modern web development, featuring advanced animations and interactive experiences.">
+    <title>yokaimsi - Advanced Portfolio</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/d/d3/Python_icon_%28black_and_white%29.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        :root {
+            /* Color System - Light Theme */
+            --primary-50: #f8fafc;
+            --primary-100: #f1f5f9;
+            --primary-200: #e2e8f0;
+            --primary-300: #cbd5e1;
+            --primary-400: #94a3b8;
+            --primary-500: #64748b;
+            --primary-600: #475569;
+            --primary-700: #334155;
+            --primary-800: #1e293b;
+            --primary-900: #0f172a;
 
+            /* Accent Colors */
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #06b6d4;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-error: #ef4444;
+
+            /* Theme Variables - Default Dark */
+            --bg-primary: var(--primary-900);
+            --bg-secondary: var(--primary-800);
+            --bg-tertiary: var(--primary-700);
+            --text-primary: var(--primary-50);
+            --text-secondary: var(--primary-300);
+            --text-tertiary: var(--primary-400);
+            --border-primary: rgba(255, 255, 255, 0.1);
+            --border-secondary: rgba(255, 255, 255, 0.05);
+
+            /* Glass Effects */
+            --glass-bg: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+            /* Shadows */
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+            --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+            --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+
+            /* Spacing System */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            --space-16: 4rem;
+            --space-20: 5rem;
+            --space-24: 6rem;
+
+            /* Typography */
+            --font-size-xs: 0.75rem;
+            --font-size-sm: 0.875rem;
+            --font-size-base: 1rem;
+            --font-size-lg: 1.125rem;
+            --font-size-xl: 1.25rem;
+            --font-size-2xl: 1.5rem;
+            --font-size-3xl: 1.875rem;
+            --font-size-4xl: 2.25rem;
+            --font-size-5xl: 3rem;
+            --font-size-6xl: 3.75rem;
+
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+
+            /* Animations */
+            --duration-fast: 150ms;
+            --duration-normal: 300ms;
+            --duration-slow: 500ms;
+            --duration-slower: 750ms;
+            --ease-out: cubic-bezier(0, 0, 0.2, 1);
+            --ease-in: cubic-bezier(0.4, 0, 1, 1);
+            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+            /* Particle System */
+            --particle-count: 100;
+            --particle-size: 3px;
+            --particle-speed: 20s;
+        }
+
+        /* Light Theme */
+        [data-theme="light"] {
+            --bg-primary: var(--primary-50);
+            --bg-secondary: var(--primary-100);
+            --bg-tertiary: var(--primary-200);
+            --text-primary: var(--primary-900);
+            --text-secondary: var(--primary-700);
+            --text-tertiary: var(--primary-600);
+            --border-primary: rgba(0, 0, 0, 0.1);
+            --border-secondary: rgba(0, 0, 0, 0.05);
+            --glass-bg: rgba(255, 255, 255, 0.8);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+            
+            .particles,
+            .floating-elements,
+            .animated-background {
+                display: none !important;
+            }
+        }
+
+        /* Base Styles */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary-bg: #0a0a0f;
-            --secondary-bg: #1a1a2e;
-            --accent-color: #00d4ff;
-            --accent-secondary: #ff006e;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0a0;
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --neon-glow: 0 0 20px rgba(0, 212, 255, 0.3);
-            --success-color: #43b581;
-            --warning-color: #faa61a;
-            --error-color: #f04747;
-            --offline-color: #747f8d;
-            --nav-bg: #12121a;
-            --nav-active-bg: #1e1e2d;
-        }
-
         html {
+            font-size: 16px;
             scroll-behavior: smooth;
+            scroll-padding-top: var(--space-24);
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: var(--primary-bg);
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.6;
             color: var(--text-primary);
-            min-height: 100vh;
+            background: var(--bg-primary);
             overflow-x: hidden;
-            position: relative;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            transition: background-color var(--duration-slow) var(--ease-out),
+                        color var(--duration-slow) var(--ease-out);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        body::-webkit-scrollbar {
-            display: none;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        body::before {
-            content: '';
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: var(--radius-full);
+            transition: background var(--duration-normal) var(--ease-out);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-secondary);
+        }
+
+        /* Animated Background */
+        .animated-background {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
+            z-index: -3;
+            opacity: 0.6;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(255, 0, 110, 0.1) 0%, transparent 50%);
-            z-index: -1;
-            animation: backgroundShift 20s ease-in-out infinite;
+                radial-gradient(circle at 20% 80%, var(--accent-primary) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--accent-secondary) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, var(--accent-tertiary) 0%, transparent 50%);
+            background-size: 100% 100%;
+            animation: backgroundFlow 20s ease-in-out infinite;
+            filter: blur(60px);
         }
 
-        @keyframes backgroundShift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            50% { transform: translate(10px, 10px) scale(1.02); }
+        @keyframes backgroundFlow {
+            0%, 100% { 
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                filter: blur(60px) brightness(0.8);
+            }
+            25% {
+                transform: translate(5%, -5%) rotate(1deg) scale(1.1);
+                filter: blur(70px) brightness(1);
+            }
+            50% { 
+                transform: translate(-5%, 5%) rotate(-1deg) scale(0.9);
+                filter: blur(50px) brightness(1.2);
+            }
+            75% {
+                transform: translate(3%, 3%) rotate(0.5deg) scale(1.05);
+                filter: blur(65px) brightness(0.9);
+            }
         }
 
+        /* Enhanced Particle System */
         .particles {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
-            z-index: -1;
-            display: var(--particles-display, block);
+            z-index: -2;
+            overflow: hidden;
         }
 
         .particle {
             position: absolute;
-            width: 2px;
-            height: 2px;
-            background: var(--accent-color);
+            background: var(--accent-primary);
             border-radius: 50%;
-            animation: float 15s infinite ease-in-out;
-            opacity: 0.3;
+            pointer-events: none;
+            opacity: 0;
+            animation: particleFloat var(--particle-speed) infinite linear;
         }
 
-        @keyframes float {
-            0% { transform: translateY(100vh) scale(1); opacity: 0; }
-            10% { opacity: 0.3; }
-            50% { transform: translateY(50vh) translateX(50px) scale(1.2); opacity: 0.5; }
-            100% { transform: translateY(-100px) translateX(100px) scale(1); opacity: 0; }
+        .particle.primary { background: var(--accent-primary); }
+        .particle.secondary { background: var(--accent-secondary); }
+        .particle.tertiary { background: var(--accent-tertiary); }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translateY(90vh) translateX(10px) rotate(90deg) scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: translateY(50vh) translateX(-20px) rotate(180deg) scale(1.2);
+            }
+            90% {
+                opacity: 0.2;
+                transform: translateY(10vh) translateX(30px) rotate(270deg) scale(0.8);
+            }
+            100% {
+                transform: translateY(-10vh) translateX(0) rotate(360deg) scale(0);
+                opacity: 0;
+            }
         }
 
+        /* Mouse Follower */
+        .mouse-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0;
+            transition: transform var(--duration-fast) var(--ease-out),
+                        opacity var(--duration-normal) var(--ease-out);
+            mix-blend-mode: difference;
+        }
+
+        .mouse-follower.active {
+            opacity: 0.6;
+        }
+
+        /* Enhanced Navigation */
         .nav {
             position: fixed;
-            top: 10px;
+            top: var(--space-6);
             left: 50%;
             transform: translateX(-50%);
-            background: var(--nav-bg);
-            backdrop-filter: blur(20px);
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid var(--glass-border);
-            border-radius: 50px;
-            padding: 8px;
+            border-radius: var(--radius-full);
+            padding: var(--space-2);
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-            transition: all 0.3s ease-in-out;
+            box-shadow: var(--glass-shadow);
+            transition: all var(--duration-slow) var(--ease-out);
+            animation: navSlideIn var(--duration-slower) var(--ease-bounce) forwards;
+        }
+
+        @keyframes navSlideIn {
+            0% {
+                transform: translateX(-50%) translateY(-100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateX(-50%) translateY(0);
+                opacity: 1;
+            }
         }
 
         .nav:hover {
-            box-shadow: 0 0 25px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            gap: var(--space-6);
         }
 
         .nav-logo {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 0 16px;
+            gap: var(--space-2);
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--accent-primary);
+            padding: 0 var(--space-4);
+            text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
         }
 
         .nav-logo i {
-            font-size: 1.5rem;
+            font-size: var(--font-size-xl);
             color: var(--accent-secondary);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            0% { filter: drop-shadow(0 0 5px var(--accent-secondary)); }
+            100% { filter: drop-shadow(0 0 15px var(--accent-secondary)); }
         }
 
         .nav-links {
             display: flex;
             list-style: none;
-            background: var(--nav-bg);
-            border-radius: 40px;
-            padding: 4px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius-full);
+            padding: var(--space-1);
             position: relative;
-            transition: all 0.3s ease-in-out;
+            gap: var(--space-1);
         }
 
         .nav-link {
+            position: relative;
             color: var(--text-secondary);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: var(--font-size-sm);
             font-weight: 500;
-            padding: 10px 20px;
-            border-radius: 35px;
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            position: relative;
-            z-index: 2;
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius-full);
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: var(--space-2);
+            transition: all var(--duration-normal) var(--ease-out);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-out);
+            border-radius: inherit;
         }
 
         .nav-link i {
-            font-size: 0.85rem;
-            transition: transform 0.3s ease-in-out;
+            position: relative;
+            z-index: 2;
+            font-size: var(--font-size-sm);
+            transition: transform var(--duration-normal) var(--ease-bounce);
         }
 
-        .nav-link:hover i {
-            transform: scale(1.2);
+        .nav-link span {
+            position: relative;
+            z-index: 2;
         }
 
-        .nav-link:hover, .nav-link:focus {
+        .nav-link:hover,
+        .nav-link:focus {
             color: var(--text-primary);
-            background: var(--nav-active-bg);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .nav-link:hover::before,
+        .nav-link:focus::before {
+            opacity: 1;
+        }
+
+        .nav-link:hover i,
+        .nav-link:focus i {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .nav-link.active {
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
         }
 
         .nav-link:focus {
             outline: none;
         }
 
-        .nav-indicator {
-            position: absolute;
-            top: 4px;
-            left: 4px;
-            height: calc(100% - 8px);
-            background: var(--nav-active-bg);
-            border-radius: 35px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
-        }
-
-        .nav-link.active {
-            color: var(--text-primary);
-            background: var(--nav-active-bg);
-        }
-
-        .social-links {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 0;
-            animation: slideUp 0.5s ease-out forwards;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .social-link {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+        /* Theme Toggle */
+        .theme-toggle {
             background: var(--glass-bg);
             border: 1px solid var(--glass-border);
+            border-radius: var(--radius-full);
+            padding: var(--space-2);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-decoration: none;
-            color: var(--text-primary);
-            font-size: 1.4rem;
-            transition: all 0.3s ease-in-out;
+            width: 44px;
+            height: 44px;
+            transition: all var(--duration-normal) var(--ease-out);
             position: relative;
+            overflow: hidden;
         }
 
-        .social-link:hover {
-            transform: translateY(-4px) scale(1.15);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        .theme-toggle:hover {
+            background: var(--accent-primary);
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
         }
 
-        .social-link::after {
-            content: attr(aria-label);
-            display: none;
-            position: absolute;
-            top: -2rem;
-            font-size: 0.8rem;
+        .theme-toggle i {
             color: var(--text-primary);
-            background: var(--nav-bg);
-            padding: 4px 8px;
-            border-radius: 4px;
-            white-space: nowrap;
-            transition: all 0.3s ease-in-out;
+            font-size: var(--font-size-base);
+            transition: all var(--duration-normal) var(--ease-out);
         }
 
-        .social-link:hover::after {
-            display: block;
+        .theme-toggle:hover i {
+            color: white;
+            transform: rotate(180deg);
         }
 
-        .social-link.github:hover { background: #333; }
-        .social-link.instagram:hover { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .social-link.discord:hover { background: #5865f2; }
-        .social-link.linkedin:hover { background: #0077b5; }
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-3);
+            cursor: pointer;
+            color: var(--text-primary);
+            font-size: var(--font-size-lg);
+            transition: all var(--duration-normal) var(--ease-out);
+        }
 
+        /* Main Content */
         .main-content {
-            margin-top: 100px;
-            min-height: calc(100vh - 100px);
-            padding: 0 20px;
+            margin-top: 120px;
+            min-height: calc(100vh - 120px);
+            padding: 0 var(--space-6);
         }
 
+        /* Page Transitions */
         .page {
             display: none;
             width: 100%;
-            animation: pageSlideIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all var(--duration-slow) var(--ease-out);
         }
 
         .page.active {
             display: block;
+            opacity: 1;
+            transform: translateY(0);
+            animation: pageSlideIn var(--duration-slow) var(--ease-out) forwards;
         }
 
         @keyframes pageSlideIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.98);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
 
+        /* Home Page */
         .home-container {
             text-align: center;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             min-height: calc(100vh - 200px);
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 20px;
+            padding: var(--space-8);
+            position: relative;
         }
 
         .loading-container {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: var(--space-6);
+            animation: fadeIn var(--duration-slow) var(--ease-out) forwards;
         }
 
-        .spinner {
-            width: 40px;
-            height: 40px;
+        .advanced-spinner {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
+        .spinner-ring {
+            position: absolute;
+            inset: 0;
             border: 2px solid transparent;
-            border-top: 2px solid var(--accent-color);
-            border-right: 2px solid var(--accent-secondary);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+
+        .spinner-ring:nth-child(1) {
+            border-top-color: var(--accent-primary);
+            animation-duration: 1.5s;
+        }
+
+        .spinner-ring:nth-child(2) {
+            border-right-color: var(--accent-secondary);
+            animation-duration: 2s;
+            animation-direction: reverse;
+        }
+
+        .spinner-ring:nth-child(3) {
+            border-bottom-color: var(--accent-tertiary);
+            animation-duration: 2.5s;
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            to { transform: rotate(360deg); }
         }
 
         .loading-text {
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-transform: lowercase;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
             letter-spacing: 2px;
+            text-transform: lowercase;
+            position: relative;
+        }
+
+        .loading-text::after {
+            content: '';
+            animation: typingCursor 1s infinite;
+        }
+
+        @keyframes typingCursor {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
         }
 
         .profile-container {
             display: none;
-            animation: fadeIn 0.5s ease-out forwards;
+            animation: profileReveal var(--duration-slower) var(--ease-bounce) forwards;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes profileReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(40px) scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .profile-header {
+            margin-bottom: var(--space-8);
+            animation: staggerIn var(--duration-slower) var(--ease-out) forwards;
+        }
+
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--space-6);
         }
 
         .avatar {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             border-radius: 50%;
-            margin: 0 auto 1.5rem;
-            border: 2px solid var(--success-color);
-            transition: transform 0.3s ease;
-            box-shadow: 0 0 15px rgba(67, 181, 129, 0.3);
             object-fit: cover;
-            loading: lazy;
+            border: 3px solid var(--accent-success);
+            box-shadow: 
+                0 0 0 4px var(--glass-bg),
+                0 0 40px rgba(16, 185, 129, 0.4);
+            transition: all var(--duration-slow) var(--ease-out);
+            animation: avatarFloat 6s ease-in-out infinite;
+        }
+
+        @keyframes avatarFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                box-shadow: 
+                    0 0 0 4px var(--glass-bg),
+                    0 0 40px rgba(16, 185, 129, 0.4);
+            }
+            50% {
+                transform: translateY(-10px) rotate(2deg);
+                box-shadow: 
+                    0 0 0 4px var(--glass-bg),
+                    0 0 60px rgba(16, 185, 129, 0.6);
+            }
         }
 
         .avatar.error {
-            border-color: var(--error-color);
+            border-color: var(--accent-error);
+            box-shadow: 
+                0 0 0 4px var(--glass-bg),
+                0 0 40px rgba(239, 68, 68, 0.4);
         }
 
+        .status-indicator-badge {
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--accent-success);
+            border: 3px solid var(--bg-primary);
+            box-shadow: 0 0 0 2px var(--glass-bg);
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .status-indicator-badge.offline { background: var(--primary-400); }
+        .status-indicator-badge.idle { background: var(--accent-warning); }
+        .status-indicator-badge.dnd { background: var(--accent-error); }
+
         .username {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            background: linear-gradient(135deg, var(--accent-color), var(--accent-secondary));
+            font-size: var(--font-size-4xl);
+            font-weight: 800;
+            margin-bottom: var(--space-2);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .discriminator {
             color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: var(--font-size-lg);
+            font-weight: 500;
+            margin-bottom: var(--space-8);
+            animation: typewriter 2s steps(20, end) forwards;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid var(--accent-primary);
         }
 
+        @keyframes typewriter {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        /* Enhanced Glass Cards */
         .glass-card {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-            transition: box-shadow 0.3s ease;
+            border-radius: var(--radius-2xl);
+            padding: var(--space-6);
+            box-shadow: var(--glass-shadow);
+            transition: all var(--duration-slow) var(--ease-out);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--duration-slow) var(--ease-out);
         }
 
         .glass-card:hover {
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        .status-indicator {
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Status Display */
+        .status-display {
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            margin-bottom: 1rem;
+            justify-content: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+            animation: slideUp var(--duration-slow) var(--ease-out) 0.2s both;
         }
 
         .status-dot {
-            width: 12px;
-            height: 12px;
+            width: 16px;
+            height: 16px;
             border-radius: 50%;
-            background: var(--success-color);
-            transition: background 0.3s ease;
+            background: var(--accent-success);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.6);
+            animation: statusPulse 2s ease-in-out infinite;
         }
 
-        .status-dot.offline { background: var(--offline-color); }
-        .status-dot.idle { background: var(--warning-color); }
-        .status-dot.dnd { background: var(--error-color); }
+        .status-dot.offline { 
+            background: var(--primary-400);
+            box-shadow: 0 0 20px rgba(148, 163, 184, 0.4);
+        }
+        .status-dot.idle { 
+            background: var(--accent-warning);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+        }
+        .status-dot.dnd { 
+            background: var(--accent-error);
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+        }
 
         .status-text {
-            font-size: 0.9rem;
+            font-size: var(--font-size-base);
             color: var(--text-primary);
+            font-weight: 600;
             text-transform: capitalize;
         }
 
         .custom-status {
-            font-size: 0.85rem;
+            font-size: var(--font-size-sm);
             color: var(--text-secondary);
-            margin-top: 0.3rem;
-            margin-bottom: 0.5rem;
-            display: none;
             font-style: italic;
-        }
-
-        .setup-notice {
-            background: rgba(255, 193, 7, 0.1);
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            color: #ffc107;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .setup-notice h4 {
-            margin-bottom: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .setup-notice ol {
-            margin-left: 1rem;
-            line-height: 1.4;
-        }
-
-        .setup-notice a {
-            color: #ffc107;
-            text-decoration: underline;
-        }
-
-        .error-details {
-            background: rgba(240, 71, 71, 0.1);
-            border: 1px solid rgba(240, 71, 71, 0.3);
-            border-radius: 10px;
-            padding: 0.75rem;
-            margin-top: 0.75rem;
-            font-size: 0.8rem;
-            color: var(--error-color);
-            display: none;
-        }
-
-        .projects-container, .skills-container, .about-container {
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
+            margin-bottom: var(--space-4);
+            display: none;
+            animation: fadeIn var(--duration-slow) var(--ease-out) forwards;
         }
 
-        .projects-title-new, .skills-title, .about-title {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            background: linear-gradient(135deg, #8b5cf6, #a855f7, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .projects-subtitle-new, .skills-subtitle, .about-subtitle {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 400;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .projects-grid-new {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1rem;
-            justify-items: center;
-            overflow: visible;
-        }
-
-        .project-card-new {
-            background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            width: 100%;
-            max-width: 300px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .project-card-new[data-visible="true"] {
-            animation: floatProject 4s ease-in-out infinite;
-        }
-
-        @keyframes floatProject {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .project-card-new:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
-        }
-
-        .project-content-new {
-            padding: 1rem;
-        }
-
-        .project-header-new {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.75rem;
-        }
-
-        .project-icon-new {
-            font-size: 1rem;
-            color: var(--accent-color);
-            transition: color 0.3s ease;
-        }
-
-        .project-card-new:hover .project-icon-new {
-            color: var(--accent-secondary);
-        }
-
-        .project-title-new {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .project-description-new {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-bottom: 1rem;
-        }
-
-        .project-tech-new {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.3rem;
-            margin-bottom: 1rem;
-        }
-
-        .tech-tag-new {
-            padding: 0.3rem 0.6rem;
-            border-radius: 15px;
-            font-size: 0.7rem;
-            font-weight: 500;
-            border: 1px solid;
-            transition: background 0.3s ease;
-        }
-
-        .tech-tag-new.js { background: rgba(247, 223, 30, 0.1); color: #f7df1e; border-color: rgba(247, 223, 30, 0.3); }
-        .tech-tag-new.python { background: rgba(55, 118, 171, 0.1); color: #3776ab; border-color: rgba(55, 118, 171, 0.3); }
-
-        .project-card-new:hover .tech-tag-new {
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .project-actions-new {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .project-btn-new {
-            padding: 0.4rem 0.8rem;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 500;
-            border: 1px solid;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .project-btn-new.github { background: rgba(51, 51, 51, 0.1); color: #ffffff; border-color: rgba(51, 51, 51, 0.3); }
-        .project-btn-new.discord { background: rgba(88, 101, 242, 0.1); color: #5865f2; border-color: rgba(88, 101, 242, 0.3); }
-
-        .project-btn-new:hover {
-            transform: translateY(-1px);
-            background: var(--nav-active-bg);
-        }
-
-        .unified-status-card {
-            border: 1px solid var(--glass-border);
-            transition: border-color 0.3s ease;
-        }
-
-        .unified-status-card.spotify-activity { border-color: rgba(29, 185, 84, 0.2); }
-        .unified-status-card.game-activity { border-color: rgba(0, 212, 255, 0.2); }
-        .unified-status-card.custom-activity { border-color: rgba(255, 0, 110, 0.2); }
-
+        /* Activity Section */
         .activity-section {
-            margin-top: 0;
-            padding-top: 0;
+            display: none;
+            animation: slideUp var(--duration-slow) var(--ease-out) 0.4s both;
         }
 
         .activity-header {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 0.8rem;
-            font-weight: 500;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
             color: var(--text-secondary);
-            transition: color 0.3s ease;
-        }
-
-        .activity-header:hover {
-            color: var(--accent-color);
         }
 
         .activity-header i {
-            font-size: 0.9rem;
-            color: var(--accent-color);
-            transition: transform 0.3s ease;
+            font-size: var(--font-size-base);
+            color: var(--accent-primary);
+            animation: rotate 2s linear infinite;
         }
 
-        .activity-header:hover i {
-            transform: rotate(360deg);
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
         }
 
         .activity-content {
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-
-        .activity-details {
-            flex: 1;
-            text-align: left;
+            text-align: center;
+            animation: fadeIn var(--duration-slow) var(--ease-out) 0.6s both;
         }
 
         .activity-name {
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: var(--font-size-lg);
+            font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 0.2rem;
+            margin-bottom: var(--space-2);
         }
 
-        .activity-file-info {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            margin-bottom: 0.2rem;
-        }
-
-        .file-type-icon {
-            font-size: 0.9rem;
-        }
-
-        .activity-details-text {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.2rem;
-        }
-
+        .activity-details-text,
         .activity-state {
-            font-size: 0.7rem;
+            font-size: var(--font-size-sm);
             color: var(--text-secondary);
-            margin-bottom: 0.2rem;
+            margin-bottom: var(--space-2);
         }
 
         .activity-timestamp {
-            font-size: 0.65rem;
-            color: var(--accent-color);
-            font-weight: 500;
+            font-size: var(--font-size-xs);
+            color: var(--accent-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 600;
         }
 
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            max-width: 800px;
-            margin: 0 auto;
+        /* Floating Social Links */
+        .floating-social-links {
+            position: fixed;
+            right: var(--space-6);
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            z-index: 500;
+            animation: slideInRight var(--duration-slower) var(--ease-bounce) 1s both;
         }
 
-        .skill-card {
+        @keyframes slideInRight {
+            0% {
+                transform: translateY(-50%) translateX(100px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(-50%) translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .floating-social-link {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            font-size: 1rem;
-            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
             color: var(--text-primary);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            font-size: var(--font-size-xl);
+            transition: all var(--duration-normal) var(--ease-bounce);
+            position: relative;
+            overflow: hidden;
         }
 
-        .skill-card[data-visible="true"] {
-            animation: skillFloat 4s ease-in-out infinite;
+        .floating-social-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-out);
         }
 
-        @keyframes skillFloat {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        .floating-social-link i {
+            position: relative;
+            z-index: 2;
+            transition: transform var(--duration-normal) var(--ease-bounce);
         }
 
-        .skill-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+        .floating-social-link:hover {
+            transform: translateX(-8px) scale(1.1);
+            box-shadow: -8px 8px 24px rgba(0, 0, 0, 0.2);
         }
 
-        .skill-card i {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            transition: color 0.3s ease;
+        .floating-social-link:hover::before {
+            opacity: 1;
         }
 
-        .skill-card:hover i {
-            color: var(--accent-secondary);
+        .floating-social-link:hover i {
+            transform: scale(1.2) rotate(10deg);
+            color: white;
         }
 
-        .skill-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .about-layout {
-            display: flex;
-            gap: 2rem;
-            max-width: 800px;
+        /* Content Pages */
+        .content-container {
+            max-width: 1200px;
             margin: 0 auto;
-            align-items: flex-start;
+            padding: var(--space-8);
         }
 
-        .about-left {
-            flex: 1;
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-16);
+            animation: staggerIn var(--duration-slower) var(--ease-out) forwards;
         }
 
-        .about-right {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
+        .page-title {
+            font-size: var(--font-size-5xl);
+            font-weight: 900;
+            margin-bottom: var(--space-4);
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        .page-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            font-weight: 400;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        /* About Page */
+        .about-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: var(--space-12);
+            align-items: start;
         }
 
         .about-content {
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            text-align: left;
-            transition: box-shadow 0.3s ease;
-        }
-
-        .about-content:hover {
-            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            box-shadow: var(--glass-shadow);
+            animation: slideInLeft var(--duration-slower) var(--ease-out) forwards;
         }
 
         .about-content p {
-            color: var(--text-secondary);
-            font-size: 1rem;
+            font-size: var(--font-size-lg);
             line-height: 1.8;
-            margin-bottom: 1rem;
-            transition: color 0.3s ease;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-6);
+            transition: color var(--duration-normal) var(--ease-out);
         }
 
         .about-content p:hover {
             color: var(--text-primary);
         }
 
-        .hamburger {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            animation: slideInRight var(--duration-slower) var(--ease-out) 0.2s both;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: var(--radius-xl);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
             color: var(--text-primary);
-            padding: 0.5rem;
-            z-index: 1001;
-            transition: transform 0.3s ease;
+            font-size: var(--font-size-xl);
+            transition: all var(--duration-normal) var(--ease-bounce);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hamburger:hover {
-            transform: scale(1.1);
+        .social-link::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-out);
         }
 
-        .nav-open .nav-links {
-            display: flex !important;
+        .social-link i {
+            position: relative;
+            z-index: 2;
+            transition: transform var(--duration-normal) var(--ease-bounce);
+        }
+
+        .social-link:hover {
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+
+        .social-link:hover::before {
+            opacity: 1;
+        }
+
+        .social-link:hover i {
+            transform: scale(1.2);
+            color: white;
+        }
+
+        /* Projects Page */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-8);
+            margin-top: var(--space-8);
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-6);
+            box-shadow: var(--glass-shadow);
+            transition: all var(--duration-slow) var(--ease-out);
+            position: relative;
+            overflow: hidden;
+            animation: projectFloat 6s ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        @keyframes projectFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-10px) rotate(1deg);
+            }
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%);
+            opacity: 0;
+            transition: opacity var(--duration-slow) var(--ease-out);
+        }
+
+        .project-card:hover {
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.2);
+            border-color: var(--accent-primary);
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-4);
+        }
+
+        .project-icon {
+            font-size: var(--font-size-xl);
+            color: var(--accent-primary);
+            transition: all var(--duration-normal) var(--ease-bounce);
+        }
+
+        .project-card:hover .project-icon {
+            color: var(--accent-secondary);
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .project-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+            line-height: 1.6;
+            margin-bottom: var(--space-6);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .project-btn {
+            padding: var(--space-3) var(--space-5);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            border: 1px solid var(--glass-border);
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            transition: all var(--duration-normal) var(--ease-bounce);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--duration-normal) var(--ease-out);
+        }
+
+        .project-btn i,
+        .project-btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+            border-color: var(--accent-primary);
+        }
+
+        .project-btn:hover::before {
+            opacity: 1;
+        }
+
+        .project-btn:hover i,
+        .project-btn:hover span {
+            color: white;
+        }
+
+        /* Skills Page */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-6);
+            margin-top: var(--space-8);
+        }
+
+        .skill-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-6);
+            text-align: center;
+            box-shadow: var(--glass-shadow);
+            transition: all var(--duration-slow) var(--ease-out);
+            position: relative;
+            overflow: hidden;
+            animation: skillFloat 8s ease-in-out infinite;
+            animation-delay: calc(var(--index, 0) * 0.1s);
+        }
+
+        @keyframes skillFloat {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-8px) rotate(1deg);
+            }
+            75% {
+                transform: translateY(-4px) rotate(-1deg);
+            }
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity var(--duration-slow) var(--ease-out);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-12px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .skill-card:hover::before {
+            opacity: 0.1;
+        }
+
+        .skill-icon {
+            font-size: var(--font-size-4xl);
+            margin-bottom: var(--space-4);
+            transition: all var(--duration-normal) var(--ease-bounce);
+            position: relative;
+            z-index: 2;
+        }
+
+        .skill-card:hover .skill-icon {
+            transform: scale(1.2) rotate(10deg);
+            color: var(--accent-primary);
+        }
+
+        .skill-label {
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Utility Animations */
+        @keyframes slideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes staggerIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .floating-social-links {
+                display: none;
+            }
+            
+            .about-layout {
+                grid-template-columns: 1fr;
+                gap: var(--space-8);
+            }
+
+            .social-links {
+                flex-direction: row;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 768px) {
             :root {
-                --particles-display: none;
+                --font-size-5xl: 2.5rem;
+                --font-size-4xl: 2rem;
+                --font-size-3xl: 1.5rem;
+            }
+
+            .particles {
+                display: none;
+            }
+
+            .animated-background {
+                opacity: 0.3;
             }
 
             .nav {
-                top: 10px;
-                left: 10px;
-                right: 10px;
+                top: var(--space-4);
+                left: var(--space-4);
+                right: var(--space-4);
                 transform: none;
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 1rem;
-                border-radius: 20px;
+                padding: var(--space-4);
+                border-radius: var(--radius-xl);
             }
 
-            .hamburger {
-                display: block;
-                position: absolute;
-                top: 10px;
-                right: 10px;
+            .nav-container {
+                width: 100%;
+                justify-content: space-between;
             }
 
             .nav-links {
                 display: none;
-                flex-direction: column;
                 width: 100%;
-                align-items: center;
-            }
-
-            .nav-links {
-                margin-top: 1rem;
+                margin-top: var(--space-4);
+                flex-direction: column;
                 background: none;
                 padding: 0;
+                gap: var(--space-2);
+            }
+
+            .nav.nav-open .nav-links {
+                display: flex;
             }
 
             .nav-link {
-                padding: 0.8rem 1rem;
-                font-size: 1rem;
-                width: 100%;
-                text-align: center;
                 justify-content: center;
+                width: 100%;
+                padding: var(--space-4);
+                border-radius: var(--radius-lg);
             }
 
-            .nav-indicator {
-                display: none;
+            .mobile-nav-toggle {
+                display: block;
             }
 
             .main-content {
-                margin-top: 120px;
-                padding: 0 15px;
+                margin-top: 140px;
+                padding: 0 var(--space-4);
             }
 
             .home-container {
-                min-height: calc(100vh - 200px);
-            }
-
-            .username {
-                font-size: 1.8rem;
+                padding: var(--space-6);
+                min-height: calc(100vh - 180px);
             }
 
             .avatar {
@@ -865,74 +1371,54 @@
                 height: 100px;
             }
 
-            .activity-content {
-                flex-direction: column;
-                text-align: center;
+            .username {
+                font-size: var(--font-size-3xl);
             }
 
-            .activity-details {
-                text-align: center;
+            .page-header {
+                margin-bottom: var(--space-12);
             }
 
-            .projects-title-new, .skills-title, .about-title {
-                font-size: 2.5rem;
+            .content-container {
+                padding: var(--space-6);
             }
 
-            .projects-grid-new {
+            .projects-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .project-card-new, .skill-card {
-                animation: none;
-            }
-
-            .project-actions-new {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .project-btn-new {
-                width: 100%;
-                max-width: 200px;
+                gap: var(--space-6);
             }
 
             .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: var(--space-4);
             }
 
-            .about-layout {
-                flex-direction: column;
-                align-items: center;
+            .project-card,
+            .skill-card {
+                animation: none;
             }
 
-            .social-links {
-                flex-direction: row;
+            .about-content {
+                padding: var(--space-6);
+            }
+
+            .about-content p {
+                font-size: var(--font-size-base);
             }
         }
 
         @media (max-width: 480px) {
             .nav {
-                padding: 0.8rem;
-            }
-
-            .nav-link {
-                font-size: 0.9rem;
-            }
-
-            .social-link {
-                width: 36px;
-                height: 36px;
-                font-size: 1rem;
+                padding: var(--space-3);
             }
 
             .main-content {
-                margin-top: 140px;
+                margin-top: 120px;
+                padding: 0 var(--space-3);
             }
 
-            .username {
-                font-size: 1.5rem;
+            .home-container {
+                padding: var(--space-4);
             }
 
             .avatar {
@@ -940,267 +1426,392 @@
                 height: 80px;
             }
 
-            .projects-title-new, .skills-title, .about-title {
-                font-size: 2rem;
+            .username {
+                font-size: var(--font-size-2xl);
+            }
+
+            .page-title {
+                font-size: var(--font-size-3xl);
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .floating-social-link,
+            .social-link {
+                width: 48px;
+                height: 48px;
+                font-size: var(--font-size-lg);
+            }
+        }
+
+        /* Focus Management */
+        .focus-trap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* High Contrast Mode */
+        @media (prefers-contrast: high) {
+            :root {
+                --glass-bg: rgba(0, 0, 0, 0.9);
+                --glass-border: rgba(255, 255, 255, 0.9);
+                --border-primary: rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .particles,
+            .animated-background,
+            .floating-social-links,
+            .nav {
+                display: none !important;
+            }
+
+            .main-content {
+                margin-top: 0;
+            }
+
+            .glass-card {
+                background: white;
+                border: 1px solid #ccc;
+                box-shadow: none;
             }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
+    <!-- Focus trap for accessibility -->
+    <div class="focus-trap" tabindex="0" aria-hidden="true"></div>
+    
+    <!-- Mouse follower -->
+    <div class="mouse-follower" aria-hidden="true"></div>
+    
+    <!-- Animated background -->
+    <div class="animated-background" aria-hidden="true"></div>
+    
+    <!-- Particle system -->
+    <div class="particles" id="particles" aria-hidden="true"></div>
+    
+    <!-- Floating social links -->
+    <div class="floating-social-links" id="floatingSocialLinks">
+        <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="floating-social-link" aria-label="GitHub Profile">
+            <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+        <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="floating-social-link" aria-label="Instagram Profile">
+            <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+        <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="floating-social-link" aria-label="Discord Profile">
+            <i class="fab fa-discord" aria-hidden="true"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="floating-social-link" aria-label="LinkedIn Profile">
+            <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+    </div>
+    
+    <!-- Enhanced Navigation -->
     <nav class="nav" role="navigation" aria-label="Main navigation">
-        <div class="nav-logo">
-            <i class="fas fa-ghost" aria-hidden="true"></i>
-            yokai
+        <div class="nav-container">
+            <div class="nav-logo" role="img" aria-label="yokai logo">
+                <i class="fas fa-ghost" aria-hidden="true"></i>
+                <span>yokai</span>
+            </div>
+            
+            <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+            
+            <ul class="nav-links" role="list" id="navLinks">
+                <li role="listitem">
+                    <a class="nav-link active" data-page="home" href="#home" aria-current="page">
+                        <i class="fas fa-home" aria-hidden="true"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li role="listitem">
+                    <a class="nav-link" data-page="about" href="#about">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                <li role="listitem">
+                    <a class="nav-link" data-page="projects" href="#projects">
+                        <i class="fas fa-code" aria-hidden="true"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li role="listitem">
+                    <a class="nav-link" data-page="skills" href="#skills">
+                        <i class="fas fa-tools" aria-hidden="true"></i>
+                        <span>Skills</span>
+                    </a>
+                </li>
+            </ul>
+            
+            <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Switch theme">
+                <i class="fas fa-sun" aria-hidden="true"></i>
+            </button>
         </div>
-        <div class="hamburger" id="hamburger" aria-label="Toggle navigation" role="button">
-            <i class="fas fa-bars" aria-hidden="true"></i>
-        </div>
-        <ul class="nav-links" role="list">
-            <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
-            <li><a class="nav-link active" data-page="home" href="#home" aria-current="page"><i class="fas fa-home" aria-hidden="true"></i> Home</a></li>
-            <li><a class="nav-link" data-page="about" href="#about"><i class="fas fa-user" aria-hidden="true"></i> About</a></li>
-            <li><a class="nav-link" data-page="projects" href="#projects"><i class="fas fa-code" aria-hidden="true"></i> Projects</a></li>
-            <li><a class="nav-link" data-page="skills" href="#skills"><i class="fas fa-tools" aria-hidden="true"></i> Skills</a></li>
-        </ul>
     </nav>
-    <div class="main-content" role="main">
+    
+    <!-- Main Content -->
+    <main class="main-content" role="main">
+        <!-- Home Page -->
         <div class="page active" id="home" role="region" aria-label="Home">
             <div class="home-container">
+                <!-- Loading State -->
                 <div class="loading-container" id="loading" role="status" aria-live="polite">
-                    <div class="spinner" aria-hidden="true"></div>
-                    <div class="loading-text">connecting to discord...</div>
-                </div>
-                <div class="profile-container" id="profile" role="region" aria-label="Profile">
-                    <div class="profile-header">
-                        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User avatar" id="avatar" class="avatar" loading="lazy">
-                        <div class="username" id="username">yokaimsi</div>
-                        <div class="discriminator" id="discriminator">@yokaimsi</div>
+                    <div class="advanced-spinner" aria-hidden="true">
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
+                        <div class="spinner-ring"></div>
                     </div>
-                    <div class="glass-card unified-status-card" role="region" aria-label="User status">
-                        <div class="status-indicator">
+                    <div class="loading-text" id="loadingText">connecting to discord...</div>
+                </div>
+                
+                <!-- Profile Content -->
+                <div class="profile-container" id="profile" role="region" aria-label="Profile information">
+                    <div class="profile-header">
+                        <div class="avatar-container">
+                            <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="User avatar" id="avatar" class="avatar" loading="lazy">
+                            <div class="status-indicator-badge offline" id="statusBadge" aria-hidden="true"></div>
+                        </div>
+                        <h1 class="username" id="username">yokaimsi</h1>
+                        <p class="discriminator" id="discriminator">@yokaimsi</p>
+                    </div>
+                    
+                    <div class="glass-card" role="region" aria-label="Discord status">
+                        <div class="status-display">
                             <span class="status-dot offline" id="statusDot" aria-hidden="true"></span>
                             <span class="status-text" id="statusText">Offline</span>
                         </div>
-                        <div class="custom-status" id="customStatus"></div>
+                        
+                        <div class="custom-status" id="customStatus" aria-label="Custom status"></div>
+                        
                         <div class="activity-section" id="activitySection" role="region" aria-label="Current activity" style="display: none;">
                             <div class="activity-header" id="activityHeader">
                                 <i class="fas fa-spinner" aria-hidden="true"></i>
                                 <span id="activityHeaderText">Loading...</span>
                             </div>
                             <div class="activity-content">
-                                <div class="activity-details">
-                                    <div class="activity-name" id="activityName"></div>
-                                    <div class="activity-file-info" id="activityFileInfo" style="display: none;">
-                                        <i class="file-type-icon" id="fileTypeIcon" aria-hidden="true"></i>
-                                        <span class="activity-details-text" id="activityDetails"></span>
-                                    </div>
-                                    <div class="activity-details-text" id="activityDetailsNoFile"></div>
-                                    <div class="activity-state" id="activityState"></div>
-                                    <div class="activity-timestamp" id="activityTimestamp"></div>
-                                </div>
+                                <div class="activity-name" id="activityName"></div>
+                                <div class="activity-details-text" id="activityDetailsText"></div>
+                                <div class="activity-state" id="activityState"></div>
+                                <div class="activity-timestamp" id="activityTimestamp"></div>
                             </div>
                         </div>
                     </div>
-                    <div class="setup-notice" id="setupNotice" style="display: none;" role="alert" aria-label="Setup instructions">
-                        <h4><i class="fas fa-exclamation-triangle" aria-hidden="true"></i> Setup Required</h4>
-                        <ol>
-                            <li>Join the <a href="https://discord.gg/lanyard" target="_blank" rel="noopener noreferrer">Lanyard Discord Server</a>.</li>
-                            <li>Enable your Discord presence in the Lanyard bot settings.</li>
-                            <li>Refresh this page after setup.</li>
+                    
+                    <!-- Setup Notice -->
+                    <div class="glass-card" id="setupNotice" style="display: none;" role="alert" aria-label="Setup instructions">
+                        <h3 style="margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
+                            <i class="fas fa-exclamation-triangle" aria-hidden="true" style="color: var(--accent-warning);"></i>
+                            Setup Required
+                        </h3>
+                        <ol style="margin-left: var(--space-4); line-height: 1.6;">
+                            <li>Join the <a href="https://discord.gg/lanyard" target="_blank" rel="noopener noreferrer" style="color: var(--accent-primary);">Lanyard Discord Server</a></li>
+                            <li>Enable your Discord presence in the Lanyard bot settings</li>
+                            <li>Refresh this page after setup</li>
                         </ol>
                     </div>
-                    <div class="error-details" id="errorDetails" role="alert" aria-label="Error message"></div>
+                    
+                    <!-- Error Details -->
+                    <div class="glass-card" id="errorDetails" style="display: none;" role="alert" aria-label="Error message">
+                        <p style="color: var(--accent-error); text-align: center;"></p>
+                    </div>
                 </div>
             </div>
         </div>
+        
+        <!-- About Page -->
         <div class="page" id="about" role="region" aria-label="About">
-            <div class="about-container">
-                <h1 class="about-title">About Me</h1>
-                <p class="about-subtitle">A glimpse into my journey as a developer and tech enthusiast</p>
+            <div class="content-container">
+                <div class="page-header">
+                    <h1 class="page-title">About Me</h1>
+                    <p class="page-subtitle">A glimpse into my journey as a developer and tech enthusiast</p>
+                </div>
+                
                 <div class="about-layout">
-                    <div class="about-left">
-                        <div class="about-content">
-                            <p>I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</p>
-                            <p>With a strong foundation in Python, JavaScript, HTML, and CSS, I enjoy building projects that combine functionality with aesthetic design.My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone. Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
-                        </div>
+                    <div class="about-content">
+                        <p>I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</p>
+                        
+                        <p>With a strong foundation in Python, JavaScript, HTML, and CSS, I enjoy building projects that combine functionality with aesthetic design. My goal is to create impactful solutions that make technology more accessible and enjoyable for everyone.</p>
+                        
+                        <p>Feel free to connect with me through my social links to collaborate or discuss exciting tech ideas!</p>
                     </div>
-                    <div class="about-right">
-                        <div class="social-links" role="list">
-                            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link github" title="GitHub" aria-label="GitHub">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link instagram" title="Instagram" aria-label="Instagram">
-                                <i class="fab fa-instagram" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link discord" title="Discord" aria-label="Discord">
-                                <i class="fab fa-discord" aria-hidden="true"></i>
-                            </a>
-                            <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link linkedin" title="LinkedIn" aria-label="LinkedIn">
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                            </a>
-                        </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub Profile">
+                            <i class="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://instagram.com/i.g_asan" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Instagram Profile">
+                            <i class="fab fa-instagram" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://discord.com/users/1282292887878369358" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="Discord Profile">
+                            <i class="fab fa-discord" aria-hidden="true"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/mohd-aasan" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn Profile">
+                            <i class="fab fa-linkedin" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
+        
+        <!-- Projects Page -->
         <div class="page" id="projects" role="region" aria-label="Projects">
-            <div class="projects-container">
-                <div class="projects-header">
-                    <h1 class="projects-title-new">Projects</h1>
-                    <p class="projects-subtitle-new">Explore my open-source contributions and personal projects.</p>
+            <div class="content-container">
+                <div class="page-header">
+                    <h1 class="page-title">Projects</h1>
+                    <p class="page-subtitle">Explore my open-source contributions and personal projects</p>
                 </div>
-                <div class="projects-grid-new">
-                    <div class="project-card-new" data-visible="false">
-                        <div class="project-content-new">
-                            <div class="project-header-new">
-                                <i class="project-icon-new fas fa-code" aria-hidden="true"></i>
-                                <h3 class="project-title-new">Python Tools N Toys</h3>
-                            </div>
-                            <p class="project-description-new">A collection of Python scripts for testing, including a string search tool with memory management.</p>
-                            <div class="project-tech-new">
-                                <span class="tech-tag-new python">Python</span>
-                            </div>
-                            <div class="project-actions-new">
-                                <a href="https://github.com/yokaimsi/Python-Tools-N-Toys" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
-                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
-                                </a>
-                            </div>
+                
+                <div class="projects-grid">
+                    <article class="project-card" style="--delay: 0s;">
+                        <div class="project-header">
+                            <i class="project-icon fas fa-code" aria-hidden="true"></i>
+                            <h3 class="project-title">Python Tools N Toys</h3>
                         </div>
-                    </div>
-                    <div class="project-card-new" data-visible="false">
-                        <div class="project-content-new">
-                            <div class="project-header-new">
-                                <i class="project-icon-new fas fa-code" aria-hidden="true"></i>
-                                <h3 class="project-title-new">ezfetch</h3>
-                            </div>
-                            <p class="project-description-new">A simple and efficient system information fetch tool.</p>
-                            <div class="project-tech-new">
-                                <span class="tech-tag-new python">Python</span>
-                            </div>
-                            <div class="project-actions-new">
-                                <a href="https://github.com/yokaimsi/ezfetch" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
-                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
-                                </a>
-                            </div>
+                        <p class="project-description">A collection of Python scripts for testing, including a string search tool with memory management.</p>
+                        <div class="project-actions">
+                            <a href="https://github.com/yokaimsi/Python-Tools-N-Toys" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>View on GitHub</span>
+                            </a>
                         </div>
-                    </div>
-                    <div class="project-card-new" data-visible="false">
-                        <div class="project-content-new">
-                            <div class="project-header-new">
-                                <i class="project-icon-new fab fa-discord" aria-hidden="true"></i>
-                                <h3 class="project-title-new">Bumblebee Discord Bot</h3>
-                            </div>
-                            <p class="project-description-new">A multifunctional Discord bot with moderation and custom commands.</p>
-                            <div class="project-tech-new">
-                                <span class="tech-tag-new js">JS</span>
-                                <span class="tech-tag-new python">Python</span>
-                            </div>
-                            <div class="project-actions-new">
-                                <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
-                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
-                                </a>
-                                <a href="https://discord.gg/GDxC4aYQxQ" target="_blank" rel="noopener noreferrer" class="project-btn-new discord">
-                                    <i class="fab fa-discord" aria-hidden="true"></i> Discord Server
-                                </a>
-                            </div>
+                    </article>
+                    
+                    <article class="project-card" style="--delay: 0.1s;">
+                        <div class="project-header">
+                            <i class="project-icon fas fa-terminal" aria-hidden="true"></i>
+                            <h3 class="project-title">ezfetch</h3>
                         </div>
-                    </div>
-                    <div class="project-card-new" data-visible="false">
-                        <div class="project-content-new">
-                            <div class="project-header-new">
-                                <i class="project-icon-new fab fa-discord" aria-hidden="true"></i>
-                                <h3 class="project-title-new">Discord Bots</h3>
-                            </div>
-                            <p class="project-description-new">A repository containing various Discord bot implementations.</p>
-                            <div class="project-tech-new">
-                                <span class="tech-tag-new js">JS</span>
-                                <span class="tech-tag-new python">Python</span>
-                            </div>
-                            <div class="project-actions-new">
-                                <a href="https://github.com/yokaimsi/Discord-BOTS" target="_blank" rel="noopener noreferrer" class="project-btn-new github">
-                                    <i class="fab fa-github" aria-hidden="true"></i> GitHub
-                                </a>
-                            </div>
+                        <p class="project-description">A simple and efficient system information fetch tool built with Python.</p>
+                        <div class="project-actions">
+                            <a href="https://github.com/yokaimsi/ezfetch" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>View on GitHub</span>
+                            </a>
                         </div>
-                    </div>
+                    </article>
+                    
+                    <article class="project-card" style="--delay: 0.2s;">
+                        <div class="project-header">
+                            <i class="project-icon fab fa-discord" aria-hidden="true"></i>
+                            <h3 class="project-title">Bumblebee Discord Bot</h3>
+                        </div>
+                        <p class="project-description">A multifunctional Discord bot with moderation and custom commands.</p>
+                        <div class="project-actions">
+                            <a href="https://github.com/yokaimsi" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>View on GitHub</span>
+                            </a>
+                            <a href="https://discord.gg/GDxC4aYQxQ" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fab fa-discord" aria-hidden="true"></i>
+                                <span>Join Server</span>
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <article class="project-card" style="--delay: 0.3s;">
+                        <div class="project-header">
+                            <i class="project-icon fab fa-discord" aria-hidden="true"></i>
+                            <h3 class="project-title">Discord Bots Collection</h3>
+                        </div>
+                        <p class="project-description">A repository containing various Discord bot implementations and utilities.</p>
+                        <div class="project-actions">
+                            <a href="https://github.com/yokaimsi/Discord-BOTS" target="_blank" rel="noopener noreferrer" class="project-btn">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span>View on GitHub</span>
+                            </a>
+                        </div>
+                    </article>
                 </div>
             </div>
         </div>
+        
+        <!-- Skills Page -->
         <div class="page" id="skills" role="region" aria-label="Skills">
-            <div class="skills-container">
-                <h1 class="skills-title">My Skills</h1>
-                <p class="skills-subtitle">A collection of technologies and tools I am proficient in.</p>
-                <div class="skills-grid">
-                    <div class="skill-card" style="--skill-index: 0;" data-visible="false">
-                        <i class="devicon-python-plain" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Python</span>
+            <div class="content-container">
+                <div class="page-header">
+                    <h1 class="page-title">Skills</h1>
+                    <p class="page-subtitle">Technologies and tools I work with</p>
+                </div>
+                
+                <div class="skills-grid" id="skillsGrid">
+                    <div class="skill-card" style="--index: 0;">
+                        <i class="skill-icon devicon-python-plain" aria-hidden="true"></i>
+                        <div class="skill-label">Python</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 1;" data-visible="false">
-                        <i class="fab fa-html5" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">HTML</span>
+                    
+                    <div class="skill-card" style="--index: 1;">
+                        <i class="skill-icon fab fa-html5" aria-hidden="true"></i>
+                        <div class="skill-label">HTML5</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 2;" data-visible="false">
-                        <i class="fab fa-css3-alt" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">CSS</span>
+                    
+                    <div class="skill-card" style="--index: 2;">
+                        <i class="skill-icon fab fa-css3-alt" aria-hidden="true"></i>
+                        <div class="skill-label">CSS3</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 3;" data-visible="false">
-                        <i class="fab fa-js-square" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">JavaScript</span>
+                    
+                    <div class="skill-card" style="--index: 3;">
+                        <i class="skill-icon fab fa-js-square" aria-hidden="true"></i>
+                        <div class="skill-label">JavaScript</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 4;" data-visible="false">
-                        <i class="fab fa-git-alt" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Git</span>
+                    
+                    <div class="skill-card" style="--index: 4;">
+                        <i class="skill-icon fab fa-git-alt" aria-hidden="true"></i>
+                        <div class="skill-label">Git</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 5;" data-visible="false">
-                        <i class="fab fa-github" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">GitHub</span>
+                    
+                    <div class="skill-card" style="--index: 5;">
+                        <i class="skill-icon fab fa-github" aria-hidden="true"></i>
+                        <div class="skill-label">GitHub</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 6;" data-visible="false">
-                        <i class="devicon-vscode-plain" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">VSCode</span>
+                    
+                    <div class="skill-card" style="--index: 6;">
+                        <i class="skill-icon devicon-vscode-plain" aria-hidden="true"></i>
+                        <div class="skill-label">VS Code</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 7;" data-visible="false">
-                        <i class="fas fa-flask" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Flask</span>
+                    
+                    <div class="skill-card" style="--index: 7;">
+                        <i class="skill-icon fas fa-flask" aria-hidden="true"></i>
+                        <div class="skill-label">Flask</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 8;" data-visible="false">
-                        <i class="devicon-sqlite-plain" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">SQLite</span>
+                    
+                    <div class="skill-card" style="--index: 8;">
+                        <i class="skill-icon devicon-sqlite-plain" aria-hidden="true"></i>
+                        <div class="skill-label">SQLite</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 9;" data-visible="false">
-                        <i class="fas fa-cloud" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Vercel</span>
+                    
+                    <div class="skill-card" style="--index: 9;">
+                        <i class="skill-icon fas fa-cloud" aria-hidden="true"></i>
+                        <div class="skill-label">Cloud</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 10;" data-visible="false">
-                        <i class="fab fa-windows" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Windows</span>
+                    
+                    <div class="skill-card" style="--index: 10;">
+                        <i class="skill-icon fab fa-linux" aria-hidden="true"></i>
+                        <div class="skill-label">Linux</div>
                     </div>
-                    <div class="skill-card" style="--skill-index: 11;" data-visible="false">
-                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Kali Linux</span>
-                    </div>
-                    <div class="skill-card" style="--skill-index: 12;" data-visible="false">
-                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Linux Mint</span>
-                    </div>
-                    <div class="skill-card" style="--skill-index: 13;" data-visible="false">
-                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Parrot</span>
-                    </div>
-                    <div class="skill-card" style="--skill-index: 14;" data-visible="false">
-                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Ubuntu</span>
-                    </div>
-                    <div class="skill-card" style="--skill-index: 15;" data-visible="false">
-                        <i class="fab fa-linux" aria-hidden="true" loading="lazy"></i>
-                        <span class="skill-label">Zorin</span>
+                    
+                    <div class="skill-card" style="--index: 11;">
+                        <i class="skill-icon fas fa-terminal" aria-hidden="true"></i>
+                        <div class="skill-label">Terminal</div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
+    
     <script>
+        // Configuration
         const CONFIG = {
             DISCORD_USER_ID: '1282292887878369358',
             LANYARD_WS_URL: 'wss://api.lanyard.rest/socket',
@@ -1211,543 +1822,1180 @@
             TIMEOUT: 15000,
             FALLBACK_AVATAR: 'https://cdn.discordapp.com/embed/avatars/0.png',
             CACHE_KEY: 'discord_status_cache',
-            CACHE_EXPIRY: 30000
+            CACHE_EXPIRY: 30000,
+            PARTICLE_COUNT: window.innerWidth > 768 ? 60 : 0,
+            ANIMATION_DURATION: 300
         };
 
-        let retryCount = 0;
-        let refreshInterval = null;
-        let isConnected = false;
-        let lastFetchTime = 0;
-        let websocket = null;
-        let wsRetryCount = 0;
-
-        const fileTypeIcons = {
-            'html': { icon: 'fab fa-html5', color: '#e34c26' },
-            'css': { icon: 'fab fa-css3-alt', color: '#1572b6' },
-            'js': { icon: 'fab fa-js-square', color: '#f7df1e' },
-            'py': { icon: 'fab fa-python', color: '#3776ab' },
-            'default': { icon: 'fas fa-file', color: '#6c757d' }
+        // State management
+        let state = {
+            retryCount: 0,
+            refreshInterval: null,
+            isConnected: false,
+            lastFetchTime: 0,
+            websocket: null,
+            wsRetryCount: 0,
+            currentTheme: localStorage.getItem('theme') || 'dark',
+            isNavOpen: false,
+            mouseFollower: null,
+            intersectionObserver: null
         };
 
-        function debounce(func, wait) {
-            let timeout;
-            return function (...args) {
-                clearTimeout(timeout);
-                timeout = setTimeout(() => func.apply(this, args), wait);
-            };
-        }
-
-        function throttle(func, limit) {
-            let inThrottle;
-            return function (...args) {
-                if (!inThrottle) {
-                    func.apply(this, args);
-                    inThrottle = true;
-                    setTimeout(() => inThrottle = false, limit);
-                }
-            };
-        }
-
-        function safeImageLoad(img, src, fallback) {
-            return new Promise((resolve) => {
-                const tempImg = new Image();
-                tempImg.onload = () => {
-                    img.src = src;
-                    resolve(true);
+        // Utility functions
+        const utils = {
+            debounce(func, wait) {
+                let timeout;
+                return function executedFunction(...args) {
+                    const later = () => {
+                        clearTimeout(timeout);
+                        func(...args);
+                    };
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
                 };
-                tempImg.onerror = () => {
-                    img.src = fallback;
-                    resolve(false);
-                };
-                tempImg.src = src;
-            });
-        }
+            },
 
-        function formatTimestamp(timestamp) {
-            if (!timestamp) return 'Just started';
-            const now = Date.now();
-            const elapsed = now - timestamp;
-            const minutes = Math.floor(elapsed / 60000);
-            const hours = Math.floor(minutes / 60);
-            return hours > 0 ? `${hours}h ${minutes % 60}m elapsed` : `${minutes}m elapsed`;
-        }
-
-        function getFileTypeIcon(filename) {
-            const extension = filename?.split('.').pop()?.toLowerCase() || 'default';
-            return fileTypeIcons[extension] || fileTypeIcons.default;
-        }
-
-        function createParticles() {
-            if (window.innerWidth <= 768) return;
-            const particlesContainer = document.getElementById('particles');
-            particlesContainer.innerHTML = '';
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        function shouldShowActivity(pageId) {
-            return window.innerWidth > 768 || pageId === 'home';
-        }
-
-        function initNavigation() {
-            const nav = document.querySelector('.nav');
-            const hamburger = document.getElementById('hamburger');
-            const navLinks = document.querySelectorAll('.nav-link');
-            const pages = document.querySelectorAll('.page');
-            const indicator = document.getElementById('navIndicator');
-
-            nav.style.visibility = 'visible';
-            nav.style.opacity = '1';
-
-            function updateIndicatorPosition() {
-                if (window.innerWidth > 768) {
-                    const activeLink = document.querySelector('.nav-link.active');
-                    if (activeLink) {
-                        const left = activeLink.offsetLeft;
-                        const width = activeLink.offsetWidth;
-                        indicator.style.left = left + 'px';
-                        indicator.style.width = width + 'px';
+            throttle(func, limit) {
+                let inThrottle;
+                return function(...args) {
+                    if (!inThrottle) {
+                        func.apply(this, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
                     }
-                }
+                };
+            },
+
+            lerp(start, end, factor) {
+                return start + (end - start) * factor;
+            },
+
+            random(min, max) {
+                return Math.random() * (max - min) + min;
+            },
+
+            safeImageLoad(img, src, fallback) {
+                return new Promise((resolve) => {
+                    const tempImg = new Image();
+                    tempImg.onload = () => {
+                        img.src = src;
+                        img.classList.remove('error');
+                        resolve(true);
+                    };
+                    tempImg.onerror = () => {
+                        img.src = fallback;
+                        img.classList.add('error');
+                        resolve(false);
+                    };
+                    tempImg.src = src;
+                });
+            },
+
+            formatTimestamp(timestamp) {
+                if (!timestamp) return 'Just started';
+                const now = Date.now();
+                const elapsed = now - timestamp;
+                const minutes = Math.floor(elapsed / 60000);
+                const hours = Math.floor(minutes / 60);
+                const days = Math.floor(hours / 24);
+                
+                if (days > 0) return `${days}d ${hours % 24}h elapsed`;
+                if (hours > 0) return `${hours}h ${minutes % 60}m elapsed`;
+                return `${minutes}m elapsed`;
+            },
+
+            animateValue(obj, start, end, duration, callback) {
+                const startTime = performance.now();
+                const animate = (currentTime) => {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const easeProgress = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+                    const value = start + (end - start) * easeProgress;
+                    
+                    callback(value);
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                };
+                requestAnimationFrame(animate);
             }
+        };
 
-            hamburger.addEventListener('click', () => {
-                nav.classList.toggle('nav-open');
-                hamburger.setAttribute('aria-expanded', nav.classList.contains('nav-open'));
-                hamburger.querySelector('i').className = nav.classList.contains('nav-open') ? 'fas fa-times' : 'fas fa-bars';
-            });
+        // Theme management
+        const themeManager = {
+            init() {
+                this.setTheme(state.currentTheme);
+                this.bindEvents();
+            },
 
-            navLinks.forEach((link) => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetPage = link.getAttribute('data-page');
-                    navLinks.forEach(nl => {
-                        nl.classList.remove('active');
-                        nl.removeAttribute('aria-current');
+            setTheme(theme) {
+                state.currentTheme = theme;
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                
+                const themeIcon = document.querySelector('#themeToggle i');
+                if (themeIcon) {
+                    themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+                }
+            },
+
+            toggle() {
+                const newTheme = state.currentTheme === 'dark' ? 'light' : 'dark';
+                this.setTheme(newTheme);
+                
+                // Animate theme transition
+                document.body.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                setTimeout(() => {
+                    document.body.style.transition = '';
+                }, 500);
+            },
+
+            bindEvents() {
+                const toggleBtn = document.getElementById('themeToggle');
+                if (toggleBtn) {
+                    toggleBtn.addEventListener('click', () => this.toggle());
+                    toggleBtn.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.toggle();
+                        }
                     });
-                    pages.forEach(page => page.classList.remove('active'));
-                    link.classList.add('active');
-                    link.setAttribute('aria-current', 'page');
-                    document.getElementById(targetPage).classList.add('active');
-                    updateIndicatorPosition();
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                    document.body.style.overflow = targetPage === 'home' ? 'hidden' : 'auto';
-                    if (window.innerWidth <= 768) {
-                        nav.classList.remove('nav-open');
-                        hamburger.setAttribute('aria-expanded', 'false');
-                        hamburger.querySelector('i').className = 'fas fa-bars';
+                }
+            }
+        };
+
+        // Enhanced particle system
+        const particleSystem = {
+            particles: [],
+            canvas: null,
+            ctx: null,
+            mouse: { x: 0, y: 0, radius: 100 },
+
+            init() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    return;
+                }
+
+                this.createCanvas();
+                this.createParticles();
+                this.bindEvents();
+                this.animate();
+            },
+
+            createCanvas() {
+                const container = document.getElementById('particles');
+                if (!container) return;
+
+                this.canvas = document.createElement('canvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.canvas.style.position = 'absolute';
+                this.canvas.style.top = '0';
+                this.canvas.style.left = '0';
+                this.canvas.style.pointerEvents = 'none';
+                
+                this.resize();
+                container.appendChild(this.canvas);
+            },
+
+            createParticles() {
+                this.particles = [];
+                for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
+                    this.particles.push({
+                        x: utils.random(0, window.innerWidth),
+                        y: utils.random(window.innerHeight, window.innerHeight + 100),
+                        size: utils.random(1, 4),
+                        speedX: utils.random(-0.5, 0.5),
+                        speedY: utils.random(-2, -0.5),
+                        opacity: utils.random(0.1, 0.8),
+                        color: Math.random() > 0.5 ? 'var(--accent-primary)' : 'var(--accent-secondary)',
+                        life: utils.random(0.8, 1)
+                    });
+                }
+            },
+
+            animate() {
+                if (!this.ctx) return;
+                
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.particles.forEach((particle, index) => {
+                    // Mouse interaction
+                    const dx = this.mouse.x - particle.x;
+                    const dy = this.mouse.y - particle.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance < this.mouse.radius) {
+                        const force = (this.mouse.radius - distance) / this.mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        particle.x -= Math.cos(angle) * force * 2;
+                        particle.y -= Math.sin(angle) * force * 2;
+                    }
+                    
+                    // Update position
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+                    particle.life -= 0.002;
+                    
+                    // Reset particle if out of bounds or life ended
+                    if (particle.y < -10 || particle.life <= 0 || particle.x < -10 || particle.x > this.canvas.width + 10) {
+                        particle.x = utils.random(0, this.canvas.width);
+                        particle.y = this.canvas.height + utils.random(0, 100);
+                        particle.life = 1;
+                        particle.opacity = utils.random(0.1, 0.8);
+                    }
+                    
+                    // Draw particle
+                    this.ctx.save();
+                    this.ctx.globalAlpha = particle.opacity * particle.life;
+                    this.ctx.fillStyle = particle.color;
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fill();
+                    this.ctx.restore();
+                });
+                
+                requestAnimationFrame(() => this.animate());
+            },
+
+            resize() {
+                if (!this.canvas) return;
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            },
+
+            bindEvents() {
+                window.addEventListener('resize', utils.debounce(() => this.resize(), 200));
+                document.addEventListener('mousemove', utils.throttle((e) => {
+                    this.mouse.x = e.clientX;
+                    this.mouse.y = e.clientY;
+                }, 16));
+            }
+        };
+
+        // Mouse follower
+        const mouseFollower = {
+            element: null,
+            mouse: { x: 0, y: 0 },
+            pos: { x: 0, y: 0 },
+
+            init() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    return;
+                }
+
+                this.element = document.querySelector('.mouse-follower');
+                if (!this.element) return;
+
+                this.bindEvents();
+                this.animate();
+            },
+
+            bindEvents() {
+                document.addEventListener('mousemove', (e) => {
+                    this.mouse.x = e.clientX;
+                    this.mouse.y = e.clientY;
+                });
+
+                document.addEventListener('mouseenter', () => {
+                    this.element.classList.add('active');
+                });
+
+                document.addEventListener('mouseleave', () => {
+                    this.element.classList.remove('active');
+                });
+
+                // Interactive elements
+                const interactiveElements = document.querySelectorAll('a, button, .nav-link, .project-card, .skill-card');
+                interactiveElements.forEach(el => {
+                    el.addEventListener('mouseenter', () => {
+                        this.element.style.transform = 'scale(1.5)';
+                        this.element.style.background = 'radial-gradient(circle, var(--accent-secondary) 0%, transparent 70%)';
+                    });
+                    
+                    el.addEventListener('mouseleave', () => {
+                        this.element.style.transform = 'scale(1)';
+                        this.element.style.background = 'radial-gradient(circle, var(--accent-primary) 0%, transparent 70%)';
+                    });
+                });
+            },
+
+            animate() {
+                this.pos.x = utils.lerp(this.pos.x, this.mouse.x, 0.15);
+                this.pos.y = utils.lerp(this.pos.y, this.mouse.y, 0.15);
+                
+                this.element.style.left = `${this.pos.x - 20}px`;
+                this.element.style.top = `${this.pos.y - 20}px`;
+                
+                requestAnimationFrame(() => this.animate());
+            }
+        };
+
+        // Enhanced navigation
+        const navigation = {
+            nav: null,
+            links: null,
+            mobileToggle: null,
+
+            init() {
+                this.nav = document.querySelector('.nav');
+                this.links = document.querySelectorAll('.nav-link');
+                this.mobileToggle = document.getElementById('mobileNavToggle');
+                
+                this.bindEvents();
+                this.setupIntersectionObserver();
+            },
+
+            bindEvents() {
+                // Navigation links
+                this.links.forEach((link) => {
+                    link.addEventListener('click', (e) => this.handleNavClick(e));
+                    
+                    // Enhanced keyboard navigation
+                    link.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.handleNavClick(e);
+                        }
+                    });
+                });
+
+                // Mobile toggle
+                if (this.mobileToggle) {
+                    this.mobileToggle.addEventListener('click', () => this.toggleMobileNav());
+                    this.mobileToggle.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            this.toggleMobileNav();
+                        }
+                    });
+                }
+
+                // Close mobile nav on escape
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && state.isNavOpen) {
+                        this.closeMobileNav();
                     }
                 });
-            });
 
-            window.addEventListener('resize', debounce(() => {
-                updateIndicatorPosition();
-                createParticles();
-                if (window.innerWidth > 768) {
-                    nav.classList.remove('nav-open');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    hamburger.querySelector('i').className = 'fas fa-bars';
-                }
-            }, 100));
-
-            updateIndicatorPosition();
-        }
-
-        function lazyLoadCards() {
-            const cards = document.querySelectorAll('.project-card-new, .skill-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    entry.target.setAttribute('data-visible', entry.isIntersecting);
-                });
-            }, { threshold: 0.1 });
-            cards.forEach(card => observer.observe(card));
-        }
-
-        function disableDevTools() {
-            document.addEventListener('contextmenu', (e) => e.preventDefault());
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C')) || (e.ctrlKey && e.key === 'u')) {
-                    e.preventDefault();
-                }
-            });
-        }
-
-        function getCachedData() {
-            const cached = localStorage.getItem(CONFIG.CACHE_KEY);
-            if (!cached) return null;
-            const { data, timestamp } = JSON.parse(cached);
-            if (Date.now() - timestamp < CONFIG.CACHE_EXPIRY) {
-                return data;
-            }
-            localStorage.removeItem(CONFIG.CACHE_KEY);
-            return null;
-        }
-
-        function setCachedData(data) {
-            localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({
-                data,
-                timestamp: Date.now()
-            }));
-        }
-
-        async function fetchDiscordStatusFallback() {
-            const loadingContainer = document.getElementById('loading');
-            const profileContainer = document.getElementById('profile');
-            const errorDetails = document.getElementById('errorDetails');
-            const setupNotice = document.getElementById('setupNotice');
-
-            try {
-                const cachedData = getCachedData();
-                if (cachedData && Date.now() - lastFetchTime < CONFIG.REFRESH_INTERVAL) {
-                    isConnected = true;
-                    loadingContainer.style.display = 'none';
-                    profileContainer.style.display = 'block';
-                    setupNotice.style.display = 'none';
-                    errorDetails.style.display = 'none';
-                    updateDiscordProfile(cachedData);
-                    return;
-                }
-
-                loadingContainer.style.display = 'flex';
-                profileContainer.style.display = 'none';
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
-                const response = await fetch(`${CONFIG.LANYARD_HTTP_URL}${CONFIG.DISCORD_USER_ID}`, {
-                    signal: controller.signal,
-                    headers: { 'Accept': 'application/json' }
-                });
-                clearTimeout(timeoutId);
-
-                if (!response.ok) {
-                    if (response.status === 404) {
-                        throw new Error('User not found. Ensure the Discord user ID is registered with Lanyard.');
+                // Close mobile nav on outside click
+                document.addEventListener('click', (e) => {
+                    if (state.isNavOpen && !this.nav.contains(e.target)) {
+                        this.closeMobileNav();
                     }
-                    throw new Error(`HTTP error: ${response.status} ${response.statusText}`);
+                });
+
+                // Handle window resize
+                window.addEventListener('resize', utils.debounce(() => {
+                    if (window.innerWidth > 768 && state.isNavOpen) {
+                        this.closeMobileNav();
+                    }
+                }, 200));
+            },
+
+            handleNavClick(e) {
+                e.preventDefault();
+                const targetPage = e.currentTarget.getAttribute('data-page');
+                this.showPage(targetPage);
+                
+                if (state.isNavOpen) {
+                    this.closeMobileNav();
+                }
+            },
+
+            showPage(pageId) {
+                // Update active states
+                this.links.forEach(link => {
+                    link.classList.remove('active');
+                    link.removeAttribute('aria-current');
+                });
+                
+                const activeLink = document.querySelector(`[data-page="${pageId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                    activeLink.setAttribute('aria-current', 'page');
                 }
 
-                const data = await response.json();
-                if (!data.success) {
-                    throw new Error(data.error?.message || 'Unknown Lanyard API error');
+                // Show target page with smooth transition
+                const pages = document.querySelectorAll('.page');
+                pages.forEach(page => {
+                    page.classList.remove('active');
+                    page.style.display = 'none';
+                });
+
+                const targetPage = document.getElementById(pageId);
+                if (targetPage) {
+                    targetPage.style.display = 'block';
+                    
+                    // Smooth transition
+                    requestAnimationFrame(() => {
+                        targetPage.classList.add('active');
+                    });
                 }
 
-                isConnected = true;
-                retryCount = 0;
-                lastFetchTime = Date.now();
-                setCachedData(data.data);
-                loadingContainer.style.display = 'none';
-                profileContainer.style.display = 'block';
-                setupNotice.style.display = 'none';
-                errorDetails.style.display = 'none';
-                updateDiscordProfile(data.data);
-            } catch (error) {
-                retryCount++;
-                let errorMessage = error.message || 'An unknown error occurred';
-                if (error.name === 'AbortError') {
-                    errorMessage = 'Request timed out';
-                } else if (error.message.includes('Failed to fetch')) {
-                    errorMessage = 'Network error: Failed to connect to Lanyard API';
-                }
+                // Update document title
+                document.title = `yokaimsi - ${pageId.charAt(0).toUpperCase() + pageId.slice(1)}`;
+                
+                // Smooth scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Update URL without page reload
+                history.pushState({ page: pageId }, '', `#${pageId}`);
+            },
 
-                if (retryCount < CONFIG.RETRY_ATTEMPTS) {
-                    setTimeout(fetchDiscordStatusFallback, CONFIG.RETRY_DELAY);
-                    return;
+            toggleMobileNav() {
+                state.isNavOpen = !state.isNavOpen;
+                this.nav.classList.toggle('nav-open', state.isNavOpen);
+                
+                const icon = this.mobileToggle.querySelector('i');
+                icon.className = state.isNavOpen ? 'fas fa-times' : 'fas fa-bars';
+                
+                this.mobileToggle.setAttribute('aria-expanded', state.isNavOpen.toString());
+                
+                // Focus management
+                if (state.isNavOpen) {
+                    this.links[0].focus();
                 }
+            },
 
-                const cachedData = getCachedData();
-                if (cachedData) {
-                    isConnected = true;
-                    loadingContainer.style.display = 'none';
-                    profileContainer.style.display = 'block';
-                    setupNotice.style.display = 'none';
-                    errorDetails.style.display = 'none';
-                    updateDiscordProfile(cachedData);
-                    return;
-                }
+            closeMobileNav() {
+                state.isNavOpen = false;
+                this.nav.classList.remove('nav-open');
+                
+                const icon = this.mobileToggle.querySelector('i');
+                icon.className = 'fas fa-bars';
+                
+                this.mobileToggle.setAttribute('aria-expanded', 'false');
+            },
 
-                loadingContainer.style.display = 'none';
-                profileContainer.style.display = 'block';
-                errorDetails.style.display = 'block';
-                errorDetails.textContent = `Error: ${errorMessage}`;
-                if (errorMessage.includes('User not found')) {
-                    setupNotice.style.display = 'block';
-                }
-                showOfflineState();
+            setupIntersectionObserver() {
+                const options = {
+                    threshold: 0.7,
+                    rootMargin: '-20% 0px -20% 0px'
+                };
+
+                state.intersectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const pageId = entry.target.id;
+                            const currentActive = document.querySelector('.nav-link.active');
+                            const targetLink = document.querySelector(`[data-page="${pageId}"]`);
+                            
+                            if (currentActive !== targetLink) {
+                                this.links.forEach(link => {
+                                    link.classList.remove('active');
+                                    link.removeAttribute('aria-current');
+                                });
+                                
+                                if (targetLink) {
+                                    targetLink.classList.add('active');
+                                    targetLink.setAttribute('aria-current', 'page');
+                                }
+                            }
+                        }
+                    });
+                }, options);
+
+                document.querySelectorAll('.page').forEach(page => {
+                    state.intersectionObserver.observe(page);
+                });
             }
-        }
+        };
 
-        function initWebSocket() {
-            try {
-                websocket = new WebSocket(CONFIG.LANYARD_WS_URL);
+        // Discord integration
+        const discordIntegration = {
+            init() {
+                this.initWebSocket();
+                this.startStatusRefresh();
+            },
+
+            getCachedData() {
+                try {
+                    const cached = localStorage.getItem(CONFIG.CACHE_KEY);
+                    if (!cached) return null;
+                    
+                    const { data, timestamp } = JSON.parse(cached);
+                    if (Date.now() - timestamp < CONFIG.CACHE_EXPIRY) {
+                        return data;
+                    }
+                    localStorage.removeItem(CONFIG.CACHE_KEY);
+                    return null;
+                } catch (error) {
+                    console.warn('Failed to parse cached data:', error);
+                    localStorage.removeItem(CONFIG.CACHE_KEY);
+                    return null;
+                }
+            },
+
+            setCachedData(data) {
+                try {
+                    localStorage.setItem(CONFIG.CACHE_KEY, JSON.stringify({
+                        data,
+                        timestamp: Date.now()
+                    }));
+                } catch (error) {
+                    console.warn('Failed to cache data:', error);
+                }
+            },
+
+            async fetchDiscordStatusFallback() {
                 const loadingContainer = document.getElementById('loading');
                 const profileContainer = document.getElementById('profile');
                 const errorDetails = document.getElementById('errorDetails');
                 const setupNotice = document.getElementById('setupNotice');
 
-                websocket.onopen = () => {
-                    wsRetryCount = 0;
-                    isConnected = true;
-                    loadingContainer.style.display = 'none';
-                    profileContainer.style.display = 'block';
-                    errorDetails.style.display = 'none';
-                    setupNotice.style.display = 'none';
-                    websocket.send(JSON.stringify({ op: 2, d: { subscribe_to_id: CONFIG.DISCORD_USER_ID } }));
-                    setInterval(() => {
-                        if (websocket.readyState === WebSocket.OPEN) {
-                            websocket.send(JSON.stringify({ op: 3 }));
+                try {
+                    // Try cached data first
+                    const cachedData = this.getCachedData();
+                    if (cachedData && Date.now() - state.lastFetchTime < CONFIG.REFRESH_INTERVAL) {
+                        this.showProfile(cachedData);
+                        return;
+                    }
+
+                    // Show loading state
+                    this.showLoading();
+
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), CONFIG.TIMEOUT);
+
+                    const response = await fetch(`${CONFIG.LANYARD_HTTP_URL}${CONFIG.DISCORD_USER_ID}`, {
+                        signal: controller.signal,
+                        headers: { 
+                            'Accept': 'application/json',
+                            'User-Agent': 'yokaimsi-portfolio/1.0'
                         }
-                    }, 30000);
-                };
+                    });
 
-                websocket.onmessage = (event) => {
-                    try {
-                        const data = JSON.parse(event.data);
-                        if (data.op === 0 && data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE') {
-                            lastFetchTime = Date.now();
-                            setCachedData(data.d);
-                            updateDiscordProfile(data.d);
+                    clearTimeout(timeoutId);
+
+                    if (!response.ok) {
+                        if (response.status === 404) {
+                            throw new Error('User not found. Ensure the Discord user ID is registered with Lanyard.');
                         }
-                    } catch (e) {
-                        errorDetails.style.display = 'block';
-                        errorDetails.textContent = 'Error: Failed to parse WebSocket data';
+                        throw new Error(`HTTP error: ${response.status} ${response.statusText}`);
                     }
-                };
 
-                websocket.onerror = () => {
-                    wsRetryCount++;
-                    if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
-                        setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
-                    } else {
-                        errorDetails.style.display = 'block';
-                        errorDetails.textContent = 'Error: WebSocket connection failed, falling back to HTTP';
-                        fetchDiscordStatusFallback();
+                    const data = await response.json();
+                    if (!data.success) {
+                        throw new Error(data.error?.message || 'Unknown Lanyard API error');
                     }
-                };
 
-                websocket.onclose = () => {
-                    wsRetryCount++;
-                    if (wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
-                        setTimeout(initWebSocket, CONFIG.RETRY_DELAY);
-                    } else {
-                        errorDetails.style.display = 'block';
-                        errorDetails.textContent = 'Error: WebSocket closed, falling back to HTTP';
-                        fetchDiscordStatusFallback();
+                    // Success
+                    state.isConnected = true;
+                    state.retryCount = 0;
+                    state.lastFetchTime = Date.now();
+                    this.setCachedData(data.data);
+                    this.showProfile(data.data);
+
+                } catch (error) {
+                    console.error('Discord fetch error:', error);
+                    state.retryCount++;
+
+                    let errorMessage = error.message || 'An unknown error occurred';
+                    if (error.name === 'AbortError') {
+                        errorMessage = 'Request timed out';
+                    } else if (error.message.includes('Failed to fetch')) {
+                        errorMessage = 'Network error: Failed to connect to Lanyard API';
                     }
-                };
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: WebSocket initialization failed';
-                fetchDiscordStatusFallback();
-            }
-        }
 
-        function showOfflineState() {
-            try {
+                    // Retry logic
+                    if (state.retryCount < CONFIG.RETRY_ATTEMPTS) {
+                        console.log(`Retrying... (${state.retryCount}/${CONFIG.RETRY_ATTEMPTS})`);
+                        setTimeout(() => this.fetchDiscordStatusFallback(), CONFIG.RETRY_DELAY);
+                        return;
+                    }
+
+                    // Try cached data as fallback
+                    const cachedData = this.getCachedData();
+                    if (cachedData) {
+                        this.showProfile(cachedData);
+                        return;
+                    }
+
+                    // Show error state
+                    this.showError(errorMessage);
+                    if (errorMessage.includes('User not found')) {
+                        setupNotice.style.display = 'block';
+                    }
+                }
+            },
+
+            initWebSocket() {
+                try {
+                    state.websocket = new WebSocket(CONFIG.LANYARD_WS_URL);
+
+                    state.websocket.onopen = () => {
+                        console.log('WebSocket connected');
+                        state.wsRetryCount = 0;
+                        state.isConnected = true;
+                        
+                        // Subscribe to user
+                        state.websocket.send(JSON.stringify({ 
+                            op: 2, 
+                            d: { subscribe_to_id: CONFIG.DISCORD_USER_ID } 
+                        }));
+
+                        // Setup heartbeat
+                        const heartbeat = setInterval(() => {
+                            if (state.websocket.readyState === WebSocket.OPEN) {
+                                state.websocket.send(JSON.stringify({ op: 3 }));
+                            } else {
+                                clearInterval(heartbeat);
+                            }
+                        }, 30000);
+                    };
+
+                    state.websocket.onmessage = (event) => {
+                        try {
+                            const data = JSON.parse(event.data);
+                            if (data.op === 0 && (data.t === 'INIT_STATE' || data.t === 'PRESENCE_UPDATE')) {
+                                state.lastFetchTime = Date.now();
+                                this.setCachedData(data.d);
+                                this.showProfile(data.d);
+                            }
+                        } catch (error) {
+                            console.error('WebSocket message parse error:', error);
+                        }
+                    };
+
+                    state.websocket.onerror = (error) => {
+                        console.error('WebSocket error:', error);
+                        state.wsRetryCount++;
+                        this.handleWebSocketFailure();
+                    };
+
+                    state.websocket.onclose = (event) => {
+                        console.log('WebSocket closed:', event.code, event.reason);
+                        state.wsRetryCount++;
+                        this.handleWebSocketFailure();
+                    };
+
+                } catch (error) {
+                    console.error('WebSocket initialization failed:', error);
+                    this.fetchDiscordStatusFallback();
+                }
+            },
+
+            handleWebSocketFailure() {
+                if (state.wsRetryCount < CONFIG.RETRY_ATTEMPTS) {
+                    console.log(`WebSocket retry ${state.wsRetryCount}/${CONFIG.RETRY_ATTEMPTS}`);
+                    setTimeout(() => this.initWebSocket(), CONFIG.RETRY_DELAY);
+                } else {
+                    console.log('WebSocket failed, falling back to HTTP');
+                    this.fetchDiscordStatusFallback();
+                }
+            },
+
+            showLoading() {
+                const loadingContainer = document.getElementById('loading');
+                const profileContainer = document.getElementById('profile');
+                const errorDetails = document.getElementById('errorDetails');
+                const setupNotice = document.getElementById('setupNotice');
+
+                loadingContainer.style.display = 'flex';
+                profileContainer.style.display = 'none';
+                errorDetails.style.display = 'none';
+                setupNotice.style.display = 'none';
+
+                // Animate loading text
+                this.animateLoadingText();
+            },
+
+            showProfile(userData) {
+                const loadingContainer = document.getElementById('loading');
+                const profileContainer = document.getElementById('profile');
+                const errorDetails = document.getElementById('errorDetails');
+                const setupNotice = document.getElementById('setupNotice');
+
+                loadingContainer.style.display = 'none';
+                profileContainer.style.display = 'block';
+                errorDetails.style.display = 'none';
+                setupNotice.style.display = 'none';
+
+                this.updateProfile(userData);
+            },
+
+            showError(message) {
+                const loadingContainer = document.getElementById('loading');
+                const profileContainer = document.getElementById('profile');
+                const errorDetails = document.getElementById('errorDetails');
+
+                loadingContainer.style.display = 'none';
+                profileContainer.style.display = 'block';
+                errorDetails.style.display = 'block';
+                errorDetails.querySelector('p').textContent = `Error: ${message}`;
+
+                this.showOfflineState();
+            },
+
+            showOfflineState() {
                 const avatar = document.getElementById('avatar');
                 const username = document.getElementById('username');
                 const discriminator = document.getElementById('discriminator');
 
-                safeImageLoad(avatar, CONFIG.FALLBACK_AVATAR, CONFIG.FALLBACK_AVATAR).then((success) => {
-                    avatar.classList.toggle('error', !success);
-                });
-
+                utils.safeImageLoad(avatar, CONFIG.FALLBACK_AVATAR, CONFIG.FALLBACK_AVATAR);
                 username.textContent = 'yokaimsi';
                 discriminator.textContent = '@yokaimsi';
                 avatar.alt = 'yokaimsi\'s avatar';
-                updateStatus('offline');
-                updateCustomStatus([]);
-                updateActivities([]);
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to display offline state';
-            }
-        }
 
-        function updateDiscordProfile(userData) {
-            try {
-                const avatar = document.getElementById('avatar');
-                const username = document.getElementById('username');
-                const discriminator = document.getElementById('discriminator');
-                const avatarUrl = userData.discord_user?.avatar 
-                    ? `https://cdn.discordapp.com/avatars/${CONFIG.DISCORD_USER_ID}/${userData.discord_user.avatar}.png?size=128`
-                    : CONFIG.FALLBACK_AVATAR;
+                this.updateStatus('offline');
+                this.updateCustomStatus([]);
+                this.updateActivities([]);
+            },
 
-                safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR).then((success) => {
-                    avatar.classList.toggle('error', !success);
-                });
+            updateProfile(userData) {
+                try {
+                    const avatar = document.getElementById('avatar');
+                    const username = document.getElementById('username');
+                    const discriminator = document.getElementById('discriminator');
 
-                username.textContent = userData.discord_user?.username || 'yokaimsi';
-                discriminator.textContent = `@${userData.discord_user?.username || 'yokaimsi'}`;
-                avatar.alt = `${userData.discord_user?.username || 'yokaimsi'}'s avatar`;
+                    const avatarUrl = userData.discord_user?.avatar 
+                        ? `https://cdn.discordapp.com/avatars/${CONFIG.DISCORD_USER_ID}/${userData.discord_user.avatar}.png?size=256`
+                        : CONFIG.FALLBACK_AVATAR;
 
-                updateStatus(userData.discord_status || 'offline');
-                updateCustomStatus(userData.activities || []);
-                updateActivities(userData.activities || []);
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to update profile';
-                showOfflineState();
-            }
-        }
+                    utils.safeImageLoad(avatar, avatarUrl, CONFIG.FALLBACK_AVATAR);
+                    username.textContent = userData.discord_user?.username || 'yokaimsi';
+                    discriminator.textContent = `@${userData.discord_user?.username || 'yokaimsi'}`;
+                    avatar.alt = `${userData.discord_user?.username || 'yokaimsi'}'s avatar`;
 
-        function updateStatus(status) {
-            try {
+                    this.updateStatus(userData.discord_status || 'offline');
+                    this.updateCustomStatus(userData.activities || []);
+                    this.updateActivities(userData.activities || []);
+
+                } catch (error) {
+                    console.error('Profile update error:', error);
+                    this.showOfflineState();
+                }
+            },
+
+            updateStatus(status) {
                 const statusDot = document.getElementById('statusDot');
+                const statusBadge = document.getElementById('statusBadge');
                 const statusText = document.getElementById('statusText');
-                if (statusDot && statusText) {
+
+                if (statusDot && statusBadge && statusText) {
+                    // Remove all status classes
                     statusDot.className = 'status-dot';
+                    statusBadge.className = 'status-indicator-badge';
+
                     switch (status) {
                         case 'online':
-                            statusText.textContent = 'Online';
                             statusDot.classList.add('online');
+                            statusBadge.classList.add('online');
+                            statusText.textContent = 'Online';
                             break;
                         case 'idle':
-                            statusText.textContent = 'Away';
                             statusDot.classList.add('idle');
+                            statusBadge.classList.add('idle');
+                            statusText.textContent = 'Away';
                             break;
                         case 'dnd':
-                            statusText.textContent = 'Do Not Disturb';
                             statusDot.classList.add('dnd');
+                            statusBadge.classList.add('dnd');
+                            statusText.textContent = 'Do Not Disturb';
                             break;
                         default:
-                            statusText.textContent = 'Offline';
                             statusDot.classList.add('offline');
+                            statusBadge.classList.add('offline');
+                            statusText.textContent = 'Offline';
                             break;
                     }
                 }
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to update status';
-            }
-        }
+            },
 
-        function updateCustomStatus(activities) {
-            try {
+            updateCustomStatus(activities) {
                 const customStatus = document.getElementById('customStatus');
-                const unifiedCard = document.querySelector('.unified-status-card');
-                if (customStatus && unifiedCard) {
-                    const customActivity = activities.find(activity => activity.type === 4 && activity.state);
-                    if (customActivity && customActivity.state) {
-                        customStatus.textContent = customActivity.state;
-                        customStatus.style.display = 'block';
-                        unifiedCard.classList.add('custom-activity');
-                    } else {
-                        customStatus.style.display = 'none';
-                        unifiedCard.classList.remove('custom-activity');
-                    }
+                if (!customStatus) return;
+
+                const customActivity = activities.find(activity => activity.type === 4 && activity.state);
+                if (customActivity && customActivity.state) {
+                    customStatus.textContent = customActivity.state;
+                    customStatus.style.display = 'block';
+                } else {
+                    customStatus.style.display = 'none';
                 }
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to update custom status';
-            }
-        }
+            },
 
-        function updateActivities(activities) {
-            try {
+            updateActivities(activities) {
                 const activitySection = document.getElementById('activitySection');
-                const activityHeader = document.getElementById('activityHeader');
-                const activityHeaderText = document.getElementById('activityHeaderText');
-                const activityName = document.getElementById('activityName');
-                const activityFileInfo = document.getElementById('activityFileInfo');
-                const fileTypeIcon = document.getElementById('fileTypeIcon');
-                const activityDetails = document.getElementById('activityDetails');
-                const activityDetailsNoFile = document.getElementById('activityDetailsNoFile');
-                const activityState = document.getElementById('activityState');
-                const activityTimestamp = document.getElementById('activityTimestamp');
-                const unifiedCard = document.querySelector('.unified-status-card');
-
-                if (!activitySection || !unifiedCard) return;
+                if (!activitySection) return;
 
                 const priorityActivity = activities.find(activity => activity.type === 0 || activity.type === 2);
 
-                if (!priorityActivity || !shouldShowActivity('home')) {
+                if (!priorityActivity) {
                     activitySection.style.display = 'none';
-                    unifiedCard.classList.remove('spotify-activity', 'game-activity');
                     return;
                 }
 
                 activitySection.style.display = 'block';
-                unifiedCard.classList.remove('spotify-activity', 'game-activity');
+                
+                const activityHeader = document.getElementById('activityHeader');
+                const activityHeaderText = document.getElementById('activityHeaderText');
+                const activityName = document.getElementById('activityName');
+                const activityDetailsText = document.getElementById('activityDetailsText');
+                const activityState = document.getElementById('activityState');
+                const activityTimestamp = document.getElementById('activityTimestamp');
 
                 if (priorityActivity.type === 2) {
-                    unifiedCard.classList.add('spotify-activity');
+                    // Spotify activity
                     activityHeaderText.textContent = 'Listening to Spotify';
                     activityHeader.querySelector('i').className = 'fab fa-spotify';
                     activityName.textContent = priorityActivity.details || 'Unknown Track';
-                    activityDetailsNoFile.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
+                    activityDetailsText.textContent = `by ${priorityActivity.state || 'Unknown Artist'}`;
                     activityState.textContent = `on ${priorityActivity.assets?.large_text || 'Spotify'}`;
-                    activityFileInfo.style.display = 'none';
-                    activityTimestamp.textContent = priorityActivity.timestamps?.start 
-                        ? formatTimestamp(priorityActivity.timestamps.start) 
-                        : 'Just started';
-                } else if (priorityActivity.type === 0) {
-                    unifiedCard.classList.add('game-activity');
-                    activityHeaderText.textContent = priorityActivity.assets?.large_text || 'Current Activity';
+                } else {
+                    // Game/Application activity
+                    activityHeaderText.textContent = 'Currently Active';
                     activityHeader.querySelector('i').className = 'fas fa-gamepad';
                     activityName.textContent = priorityActivity.name || 'Unknown Activity';
-
-                    const fileExtension = priorityActivity.details?.split('.').pop()?.toLowerCase();
-                    if (fileExtension && fileTypeIcons[fileExtension]) {
-                        const fileIcon = getFileTypeIcon(priorityActivity.details);
-                        fileTypeIcon.className = `file-type-icon ${fileIcon.icon}`;
-                        fileTypeIcon.style.color = fileIcon.color;
-                        activityDetails.textContent = priorityActivity.details || '';
-                        activityFileInfo.style.display = 'flex';
-                        activityDetailsNoFile.textContent = '';
-                    } else {
-                        activityFileInfo.style.display = 'none';
-                        activityDetailsNoFile.textContent = priorityActivity.details || '';
-                    }
-
+                    activityDetailsText.textContent = priorityActivity.details || '';
                     activityState.textContent = priorityActivity.state || '';
-                    activityTimestamp.textContent = priorityActivity.timestamps?.start 
-                        ? formatTimestamp(priorityActivity.timestamps.start) 
-                        : 'Just started';
                 }
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to update activities';
-            }
-        }
 
-        function startStatusRefresh() {
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
-            }
-            refreshInterval = setInterval(() => {
-                if (!isConnected || websocket?.readyState !== WebSocket.OPEN) {
-                    fetchDiscordStatusFallback();
+                activityTimestamp.textContent = utils.formatTimestamp(priorityActivity.timestamps?.start);
+            },
+
+            animateLoadingText() {
+                const loadingText = document.getElementById('loadingText');
+                const messages = [
+                    'connecting to discord...',
+                    'fetching presence data...',
+                    'almost there...',
+                    'loading profile...'
+                ];
+                
+                let currentIndex = 0;
+                const interval = setInterval(() => {
+                    if (document.getElementById('loading').style.display === 'none') {
+                        clearInterval(interval);
+                        return;
+                    }
+                    
+                    loadingText.textContent = messages[currentIndex];
+                    currentIndex = (currentIndex + 1) % messages.length;
+                }, 1500);
+            },
+
+            startStatusRefresh() {
+                if (state.refreshInterval) {
+                    clearInterval(state.refreshInterval);
                 }
-            }, CONFIG.REFRESH_INTERVAL);
-        }
+                
+                state.refreshInterval = setInterval(() => {
+                    if (!state.isConnected || state.websocket?.readyState !== WebSocket.OPEN) {
+                        this.fetchDiscordStatusFallback();
+                    }
+                }, CONFIG.REFRESH_INTERVAL);
+            }
+        };
 
+        // Scroll animations
+        const scrollAnimations = {
+            observer: null,
+
+            init() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    return;
+                }
+
+                this.setupObserver();
+                this.observeElements();
+            },
+
+            setupObserver() {
+                const options = {
+                    threshold: 0.1,
+                    rootMargin: '0px 0px -50px 0px'
+                };
+
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.animationPlayState = 'running';
+                            this.observer.unobserve(entry.target);
+                        }
+                    });
+                }, options);
+            },
+
+            observeElements() {
+                const elements = document.querySelectorAll('.project-card, .skill-card, .glass-card, .about-content');
+                elements.forEach((el, index) => {
+                    el.style.opacity = '0';
+                    el.style.transform = 'translateY(30px)';
+                    el.style.animation = `slideUp 0.6s ease-out ${index * 0.1}s both paused`;
+                    this.observer.observe(el);
+                });
+            }
+        };
+
+        // Performance monitoring
+        const performance = {
+            init() {
+                this.monitorFPS();
+                this.optimizeAnimations();
+            },
+
+            monitorFPS() {
+                let frames = 0;
+                let lastTime = Date.now();
+                
+                const tick = () => {
+                    frames++;
+                    const now = Date.now();
+                    
+                    if (now - lastTime >= 1000) {
+                        const fps = Math.round((frames * 1000) / (now - lastTime));
+                        
+                        // Reduce particle count if FPS is low
+                        if (fps < 30 && CONFIG.PARTICLE_COUNT > 20) {
+                            CONFIG.PARTICLE_COUNT = Math.max(20, CONFIG.PARTICLE_COUNT - 10);
+                            particleSystem.createParticles();
+                        }
+                        
+                        frames = 0;
+                        lastTime = now;
+                    }
+                    
+                    requestAnimationFrame(tick);
+                };
+                
+                requestAnimationFrame(tick);
+            },
+
+            optimizeAnimations() {
+                // Pause animations for invisible elements
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const element = entry.target;
+                        if (entry.isIntersecting) {
+                            element.style.animationPlayState = 'running';
+                        } else {
+                            element.style.animationPlayState = 'paused';
+                        }
+                    });
+                });
+
+                document.querySelectorAll('.animated').forEach(el => {
+                    observer.observe(el);
+                });
+            }
+        };
+
+        // Accessibility enhancements
+        const accessibility = {
+            init() {
+                this.setupFocusManagement();
+                this.setupKeyboardNavigation();
+                this.setupScreenReader();
+                this.handleReducedMotion();
+            },
+
+            setupFocusManagement() {
+                // Focus trap for modals
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab') {
+                        this.handleTabNavigation(e);
+                    }
+                });
+
+                // Focus indicators
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Tab') {
+                        document.body.classList.add('keyboard-navigation');
+                    }
+                });
+
+                document.addEventListener('mousedown', () => {
+                    document.body.classList.remove('keyboard-navigation');
+                });
+            },
+
+            setupKeyboardNavigation() {
+                // Arrow key navigation for skill cards
+                const skillCards = document.querySelectorAll('.skill-card');
+                skillCards.forEach((card, index) => {
+                    card.tabIndex = index === 0 ? 0 : -1;
+                    
+                    card.addEventListener('keydown', (e) => {
+                        let targetIndex = index;
+                        
+                        switch (e.key) {
+                            case 'ArrowRight':
+                            case 'ArrowDown':
+                                targetIndex = (index + 1) % skillCards.length;
+                                break;
+                            case 'ArrowLeft':
+                            case 'ArrowUp':
+                                targetIndex = index === 0 ? skillCards.length - 1 : index - 1;
+                                break;
+                            case 'Home':
+                                targetIndex = 0;
+                                break;
+                            case 'End':
+                                targetIndex = skillCards.length - 1;
+                                break;
+                            default:
+                                return;
+                        }
+                        
+                        e.preventDefault();
+                        skillCards[index].tabIndex = -1;
+                        skillCards[targetIndex].tabIndex = 0;
+                        skillCards[targetIndex].focus();
+                    });
+                });
+            },
+
+            setupScreenReader() {
+                // Live region for dynamic content updates
+                const liveRegion = document.createElement('div');
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.style.position = 'absolute';
+                liveRegion.style.left = '-10000px';
+                liveRegion.style.width = '1px';
+                liveRegion.style.height = '1px';
+                liveRegion.style.overflow = 'hidden';
+                document.body.appendChild(liveRegion);
+
+                // Announce page changes
+                navigation.originalShowPage = navigation.showPage;
+                navigation.showPage = function(pageId) {
+                    navigation.originalShowPage.call(this, pageId);
+                    liveRegion.textContent = `Navigated to ${pageId} page`;
+                };
+            },
+
+            handleReducedMotion() {
+                if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    document.documentElement.style.setProperty('--duration-fast', '0ms');
+                    document.documentElement.style.setProperty('--duration-normal', '0ms');
+                    document.documentElement.style.setProperty('--duration-slow', '0ms');
+                    document.documentElement.style.setProperty('--duration-slower', '0ms');
+                }
+            },
+
+            handleTabNavigation(e) {
+                const focusableElements = document.querySelectorAll(
+                    'a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'
+                );
+                
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        };
+
+        // Initialize everything when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Initializing advanced portfolio...');
+            
             try {
-                createParticles();
-                initNavigation();
-                lazyLoadCards();
-                disableDevTools();
-                initWebSocket();
-                startStatusRefresh();
-            } catch (e) {
-                document.getElementById('errorDetails').style.display = 'block';
-                document.getElementById('errorDetails').textContent = 'Error: Failed to initialize page';
+                // Initialize core systems
+                themeManager.init();
+                navigation.init();
+                discordIntegration.init();
+                
+                // Initialize visual effects (with reduced motion respect)
+                if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    particleSystem.init();
+                    mouseFollower.init();
+                    scrollAnimations.init();
+                }
+                
+                // Initialize performance monitoring
+                performance.init();
+                
+                // Initialize accessibility features
+                accessibility.init();
+                
+                console.log('✅ Portfolio initialized successfully!');
+                
+            } catch (error) {
+                console.error('❌ Initialization error:', error);
+                
+                // Fallback initialization
+                navigation.init();
+                discordIntegration.showOfflineState();
             }
         });
 
-        window.addEventListener('beforeunload', () => {
-            if (websocket) {
-                websocket.close();
-            }
-            if (refreshInterval) {
-                clearInterval(refreshInterval);
+        // Handle page visibility changes
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Pause animations when page is hidden
+                if (particleSystem.canvas) {
+                    particleSystem.canvas.style.animationPlayState = 'paused';
+                }
+            } else {
+                // Resume animations when page is visible
+                if (particleSystem.canvas) {
+                    particleSystem.canvas.style.animationPlayState = 'running';
+                }
+                
+                // Refresh Discord status
+                if (Date.now() - state.lastFetchTime > CONFIG.REFRESH_INTERVAL) {
+                    discordIntegration.fetchDiscordStatusFallback();
+                }
             }
         });
+
+        // Handle browser back/forward navigation
+        window.addEventListener('popstate', (e) => {
+            const page = e.state?.page || 'home';
+            navigation.showPage(page);
+        });
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (state.websocket) {
+                state.websocket.close();
+            }
+            
+            if (state.refreshInterval) {
+                clearInterval(state.refreshInterval);
+            }
+            
+            if (state.intersectionObserver) {
+                state.intersectionObserver.disconnect();
+            }
+        });
+
+        // Error handling
+        window.addEventListener('error', (e) => {
+            console.error('Global error:', e.error);
+            
+            // Show user-friendly error message
+            const errorDetails = document.getElementById('errorDetails');
+            if (errorDetails && !errorDetails.textContent) {
+                errorDetails.style.display = 'block';
+                errorDetails.querySelector('p').textContent = 'Something went wrong. Please refresh the page.';
+            }
+        });
+
+        window.addEventListener('unhandledrejection', (e) => {
+            console.error('Unhandled promise rejection:', e.reason);
+            e.preventDefault(); // Prevent console spam
+        });
+
+        // Export for debugging
+        window.portfolioDebug = {
+            state,
+            CONFIG,
+            utils,
+            themeManager,
+            particleSystem,
+            navigation,
+            discordIntegration
+        };
     </script>
 </body>
 </html>
