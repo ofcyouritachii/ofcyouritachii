@@ -1,5 +1,5 @@
 {
-  "name": "yokai-portfolio",
+  "name": "itachi",
   "version": "1.0.0",
   "description": "A futuristic personal portfolio website with real-time Discord status integration",
   "main": "index.html",
@@ -15,14 +15,14 @@
     "personal-website",
     "lanyard-api"
   ],
-  "author": "yokai",
+  "author": "usr/bin/itachi",
   "license": "MIT",
   "devDependencies": {
     "serve": "^14.2.1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yokaimsi/yokai-portfolio.git"
+    "url": "https://github.com/ofcyouritachii/ofcyouritachii.git"
   },
-  "homepage": "https://yokaimsi.github.io/yokai-portfolio"
+  "homepage": "https://ofcyouritachii.github.io/0fcyouritachii/"
 }
