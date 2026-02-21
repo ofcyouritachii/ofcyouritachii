@@ -7,7 +7,7 @@
 
 - 👯 I’m looking to collaborate on [ezfetch](https://github.com/ofcyoueitachii)
 
-- 👨‍💻 All of my projects are available at [https://yokaimsi.vercel.app](https://asan.btwarch.me)
+- 👨‍💻 All of my projects are available at [https://asan.btwarch.me](https://asan.btwarch.me)
 
 - 📫 How to reach me **through my portfolio**
 
