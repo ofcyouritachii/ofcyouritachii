@@ -1,5 +1,5 @@
 <h1 align="center">Hi 👋, I'm iTachi</h1>
-<h3 align="center">I'm yokaimsi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</h3>
+<h3 align="center">I'm iTachi, a passionate developer with a love for creating innovative solutions and exploring new technologies. My journey in programming started with Python, and I've since expanded my expertise to include web development, Discord bot creation, and system administration.</h3>
 
 - 🔭 I’m currently working on **Open Source Projects**
 
