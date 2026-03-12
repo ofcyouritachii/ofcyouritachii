@@ -116,8 +116,8 @@ Passion  : Writing clean code and shipping fast
 |:---:|:---|:---|:---|
 | 🎵 | [**Mikasa Music Bot**](https://github.com/ofcyouritachii/Mikasa-Music-Bot) | Feature-rich Discord music bot with queuing, volume control & multiple audio sources | `Node.js` `Discord.js` |
 | 🔍 | [**ezfetch**](https://github.com/ofcyouritachii/ezfetch) | Lightweight CLI tool to display system info in a clean, readable format on Linux | `Python` `Bash` `Linux` |
-| 📖 | [**Discord Components Guide**](https://github.com/ofcyouritachii/Discord-Components-GUIDE) | Complete code reference for Discord.js UI components — buttons, modals, select menus | `Discord.js` `JavaScript` |
-| 🤖 | [**Discord Bots**](https://github.com/ofcyouritachii/Discord-BOTS) | Collection of multipurpose bots with moderation, utility & fun commands | `Node.js` `Discord.js` |
+| 📖 | [**Discord Components Guide**](https://github.com/ofcyouritachii/Discord-Components-GUIDE) | Complete code reference for Discord.py UI components — buttons, modals, select menus | `Discord.py` `Pythonn` |
+| 🤖 | [**Discord Bots**](https://github.com/ofcyouritachii/Discord-BOTS) | Collection of multipurpose bot | `Python` `Discord.py` |
 
 </div>
 
